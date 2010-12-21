@@ -1,0 +1,857 @@
+[en]
+
+UWC3X = ULTIMATE WARCRAFT 3 Expansion
+TERRORIST = Terrorist
+COUNTER_TERRORIST = Counter-Terrorists
+EVERYONE = Everyone
+SAY = say
+IN_CONSOLE = In console:
+PLAYER_NAME = player_name
+
+PLAYERSKILLS = [%s] /Playerskills is deprecated, please use /who instead.
+
+XP_GIVE_MULT = Give Multiple Players XP
+XP_GIVE_ONE = Give Individual Players XP
+XP_GIVE_EVERYONE = Give Everyone XP
+
+HELPMENU1 = UWC3X General Help
+HELPMENU2 = About UWC3X Ultimates
+HELPMENU3 = UWC3X Credits
+HELPMENU4 = UWC3X Latest News
+HELPMENU5 = (\rNew\w) Attributes Info
+HELPMENU6 = (\rNew\w) Resistances Inf
+HELPMENU7 = Tips for Playing UWC3X pg.1
+HELPMENU8 = Tips for Playing UWC3X pg.2
+
+MENUITEM1 = Skills Menu
+MENUITEM2 = Item Menu
+MENUITEM3 = Help
+MENUITEM4 = UWC3X Credits
+MENUITEM5 = Commands List
+MENUITEM6 = Your Character Sheet
+MENUITEM7 = Admin Menu
+
+SERVER_MODE_FAST = Server Mode: Fast XP -- Long Term XP is Disabled
+
+UWC3X_XP_TABLE_HEADER = UWC3X XP Table for this Server:
+ENH_COST_TABLE = Attrib Pt Cost: %d E-XP , Resist Pt Cost: %d E-XP
+UWC3X_XP_TABLE = [level %d] XP: %d Total XP: %d
+
+NO_ACCESS = [%s] You have no access to that command
+COMMAND_DISABLED = [%s] This command has been disabled.
+ADMINMENU_OFF = The Admin Menu has been disabled on this server
+ADMIN_GIVEXP_LOG = [%s] %s used Admin-Menu XP [%s] for %s
+ADMIN_GIVEXP = [%s] The admin just awarded you %d experience.
+ADMIN_XP1 = Give %d XP
+
+ADMIN_RESET_SKILLS = [%s] The admin has reset your skills, please pick new ones on the next round
+ADMIN_RESET_ATTRIBS = [%s] The admin has reset your attribs, please pick new ones on the next round
+ADMIN_RESET_RESISTS = [%s] The admin has reset your resists, please pick new ones on the next round
+ADMIN_RESET_ALL = [%s] The admin has reset your charsheet, please pick new skills, attribs and resists on the next round
+
+
+ADMIN_XP_T_LOG = [%s] %s used Admin-Menu XP [%d] for team Terrorist
+ADMIN_XP_CT_LOG = [%s] %s used Admin-Menu XP [%d] for team CT
+ADMIN_XP_ALL_LOG = [%s] %s used Admin-Menu XP [%d] for EVERYONE
+
+COMMANDS_HEADER = UWC3X Commands
+COMMANDS_HEADER2 = The following commands are available:
+COMMANDS_HELP1 = say /war3menu - Displays the UWC3X main menu
+COMMANDS_HELP2 = say /help - Displays the UWC3X help menu 
+COMMANDS_HELP3 = say /selectskill - Displays the skill selection menu 
+COMMANDS_HELP4 = say /selectattrib - Displays the attributes selection menu
+COMMANDS_HELP5 = say /selectresist - Displays the resistances selection menu
+COMMANDS_HELP6 = say /charactersheet - (also /charsheet) Displays your complete character summary (skills, attributes, resists, etc)
+COMMANDS_HELP7 = say /who - Displays a list of players on the server
+COMMANDS_HELP8 = say /whois player - Displays the character sheet for the specified player
+COMMANDS_HELP9 = say /skillsinfo# - Displays information about each skill (where # is a number reflecting the page the skill is on)
+COMMANDS_HELP10 = say /resetskills - Resets your skills so you can retrain them
+COMMANDS_HELP11 = say /resetattribs - Resets your attributes so you can retrain them 
+COMMANDS_HELP12 = say /deletexp - Deletes all of your XP and skill points
+COMMANDS_HELP13 = say /itemsinfo - Displays the list of items in the shopmenu
+COMMANDS_HELP14 = say /itemsinfo2 - Displays the list of items in the shopmenu2
+COMMANDS_HELP15 = say /itemsinfo3 - Displays the list of items in the shopmenu3
+COMMANDS_HELP16 = say /level - Displays your rank and level
+COMMANDS_HELP17 = say /toggle_lowres - Toggles the position of ultimate/shopitems HUD messages
+COMMANDS_HELP18 = type xp_table (in console) - Displays the XP/Level table for this server
+COMMANDS_HELP19 = say /save skillset# - Saves a skillset at the start of next round - # is a number from 1 to 5
+COMMANDS_HELP20 = say /load skillset# - Loads (and sets your skills to ) a skillset at the start of next round - # is a number from 1 to 5
+COMMANDS_HELP21 = say /resistinfo - Shows information on resistances
+COMMANDS_HELP22 = say /attribsinfo - Shows information on attributes
+COMMANDS_HELP23 = say /skillsinfo# - Displays information about each skill (where # is a number reflecting the page the skill is on)
+COMMANDS_HELP24 = say /binds - Shows all of the bindable commands
+COMMANDS_HELP25 = say /resetresists - Resets your resistances so you can re-pick them 
+
+LEVEL = Lvl
+LEVEL_DISPLAY = Level
+COMMING_SOON = coming soon
+BIND_KEY = bind key
+PASSIVE_ABILITY = Passive Ability
+NO_SKILL = skill being developed
+NEXT_PAGE = Next Page
+EXIT = Exit
+REQUIRED = required
+
+DEBUG1 = DEBUG #1: Mapname= ( %s ) Player= ( %s ) Level= ( %d ) #Skills= ( %d ) XP= ( %d )
+DEBUG2 = DEBUG #2: Server Max_Attribs= ( %d ) Apts_spent= ( %d ) Apts_left= ( %d )
+DEBUG3 = DEBUG #3: Server Max_Resists= ( %d ) Rpts_spent= ( %d ) Rpts_left= ( %d )
+
+ONE_NADE = Only one HE grenade per round
+
+NOTICE_MASTERED = [%s] Announcement :: %s has mastered %s
+NOTICE_SKILL_TRAINED = [%s] You have expanded your knowledge of %s
+NOTICE_ULT_BIND = [ Ultimate Skill, in console: bind key %s ]
+NOTICE_SKILL_TRAINED2 = [%s] You have learned the basics of %s %s
+NOTICE_ULT_BIND2 = Ultimate ability trained, in console: bind key %s
+NOTICE_ULT_PASSIVE1 = PASSIVE Ultimate ability trained, no bind needed
+
+ADMIN_ONLY_SKILLS = Admin-Reserved Skills
+ADMIN_ONLY_RESERVED = This skill is reserved for Admins
+
+ADMIN_SHOWXP = [%s] %s has %d XP
+ADMIN_GIVE_XP = [%s] The admin gave you %d experience
+ADMIN_SET_LEVEL = [%s] The admin has set your level to %d
+ADMIN_SET_LEVEL_RESPONSE = %s level has been set to %d
+ADMIN_TAKE_XP = [%s] The admin took %d experience away from you.
+ADMIN_SHOW_LOCATION = [%s] Your location is: <%d %d %d>
+WARNING_FULLUPDATE = FULLUPDATE: User:%s SteamID:%s  -- Attempted to use the fullupdate command!
+
+RELOAD_XP = Your XP and Skill are attempting to be reloaded
+RELOAD_XP_NO_AUTH = You can not reload your skills and XP as you are not yet Steam Authorized [STEAM_ID:PENDING]
+DELETE_XP = [%s] Your skills/attributes/resistances and XP have been reset to 0.
+COMAND_ISSUED = [%s] %s issued
+NO_MATCHING_CLIENTS = No clients in such team
+SAME_TEAM = He's on your team, DON'T SHOOT
+
+EXAMINE_ENEMY = Examining %s :: [ ENEMY ]
+EXAMINE_ENEMY_HPAP = Examining %s :: [ %d HP / %d ARM ]
+
+LOW_RES_OFF = [%s] You have toggled Low Res mode OFF
+LOW_RES_ON = [%s] You have toggled Low Res mode ON
+
+DEBUG_INFO_HEADER = Dumping debug info
+DEBUG_INFO_LINE = [%d] xpgiven= ( %d ) xplevel= ( %d ) attrib_pt_cost= ( %d ) resist_pt_cost= ( %d )
+
+CHANGERACE1 = Ultimate Warcraft3 Expansion (UWC3X) is a raceless version of the Warcraft3 plugin you may be familiar with.
+CHANGERACE2 = UWC3X provides players with 34 playable levels and a freeform skills system which allows you to mix and match skills of your choosing. In addition UWC3X offers players a choice of 10 ultimate skills and you can train up to 3 different ultimates, as well as other special abilities. UWC3X also offers an optional Enhancement system to provide your character with even more customization. 
+CHANGERACE3 = Interested? Read on! Say <b>/help</b> for UWC3X's help menu and say <b>/commands</b> to see the list of UWC3X spoken commands. Say <b>/news</b> to read up on the latest changes to the plugin.
+
+DISPLAY_INFO = Display UWC3X info
+SELECT_SKILL = Displays the skills menu
+SELECT_ATTRIB = Displays the attributes menu
+RESET_ATTRIB = Your attributes will be reset next round
+RESETATTRIBS_OFF = This server has disabled that option
+
+SELECT_RESIST = Displays the resistances menu
+RESET_RESIST = Your resistances will be reset next round
+RESETRESISTS_OFF = This server has disabled that option
+
+ATTRIB_INFO = (say /attribinfo for info about attributes)
+ATTRIB_SELECT = Select an Attribute to enhance [%d pts remaining]
+ATTRIB_MENU = Attributes Menu
+
+ATTRIB_STR = Strength
+ATTRIB_INT = Intellect
+ATTRIB_DEX = Dexterity
+ATTRIB_AGI = Agility
+ATTRIB_CON = Constitution
+ATTRIB_WIS = Wisdom
+
+ATTRIB_MENU1_STR = <li><b>Strength</b> - Determines your starting base health, stacks with Devotion Aura</li><p>
+ATTRIB_MENU1_INT = <li><b>Intellect</b> - Each level of intellect you enhance from 11 - 18 provides a different benefit ( see website for more details)</li><p>
+ATTRIB_MENU1_DEX = <li><b>Dexterity</b> - Helps to successfully Evade shots for characters trained in Evasion, and adds to Jumpkick effectiveness</li><p>
+ATTRIB_MENU1_AGI = <li><b>Agility</b> - Determines your base runspeed, stacks with Unholy Aura</li><p>
+ATTRIB_MENU1_CON = <li><b>Constitution</b> - Provides health regeneration which stacks with Healing Wave</li><p>
+ATTRIB_MENU1_WIS = <li><b>Wisdom</b>- Each level of wisdom you enhance from 11 - 18 provides a different benefit</li><ul><li>11) Decrease chance of being Hexed</li><li>12) Decrease chance of being Impaled</li><li>13) Increase damage by Fire ultimates</li><li>14) Increased damage by Lightning ultimates</li><li>15) Decrease chance of dropping your weapon from jumpkick</li><li>16) Decrease chance of being banished</li><li>17) Decrease chance of being bashed</li><li>18) +1 ultimate</li></ul></li><p>
+WISDOM_JUMPKICK_RESIST1 = Your Wisdom allows you to sense the impending jumpkick and hold onto your weapon!
+WISDOM_JUMPKICK_RESIST2 = Your opponents wisdom allows them to hold onto their weapon!
+JUMPKICK_NO_RESIST = ARG!!! Your weapon has been kicked out of your hands!  Better get a new one FAST!
+JUMPKICK_NO_RESIST_DEPOWER = The only reason you are still holding your gun is becuase you are depowered....
+
+GRAB_RESIST1 = Your high agility allows you to get out of the Grab attempt by %s
+GRAB_RESIST2 = Your opponents high agility allows them to get out of your Grab attempt
+
+WISDOM_HEX_RESIST1 = Your Wisdom allows you to sense the impending HEX and avoid it!
+WISDOM_HEX_RESIST2 = Your opponents wisdom allows them to avoid your HEX!
+WISDOM_BASH_RESIST1 = Your Wisdom allows you to sense the impending BASH and avoid it
+WISDOM_BASH_RESIST2 = Your opponents wisdom allows them to avoid your BASH!
+WISDOM_BANISH_RESIST1 = Your Wisdom allows you to sense the impending BANISH and avoid it
+WISDOM_BANISH_RESIST2 = Your opponents wisdom allows them to avoid your BANISH!
+WISDOM_IMPALE_RESIST1 = Your Wisdom allows you to sense the impending IMPALE and avoid it
+WISDOM_IMPALE_RESIST2 = Your opponents wisdom allows them to avoid your IMPALE!
+
+ATTRIB_MENU1 = Attributes Information
+ATTRIB_MENU2 = UWC3X provides, in addition to the normal XP system, a new enhancement XP system (E-XP) which allows you to earn Attribute points to spend building your character. These attributes are as follows:
+ATTRIB_MENU3 = Determines your starting base health, stacks with Devotion Aura
+ATTRIB_MENU4 = Each level of intellect you enhance from 11 - 18 provides a different benefit, check the website for complete details
+ATTRIB_MENU5 = Helps to successfully Evade shots for characters trained in Evasion
+ATTRIB_MENU6 = Determines your base runspeed, stacks with Unholy Aura
+ATTRIB_MENU7 = Provides health regeneration which stacks with Healing Wave
+ATTRIB_MENU8 = Each level of wisdom you enhance from 14 - 18 provides a different benefit, check the website for complete details
+
+RESIST_MENU = Resistances Menu
+RESIST_SELECT = Select a Resistance to enhance [%d pts remaining]: \w^n
+RESIST_RESET = (say /resistinfo for info about resistances) \w^n^n
+RESIST_MAX = [%s] You have already reached the maximum resistance level.
+RESIST_NONE = [%s] You do not have any Resistance points to spend, earn more E-XP
+RESIST_MAX_POINTS = [%s] You have reached the server limit for obtainable Resistance points.
+RESIST_SPEND = [%s] You spend 1 E-XP point to enhance your %s
+
+RESIST_POISON = Poison Resistance
+RESIST_DISEASE = Disease Resistance
+RESIST_ELECTRICITY = Electricity Resistance
+RESIST_FIRE = Fire Resistance
+RESIST_MAGIC = Magic Resistance
+RESIST_ROT = Rot Resistance
+
+RESIST_MENU1_POISON = <li><b>Poison Resistance</b> - protection against Shadow Strike and poison-based attacks <p></li>
+RESIST_MENU1_DISEASE = <li><b>Disease Resistance</b> - protection against Carrion Beetles and Locust Swarm disease-based attacks <p></li>
+RESIST_MENU1_ELECTRIC = <li><b>Electricity Resistance</b> - protection against Chain Lightning attacks <p></li>
+RESIST_MENU1_FIRE = <li><b>Fire Resistance</b> - protection against Flamethrower and Napalm Grenade fire-based attacks <p></li>
+RESIST_MENU1_FIRE = <li><b>Ice Resistance</b> - protection against ice-based attacks <p></li>
+RESIST_MENU1_MAGIC = <li><b>Magic Resistance</b> - protection against Shadow Strike and poison-based attacks <p></li>
+RESIST_MENU1_ROT = <li><b>Rot Resistance</b> - protection against Rot <p></li>
+
+RESIST_MENU1 = Resistances Information
+RESIST_MENU2 = UWC3X provides, in addition to the normal XP system, a new enhancement XP system (E-XP) which allows you to earn Resistance points to spend building a defense system for your character. Each resistance can be trained to 100 points at which time you should be totally covered from the specified damage type. These resistances are as follows:
+RESIST_MENU3 = protection against Shadow Strike and poison-based attacks 
+RESIST_MENU4 = protection against Carrion Beetles and Locust Swarm disease-based attacks
+RESIST_MENU5 = protection against Chain Lightning attacks 
+RESIST_MENU6 = protection against Flamethrower and Napalm Grenade fire-based attacks
+RESIST_MENU7 = Similar to a Necklace of Immunity with some exceptions made to attacks covered by other resistance types.
+
+WON_ROUND_XP = [%s] %s recieved %d XP for winning the round
+
+BOMB_SPAWN = [%s] %s recieved %d XP for spawning with the bomb.
+BOMB_DROP = [%s] %s lost the %d XP bomb carrying bonus.
+BOMB_PICKUP = [%s] %s gained %d XP for picking up the bomb.
+BOMB_PLANT_XP1 = [%s] %s recieved %d extra XP for personally planting the bomb.
+BOMB_PLANT_XP2 = [%s] %s recieved %d for supporting the bomb planting effort.
+BOMB_DEFUSE_XP1 = [%s] %s recieved %d extra XP for defusing the bomb.
+BOMB_DEFUSE_XP2 = [%s] %s recieved %d for supporting the bomb defusing effort.
+BOMB_DEFUSE_XP3 = [%s] %s recieved %d XP for cutting the red wire on the bomb.
+BOMB_DEFUSE_XP4 = [%s] %s recieved %d XP for attempting to defuse bare handed.^n
+
+HOSTAGE_KILL = [%s] %s lost %d XP for killing a hostage.
+HOSTAGE_TOUCH = [%s] %s recieved %d XP for beginning to escort the hostage to safety.
+HOSTAGE_RESCUE1 = [%s] %s is given %d XP for escorting a hostage to safety.
+HOSTAGE_RESCUE2 = [%s] %s recieved %d for supporting the hostage run.
+
+VIP_SPAWN = [%s] %s recieved %d XP for being so important.
+VIP_ESCAPE1 = [%s] %s gained %d XP for evading assasination.
+VIP_ESCAPE2 = [%s] %s recieved %d for helping the %s escape.
+VIP_KILL = [%s] %s gained %d XP for assinating %s the VIP.
+
+DROPSKILL_MENU = Displays the drop skills menu
+DROPSKILL_WAIT = [%s] You must wait one round to select new skills after dropping them
+DROPSKILL_NOSKILLS = [%s] You have no skill points to drop
+DROPSKILL_SPENDFIRST = [%s] You must first spend your available skill points
+DROPSKILL_STEALSKIN = [%s] You must first drop Steel Skin
+DROPSKILL_NOPOINTS = [%s] You have no points in %s
+DROPSKILL_UNTRAINED = [%s] You are no longer trained in %s
+DROPSKILL_DECREASED = [%s] You have decreased your knowledge of %s
+DROPSKILL_CRIPPLE = [%s] You can not go below 2 points in Trueshot and 3 points in Bash when you have the Cripple Skill
+DROPSKILL_STEALSKIN = [%s] You can not go below 3 points in Leather Skin and 1 point in Vampiric when you have Steal Skin Skill
+
+NO_SKILL_POINTS = [%s] You have no skill points to spend
+SKILL_CANT_LEARN = [%s] You are not yet able to train that skill
+SKILL_AT_MAX = [%s] You have reached the maximum level for this skill
+SKILL_MAX_TRAINED = [%s] You have trained the allowed limit for this skill at your current level. Try again next level.
+ULTIMATE_MAX_ALLOWED = [%s] You have already trained the maximum number of ultimate skills [%d]
+SKILL_NO_SKILL = [%s] This skill slot is reserved for an upcoming skill
+SKILL_TOO_MANY = [%s] You have spent too many skillpoints, skills reset forced.
+ULT_TOO_MANY = [%s] You have spent too many skill points on ultimates, skills reset forced.
+
+SUICIDE_NO_FAN = [%s] You would have to first give up your Suicide Bomber to train Fan of Knives
+FAN_NO_SUICIDE = [%s] You would have to first give up your Fan of Knives to train Suicide Bomber
+
+SKILL_ERROR1 = [UWC3X Skillset Loader Error] Failed on player min level check
+SKILL_ERROR2 = [UWC3X Skillset Loader Error] Failed by trying to add more levels than current player level
+SKILL_ERROR3 = [UWC3X Skillset Loader Error] Failed on player is already trained in this skill
+SKILL_ERROR4 = [UWC3X Skillset Loader Error] Failed on player - he/she is trying to train a skill above its max ( if so, set it to the right max )
+SKILL_ERROR5 = [UWC3X Skillset Loader Error] Failed on players can only put 1 skill pt into a skill for each level over ( or equal ) to the min. level to train it
+SKILL_ERROR6 = [UWC3X Skillset Loader Error] Failed on player min level check
+SKILL_ERROR7 = [UWC3X Skillset Loader Error] Failed by trying to add more levels than current player level
+
+STEAL_SKIN_NOTICE = [%s] You must be trained in 1 level of Vampiric Aura and 3 levels of Leather Skin to train this skill
+CRIPPLE_NOTICE = [%s] You must be trained in 3 levels of Bash and 2 levels of TrueShot to train this skill
+STEAL_NOTICE2 =[UWC3X Skillset Loader Error] Failed on Only allow Steel Skin if Vampiric and Leather Skin trained
+
+SYPHON_AMMO_NOMANA = [%s] Only one siphon skill is allowed, you would have to give up your Siphon Mana
+SYPHON_MANA_NOAMMO = [%s] Only one siphon skill is allowed, you would have to give up your Siphon Ammo
+SYPHON_ERROR1 = [UWC3X Skillset Loader Error] Failed on Allow only one siphon skill ( got cash )
+SYPHON_ERROR2 = [UWC3X Skillset Loader Error] Failed on Allow only one siphon skill ( got ammo )
+
+CARAPACE_NO_THORNS = [%s] Only one damage shield skill is allowed, you would have to give up your Thorns Aura
+THORNS_NO_CARAPACE = [%s] Only one damage shield skill is allowed, you would have to give up your Spiked Carapace
+DAMAGE_SKILL_ERROR1 = [UWC3X Skillset Loader Error] Failed on Allow only one damage shield skill ( got carapace )
+DAMAGE_SKILL_ERROR2 = [UWC3X Skillset Loader Error] Failed on Allow only one damage shield skill ( got thorns )
+POISON_DISEASE_ERROR1 = [UWC3X Skillset Loader Error] Failed on Allow only one Shadow Strike / Carrion Beetles ( got sstrike )
+POISON_DISEASE_ERROR2 = [UWC3X Skillset Loader Error] Failed on Allow only one Shadow Strike / Carrion Beetles ( got beetles )
+POISON_DISEASE_ERROR3 = [UWC3X Skillset Loader Error] Failed on Allow only one Shadow Strike / Carrion Beetles ( got rot )
+POISON_DISEASE_ERROR4 = [UWC3X Skillset Loader Error] Failed on Allow only one Shadow Strike / Carrion Beetles ( got cripple )
+CRIPPLE_ERROR1 = [UWC3X Skillset Loader Error] You do not meet the skill requirements for cripple
+
+SHADOW_NO_CARION = [%s] You would have to first give up your Carrion Beetles skill to train this
+CARION_NO_SHADOW = [%s] You would have to first give up your Shadow Strike skill to train this
+CARION_NO_ROT = [%s] You would have to first give up your Rot skill to train this 
+NO_CRIPPLE = [%s] You would have to first give up your Cripple skill to train this
+VENG_NO_SUICIDE = [%s] You would have to first give up your Suicide Bomber ultimate to train this
+SUICICDE_NO_VENG = [%s] You would have to first give up your Vegeance ultimate to train this
+CRIT_NO_CLUSTER = [%s] You would have to first give up your Critical Grenades to train this
+CLUSTER_NO_CRIT = [%s] You would have to first give up your Cluseter Bombs to train this
+NAPALM_NO_ICE = [%s] You would have to first give up your Napalm Grenades to train this
+ICE_NO_NAPALM = [%s] You would have to first give up your Ice Bombs to train this
+SUICIDE_NO_FAN = [%s] You would have to first give up your Suicide Bomber ultimate to train this
+FAN_NO_SUICIDE = [%s] You would have to first give up your Fan of Knives to train this
+
+POINTS_REMAINING = pts remaining
+SAY_SKILLINFO = (say %s for info about skills on this page)
+
+OBJECTIVES_XP_HS = [%s] You are awarded %d XP for having a headshot
+OBJECTIVES_XP = [%s] You just gained %d XP for killing %s with %s
+TK_XP = [%s] You just lost %d XP for killing your team mate %s with %s
+MEDIC1 = [%s] MEDIC ALERT : %s is burning and needs medical attention
+MEDIC2 = [%s] MEDIC ALERT : %s is ROTTING AWAY and needs medical attention
+MEDIC3 = [%s] MEDIC ALERT : %s is poisoned and needs medical attention
+MEDIC4 = [%s] MEDIC ALERT : %s is diseased and needs medical attention
+MEDIC5 = [%s] MEDIC ALERT : %s needs medical attention
+MOLE_DEFLECT = [%s] A shot by a mole was deflected
+EVADE1 = [%s] You skillfully evade a shot by %s
+EVADE2 = [%s] %s skillfully evades your shot
+CRIT_STRIKE_BACKFIRE1 = [%s] Your Critical Strike and Trueshot Auras have caused a backfire!
+CRIT_STRIKE_BACKFIRE2 = [%s] %s experienced a backfire from Critical Strike and Trueshot Auras
+POISON1 = [%s] w00t! Your poison darts hit their mark on %s
+POISON2 = [%s] EGADS!  Poison darts from %s are pwning you, seek a medic quickly!
+POISON3 = [%s] Your resistance to poison helps to shield you from a Shadow Strike
+POISON4 = [%s] Your Shadow Strike is absorbed by your target's poison resistance
+ROT1 = [%s] Your Rot infects %s with disease - muwahahaha
+ROT2 = [%s] Oh Noes!! You have caught the ROT from %s, seek a medic quickly!
+ROT3 = [%s] Your resistance to rot shields you from catching the ROT
+ROT4 = [%s] Your ROT is absorbed by your target's rot resistance
+BEGIN_LUCK1 = [%s] Your Beginner's Luck allows you to evade a shot from %s
+BEGIN_LUCK2 = [%s] %s has Beginner's Luck and evades your shot.
+BEGIN_LUCK3 = [%s] Your Beginner's Luck causes you to do extra damage to %s.
+BEGIN_LUCK4 = [%s] %s uses Beginner's Luck to cause you extra damage.
+THORNS1 = [%s] The Thorns Aura surrounding %s inflicts damage on you.
+THORNS2 = [%s] Your Thorns Aura inflicts damage on %s
+DISEASE1 = [%s] Your Carrion Beetles infect %s with disease
+DISEASE2 = [%s] Carrion Beetles from %s infect you with disease, seek a medic quickly!
+DISEASE3 = [%s] Your resistance to disease helps to shield you from Carrion Beetles
+DISEASE4 = [%s] Your Carrion Beetles are absorbed by your target's disease resistance
+HEX1 = [%s] %s has morphed you into an undesirable form
+HEX2 = [%s] You have morphed %s into an undesirable form
+BANISH1 = [%s] You have banished %s
+BANISH2 = [%s] You have been banished by %s
+IMPALE1 = [%s] You cause the ground to shake beneath %s
+IMPALE2 = [%s] The ground shakes beneath your feet
+IMPALE3 = [%s] You have been impaled for trying to kill respawner %s
+SYPHON1 = [%s] You siphoned %d rounds from %s
+SYPHON2 = [%s] %d rounds were siphoned by %s
+SYPHON3 = [%s] You siphon $%d from %s
+SYPHON4 = [%s] You have been robbed of $%d by %s
+VAMPIRIC1 = [%s] Your Vampiric Aura steals health from %s
+VAMPIRIC2 = [%s] Your lifeforce has been drained by %s
+BASH1 = [%s] Your Bash has stunned %s
+BASH2 = [%s] You have been stunned by %s
+CRIT_STRIKE1 = [%s] Your critical strike is deflected by Big Bad Voodoo
+CRIT_STRIKE2 = [%s] Your Big Bad Voodoo protects you from a critical strike
+CRIT_STRIKE3 = [%s] You strike a critical blow to %s
+CRIT_STRIKE4 = [%s] You were hit by a critical strike from %s
+CRIT_GRENADE1 = [%s] Your magic resistance protects you from Critical Grenade damage
+NAPALM_GRENADE1 = [%s] %s has burned you with a Napalm Grenade, Eeek!
+NAPALM_GRENADE2 = [%s] Your Napalm Grenade burns %s
+JUMPKICK1 = OMG!! WTF#$$@  You just got JUMPKICKED to DEATH by %s !!!!
+JUMPKICK2 = You just pwnt %s with a JUMPKICK right to the chops!!
+SPIKED1 = [%s] The spiked armor about %s causes you pain
+SPIKED2 = [%s] Your spiked carapace hurts %s
+STEALSKIN = [%s] Your Steel Skin gleams as your Vampiric Aura strengthens your armor
+
+SHOPMENU = shopmenu1
+SHOPMENU2 = shopmenu2
+SHOPMENU3 = shopmenu3
+SHOPMENU_SHOW1 = Show Shopmenu 1 Information
+SHOPMENU_SHOW2 = Show Shopmenu 2 Information
+SHOPMENU_SHOW3 = Show Shopmenu 3 Information
+
+ITEM_DEAD = You may not buy items when you are dead.
+ITEM_BUYTIME = %0.0f seconds have passed. You can't buy anthing now.
+ITEM_BUYZONE = You must be in the buyzone to purchase an item
+ITEM_JOIN_TEAM = You must join a team before purchasing an item
+ITEM_OWNS = You already own that item
+ITEM_NO_MONEY = You have insufficient funds!
+ITEM_ROUND_OVER = You may not purchase this after the round has ended
+
+SHOPMENU1_HEADER = The following items are available for purchase at the shop (say shopmenu)
+SHOPMENU1_ANKH = Ankh of Reincarnation: If you die you will retrieve your equipment the following round
+SHOPMENU1_BOOTS = Boots of Speed: Allows you to run faster
+SHOPMENU1_CLAWS = Claws of Attack: An additional %d hp will be removed from the enemy on every hit
+SHOPMENU1_CLOAK = Cloak of Shadows: Makes you partially invisible, stacks with the invisibility skill, and invisibility is increased when holding the knife
+SHOPMENU1_MASK = Mask of Death: You will receive health for every hit on the enemy
+SHOPMENU1_NECKLACE = Necklace of Immunity: You will be immune to enemy ultimates
+SHOPMENU1_ORB = Orb of Frost: Slows your enemy down when you hit him
+SHOPMENU1_PERIPHAT = Periapt of Health: Receive extra health
+SHOPMENU1_TOME = Tome of Experience: Purchasing a tome increases your experience by a fixed amount, the tome is consume
+SHOPMENU1_TOME2 = [%s]You have gained %d XP from purchasing Tomb of experience
+TOO_MANY_TOMES = You have already purchased more then the allowed amount of Tomes for this round
+
+SHOPMENU2_HEADER = The following items are available for purchase at the shop (say shopmenu2)
+SHOPMENU2_SCROLL = Scroll of Respawning: You will respawn after death
+SHOPMENU2_MP = Mole Protectant: Protects you from moles (unless they hit you in the head)
+SHOPMENU2_AMULET = Amulet of the Cat: You cannot be heard when running/going up ladders
+SHOPMENU2_SOCK = Sock of the Feather: Allows you to levitate
+SHOPMEUN2_HELM = Helm of Excellence: Immunity to headshots
+SHOPMENU2_GLOVE = Flaming Gloves of Warmth: Given an HE grenade every %s seconds
+SHOPMENU2_RINGS = Ring of Regeneration +1: Gives 1 health every 2 seconds, you can have 5 max (type rings to receive 5)
+SHOPMENU2_CHAMELEON = Chameleon: You are disguised as the enemy!!
+SHOPMENU2_MOLE = Mole: Teleports you to the enemy spawn under disguise at the start of the round
+
+SHOPMENU3_HEADER = The following items are available for purchase at the shop (say shopmenu3) and can be purchased ONCE every 30 seconds:
+SHOPMENU3_ITEM1 = Lesser healing potion: Heals 50 HP instantly
+SHOPMENU3_ITEM2 = Potion of Invisibility: Gives you level 10 invisibility for 15 seconds
+SHOPMENU3_ITEM3 = Potion of Invulnerability: Takes away 6 damage from each hit for 20 seconds
+SHOPMENU3_ITEM4 = Scroll of Town Portal: Instantly Teleports you back to your spawn
+SHOPMENU3_ITEM5 = Disease Cure: Cures any infection caused by disease
+SHOPMENU3_ITEM6 = Poison Cure: Cures any infection caused by poison
+SHOPMENU3_ITEM7 = Fire Cure: Teaches you (momentarily) how to stop drop and roll
+SHOPMENU3_ITEM8 = Rot Cure: Cures that not so fresh feeling that is teh ROT
+SHOPMENU3_ITEM9 = De-HEX: Cures Hex
+
+GLOVE_NADE_GIVEN = Your Flaming Gloves provide you with a Nade!
+GLOVE_RESTRICTED = Flaming Gloves of Warmth are restricted on this map
+GLOVE_TIMER = %d second( s ) until your next grenade
+GLOVE_DIED = If you could manage to stay alive I could provide you with more nades!
+
+RINGS_X5_MORE = You may not purchase more than 5 rings
+RINGS_X5 = Saying this allows you to buy 5 rings
+
+MOLE_DISABLED_PLAYER = Mole has been disabled on this server
+MOLE_DISABLED_ADMIN = Mole has been disabled on this server
+
+RESETSKILLS_ON = Your skills will be reset next round
+RESETSKILLS_OFF = This server has disabled that option
+
+LOADSKILLSET_ON = Your skills will be loaded next round
+LOADSKILLSET_OFF = This server has disabled that option
+LOADSKILLSET = [%s] Your skills have been loaded from skillset %d
+LOADSKILLSET_NODATA = [%s] No data found for that SkillSet ID #%d
+LOADSKILLSET_ERROR = [%s] Error Retrieving Your Skillset Data. Please try again next map - Sorry.
+
+SAVESKILLSET_ON = Your skills will be saved next round
+SAVESKILLSET_OFF = This server has disabled that option
+SAVESKILLSET = [%s] Your skills have been saved to skillset %d
+SAVESKILLSET_ERROR = [%s] Error Saving Your Skillset Data. Please try again next map - Sorry.
+
+SKILLSET_CANT_SAVE_LOAD = You can not Save your skill set becuase you are Loading a skillset.  Please wait a round then try again
+SKILLSET_CANT_LOAD_SAVE = You can not Load your skill set becuase you are Saving a skillset.  Please wait a round then try again
+
+DELETESKILLSET_ERROR = [%s] Error Deleting Your Skillset Data. Please try again next map - Sorry.
+DELETESKILLSET_OK = [%s] Your Skillset %d Data has been cleared.
+SKILLSET_CANT_DEL_SAVE = You can not Delete your skill set becuase you are Saving a skillset.  Please wait a round then try again
+SKILLSET_CANT_DEL_LOAD = You can not Delete your skill set becuase you are Loading a skillset.  Please wait a round then try again
+DELSKILLSET_ON = Your SkillSet will be deleted
+
+SKILLS_RESET_LOG = TOO MANY SKILLPOINTS: ( %s ) level= ( %d ) skillcount= ( %d )
+
+CANCEL = Cancel
+ERROR = ERROR
+CONNECT_TABLE_CONNECT_FAILED = Error: Could not connect to SQL database in CreateTable
+
+FAILED_TO_CREATE_TABLE = UWC3X SQL :: Error creating table
+FAILED_TO_RUN_QUERY = UWC3X SQL :: Error running Query
+FAILED_TO_RUN_QUERY_CONNECT = Error: Could not connect to SQL database in RunQuerry.
+
+CONFIG_LOADING_DEBUG = UWC3X SQL :: Config Report: host= ( %s ) user= ( %s ) pass= ( * ) db= ( %s )
+CONFIG_LOADING_MESSAGE = UWC3X SQL :: Loading Configuration File...
+CONFIG_LOADING_SUCCESS = UWC3X SQL :: Configuration File Loaded [OK]
+CONFIG_LOADING_FAILURE = UWC3X SQL :: No Configuration File -- NOT SAVING XP...
+CONFIG_LOADING_FDE = UWC3X SQL :: No Configuration File -- NOT SAVING XP...
+
+DB_CONNECT_FAILURE = Error connecting to SQL database
+DB_CONNECT_SUCCESS = UWC3X SQL :: Connected [OK]
+
+SKILLSET_BAD = Your skillset doesnt appear to be right. Please check it and try again
+SKILLSET_RESET_NR = Your skillset will be set next round
+
+ULTIMATE_RETRIEVED = [%s] Retrieved saved ultimate ( %s )^n
+ULTIMATE_READY = Ultimates Ready
+ULTIMATE_NOT_READY = Ultimates NOT Ready
+
+STARTING_XP_DISABLED = Sorry, this server does not use Starting XP - you are now level 0
+STARTING_XP_MESSAGE = Congratulations! You have been awarded the new player XP bonus of %s FREE XP
+STARTING_LEVEL_MESSAGE = Congratulations! You have been awarded the new player starting level of %d 
+LOAD_XP_FAILURE = Error Retrieving Your XP+Skills Data. Sorry.
+LOAD_XP_QUERY_FAILURE = UWC3X SQL :: Error in LoadXPHandle
+LOAD_XP_CONNECT_FAILURE = Error: Could not connect to SQL database in _LoadXP.
+LOAD_XP_NO_DATA = [%s] No Saved Skills SQL Data Found for you
+LOAD_XP_STARTING_XP = [%s] Congratulations! You have been awarded the new player XP bonus of %d FREE XP
+LOAD_XP_STARTING_LEVEL = [%s] Congratulations! You have been awarded the new player starting level of %d 
+
+SAVEXP_FAILED_TO_RUN_QUERY = UWC3X SQL :: Error in _SaveXP
+SAVEXP_CONNECT_FAILED = Error: Could not connect to SQL database in _SaveXP
+SAVE_XP_FAILURE = Error Saving Your XP+Skills Data. Sorry :' ( 
+SAVE_XP_DISABLED = [%s] Long term XP mode is NOT enabled now.
+SAVING_XP_NOW = [%s] Saving all your UWC3X Data now.
+SAVEXP_HUD_MESSAGE = Your XP, Skills, Attributes and Resistances will be saved when you disconnect, and on a map change.
+SAVEXP_CLIENT_MESSAGE = Your XP, Skills, Attributes and Resistances will be saved when you disconnect, and on a map change.
+
+ENH_OFF = This server has restricted attribute enhancements
+
+ENH_MIN_LEVEL = [%s] You must reach level [%d] before you may enhance your attributes
+ENH_MAX_LEVEL = [%s] You have already reached the maximum enhancement level.
+ENH_LIMIT_REACHED = [%s] You have reached the server limit for obtainable Attribute points.
+ENH_NO_POINTS = [%s] You do not have any Attribute points to spend, earn more E-XP
+ENH_SPEND = [%s] You spend 1 E-XP point to enhance your %s
+
+ABILITY_DURING_FREEZETIME = You may not use this ability during freezetime
+ULTIMATE_DELAY_MESSAGE = This ability is disabled for the^nfirst %d seconds of the round
+
+ULTIMATE_VENGANCE = Ultimate ability Vengeance trained, no bind required
+CLOAK_SKILL_AWARDED = [%s] You have been awarded a Cloak of Chameleon, and now look like a member of the other team
+CLOAK_SKILL_AWARDED2 = You have been awarded a Cloak of Chameleon, and now look like a member of the other team
+CLOAK_SKILL_HAVE_ITEM = [%s] You can not be awarded a Cloak of Chameleon as you have the Chameleon shopmenu2 item already
+HEALING_WAVE_MAX = [%s] You have already performed the maximum number of heals for this round
+HEALING_WAVE_HEAL = [%s] You have healed a teammate <%d XP>.
+
+MOLE_NO_SLOT = A mole location was not found for you, item saved for next round
+MOLE_NO_SLOT_T = No Terrorist mole locations available, will try again next round
+MOLE_NO_SLOT_CT = No Counter-Terrorist mole locations available, will try again next round
+MOLE_SLOT = A mole location was not found for you
+MOLE_BLIND = [%s] You are temporarily blind after coming into daylight.
+MOLE_READY = Mole location ready, sending you to : < %d %d %d>
+MOLE_JOIN_TEAM = Join a Team First!
+
+RESPAWN_GRACE_END = [%s] Your Respawn grace period has ended, Beware!
+PHEONIX_REVIVE1 = %s has revived you
+PHEONIX_REVIVE2 = [%s] Your Phoenix has revived %s <%d XP>
+PHEONIX_REVIVE3 = You have revived %s, way to go!
+PHEONIX_REVIVE4 = [%s] %s has revived you
+
+SERPENTWARD_PLACED = Serpent Ward Placed, %d remaining
+SERPENTWARD_ALLGONE = You have already used all %d of your Serpent Wards
+SERPENTWARD_UNTRAINED = You do not know the Serpant Ward ultimate yet
+SERPENTWARD_MAGICPROTECT = [%s] Your magic resistance protects you from a Serpent Ward
+
+REPAIR_ARMOR_UNTRAINED = You do not know the Repair Armor ability yet
+REPAIR_ARMOR_XP_MESSAGE = [%s] You have made some repairs to your teammate's armor <%d XP>.
+REPAIR_ARMOR_MAX_REPAIRS = [%s] You have already performed the maximum number of repairs for this round
+REPAIR_ARMOR_UNNEEDED = [%s] %s does not need armor repair at this time
+REPAIR_ARMOR_MESSAGE = [%s] %s has made some repairs to your armor.
+
+DISPELL_UNTRAINED = You do not know the Dispell Hex ability yet
+DISPELL_NOT_HEXED = [%s] Your teammate isnt hexed at the moment.
+DISPELL_MESSAGE = [%s] %s has dispelled your hex.
+DISPELL_XP_MESSAGE = [%s] You have dispelled your teammate's hex <%d XP>.
+DISPELL_MAX_DISPELLS = [%s] You have already performed the maximum number of dispells for this round
+
+MENDWOUNDS_UNTRAINED = You do not know the Mend Wounds ability yet
+MENDWOUNDS_MAX_HEALS = [%s] You have already mended the maximum number of wounds for this round
+MENDWOUNDS_NOT_HURT = [%s] %s does not have wounds to be mended at this time
+MENDWOUNDS_CURED_ALL = [%s] You have provided medical care to %s : tended burns, cured poison, cured disease <%d XP>
+MENDWOUNDS_CURED_ALL_MESSAGE = [%s] %s has provided the following medical care : tended burns, cured poison, cured disease
+MENDWOUNDS_CURED_TWO1 = [%s] You have provided medical care to %s : tended burns, cured poison ( or ) disease <%d XP>
+MENDWOUNDS_CURED_TWO_MESSAGE1 = [%s] %s has provided the following medical care : tended burns, cured poison ( or ) disease
+MENDWOUNDS_CURED_TWO2 = [%s] You have provided medical care to %s : cured poison and disease <%d XP>
+MENDWOUNDS_CURED_TWO_MESSAGE2 = [%s] %s has provided the following medical care : cured poison and disease
+MENDWOUNDS_CURED_ONE = [%s] You have provided medical care to %s : cured poison ( or ) disease <%d XP>
+MENDWOUNDS_CURED_ONE_MESSAGE = [%s] %s has provided the following medical care : cured poison ( or ) disease
+MENDWOUNDS_CURED = [%s] You have provided basic medical care to %s <%d XP>
+MENDWOUNDS_CURED_MESSAGE = [%s] %s has provided basic medical care to you
+
+SHHH_DEAD_MESSAGE = [%s] Shhhh, you are dead, act like it.
+RESISTANCE_ENDED = [%s] Your magic resistance to %s has ended
+
+SM3_DISEASE2 = Whoah, you suddenly start feeling a little better....
+SM3_POISON2 = Out of no where a man appears and sucks out the poison!
+SM3_FIRE2 = You suddenly remember to stop drop and roll, and the fire goes out.
+SM3_ROT2 = The arm that had rotted off suddenly regenerates and you are no longer rotting
+SM3_INVIS2 = You are now level 10 invisible for 15 seconds - better make it count!
+SM3_HEAL2 = mmmm You feel heathly!
+SM3_INVUL2 = For the next 20 seconds you will recieve 6 health back from each shot taken, if you survive the damage....
+SM3_GATE2 = You will be taken back to spawn.  Wussy :p
+SM3_VISIBLE2 = Looks like you are starting to become VISIBLE again.....better hide....
+SM3_VULERABLE2 = Looks like you are starting to become VULNERABLE again.....better not take much more damage....
+SM3_WAIT2 = You must wait 30 seconds between shopemnu3 purchases
+SM3_CAN_BUY2 = You can now make another purchase from SHOPMENU3
+SM3_NOHEX2 = Your hex has been dispelled.  Boy your legs are tired from all that jumping...
+SM3_MAXHEALTH = You are already at maximum health.
+
+SM3_DISEASE = [%s] Whoah, you suddenly start feeling a little better....
+SM3_POISON = [%s] Out of no where a man appears and sucks out the poison!
+SM3_FIRE = [%s] You suddenly remember to stop drop and roll, and the fire goes out.
+SM3_ROT = [%s] The arm that had rotted off suddenly regenerates and you are no longer rotting
+SM3_INVIS = [%s] You are now level 10 invisible for 15 seconds - better make it count!
+SM3_HEAL = [%s] mmmm You feel heathly!
+SM3_INVUL = [%s] For the next 20 seconds you will recieve 6 health back from each shot taken, if you survive the damage....
+SM3_GATE = [%s] You will be taken back to spawn.  Wussy :p
+SM3_VISIBLE = [%s] Looks like you are starting to become VISIBLE again.....better hide....
+SM3_VULERABLE = [%s] Looks like you are starting to become VULNERABLE again.....better not take much more damage....
+SM3_WAIT = [%s] You must wait 30 seconds between shopemnu3 purchases
+SM3_CAN_BUY = [%s] You can now make another purchase from SHOPMENU3
+SM3_NOHEX = [%s] Your hex has been dispelled.  Boy your legs are tired from all that jumping...
+
+SM3_NO_DISEASE = You are not diseased, this item will do you no good
+SM3_NO_POISON = You are not poisoned, this item will do you no good
+SM3_NO_FIRE = You are not on fire, this item will do you no good
+SM3_NO_ROT = You are not rotting, this item will do you no good
+SM3_DOES_NOTHING = [%s] Congratulations, you just wasted your money since this item doesnt do anything.
+SM3_NO_HEX = You are not hexed, this item will do you no good
+
+ULTIMATE_SIV_XP = You have been awarded %d XP for Shielding %s
+ULTIMATE_SIV_READY = Your Team Shield has recharged and is ready to be used
+ULTIMATE_SIV_PLAYER_EXPIRED = The Shield arround %s fades... 
+ULTIMATE_SIV_PLAYER = You have a Shield placed arround you by %s
+ULTIMATE_SIV_SHIELDER = You have placed a shield arround %s
+ULTIMATE_SIV_SHIELDER_EXPIRED = You Shield is loosing strength...
+ULTIMATE_SIV_UNTRAINED = You do not know the Siv Shield ultimate yet
+
+TEAMSHIELD_ABSORB1 = [%s] The Team shield provided by %s absorbs %d damage - Thanks may be in order.... 
+TEAMSHIELD_ABSORB2 = [%s] You have taken %d damage from the shield protecting %s 
+
+ULTIMATE_DELAY = Ultimates are disabled for the^nfirst %d seconds of the round
+ULTIMATE_PLAYER_IS_MOLE = Moles cannot use ultimates
+ULTIMATE_FREEZETIME = You may not use your ultimate during freezetime
+ULTIMATE_WCSUICIDE_UNTRAINED = [%s] You do not know the Suicide Bomber ultimate yet
+ULTIMATE_WCSUICIDE_ARMED = Suicide Bomb Armed^nPress Again To Detonate
+ULTIMATE_SUICIDE_RESIST = [%s] Your magic resistance makes you temporarily immune to a Suicide Bomber's blast waves
+
+ULTIMATE_FLAME_UNTRAINED = You do not know the Flame Strike ultimate yet
+ULTIMATE_FLAME_RESIST = [%s] Your fire resistance protects you from a flamethrower attack
+ULTIMATE_FLAME_DEFLECTED = [%s] Your flamethrower attack is deflected by your target's fire resistance
+ULTIMATE_FLAME_FAILED = [%s] Your fire resistance fails to fully protect you from a flamethrower attack
+
+ULTIMATE_TELEPORT_UNTRAINED = You do not know the Teleport ultimate yet
+ULTIMATE_TELEPORT_IMMUNITY = Teleport Failed^nA Nearby Enemy Has Immunity
+ULTIMATE_TELEPORT_SLAY = [%s] You have been slain for teleporting into a restricted area
+ULTIMATE_TELEPORT_NO_TARGETS = No valid targets found!
+ULTIMATE_TELEPORT_FAILED = Teleport Failed^nBad Destination
+ULTIMATE_TEPELORT_IMMUNE = Teleport Failed^nAn Enemy Near Your Destination Has Immunity
+
+ULTIMATE_VOODOO_UNTRAINED = You do not know the Big Bad Voodoo ultimate yet
+ULTIMATE_VOODOO_EXPIRED = Your Voodoo has expired
+ULTIMATE_VOODOO_RESET = Your Voodoo has been reset
+
+ULTIMATE_GATE_UNTRAINED = You do not know the Gate ultimate yet
+ULTIAMTE_GATE = [%s] Your gateway opens and is ready to take you home
+ULTIMATE_GATE_NO_MORE = [%s] You have used up your available Gateways this round.
+ULTIMATE_GATE_FAILED = [%s] Your gateway failed to open
+ULTIMATE_GATE_COLLAPSE = [%s] An unknown force causes your gateway to collapse
+ULTIMATE_GATE_COOLDOWN = [%s] You must wait %d seconds between gate attempts
+
+ULTIMATE_LGHTNG_UNTRAINED = You do not know the Chain Lightning ultimate yet
+ULTIMATE_LGHTNG_RESISTALL = [%s] Your resistance to electricity absorbs all of the Chain Lightning damage
+ULTIMATE_LGHTNG_RESIST = [%s] Your resistance to electricity absorbs some of the Chain Lightning damage
+
+ULTIMATE_DECOY_UNTRAINED = You do not know the Decoy ultimate yet
+ULTIMATE_DECOY_ONE = [%s] You cannot have more than one decoy at a time
+ULTIMATE_DECOY_LIMIT = [%s] You may only create 1 decoy per round
+ULTIMATE_DECOY_HEXED = [%s] You are currently a Goombah and unable to create a decoy.
+ULTIMATE_DECOY_PLAYER = [%s] You cannot create a Decoy on a player.
+ULTIMATE_DECOY_EXPIRED = Your decoy has expired
+
+ULTIMATE_ENTANGLE_UNTRAINED = You do not know the Entangle ultimate yet
+ULTIMATE_ENGANGLE_RESISTANT = [%s] Your magic resistance makes you temporarily immune to Entangling Roots
+
+ULTIMATE_TEAMSHIELD_UNTRAINED = You do not know the Team Shield ultimate yet
+ULTIMATE_TEAMSHIELD_ACTIVE = [%s] You are already using a Team Shield, wait until that one is done
+ULTIMATE_TEAMSHIELD_COOLDOWN = [%s] You have already used a Team Shield, you now have to wait %f seconds after the last one expired
+
+ULTIMATE_DEPOWER_UNTRAINED = You do not know the Depower ultimate yet
+ULTIMATE_DEPOWER_COOLDOWN = [%s] You have recently used depower, you now have to wait %f seconds until you can use it again
+ULTIMATE_DEPOWER_YOU1 = [%s] You have depowered %s and now you both have TMPs!!
+ULTIMATE_DEPOWER_ENEMY1 = [%s] You have been depowered by %s and now you both have TMPs!!
+ULTIMATE_DEPOWER_READY = [%s] Your depower ultimate is once again ready to be used
+ULTIMATE_DEPOWER_ENEMY2 = [%s] You can only have the TMP until your cooldown is finished.  You cant drop this gun until then
+ULTIMATE_DEPOWER_WORE_OFF = [%s] The depower placed on you by %s has finally wore off, you can go find a real gun now.....
+
+ULTIMATE_FLASH_UNTRAINED = You do not know the Flash of Light ultimate yet
+ULTIMATE_FLASH_ENEMY2 = You have been blinded by %s
+ULTIMATE_FLASH_ENEMY1 = [%s] You have been blinded by %s
+ULTIMATE_FLASH_YOU1 = [%s] %s has been blinded by your Flash of Light
+ULTIMATE_FLASH_YOU2 = %s has been blinded by your Flash of Light
+
+ULTIMATE_BLIND_UNTRAINED = [%s] You do not know the Total Blindness ultimate yet
+ULTIMATE_BLIND_ENEMY = You have been blinded by %s
+ULTIMATE_BLIND_YOU = [%s] You have blinded %s
+
+ULTIMATE_BADAIM_ENEMY1 = [%s] You have been disoreinted by %s for %d seconds!!!!
+ULTIMATE_BADAIM_ENEMY2 = You have been disoreinted by %s for %d seconds!!!!
+ULTIMATE_BADAIM_ENEMY3 = [%s] %s is no longer disoriented!
+
+ULTIMATE_BADAIM_YOU1 = [%s] %s has been disoriented for %d seconds!!!!
+ULTIMATE_BADAIM_YOU2 = %s has been disoriented for %d seconds!!!!
+ULTIMATE_BADAIM_YOU3 = [%s] You are no longer disoriented!
+
+ULTIMATE_LOCUST_UNTRAINED = You do not know the Locust Swarm ultimate yet
+
+ULTIMATE_UAMMO_UNTRAINED = You do not know the Unlimited Ammo ultimate yet
+ULTIMATE_UAMMO_YOU1 = [%s] You have unlimited ammo for %d seconds
+ULTIMATE_UAMMO_YOU2 = Your unlmited ammo spree is now over
+
+ULTIMATE_DISORIENT_UNTRAINED = You do not know the Disorient ultimate yet
+ULTIMATE_DISORIENT_YOU1 = [%s] You have been disoriented and it will ware off in %d seconds
+ULTIMATE_DISORIENT_YOU2 = You have been disoriented and it will ware off in %d seconds
+ULTIMATE_DISORIENT_ENEMY1 = [%s] %s is disoriented for %d seconds
+ULTIMATE_DISORIENT_ENEMY2 = %s is disoriented for %d seconds
+
+ULTIMATE_CRIPPLE_UNTRAINED = You do not know the Cripple ultimate yet
+ULTIMATE_CRIPPLE_COOLDOWN = [%s] You have recently used cripple, you now have to wait %f seconds until you can use it again
+ULTIMATE_CRIPPLE_ENEMY1 = [%s] You have been crippled by %s and rendered immobile for 3 seconds
+ULTIMATE_CRIPPLE_ENEMY6 = [%s] You have crippled by %s and rendered immobile for 3 seconds
+ULTIMATE_CRIPPLE_ENEMY2 = [%s] You have been crippled by %s and are now moving at a reduced speed for 6 seconds
+ULTIMATE_CRIPPLE_ENEMY7 = [%s] You have crippled %s and he is now moving at a reduced speed for 6 seconds
+ULTIMATE_CRIPPLE_ENEMY4 = You have been crippled by %s and rendered immobile for 3 seconds
+ULTIMATE_CRIPPLE_ENEMY5 = You have been crippled by %s and are now moving at a reduced speed for 6 seconds
+ULTIMATE_CRIPPLE_ENEMY8 = You have crippled by %s and rendered immobile for 3 seconds
+ULTIMATE_CRIPPLE_ENEMY9 = You have crippled %s and he is now moving at a reduced speed for 6 seconds
+ULTIMATE_CRIPPLE_READY = [%s] Your cripple ultimate is once again ready to be used
+ULTIMATE_CRIPPLE_ENEMY3 = [%s] You can not use an ultimate while crippled
+ULTIMATE_CRIPPLE_WORE_OFF1 = [%s] You are no longer crippled
+ULTIMATE_CRIPPLE_WORE_OFF2 = You are no longer crippled
+ULTIMATE_CRIPPLE_WORE_OFF4 = %s is no longer crippled
+ULTIMATE_CRIPPLE_WORE_OFF3 = [%s] %s is no longer crippled
+
+ULTIMATE_EARTHQUAKE_UNTRAINED = You do not know the Earth Quake ultimate yet
+ULTIMATE_EARTHQUAKE_ENEMY1 = [%s] The ground arround you shakes from an earthquake causing you damage
+ULTIMATE_EARTHQUAKE_ENEMY2 = The ground arround you shakes from an earthquake causing you damage
+ULTIMATE_EARTHQUAKE_RESIST1 = [%s] Your magic resistance allows you to take only half damage from %ss Earth Quake
+ULTIMATE_EARTHQUAKE_RESIST2 = Your magic resistance allows you to take only half damage from %ss Earth Quake
+ULTIMATE_EARTHQUAKE_RESIST3 = [%s] %ss magic resistance allows them to take only half damage from your Earth Quake
+ULTIMATE_EARTHQUAKE_RESIST4 =  %ss  magic resistance allows them to take only half damage from your Earth Quake
+ULTIMATE_EARTHQUAKE_YOU1 = [%s] %s creates an Earthquake arround you causing you damage
+ULTIMATE_EARTHQUAKE_YOU2 = %s creates an Earthquake arround you causing you damage
+ULTIMATE_EARTHQUAKE_DAMAGE1 = [%s] Your Earthquake causes the ground to shake arround %s causing them damage
+ULTIMATE_EARTHQUAKE_DAMAGE2 = Your Earthquake causes the ground to shake arround %s causing them damage
+
+ULTIMATE_ICEBOMB_RESIST1 = [%s] Your ice resistance allows you to take only half damage from %ss Ice Bomb
+ULTIMATE_ICEBOMB_RESIST2 = Your ice resistance allows you to take only half damage from %ss Ice Bomb
+ULTIMATE_ICEBOMB_RESIST3 = [%s] %ss ice resistance allows them to take only half damage from your Ice Bomb
+ULTIMATE_ICEBOMB_RESIST4 =  %ss  ice resistance allows them to take only half damage from your Ice Bomb
+
+ULTIMATE_SMITE_UNTRAINED = You do not know the Smite ultimate yet
+SMITE_DESC = Smite (Ultimate bind wcsmite) : A Lightning bolt falls from the sky dealing damage to one opponent - More powerful then chaing lightning but only hits one target
+
+VAMPIRIC_DESC = Vampiric Aura: Gives you (10%% to 37%%) of the damage you do in attack back as health
+LEVITATION_DESC = Levitation: Allows you to jump higher by reducing your gravity
+DEVOTION_DESC = Devotion Aura: Gives you (110 to 155) health at the start of the round.
+REINCARNATION_DESC = Equipment Reincarnation: Gives you a (%d%%, %d%% or %d%%) chance of regaining your equipment on death
+HEALINGWAVE_DESC = Healing Wave: Every (6 down to 1.5) seconds you and your nearby teammates around you gain 2 HP
+SIPHONMANA_DESC = Siphon Mana: Steal (5%% to 14%%) of the enemy's money
+IMPALE_DESC = Impale: Adds a chance to cause the ground the shake beneath your enemy. High intellect may help your chances to land a successful impale attack.
+LEATHERSKIN_DESC = Leather Skin: Natural armor enhancement and regeneration
+UNHOLY_DESC = Unholy Aura: Gives you a speed boost, weapons will no longer affect your unholy speed. Enhancing your agility improves your overall run speed.
+BASH_DESC = Bash: When you shoot someone you have a (10%% to 37%%) chance of rendering them immobile for 1 second. Enhancements made to your Intellect may help a Bash attack.
+CRITSTRIKE_DESC = Critical Strike: Gives you a 15%% to 24%% chance of doing double the normal damage
+REPAIRARMOR_DESC = Repair Armor: Allows you the opportunity to repair a teammate's armor as an alternate means of gaining XP. As your rank/level increases your effectiveness at armor repair also improves. To use: target a teammate and trigger the wcrepair command
+BANISH_DESC = Banish: You have a (6%% to 24%%) chance of slapping your enemy. High intellect may help your chance to banish an enemy.
+HEX_DESC = Hex: You have a (5%% to 23%%) chance of morphing your enemy into a less than desirable form. Enhancements made to your intellect may help your Hex attacks.
+SIPHONAMMO_DESC = Siphon Ammo: Allows you to steal opponents ammo when doing damage (between 3.5%% and 8%% percent.
+SPIKEDCARAPACE_DESC = Spiked Carapace: Does (5%% to 23%%) mirror damage to the person who shot you and you gain armor
+MENDWOUNDS_DESC = Mend Wounds: Allows you the opportunity to heal a teammate's wounds as an alternate means of gaining XP. As your rank/level increases your effectiveness at mending wounds also improves. 2nd skill level adds ability to cure poison, 3rd skill level adds ability to cure burns from napalm or a flame thrower. To use: target a teammate and trigger the wcmend command
+EVASION_DESC = Evasion: Gives you a (5%% to 17%%) chance of evading each shot. Enhancing your dexterity improves your Evasion skill.
+TRUESHOT_DESC = Trueshot Aura: Does (10%% to 37%%) extra damage to the enemy. A superior Intellect will cause your Trueshot to inflict more damage.
+STEELSKIN_DESC = Steel Skin: [Requires 1 level Vampiric Aura and 3 levels Leather Skin] Upgrades your Leather Skin and allows Vampiric Aura to steal armor from your enemy
+CARRIONBEETLES_DESC = Carrion Beetles: You have a (10%% to 37%%) chance of sending Carrion Beetles to attack your enemy and spread disease
+SHADOWSTRIKE_DESC = Shadow Strike: You have a (10%% to 37%%) chance of poisoning your enemy with
+ENTANGLEROOTS_DESC = Entangle Roots (Ultimate bind wcentangle): Allows you to prevent an enemy player from moving for 10 seconds
+FLAMESTRIKE_DESC = Flame Strike (Ultimate bind wcflame): You receive a flame throwers (1 uses every 20 seconds)
+DISPELLHEX_DESC = Dispell Hex (Special Ability: bind wcdispell): Works like mend/repair and will remove hex from targeted team mate. Will receive XP for dispelling.
+CRITICALGRENADE_DESC = Critical Grenade: Your HE grenades do (1.5 to 7.8) times normal damage
+SEPENTWARD_DESC = Serpent Ward (Special Ability: bind wcward): You receive (%d, %d or %d) serpent wards each round that damage nearby enemy units ( bind a key to wcward to plant one)
+THORNSAURA_DESC = Thorns Aura: Does (10%% to 37%%) mirror damage to the person who shot you
+INVISIBILITY_DESC = Invisibility: Makes you partially invisible, you will be harder to see (Use cloak for disappear more!)
+TELEPORT_DESC = Teleport (Ultimate bind wcteleport): Allows you to teleport to where you aim (avoid ceilings).
+BIGBADVOODOO_DESC = Big Bad Voodoo (Ultimate bind wcvoodoo): Invincibility for 3 seconds
+FANOFKNIVES_DESC = Fan of Knives: You have a (%d%%, %d%% or %d%%) chance of becoming a mole
+VENGANCE_DESC = Vengeance (Ultimate passive): Respawn once with 50 health
+BLINK_DESC = Blink: Chance to disables ALL enemy ultimates (20%% to 100%%)
+PHEONIX_DESC = Phoenix: You have a (20%% to 100%%) chance of reviving the first teammate who dies
+NAPALMGRENADE_DESC = Napalm Grenades: Each round your first he grenade will coat your enemies with napalm, anyone they touch will spread the napalm
+SUICIDEBOMB_DESC = Suicide Bomber (Ultimate passive): When you die you will explode killing nearby enemies and regenerate
+CHAINLIGHTNING_DESC = Chain Lightning (Ultimate bind wclightning): Discharges a bolt of lightning that jumps to all nearby enemies
+DECOY_DESC = Decoy (Ultimate bind wcdecoy): Spawns a temporary decoy (looks like you) where you are aiming
+GATE_DESC = Gate (Ultimate bind wcgate): Opens a Gateway for you to be teleported back to your spawn point and away from danger (hopefully)
+SIV_DESC = Siv Shield (Ultimate bind wcshield): Places a protective shield arround a teammate you aim at, allowing you to take the damage from shots (20 damage + 10 every level - level 1=30, level 2=40, etc).  Doing this will give the player casting the shield XP for helping their team
+JKICK_DESC = Jump Kick: You will do 7 damage per level and knock your oppent back (the higher the level the farther the knock back) - as well as knock the gun out of their hands.  Ahh grasshopper, this skill is deadly!
+MJUMP_DESC = MultiJump: Allows you to jump multiple times while in mid air.  Each level allows one extra jump in mid air - comparable to sock or levitation although it can be controlled to what ever level of hieght you need at the time.
+CAT_DESC = Wind Walker (Ultimate passive): This skill allows you to walk like the wind - silently.  Comparable to amulet of the cat as an ultimate skill.
+ROT_DESC = Rot: This is the ultimate in effect changing skills.  Much like disease or poison this skill will rot away the player until they are no more.  Doing massive damage and then a slow rotting death that is only curable with the Shopmenu3 item.
+DEPOWER_DESC = Depower (Ultimate bind wcdepower): This will make BOTH you AND your opponent drop your guns and will give you a TMP instead.
+CLOAK_DESC = Cloak of the chameleon: This skill gives you a 10% chance per level of being spawned as a chameleon.  The bonus of this skill is that it will stack with MOLE, so if you have mole you will be spawned in the other teams spawn AND with chameleon.
+CRIPPLE_DESC = Cripple (Ultimate passive): Chance of completely freezing his target for 3 seconds (like Entangle but unblockable), Or crippling the target (crawl speed) for 6 seconds - Requires 3 points Bash, and 2 points Trueshot
+FLASH_DESC = Flash of Light (Ultimate bind wcflash): Blinds nearby enemeys
+LOCUST_DESC = Locust Swarm (Ultimate bind wclocust): Sends a swarm out to damage enemys all over the map, each point spent does 20 damage - affected player is also slowed temporarily
+DISORIENT_DESC = Disorient ( Ultimate bind wcdisorient): Causes your Opponent to be disoriented for a few seconds - quite a scary experience...
+UAMMO_DESC = Unlimited Amunition ( Ultimate bind wcuammo) : Gives you unlimited ammo for a few seconds
+EARTHQUAKE_DESC = Earth Quake (Ultimate bind wcquake ): Causes the ground to shake arround an enemy, damaging all enemys arround them.  The higher the skill points spent the further away from the epicenter the damage spreads
+CLUSTERNADE_DESC = Cluster Grenade: For each point used in this skill causes one cluster to be included in your grenade.  Each cluster deals extra damage.
+
+ICENADE_DESC = Ice Bomb: Causes your Smoke Grenades to become ICE BOMBS, freezing your opponents in place and slowing them down momentarily while dealing damage
+ICEBOMB_GIVEN1 = [%s] You have recieved an Ice Bomb - use it well
+ICEBOMB_GIVEN2 = You have recieved an Ice Bomb - use it well
+
+SPLITTER_DESC = Helm Splitter ( Ultimate passive) : You have a chance of splitting your opponents helmet, rendering it unusable when you headshot an opponent with a helmet
+HELMET_SHATTERED1 = [%s] You have shattered your opponents helmet - his head is now exposed!
+HELMET_SHATTERED2 = [%s] Your helmet has been shattered by %s and your head is no longer protected!
+
+HOOK_DESC = HookShot (bind key wchook ) : Fly to a place by aiming and pressing your bind, press again to let go
+ULTIMATE_HOOK_UNTRAINED = You do not know the Hook Shot Ultimate yet
+HOOK_NONE_LEFT = [%s] You are all out of hooks. Wait until next round.
+HOOK_LAST_ONE = [%s] That was your last hook for this round.
+HOOK_COUNT = [%s] You have %d hooks left, use them wisely.
+HOOK_NO_VIP = [%s] Hooking by the VIP is prohibited
+
+GRAB_DESC = Grab (bind key wcgrab ) : Grab a player by aiming and pressing your bind to move them arround, press again to let them go.
+ULTIMATE_GRAB_UNTRAINED = You do not know the Grab Ultimate yet
+GRAB_NONE_LEFT = [%s] You are all out of grabs. Wait until next round.
+GRAB_LAST_ONE = [%s] That was your last grabs for this round.
+GRAB_COUNT = [%s] You have %d grabs left, use them wisely.
+GRAB_NO_VIP = [%s] Grabbing by the VIP is prohibited
+
+ROPE_DESC = Ninja Rope (bind key wcrope ) : Swing from a location like Tarzan by aiming and pressing your bind - press again to let go of the rope
+ULTIMATE_ROPE_UNTRAINED = You do not know the Ninja Rope Ultimate yet
+ROPE_NONE_LEFT = [%s] You are all out of ropes. Wait until next round.
+ROPE_LAST_ONE = [%s] That was your last ropes for this round.
+ROPE_COUNT = [%s] You have %d ropes left, use them wisely.
+ROPE_NO_VIP = [%s] VIPs are ninjas, but can not rope - sorry
+
+GRAB_FOUND = [%s] Grab - Found Target
+GRAB_LETGO = [%s] Grab - Target Released
+GRAB_NOTARGETS = [%s] Grab - No Targets Found
+
+HOOK_NO_ROPE = [%s] You have to give up your Ninja Rope to train Hook Shot
+GRAB_NO_ROPE = [%s] You have to give up your Ninja Rope to train Grab
+ROPE_NO_HOOK = [%s] You have to give up your Hook Shot to train Ninja Rope
+GRAB_NO_HOOK = [%s] You have to give up your Hook Shot to train Grab
+ROPE_NO_GRAB = [%s] You have to give up your Grab to train Ninja Rope
+HOOK_NO_GRAB = [%s] You have to give up your Grab to train Hook Shot  
+
+BLESS_UNTRAINED = [%s] You do not know the Blessing ability yet
+BLESS_MAX_BLESS = [%s] You have already performed a blessing for this round
+BLESS_GET = [%s] %s has blessed you.
+BLESS_CAST = [%s] You bless %s and gain <%d XP>
+
+BLESS_DESC = Blessing: Heals your teammate, cures any negative effects and sets his hp and armor to maximum + extra 30hp. Awards XP.
+
+FATAL_STRIKE1 = [%s] You strike a merciless fatal blow to %s
+FATAL_STRIKE2 = [%s] You just got hit by a fatal strike from %s
+FATAL_DESC = Fatal Strike: Gives you a chance of doing at least double damage to an enemy.  At the Master level also provides a small chance of doing an instant kill.
+FATAL_NO_TRUE = [%s] You have to give up your True Shot skill to train Fatal Strike
+TRUE_NO_FATAL = [%s] You have to give up your Fatal Strike skill to train True Shot
+FATAL_NO_CRIT = [%s] You have to give up your Critical Strike skill to train Fatal Strike
+CRIT_NO_FATAL = [%s] You have to give up your Fatal Strike skill to train Critical Strike
+
+NEWSKILL13_DESC = We need ideas for new skills
+NEWSKILL14_DESC = tell us what you want to see at yaur.com
+NEWSKILL15_DESC = We need ideas for new skills
+NEWSKILL16_DESC = tell us what you want to see at yaur.com
+
+WAR3INFO1 = Ultimate Warcraft 3 Expansion (UWC3X) is more or less a raceless, skill-based implementation of the Warcraft3 Frozen Throne plugin.
+WAR3INFO2 = This mod is a derived work based on Warcraft3:FT, Uwc3, and the community at -=[Yaur]=-.
+WAR3INFO3 = This is how you bind a key:
+WAR3INFO4 = 1) Type ` to get to the console (key to the left of number 1)
+WAR3INFO5 = 2) Type bind - shopmenu (displays shopmenu1)
+WAR3INFO6 = 3) Type bind = shopmenu2 (displays shopmenu2)
+WAR3INFO7 = 4) Type bind p wcward (to use the serpant ward ability)
+WAR3INFO8 = UWC3X allows you to have several ultimate skills as opposed to just one from the original Warcraft3. In the skills menu (/selectskill) ultimate skills will say (Ultimate: name), for example for the Teleport ultimate it says (Ultimate: wcteleport). Once you learn this skill you can use it by binding a key to the wcteleport command, done by typing: bind key wcteleport in the console.
+WAR3INFO9 = Say <b>/commands</b> to see the list of UWC3X spoken commands and say <b>/help</b> for the UWC3X help menu.
