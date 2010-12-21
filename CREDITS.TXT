@@ -1,0 +1,35 @@
+
+*************************************************************************************
+*** 		Originally by K2mia with portions by Dumb and the Yaur.com community
+***		by the Yaur.com community
+***
+*************************************************************************************
+*
+*
+* Credits to:
+* Original War3FT by Pimp Daddy ( OoTOAoO )
+* Spacedude ( for War3 MOD )
+* Ludwig Van ( for flamethrower )
+* OLO ( for spectating rank info )
+* JGHG for the mole code
+* [AOL]Demandred, [AOL]LuckyJ for help coding it for steam
+* [AOL]Demandred for freezetime exploit fix
+* Denkkar for some of his code ( ie. STEAM_POWERED )
+* Everyone at amxmod.net for help
+* joecool12321 for various health related fixes
+* Tri Moon for various improvements ( No Race, war3menu, etc... )
+* xeroblood for spotting some bugs for me : )
+* bad-at-this for contributing the status bar code used for godmode ( big bad voodoo )
+* kamikaze for help w/testing version before release
+* lui for the delayed ultimate code
+* the original UWC3 DEV team 
+* Left Nut for all his hard work on balancing the skills
+* Hawk552 for his work on jumpkick
+* twistedeuphoria for his work on multijump
+* the developers of DIABLO MOD for inspiring us on the Syv Shield skill
+* (--eRRoR--) from the StormZone community for their work on finding bugs and some of the new sprites and sounds
+* Dantallion for fatal strike and bug replication as well as help with some sounds
+* A special THANKS to the YAUR community for their work and inspiration
+* 
+* 
+*************************************************************************************
