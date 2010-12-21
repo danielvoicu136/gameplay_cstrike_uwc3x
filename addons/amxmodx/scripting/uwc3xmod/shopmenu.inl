@@ -193,9 +193,9 @@ public Buy_Item( id , key )
 	
 			if ( CVAR_DEBUG_MODE )
 			{
-				//new name[32];
-				//get_user_name(id, name, 31);
-				//log_amx( "In buy_item() :: [%s] Bought Health Has=(%d) Max=(%d)",name, get_user_health(id), maxhealth[id] );
+				new name[32];
+				get_user_name(id, name, 31);
+				log_amx( "In buy_item() :: [%s] Bought Health Has=(%d) Max=(%d)",name, get_user_health(id), maxhealth[id] );
 			}
 		}
 	}

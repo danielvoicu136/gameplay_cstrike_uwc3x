@@ -176,7 +176,6 @@ public Select_Attrib ( id )
 public Attrib_Menu( id, key )
 {
 
-	//log_amx("Showing attrib menu");
 	new name[32];
 	get_user_name( id, name, 31 );
 
@@ -322,7 +321,7 @@ public Select_Resist ( id )
 	
 		return PLUGIN_HANDLED;
 	}
-	//log_amx("in Select_Resist");
+
 	// Calculate how many attrib/resist points can be spent
 	new rpts = get_availresistpts( id );
 	new pos = 0, i, menu_body[1024], menu_items[7][64];
@@ -386,7 +385,6 @@ public Resist_Menu ( id, key )
 		// Calculate how many resist points can be spent
 		new rcount = get_resistcount( id );
 		new rpts = get_availresistpts( id );
-		//log_amx("rcount=%d rpts=%d", rcount, rpts);
 
 		if (rpts <= 0 )
 		{
@@ -724,8 +722,10 @@ public electricity_saving_throw( id )
 
 public Bot_Pick_Attribs( id )
 {
-
-	//log_amx( "DEBUG :: Bot_Pick_Attribs -> Bot is picking Attributes" );
+	if ( CVAR_DEBUG_MODE )
+	{
+		log_amx( "DEBUG :: Bot_Pick_Attribs -> Bot is picking Attributes" );
+	}
 
 	//new acount = get_attribcount( id );
 	new apts = get_availattribpts( id );
@@ -741,7 +741,10 @@ public Bot_Pick_Attribs( id )
 		p_attribs[id][attrib_num] += 1;
 		apts--;
 
-		//log_amx( "DEBUG :: Bot_Pick_Attribs -> attrib_num=%d, apts=%d", attrib_num, apts);
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: Bot_Pick_Attribs -> attrib_num=%d, apts=%d", attrib_num, apts);
+		}
 
 		switch( attrib_num )
 		{
@@ -749,16 +752,6 @@ public Bot_Pick_Attribs( id )
 			case ATTRIBIDX_CON: Task_Check_Const_Regen( id );
 			case ATTRIBIDX_AGI: 
 				{
-
-					//new steamid[32];
-					//get_user_authid( id, steamid, 31 )
-					//if(  equali( steamid, "STEAM_0:1:9083362" ) )
-					//{
-					//	new name[32];
-					//	get_user_name ( id, name, 31 );
-					//	log_amx( "DEBUG :: Bot_Pick_Attribs -> Set_Speed -> %s", name )
-					//}
-
 					// Call routine to set user runspeed
 					new parm[1];
 					parm[0] = id;
@@ -772,8 +765,10 @@ public Bot_Pick_Attribs( id )
 }
 public Bot_Pick_Resists( id )
 {
-
-	//log_amx( "DEBUG :: Bot_Pick_Resists -> Bot is picking Resistances" );
+	if ( CVAR_DEBUG_MODE )
+	{
+		log_amx( "DEBUG :: Bot_Pick_Resists -> Bot is picking Resistances" );
+	}
 
 	//new acount = get_resistcount( id );
 	new rpts = get_availresistpts( id );
@@ -789,7 +784,10 @@ public Bot_Pick_Resists( id )
 		p_resists[id][res_num] += 1;
 		rpts--;
 
-		//log_amx( "DEBUG :: Bot_Pick_Resists -> res_num=%d, rpts=%d", res_num, rpts);
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: Bot_Pick_Resists -> res_num=%d, rpts=%d", res_num, rpts);
+		}
 	}
 
 	return PLUGIN_CONTINUE;

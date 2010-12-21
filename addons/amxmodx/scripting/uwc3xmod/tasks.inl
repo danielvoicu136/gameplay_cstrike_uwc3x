@@ -279,10 +279,10 @@ public Task_Gate_User ( parm[6] )
 
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//client_print( id, print_console, "[%s DEBUG] Task_Gate_User -> Setting gateused[id] =true for player %s so now there is a 5 second delay", MOD, debugname );
-		//log_amx( "DEBUG :: Task_Gate_User -> Setting gateused[id] =true for player %s so now there is a 5 second delay", debugname );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		client_print( id, print_console, "[%s DEBUG] Task_Gate_User -> Setting gateused[id] =true for player %s so now there is a 5 second delay", MOD, debugname );
+		log_amx( "DEBUG :: Task_Gate_User -> Setting gateused[id] =true for player %s so now there is a 5 second delay", debugname );
 	}
 
 	gateused[id] = true;
@@ -1020,7 +1020,11 @@ public TASK_SHIELD_Search( parm[2] )
 		}
 
 		HasTeamShield[teammate]=true;
-		//log_amx( "DEBUG :: TASK_SHIELD_Search -> TeamShield -> Shielder: %s Player: %s HasTeamShield[teammate]=true", name2, name );
+		if( CVAR_DEBUG_MODE)
+		{
+			log_amx( "DEBUG :: TASK_SHIELD_Search -> TeamShield -> Shielder: %s Player: %s HasTeamShield[teammate]=true", name2, name );
+		}
+
 		p_PlayerShieldedBy[teammate] = id;
 		p_ShieldMaxDamageAbsorbed[teammate] = 0;
 		UsedTeamShield[id] = 1;
@@ -1099,8 +1103,11 @@ public TASK_SHIELD_CHECK ( parm[3] )
 	if( shield_damage <  MaxDamage )
 	{
 		HasTeamShield[id]=true;
-		//log_amx( "DEBUG :: TASK_SHIELD_CHECK( ) -> TeamShield -> Setting HasTeamShield[teammate]=true");
-		//p_PlayerShieldedBy[teammate] = id;
+		if( CVAR_DEBUG_MODE)
+		{
+			log_amx( "DEBUG :: TASK_SHIELD_CHECK( ) -> TeamShield -> Setting HasTeamShield[teammate]=true");
+		}
+
 		p_PlayerShieldedBy[id] = teammate;
 		parm[2] = p_ShieldMaxDamageAbsorbed[id];
 		set_task ( 1.0, "TASK_SHIELD_CHECK", TASK_SHIELD_CHECK_ID + id, parm, 3 );
@@ -1125,7 +1132,10 @@ public TASK_SHIELD_CHECK ( parm[3] )
 
 		//Reset the vars
 		HasTeamShield[id]=false;
-		//log_amx( "DEBUG :: TASK_SHIELD_CHECK( ) -> TeamShield -> Setting HasTeamShield[teammate]=false -> Expired");
+		if( CVAR_DEBUG_MODE)
+		{
+			log_amx( "DEBUG :: TASK_SHIELD_CHECK( ) -> TeamShield -> Setting HasTeamShield[teammate]=false -> Expired");
+		}
 
 		//Set cooldown
 		new cooldownparm[1];
@@ -1298,7 +1308,7 @@ public TASK_CHAIN_Damage ( parm[4] )
 
 			if ( CVAR_DEBUG_MODE )
 			{
-				//client_print( id, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, actual_damage );
+				client_print( id, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, actual_damage );
 			}
 		}
 
@@ -1915,7 +1925,6 @@ public con_heal( parm[] )
 	new bool:was_healed = false;
 
 	health = maxhealth[id] + ( playeritem[id] == HEALTH ? HEALTHBONUS : 0 );
-
 	if ( get_user_health( id ) < health )
 	{
 		was_healed = true;
@@ -2320,7 +2329,11 @@ public Task_locust_function( id )
 	new debugname[32];
 	get_user_name(parm[6],debugname,31);
 
-	//log_amx("DEBUG :: Task_locust_function -> VALID Player=%d %s  -> Moving on", parm[6], debugname );
+	if( CVAR_DEBUG_MODE)
+	{
+		log_amx("DEBUG :: Task_locust_function -> VALID Player=%d %s  -> Moving on", parm[6], debugname );
+	}
+
 	new origin[3], origin2[3];
 	get_user_origin(id,origin);
 	get_user_origin(parm[6],origin2);
@@ -2379,14 +2392,20 @@ public Task_locust_drawfunnels(parm[])
 			show_hudmessage(caster,"Your locusts were resistsed by Player %s ", name );
 		}
 
-		//log_amx("DEBUG :: Task_locust_drawfunnels -> Locusts Avoided Resistance Check - Caster=%s Player %s ", name2, name );
+		if( CVAR_DEBUG_MODE)
+		{
+			log_amx("DEBUG :: Task_locust_drawfunnels -> Locusts Avoided Resistance Check - Caster=%s Player %s ", name2, name );
+		}
 
 		ultimateused[caster]=true;
 		icon_controller(caster);
 		return PLUGIN_CONTINUE;
 	}
 
-	//log_amx("DEBUG :: Task_locust_drawfunnels -> Locusts Hit - Caster=%s Player %s", name2, name );
+	if( CVAR_DEBUG_MODE)
+	{
+		log_amx("DEBUG :: Task_locust_drawfunnels -> Locusts Hit - Caster=%s Player %s", name2, name );
+	}
 	get_user_origin(id,origin);
 
 	funnel[0]=parm[0];                       // Origin of the funnel
@@ -2437,7 +2456,11 @@ public Task_locust_drawfunnels(parm[])
 		{
 			new pDamageMultiplier = pDamageMultiplier = p_skills[caster][SKILLIDX_LOCUST];
 			new actual_damage = 20 * pDamageMultiplier;
-			//log_amx("DEBUG :: Task_locust_drawfunnels -> pDamageMultiplier=%d actual_damage=%d", pDamageMultiplier, actual_damage );
+			
+			if( CVAR_DEBUG_MODE)
+			{
+				log_amx("DEBUG :: Task_locust_drawfunnels -> pDamageMultiplier=%d actual_damage=%d", pDamageMultiplier, actual_damage );
+			}
 
 			do_damage(id, caster, actual_damage, 15, 3, 0, 0, 0);
 
@@ -2611,7 +2634,7 @@ public Task_Switch_UnlimitedAmmoOn( id )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		//log_amx("Debug:: Task_Switch_UnlimitedAmmoOff -> unammo[ %s ] = ON ", name );
+		log_amx("Debug:: Task_Switch_UnlimitedAmmoOff -> unammo[ %s ] = ON ", name );
 	}
 
 	unammo[id] = true;
@@ -2632,7 +2655,7 @@ public Task_Switch_UnlimitedAmmoOff( parm[] )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		//log_amx("Debug:: Task_Switch_UnlimitedAmmoOff -> unammo[ %s ] = OFF ", name );
+		log_amx("Debug:: Task_Switch_UnlimitedAmmoOff -> unammo[ %s ] = OFF ", name );
 	}
 
 
@@ -2793,13 +2816,13 @@ public TASK_Smite_Search( parm[] )
 
 			if ( CVAR_DEBUG_MODE )
 			{
-				//client_print( id, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, actual_damage );
+				client_print( id, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, actual_damage );
 			}
 		}
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			//client_print( id, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, actual_damage );
+			client_print( id, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, actual_damage );
 		}
 
 		//Damage - done only once :)
@@ -3092,9 +3115,9 @@ public TASK_hooktask(parm[])
 
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//log_amx( "DEBUG :: TASK_hooktask -> player %s - Hook style=%d", debugname, CVAR_HOOK_STYLE );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		log_amx( "DEBUG :: TASK_hooktask -> player %s - Hook style=%d", debugname, CVAR_HOOK_STYLE );
 	}
 
 }
@@ -3110,10 +3133,6 @@ public TASK_GRAB_Search( parm[2] )
 
 	if(target && is_valid_ent2(target) && target!=id && !Util_IsSame_Team(target,id) && Util_IsValid_Team(target ) )
 	{
-		//new name[32], name2[32];
-		//get_user_name ( target, name, 31 );
-		//get_user_name ( id, name2, 31 );
-
 		issearching[id] = false;
 		ultimateused[id] = true;
 		icon_controller ( id );
@@ -3125,8 +3144,8 @@ public TASK_GRAB_Search( parm[2] )
 			{
 				if ( CVAR_DEBUG_MODE )
 				{
-					//client_print( id, print_console, "DEBUG :: TASK_GRAB_Search -> failed to resist" );
-					//log_amx( "DEBUG :: TASK_GRAB_Search -> failed to resist" );
+					client_print( id, print_console, "DEBUG :: TASK_GRAB_Search -> failed to resist" );
+					log_amx( "DEBUG :: TASK_GRAB_Search -> failed to resist" );
 				}
 
 				grabem(id,target);
@@ -3135,12 +3154,11 @@ public TASK_GRAB_Search( parm[2] )
 			{
 				if ( CVAR_DEBUG_MODE )
 				{
-					//client_print( id, print_console, "DEBUG :: grabem -> resisted" );
-					//log_amx( "Debug :: grabem -> resisted" );
+					client_print( id, print_console, "DEBUG :: grabem -> resisted" );
+					log_amx( "Debug :: grabem -> resisted" );
 				}
 			}
 		}
-
 	}
 	else
 	{
@@ -3177,4 +3195,3 @@ public TASK_GRAB_Search( parm[2] )
 
 	return PLUGIN_CONTINUE;
 }
-

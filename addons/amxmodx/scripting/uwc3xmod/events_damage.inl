@@ -618,7 +618,7 @@ public damage_event( id )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		//client_print( 0, print_console, "[%s DEBUG In damage_event( )] <%s => %s> damage=( %d ) was_evaded?=( %d )", MOD, name2, name1, damage, p_evadethisshot[id] );
+		client_print( 0, print_console, "[%s DEBUG In damage_event( )] <%s => %s> damage=( %d ) was_evaded?=( %d )", MOD, name2, name1, damage, p_evadethisshot[id] );
 	}
 
 	if ( p_skills[enemy][SKILLIDX_CRITSTRIKE] && p_skills[enemy][SKILLIDX_TRUESHOT] )
@@ -780,7 +780,7 @@ public damage_event( id )
 	{
 		if ( CVAR_DEBUG_MODE )
 		{
-			//client_print( id, print_console, "[%s DEBUG In damage_event( )] Shot evaded, Shadow Strike check skipped", MOD );
+			client_print( id, print_console, "[%s DEBUG In damage_event( )] Shot evaded, Shadow Strike check skipped", MOD );
 		}
 	}
 	// End of Shadow Strike
@@ -988,7 +988,7 @@ public damage_event( id )
 	{
 		if ( CVAR_DEBUG_MODE )
 		{
-			//client_print( id, print_console, "[%s DEBUG In damage_event( )] Shot evaded, Carrion Beetles check skipped", MOD );
+			client_print( id, print_console, "[%s DEBUG In damage_event( )] Shot evaded, Carrion Beetles check skipped", MOD );
 		}
 
 	}
@@ -1144,7 +1144,7 @@ public damage_event( id )
 
 				if ( CVAR_DEBUG_MODE )
 				{
-					//client_print( enemy, print_console, "[%s DEBUG] Intellect-Trueshot damage modified=( %f )", MOD, ts_dmg );
+					client_print( enemy, print_console, "[%s DEBUG] Intellect-Trueshot damage modified=( %f )", MOD, ts_dmg );
 				}
 			}
 
@@ -1582,30 +1582,44 @@ public damage_event( id )
 	// [08-04-04] - Modified Vampiric to not pass test if enemy in full health - K2mia
 	if ( p_skills[enemy][SKILLIDX_VAMPIRIC] && ( get_user_health( enemy ) < maxhealth[enemy] ) && !p_evadethisshot[id] )
 	{
-		//log_amx( "DEBUG :: events_damage -> Vampiric Aura -> start()");
-
+		if ( CVAR_DEBUG_MODE )
+		{
+			//log_amx( "DEBUG :: events_damage -> Vampiric Aura -> start()");
+		}
 		damage = read_data( 2 );
-		//log_amx( "DEBUG :: Original damage=%d ", damage );
-		//log_amx( "DEBUG :: Original Health=%d ", get_user_health( enemy ) );
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: Original damage=%d ", damage );
+			log_amx( "DEBUG :: Original Health=%d ", get_user_health( enemy ) );
+		}
 
 		damage = floatround( float( damage ) * p_vampiric[p_skills[enemy][SKILLIDX_VAMPIRIC]-1] );
 
-		//log_amx( "DEBUG :: Skill Points = %d ", p_skills[enemy][SKILLIDX_VAMPIRIC] );
-		//log_amx( "DEBUG :: Vampiric Max Life = %d  ( p_vampirichealth[p_skills[enemy][SKILLIDX_VAMPIRIC]-1])", p_vampirichealth[p_skills[enemy][SKILLIDX_VAMPIRIC]-1] );
-		//log_amx( "DEBUG :: Vampiric Percentage = %f ", p_vampiric[p_skills[enemy][SKILLIDX_VAMPIRIC]-1] );
-		//log_amx( "DEBUG :: Max Health = %d ", maxhealth[enemy] );
-		//log_amx( "DEBUG :: Vampiric Life to give based on damage =%d ", damage );
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: Skill Points = %d ", p_skills[enemy][SKILLIDX_VAMPIRIC] );
+			log_amx( "DEBUG :: Vampiric Max Life = %d  ( p_vampirichealth[p_skills[enemy][SKILLIDX_VAMPIRIC]-1])", p_vampirichealth[p_skills[enemy][SKILLIDX_VAMPIRIC]-1] );
+			log_amx( "DEBUG :: Vampiric Percentage = %f ", p_vampiric[p_skills[enemy][SKILLIDX_VAMPIRIC]-1] );
+			log_amx( "DEBUG :: Max Health = %d ", maxhealth[enemy] );
+			log_amx( "DEBUG :: Vampiric Life to give based on damage =%d ", damage );
+		}
 
 		//If the amount is less then 1, then set it to 1 so they at least get something
 		if( damage < 1 )
 		{
-			//log_amx( "DEBUG :: damage < 1 setting to 1 ");
+			if ( CVAR_DEBUG_MODE )
+			{
+				log_amx( "DEBUG :: damage < 1 setting to 1 ");
+			}
 			damage = 1;
 		}
-		//else
-		//{
-		//	log_amx( "DEBUG :: damage (%d) > 1 ", damage);
-		//}
+		else
+		{
+			if ( CVAR_DEBUG_MODE )
+			{
+				log_amx( "DEBUG :: damage (%d) > 1 ", damage);
+			}
+		}
 
 		// [09-29-04] Rewrote Vampiric ceiling checks - K2mia
 		// Set max_health to be the lesser of p_vampiric or maxhealth[enemy]
@@ -1616,8 +1630,11 @@ public damage_event( id )
 		if ( playeritem[enemy] == HEALTH )
 			max_health += HEALTHBONUS;
 
-		//log_amx( "DEBUG :: new max_health (%d) ", max_health);
-		//log_amx( "DEBUG :: Before - Enemy Health (%d) ", get_user_health( enemy ) );
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: new max_health (%d) ", max_health);
+			log_amx( "DEBUG :: Before - Enemy Health (%d) ", get_user_health( enemy ) );
+		}
 
 		if ( get_user_health( enemy ) < max_health )
 		{
@@ -1629,11 +1646,17 @@ public damage_event( id )
 			get_user_name( id, idname, 31 );
 			get_user_name( enemy, ename, 31 );
 
-			//log_amx( "[%s] The Vampiric Aura from %s steals %d health from %s", MOD, ename, damage, idname );
+			if ( CVAR_DEBUG_MODE )
+			{
+				log_amx( "[%s] The Vampiric Aura from %s steals %d health from %s", MOD, ename, damage, idname );
+			}
 			set_user_health_log( enemy, new_health );
 		}
 
-		//log_amx( "DEBUG :: After - Enemy Health  = %d", get_user_health( enemy ) );
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: After - Enemy Health  = %d", get_user_health( enemy ) );
+		}
 
 		if ( p_skills[enemy][SKILLIDX_SSKIN] )
 		{
@@ -1716,7 +1739,11 @@ public damage_event( id )
 			write_byte( iglow[enemy][1] ); // fade alpha
 			message_end( );
 		}
-		//log_amx( "DEBUG :: events_damage -> Vampiric Aura -> end()");
+
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: events_damage -> Vampiric Aura -> end()");
+		}
 	}
 	// End of Vampiric Aura
 
@@ -2043,7 +2070,7 @@ public damage_event( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				//log_amx( "SPLITTER DEBUG: playeritem2[%s] == HELM", idname );
+				log_amx( "SPLITTER DEBUG: playeritem2[%s] == HELM", idname );
 			}
 
 			new Float:randomnumber = random_float( 0.0, 1.0 );
@@ -2056,20 +2083,20 @@ public damage_event( id )
 
 				if ( CVAR_DEBUG_MODE )
 				{
-					//log_amx( "SPLITTER DEBUG: Dex bonus of %f has been subtracted from attacker - new chance is  %f ", ename, splitter_percent );
+					log_amx( "SPLITTER DEBUG: Dex bonus of %f has been subtracted from attacker - new chance is  %f ", ename, splitter_percent );
 				}
 			}
 
 			if ( CVAR_DEBUG_MODE )
 			{
-				//log_amx( "SPLITTER DEBUG: %s has skill vs %s :: Random number %f and splitter_percent %f ", ename, idname, randomnumber, splitter_percent );
+				log_amx( "SPLITTER DEBUG: %s has skill vs %s :: Random number %f and splitter_percent %f ", ename, idname, randomnumber, splitter_percent );
 			}
 
 			if ( is_user_alive( id ) && is_user_alive( enemy ) && ( randomnumber <= splitter_percent ) )
 			{
 				if ( CVAR_DEBUG_MODE )
 				{
-					//log_amx( "SPLITTER DEBUG: Random number <= Chance ( %f <= %f ) - Removing item from %s, play sound and alert clients", randomnumber, splitter_percent, idname );
+					log_amx( "SPLITTER DEBUG: Random number <= Chance ( %f <= %f ) - Removing item from %s, play sound and alert clients", randomnumber, splitter_percent, idname );
 				}
 
 				if( Util_Should_Msg_Client(enemy) )
@@ -2083,7 +2110,7 @@ public damage_event( id )
 					{
 						if ( CVAR_DEBUG_MODE )
 						{
-							//log_amx( "SPLITTER DEBUG: Sound Doesnt exist!");
+							log_amx( "SPLITTER DEBUG: Sound Doesnt exist!");
 						}
 					}
 				}
@@ -2099,7 +2126,7 @@ public damage_event( id )
 					{
 						if ( CVAR_DEBUG_MODE )
 						{
-							//log_amx( "SPLITTER DEBUG: Sound Doesnt exist!");
+							log_amx( "SPLITTER DEBUG: Sound Doesnt exist!");
 						}
 					}
 				}
@@ -2115,7 +2142,7 @@ public damage_event( id )
 			//Enemy doesnt have HELM
 			if ( CVAR_DEBUG_MODE )
 			{
-				//log_amx( "SPLITTER DEBUG: Player %s doesnt have a helm", idname );
+				log_amx( "SPLITTER DEBUG: Player %s doesnt have a helm", idname );
 			}
 		}
 	}
@@ -2501,7 +2528,10 @@ public death( )
 	// Suicide Bomber
 	else if ( p_skills[victim_id][SKILLIDX_SUICIDE] && !hasblink[killer_id] && !changingteam[victim_id] && !u_delay )
 	{
-		//log_amx( "DEBUG :: events_damage -> Suicide Bomber -> start()");
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: events_damage -> Suicide Bomber -> start()");
+		}
 
 		if( Util_Should_Msg_Client(victim_id) )
 		{
@@ -2519,7 +2549,10 @@ public death( )
 		set_task( 0.1, "EVENT_Suicide_Implosion", 1, parm, 5 );
 		set_task( 0.2, "TASK_Suicide_Explode", TASK_SUICIDE_EXPLODE_NOID, parm, 5 );
 		set_task( 0.3, "EVENT_Suicide_Blast", 3, parm, 5 );
-		//log_amx( "DEBUG :: events_damage -> Suicide Bomber -> end()");
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: events_damage -> Suicide Bomber -> end()");
+		}
 
 	}
 	// End of Suicide Bomber
@@ -2762,10 +2795,12 @@ public death( )
 
 		//Reset their Team Shield
 		HasTeamShield[victim_id] = false;
-		//log_amx( "DEBUG :: death( ) -> TeamShield -> Reset their Team Shield");
-
-		//Tell them its done - No need, they are dead
-		//client_print ( PlayerShieldedBy, print_chat, "%L", PlayerShieldedBy, "ULTIMATE_SIV_PLAYER_EXPIRED", friend_name);
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx( "DEBUG :: death( ) -> TeamShield -> Reset their Team Shield");
+			//Tell them its done - No need, they are dead
+			client_print ( PlayerShieldedBy, print_chat, "%L", PlayerShieldedBy, "ULTIMATE_SIV_PLAYER_EXPIRED", friend_name);
+		}
 
 		//Remove teh Shield Check task
 		if( task_exists(TASK_SHIELD_CHECK_ID + victim_id) )
@@ -2875,7 +2910,7 @@ public do_rot( args[] )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		//client_print( id, print_console, "DEBUG :: do_rot -> In do_rot as set task" );
+		client_print( id, print_console, "DEBUG :: do_rot -> In do_rot as set task" );
 	}
 
 	if( !is_user_alive( id ) || bIsRotting[id] == false )
@@ -3287,19 +3322,19 @@ public GrabResisted( id, enemy )
 	{
 		if ( CVAR_DEBUG_MODE )
 		{
-			//log_amx( "Debug :: GrabResisted -> WisdomCanResist was false for one of two users, return true" );
-			//client_print( enemy, print_console, "DEBUG :: GrabResisted -> WisdomCanResist was false for one of two users, return true");
+			log_amx( "Debug :: GrabResisted -> WisdomCanResist was false for one of two users, return true" );
+			client_print( enemy, print_console, "DEBUG :: GrabResisted -> WisdomCanResist was false for one of two users, return true");
 		}
 		return true;
 	}
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		//new name1[32], name2[32];
-		//get_user_name ( enemy, name2, 31 );
-		//get_user_name ( id, name1, 31 );
-		//log_amx( "Debug :: GrabResisted -> id:%s enemy:%s skill_points=%d", name1, name2, p_skills[enemy][SKILLIDX_GRAB] );
-		//client_print( enemy, print_console, "DEBUG :: GrabResisted -> id:%s enemy:%s skill_points=%d", name1, name2, p_skills[enemy][SKILLIDX_GRAB] );
+		new name1[32], name2[32];
+		get_user_name ( enemy, name2, 31 );
+		get_user_name ( id, name1, 31 );
+		log_amx( "Debug :: GrabResisted -> id:%s enemy:%s skill_points=%d", name1, name2, p_skills[enemy][SKILLIDX_GRAB] );
+		client_print( enemy, print_console, "DEBUG :: GrabResisted -> id:%s enemy:%s skill_points=%d", name1, name2, p_skills[enemy][SKILLIDX_GRAB] );
 	}
 
 	//enemy has no skill points, so they should resist just fine :)
@@ -3307,8 +3342,8 @@ public GrabResisted( id, enemy )
 	{
 		if ( CVAR_DEBUG_MODE )
 		{
-			//client_print( enemy, print_console, "DEBUG :: GrabResisted -> no skill points, return true");
-			//log_amx( "Debug :: GrabResisted -> no skill points, return true" );
+			client_print( enemy, print_console, "DEBUG :: GrabResisted -> no skill points, return true");
+			log_amx( "Debug :: GrabResisted -> no skill points, return true" );
 		}
 		return true;
 	}
@@ -3316,11 +3351,11 @@ public GrabResisted( id, enemy )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		//new name1[32], name2[32];
-		//get_user_name ( enemy, name2, 31 );
-		//get_user_name ( id, name1, 31 );
-		//client_print( enemy, print_console, "DEBUG :: GrabResisted 1 -> id:%s enemy:%s grabchance_base=%f", name1, name2, grabchance_base );
-		//log_amx( "Debug :: GrabResisted 1 -> id:%s enemy:%s grabchance_base=%f", name1, name2, grabchance_base );
+		new name1[32], name2[32];
+		get_user_name ( enemy, name2, 31 );
+		get_user_name ( id, name1, 31 );
+		client_print( enemy, print_console, "DEBUG :: GrabResisted 1 -> id:%s enemy:%s grabchance_base=%f", name1, name2, grabchance_base );
+		log_amx( "Debug :: GrabResisted 1 -> id:%s enemy:%s grabchance_base=%f", name1, name2, grabchance_base );
 	}
 
 	//If agility is 18 then they subtract the bonus - if there is one - from the attackers chance
@@ -3335,11 +3370,11 @@ public GrabResisted( id, enemy )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		//new name1[32], name2[32];
-		//get_user_name ( enemy, name2, 31 );
-		//get_user_name ( id, name1, 31 );
-		//client_print( enemy, print_console, "DEBUG :: GrabResisted 2 -> id:%s enemy:%s grabchance_base=%f randomnumber=%f", name1, name2, grabchance_base, randomnumber );
-		//log_amx( "Debug :: GrabResisted 2 -> id:%s enemy:%s grabchance_base=%f randomnumber=%f", name1, name2, grabchance_base, randomnumber );
+		new name1[32], name2[32];
+		get_user_name ( enemy, name2, 31 );
+		get_user_name ( id, name1, 31 );
+		client_print( enemy, print_console, "DEBUG :: GrabResisted 2 -> id:%s enemy:%s grabchance_base=%f randomnumber=%f", name1, name2, grabchance_base, randomnumber );
+		log_amx( "Debug :: GrabResisted 2 -> id:%s enemy:%s grabchance_base=%f randomnumber=%f", name1, name2, grabchance_base, randomnumber );
 	}
 
 	if ( randomnumber >= grabchance_base )
@@ -3359,11 +3394,11 @@ public GrabResisted( id, enemy )
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			//new name1[32], name2[32];
-			//get_user_name ( enemy, name2, 31 );
-			//get_user_name ( id, name1, 31 );
-			//client_print( enemy, print_console, "DEBUG :: GrabResisted 3 -> player %s evades grab by enemy:%s", name1, name2 );
-			//log_amx( "Debug :: GrabResisted 3 -> player %s evades grab by enemy:%s", name1, name2  );
+			new name1[32], name2[32];
+			get_user_name ( enemy, name2, 31 );
+			get_user_name ( id, name1, 31 );
+			client_print( enemy, print_console, "DEBUG :: GrabResisted 3 -> player %s evades grab by enemy:%s", name1, name2 );
+			log_amx( "Debug :: GrabResisted 3 -> player %s evades grab by enemy:%s", name1, name2  );
 		}
 
 		return true;
@@ -3373,11 +3408,11 @@ public GrabResisted( id, enemy )
 		//they didnt resist
 		if ( CVAR_DEBUG_MODE )
 		{
-			//new name1[32], name2[32];
-			//get_user_name ( enemy, name2, 31 );
-			//get_user_name ( id, name1, 31 );
-			//client_print( enemy, print_console, "DEBUG :: GrabResisted 4 -> player %s failed to evade grab by enemy:%s", name1, name2 );
-			//log_amx( "Debug :: GrabResisted 4 -> player %s failed to evade grab by enemy:%s", name1, name2  );
+			new name1[32], name2[32];
+			get_user_name ( enemy, name2, 31 );
+			get_user_name ( id, name1, 31 );
+			client_print( enemy, print_console, "DEBUG :: GrabResisted 4 -> player %s failed to evade grab by enemy:%s", name1, name2 );
+			log_amx( "Debug :: GrabResisted 4 -> player %s failed to evade grab by enemy:%s", name1, name2  );
 		}
 
 		return false;
@@ -3385,11 +3420,11 @@ public GrabResisted( id, enemy )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		//new name1[32], name2[32];
-		//get_user_name ( enemy, name2, 31 );
-		//get_user_name ( id, name1, 31 );
-		//client_print( enemy, print_console, "DEBUG :: GrabResisted 5 -> hitting default false... thats bad..." );
-		//log_amx( "Debug :: GrabResisted 5 -> hitting default false... thats bad..."  );
+		new name1[32], name2[32];
+		get_user_name ( enemy, name2, 31 );
+		get_user_name ( id, name1, 31 );
+		client_print( enemy, print_console, "DEBUG :: GrabResisted 5 -> hitting default false... thats bad..." );
+		log_amx( "Debug :: GrabResisted 5 -> hitting default false... thats bad..."  );
 	}
 
 	//Need to set a default value in case something bad happens - but we shouldnt get here anyways

@@ -537,12 +537,13 @@ public grenade_explosion()
 			return PLUGIN_CONTINUE;
 		}
 
-		/* THIS IS FOR DEBUG */
-		//new idname[32];
-		//get_user_name( owner , idname, 31 );
-		//client_print( 0, print_console, "DEBUG :: grenade_explosion -> Player=%s CLUSTERS = %d ", idname, CLUSTERS );
-		//log_amx( "DEBUG :: grenade_explosion -> Player=%s CLUSTERS = %d ", idname, CLUSTERS );
-		/* THIS IS FOR DEBUG */
+		if ( CVAR_DEBUG_MODE )
+		{
+			new idname[32];
+			get_user_name( owner , idname, 31 );
+			client_print( 0, print_console, "DEBUG :: grenade_explosion -> Player=%s CLUSTERS = %d ", idname, CLUSTERS );
+			log_amx( "DEBUG :: grenade_explosion -> Player=%s CLUSTERS = %d ", idname, CLUSTERS );
+		}
 
 		//This will launch the above specified number of clusters
 		for (new i = 0; i < CLUSTERS; i++)

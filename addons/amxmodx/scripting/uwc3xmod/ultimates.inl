@@ -480,13 +480,12 @@ public Ult_Can_Use ( id , IDX )
 
 		if( CVAR_DEBUG_MODE )
 		{
-			//new debugname[32];
-			//get_user_name ( id, debugname, 31 );
-			//client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - HOOK -> Player:%s Hook Count:%d Skill points:%d allowed hooks:%d ", MOD, debugname, HookCount[id],p_skills[id][SKILLIDX_HOOK], p_hooks[p_skills[id][SKILLIDX_HOOK]] );
-			//log_amx( "DEBUG :: Ult_Can_Use - HOOK -> Player:%s Hook Count:%d Skill points:%d allowed hooks:%d ", debugname, HookCount[id],p_skills[id][SKILLIDX_HOOK], p_hooks[p_skills[id][SKILLIDX_HOOK]] );
+			new debugname[32];
+			get_user_name ( id, debugname, 31 );
+			client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - HOOK -> Player:%s Hook Count:%d Skill points:%d allowed hooks:%d ", MOD, debugname, HookCount[id],p_skills[id][SKILLIDX_HOOK], p_hooks[p_skills[id][SKILLIDX_HOOK]] );
+			log_amx( "DEBUG :: Ult_Can_Use - HOOK -> Player:%s Hook Count:%d Skill points:%d allowed hooks:%d ", debugname, HookCount[id],p_skills[id][SKILLIDX_HOOK], p_hooks[p_skills[id][SKILLIDX_HOOK]] );
 		}
 
-		//if(HookCount[id] >= p_hooks[ p_skills[id][SKILLIDX_HOOK] ] )
 		if(HookCount[id] == 0 )
 		{
 			client_print( id ,print_chat, "%L", id, "HOOK_NONE_LEFT", MOD )
@@ -503,13 +502,12 @@ public Ult_Can_Use ( id , IDX )
 
 		if( CVAR_DEBUG_MODE )
 		{
-			//new debugname[32];
-			//get_user_name ( id, debugname, 31 );
-			//client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - GRAB -> Player:%s GRAB Count:%d Skill points:%d allowed GRABS:%d ", MOD, debugname, GrabCount[id],p_skills[id][SKILLIDX_GRAB], p_grabs[p_skills[id][SKILLIDX_GRAB]] );
-			//log_amx( "DEBUG :: Ult_Can_Use - GRAB -> Player:%s GRAB Count:%d Skill points:%d allowed GRABS:%d ", debugname,GrabCount[id],p_skills[id][SKILLIDX_GRAB], p_grabs[p_skills[id][SKILLIDX_GRAB]] );
+			new debugname[32];
+			get_user_name ( id, debugname, 31 );
+			client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - GRAB -> Player:%s GRAB Count:%d Skill points:%d allowed GRABS:%d ", MOD, debugname, GrabCount[id],p_skills[id][SKILLIDX_GRAB], p_grabs[p_skills[id][SKILLIDX_GRAB]] );
+			log_amx( "DEBUG :: Ult_Can_Use - GRAB -> Player:%s GRAB Count:%d Skill points:%d allowed GRABS:%d ", debugname,GrabCount[id],p_skills[id][SKILLIDX_GRAB], p_grabs[p_skills[id][SKILLIDX_GRAB]] );
 		}
 
-		//if(GrabCount[id] >= p_grabs[ p_skills[id][SKILLIDX_GRAB] ] )
 		if(GrabCount[id] == 0 )
 		{
 			client_print( id ,print_chat, "%L", id, "GRAB_NONE_LEFT", MOD )
@@ -526,13 +524,12 @@ public Ult_Can_Use ( id , IDX )
 
 		if( CVAR_DEBUG_MODE )
 		{
-			//new debugname[32];
-			//get_user_name ( id, debugname, 31 );
-			//client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - ROPE -> Player:%s ROPE Count:%d Skill points:%d allowed ROPES:%d ", MOD, debugname, RopeCount[id],p_skills[id][SKILLIDX_ROPE], p_ropes[p_skills[id][SKILLIDX_ROPE]] );
-			//log_amx( "DEBUG :: Ult_Can_Use - ROPE -> Player:%s ROPE Count:%d Skill points:%d allowed ROPES:%d ", debugname,RopeCount[id],p_skills[id][SKILLIDX_ROPE], p_ropes[p_skills[id][SKILLIDX_ROPE]] );
+			new debugname[32];
+			get_user_name ( id, debugname, 31 );
+			client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - ROPE -> Player:%s ROPE Count:%d Skill points:%d allowed ROPES:%d ", MOD, debugname, RopeCount[id],p_skills[id][SKILLIDX_ROPE], p_ropes[p_skills[id][SKILLIDX_ROPE]] );
+			log_amx( "DEBUG :: Ult_Can_Use - ROPE -> Player:%s ROPE Count:%d Skill points:%d allowed ROPES:%d ", debugname,RopeCount[id],p_skills[id][SKILLIDX_ROPE], p_ropes[p_skills[id][SKILLIDX_ROPE]] );
 		}
 
-		//if(RopeCount[id] = p_ropes[ p_skills[id][SKILLIDX_ROPE] ] )
 		if(RopeCount[id] == 0 )
 		{
 			client_print( id ,print_chat, "%L", id, "ROPE_NONE_LEFT", MOD )
@@ -593,7 +590,7 @@ public Set_Ult_Count( id )
 
 	if( CVAR_DEBUG_MODE )
 	{
-		//log_amx( "DEBUG :: Set_Ult_Count -> ultlearned[id] = %d", ultlearned[id] );
+		log_amx( "DEBUG :: Set_Ult_Count -> ultlearned[id] = %d", ultlearned[id] );
 	}
 
 }
@@ -2041,7 +2038,6 @@ public grab_on2(id)
 		get_user_aiming(id,target,trash)
 		if(target && is_valid_ent2(target) && target!=id && !Util_IsSame_Team(target,id) && Util_IsValid_Team(target ) )
 		{
-			//formerly target<=MAX_PLAYERS
 			if( Util_Is_Valid_Player( target ) )
 			{
 				if(is_user_alive(target) )
@@ -2050,8 +2046,8 @@ public grab_on2(id)
 					{
 						if ( CVAR_DEBUG_MODE )
 						{
-							//client_print( id, print_console, "DEBUG :: TASK_GRAB_Search -> failed to resist" );
-							//log_amx( "DEBUG :: TASK_GRAB_Search -> failed to resist" );
+							client_print( id, print_console, "DEBUG :: TASK_GRAB_Search -> failed to resist" );
+							log_amx( "DEBUG :: TASK_GRAB_Search -> failed to resist" );
 						}	
 					
 						client_print(id, print_chat, "%L", id, "GRAB_FOUND", MOD);
@@ -2062,8 +2058,8 @@ public grab_on2(id)
 					{
 						if ( CVAR_DEBUG_MODE )
 						{
-							//client_print( id, print_console, "DEBUG :: grabem -> resisted" );
-							//log_amx( "Debug :: grabem -> resisted" );
+							client_print( id, print_console, "DEBUG :: grabem -> resisted" );
+							log_amx( "Debug :: grabem -> resisted" );
 						}	
 					}
 				}
@@ -2092,15 +2088,14 @@ public grabem(id,target)
 	
 	if ( CVAR_DEBUG_MODE )
 	{
-		//new name1[32], name2[32];
-		//get_user_name ( target, name1, 31 );
-		//get_user_name ( id, name2, 31 );
-		//client_print(id, print_console, "DEBUG :: grabem -> player %s target:%s", name2, name1 );
-		//log_amx( "Debug :: grabem -> player %s target:%s", name2, name1 );
+		new name1[32], name2[32];
+		get_user_name ( target, name1, 31 );
+		get_user_name ( id, name2, 31 );
+		client_print(id, print_console, "DEBUG :: grabem -> player %s target:%s", name2, name1 );
+		log_amx( "Debug :: grabem -> player %s target:%s", name2, name1 );
 	}	
 
 	set_rendering2(target,kRenderFxGlowShell,255,0,0,kRenderTransAlpha,70);
-	//formerly target<=MAX_PLAYERS
 	if( Util_Is_Valid_Player( target ))
 		set_user_gravity(target,0.0);
 
@@ -2129,9 +2124,9 @@ public grabem(id,target)
 	{
 		if( CVAR_DEBUG_MODE )
 		{
-			//new debugname[32];
-			//get_user_name ( id, debugname, 31 );
-			//log_amx( "DEBUG :: grabem -> player %s  GrabsLeft=%d", debugname, GrabCount[id] );
+			new debugname[32];
+			get_user_name ( id, debugname, 31 );
+			log_amx( "DEBUG :: grabem -> player %s  GrabsLeft=%d", debugname, GrabCount[id] );
 		}
 
 		if( GrabCount[id] == 0 )
@@ -2163,7 +2158,7 @@ public grab_off(id)
 			client_print(id, print_chat, "%L", id, "GRAB_LETGO", MOD);
 			client_print(id, print_center, "%L", id, "GRAB_LETGO", MOD);
 			set_rendering2(grab[id]);
-			//Formerly grab[id] <=MAX_PLAYERS
+
 			if( Util_Is_Valid_Player( grab[id] ) && is_user_alive(grab[id]))
 				set_user_gravity(grab[id],1.0);
 
@@ -2328,9 +2323,9 @@ public hook_on ( id )
 	{
 		if( CVAR_DEBUG_MODE )
 		{
-			//new debugname[32];
-			//get_user_name ( id, debugname, 31 );
-			//log_amx( "DEBUG :: Ult_Hook -> player %s  HooksLeft=%d", debugname, HookCount[id] );
+			new debugname[32];
+			get_user_name ( id, debugname, 31 );
+			log_amx( "DEBUG :: Ult_Hook -> player %s  HooksLeft=%d", debugname, HookCount[id] );
 		}
 
 		if( HookCount[id] == 0 )
@@ -2448,9 +2443,9 @@ public Ult_Hook( id )
 
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//log_amx( "DEBUG :: Ult_Hook -> player %s  wchook HOOK_COUNT_IDX=%d   HOOKCOUNTint=%d", debugname, HOOK_COUNT_IDX, HOOKCOUNTint );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		log_amx( "DEBUG :: Ult_Hook -> player %s  wchook HOOK_COUNT_IDX=%d   HOOKCOUNTint=%d", debugname, HOOK_COUNT_IDX, HOOKCOUNTint );
 	}
 
 	if ( is_user_alive ( id ) && !ultimateused[id] && !hooked[id] )
@@ -2471,9 +2466,9 @@ public Ult_Hook( id )
 
 			if( CVAR_DEBUG_MODE )
 			{
-				//new debugname[32];
-				//get_user_name ( id, debugname, 31 );
-				//log_amx( "DEBUG :: Ult_Hook -> player %s  HooksLeft=%d", debugname, HooksLeft );
+				new debugname[32];
+				get_user_name ( id, debugname, 31 );
+				log_amx( "DEBUG :: Ult_Hook -> player %s  HooksLeft=%d", debugname, HooksLeft );
 			}
 
 			if( HooksLeft == 0 )
@@ -2516,10 +2511,8 @@ public DO_HOOK(id)
 
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//log_amx( "DEBUG :: DO_HOOK -> player %s  in function", debugname );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		log_amx( "DEBUG :: DO_HOOK -> player %s  in function", debugname );
 	}
-
-
 }

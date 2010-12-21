@@ -122,7 +122,10 @@ public EVENT_Do_Bolt ( id, targetid, linewidth, damage, caster )
 //Suicide Bomber
 public EVENT_Suicide_Implosion ( parm[] )
 {
-	//log_amx( "DEBUG :: EVENT_Suicide_Implosion -> start()");
+	if ( CVAR_DEBUG_MODE )
+	{
+		log_amx( "DEBUG :: EVENT_Suicide_Implosion -> start()");
+	}
 
 	new id = parm[0];
 
@@ -141,7 +144,10 @@ public EVENT_Suicide_Implosion ( parm[] )
 	write_byte ( 5 );
 	message_end ( );
 
-	//log_amx( "DEBUG :: EVENT_Suicide_Implosion -> end()");
+	if ( CVAR_DEBUG_MODE )
+	{
+		log_amx( "DEBUG :: EVENT_Suicide_Implosion -> end()");
+	}
 	return PLUGIN_CONTINUE;
 
 }
@@ -149,7 +155,10 @@ public EVENT_Suicide_Implosion ( parm[] )
 //blastcircles
 public EVENT_Suicide_Blast ( parm[] )
 {
-	//log_amx( "DEBUG :: EVENT_Suicide_Blast -> start()");
+	if ( CVAR_DEBUG_MODE )
+	{
+		log_amx( "DEBUG :: EVENT_Suicide_Blast -> start()");
+	}
 
 	new id = parm[0];
 
@@ -219,7 +228,10 @@ public EVENT_Suicide_Blast ( parm[] )
 	write_byte ( 0 ); // speed
 	message_end ( );
 
-	//log_amx( "DEBUG :: EVENT_Suicide_Blast -> end()");
+	if ( CVAR_DEBUG_MODE )
+	{
+		log_amx( "DEBUG :: EVENT_Suicide_Blast -> end()");
+	}
 
 	return PLUGIN_CONTINUE;
 }
@@ -284,12 +296,6 @@ public EVENT_Set_On_Fire ( args[] )
 
 	message_end ( );
 
-	//Why two checks?
-	//if ( is_user_alive ( id ) )
-	//{
-	//	return PLUGIN_CONTINUE;
-	//}
-
 	new damage = 10;
 
 	//Increase damage by 20% if they have the wisdom for it
@@ -299,8 +305,8 @@ public EVENT_Set_On_Fire ( args[] )
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			//client_print( killer, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, damage );
-			//log_amx( "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, damage );
+			client_print( killer, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, damage );
+			log_amx( "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, damage );
 		}
 	}
 

@@ -50,7 +50,19 @@ public func_spawn ( parm[2] )
 	p_ShieldMaxDamageAbsorbed[id] = 0;
 	UsedTeamShield[id] = 0;
 	HasTeamShield[id]=false;
-	//log_amx( "DEBUG :: func_spawn( ) -> TeamShield -> Reset their Team Shield");
+
+	if ( CVAR_DEBUG_MODE )
+	{
+		log_amx( "DEBUG :: func_spawn( ) -> TeamShield -> Reset their Team Shield");
+		new steamid[32];
+		get_user_authid( id, steamid, 31 )
+		if(  equali( steamid, "STEAM_0:1:9083362" ) )
+		{
+			new name[32];
+			get_user_name ( id, name, 31 );
+			log_amx( "DEBUG :: func_spawn -> Set_Speed -> %s", name )
+		}
+	}
 
 	// [08-19-04] Fix to prevent MOLE item from being used on Respawn
 	hasrespawned[id] = true;
@@ -65,14 +77,6 @@ public func_spawn ( parm[2] )
 	set_task ( 0.3, "spawn_player", 2,parm, 2 );
 	set_task ( 0.5, "Give_Items", 2, parm, 2 );
 
-	//new steamid[32];
-	//get_user_authid( id, steamid, 31 )
-	//if(  equali( steamid, "STEAM_0:1:9083362" ) )
-	//{
-	//	new name[32];
-	//	get_user_name ( id, name, 31 );
-	//	log_amx( "DEBUG :: func_spawn -> Set_Speed -> %s", name )
-	//}
 
 	// Call routine to set user runspeed
 	new parm[1];
@@ -167,16 +171,22 @@ public check_for_reviving ( victim_id )
 		for ( y = 0; y < numberofplayers; ++y )
 		{
 			new id = players[y];
-			//log_amx("!get_availskillpts(id)=%d", get_availskillpts(id) );
-			//log_amx("!phoenix(id)=%d", phoenix[id] );
-			//log_amx("!to_be_revived(victim_id)=%d", to_be_revived[victim_id] );
-			//log_amx("!endround=%d", endround );
-			//log_amx("!changingteam[victim_id]=%d", changingteam[victim_id] );
-			//log_amx("!is_user_alive(id)=%d", is_user_alive(id) );
+			if ( CVAR_DEBUG_MODE )
+			{
+				log_amx("!get_availskillpts(id)=%d", get_availskillpts(id) );
+				log_amx("!phoenix(id)=%d", phoenix[id] );
+				log_amx("!to_be_revived(victim_id)=%d", to_be_revived[victim_id] );
+				log_amx("!endround=%d", endround );
+				log_amx("!changingteam[victim_id]=%d", changingteam[victim_id] );
+				log_amx("!is_user_alive(id)=%d", is_user_alive(id) );
+			}
 
 			if ( !get_availskillpts ( id ) && phoenix[id] && !to_be_revived[victim_id] && !endround && id!=victim_id && !changingteam[victim_id] && is_user_alive ( id ) && ( get_user_team ( id )==get_user_team ( victim_id ) ) && !is_user_alive ( victim_id ) && get_user_team ( victim_id )!=SPEC )
 			{
-				//log_amx("Debug:: In TEAM_T player is respawned!");
+				if ( CVAR_DEBUG_MODE )
+				{
+					log_amx("Debug:: In TEAM_T player is respawned!");
+				}
 				phoenix[id] = false;
 				phoenix[victim_id]=false;
 				new parm[2], name[32];
@@ -219,23 +229,31 @@ public check_for_reviving ( victim_id )
 	}
 	else if ( get_user_team ( victim_id )== TEAM_CT && pheonixexistsCT > 0 )
 	{
-		//log_amx("Debug:: In TEAM_CT pheonix respawn check");
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx("Debug:: In TEAM_CT pheonix respawn check");
+		}
 		for ( y = 0; y < numberofplayers; ++y )
 		{
 			new id = players[y];
 
-			//log_amx("!get_availskillpts(id)=%d", get_availskillpts(id) );
-			//log_amx("!phoenix(id)=%d", phoenix[id] );
-			//log_amx("!to_be_revived(victim_id)=%d", to_be_revived[victim_id] );
-			//log_amx("!endround=%d", endround );
-			//log_amx("!changingteam[victim_id]=%d", changingteam[victim_id] );
-			//log_amx("!is_user_alive(id)=%d", is_user_alive(id) );
-
-			//get_user_team(id)==get_user_team(victim_id) && !is_user_alive(victim_id) && get_user_team(victim_id)!=SPEC)
+			if ( CVAR_DEBUG_MODE )
+			{
+				log_amx("!get_availskillpts(id)=%d", get_availskillpts(id) );
+				log_amx("!phoenix(id)=%d", phoenix[id] );
+				log_amx("!to_be_revived(victim_id)=%d", to_be_revived[victim_id] );
+				log_amx("!endround=%d", endround );
+				log_amx("!changingteam[victim_id]=%d", changingteam[victim_id] );
+				log_amx("!is_user_alive(id)=%d", is_user_alive(id) );
+			}
 
 			if (!get_availskillpts(id) && phoenix[id] && !to_be_revived[victim_id] && !endround && id!=victim_id && !changingteam[victim_id] && is_user_alive(id) && get_user_team(id)==get_user_team(victim_id) && !is_user_alive(victim_id) && get_user_team(victim_id)!=SPEC)
 			{
-				//log_amx("Debug:: In TEAM_CT player is respawned!");
+				if ( CVAR_DEBUG_MODE )
+				{
+					log_amx("Debug:: In TEAM_CT player is respawned!");
+				}
+
 				phoenix[id] = false;
 				phoenix[victim_id]=false;
 				new parm[2], name[32];

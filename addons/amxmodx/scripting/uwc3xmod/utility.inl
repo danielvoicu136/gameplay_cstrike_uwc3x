@@ -1753,7 +1753,7 @@ public monitor_players ( )
 				{
 					if ( CVAR_DEBUG_MODE )
 					{
-						//log_amx ( "In monitor_players ( ) :: [%s] Kept health ( Voodoo Active or Respawned ) Has= ( %d ) Max= ( %d )", pname, get_user_health ( id ), health );
+						log_amx ( "In monitor_players ( ) :: [%s] Kept health ( Voodoo Active or Respawned ) Has= ( %d ) Max= ( %d )", pname, get_user_health ( id ), health );
 					}
 				}
 				else
@@ -1762,7 +1762,7 @@ public monitor_players ( )
 					{
 						if ( ( get_user_health ( id ) - health ) > allowed_diff )
 						{
-							//log_amx ( "In monitor_players ( ) :: [%s] Reset health ( Voodoo Inactive  or Respawn grace over ) Has= ( %d ) Max= ( %d )", pname, get_user_health ( id ), health );
+							log_amx ( "In monitor_players ( ) :: [%s] Reset health ( Voodoo Inactive  or Respawn grace over ) Has= ( %d ) Max= ( %d )", pname, get_user_health ( id ), health );
 						}
 					}
 

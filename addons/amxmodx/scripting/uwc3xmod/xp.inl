@@ -164,7 +164,6 @@ public XP_UseSaved ( )
 	}
 
 	// Set the attribute and resistance pt costs ( based on xplevel table )
-	// Set the attribute and resistance pt costs ( based on xplevel table )
 	attrib_pt_cost = floatround ( ( xplevel_lev[10] / 10 ) * CVAR_ATTRIB_MODIFIER );
 	resist_pt_cost = floatround ( ( xplevel_lev[5] / 10 ) * CVAR_RESIST_MODIFIER );
 
@@ -176,8 +175,9 @@ public XP_SetMultiplier ( )
 {
 	if( CVAR_DEBUG_MODE)
 	{
-		//log_amx("CVAR_WEAPON_MULTIPLIER=%d", CVAR_WEAPON_MULTIPLIER);
+		log_amx("CVAR_WEAPON_MULTIPLIER=%d", CVAR_WEAPON_MULTIPLIER);
 	}
+
 	if ( !CVAR_WEAPON_MULTIPLIER )
 	{
 		log_amx("XP Multiplier Initialized [FAILED] - mp_weaponxpmodifier Cvar not present");

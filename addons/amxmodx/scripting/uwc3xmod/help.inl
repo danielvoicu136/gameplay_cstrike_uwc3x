@@ -1568,7 +1568,6 @@ public cmd_who( id )
 		}
 
 		get_user_name( playerid, name, 31 );
-		//log_amx( "Adding player: %s", name );
 		pos += format( message[pos], 4096-pos, "<tr><td>%s</td><td>%s</td><td>%d</td></tr>^n", name, team, p_level[playerid], name);
 	}
 

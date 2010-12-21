@@ -660,10 +660,10 @@ public set_skill ( id, key )
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			//new mapname[32];
-			//get_mapname(mapname,31);
-			//new skillcount = get_skillcount( id );
-			//log_amx( "DEBUG #4: In set_skill() Mapname=(%s) Player=(%s) skill_key=(%d)<%s> Level=(%d) #Skills=(%d), skillpts=(%d)", mapname, name, key, skillname, p_level[id], skillcount, skillpts );
+			new mapname[32];
+			get_mapname(mapname,31);
+			new skillcount = get_skillcount( id );
+			log_amx( "DEBUG #4: In set_skill() Mapname=(%s) Player=(%s) skill_key=(%d)<%s> Level=(%d) #Skills=(%d), skillpts=(%d)", mapname, name, key, skillname, p_level[id], skillcount, skillpts );
 		}
 
 		// Prevent player from selecting new skills after dropping them - Marticus
@@ -1925,11 +1925,14 @@ public Set_Phoenix_Count( id )
 	if (p_skills[id][SKILLIDX_PHOENIX] && is_user_alive(id))
 	{
 		new Float:randomnumber = random_float( 0.0, 1.0 );
-		//new teamnumber = get_user_team( id );
+		new teamnumber = get_user_team( id );
 		new Float:pheonix_chance = p_phoenix[p_skills[id][SKILLIDX_PHOENIX]-1];
 
-		//log_amx("Debug:: randomnumber=%f teamnumber=%d chance=%f", randomnumber, teamnumber, pheonix_chance);
-
+		if ( CVAR_DEBUG_MODE )
+		{
+			log_amx("Debug:: randomnumber=%f teamnumber=%d chance=%f", randomnumber, teamnumber, pheonix_chance);
+		}
+		
 		if ( randomnumber <= pheonix_chance )
 		{
 			phoenix[id] = true;
@@ -2278,9 +2281,9 @@ public HOOK_beamentpoint(id)
 	
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//log_amx( "DEBUG :: HOOK_beamentpoint -> player %s ", debugname );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		log_amx( "DEBUG :: HOOK_beamentpoint -> player %s ", debugname );
 	}
 	
 }
@@ -2289,9 +2292,9 @@ public HOOK_killbeam(id)
 {
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//log_amx( "DEBUG :: HOOK_killbeam -> player %s ", debugname );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		log_amx( "DEBUG :: HOOK_killbeam -> player %s ", debugname );
 	}
 
 	message_begin( MSG_BROADCAST, SVC_TEMPENTITY );
@@ -2305,9 +2308,9 @@ public HOOK_release(id)
 
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//log_amx( "DEBUG :: HOOK_release -> player %s pressed wchook bind key twice", debugname );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		log_amx( "DEBUG :: HOOK_release -> player %s pressed wchook bind key twice", debugname );
 	}
 
 	hooked[id] = false;
@@ -2324,9 +2327,9 @@ public Hook_boost(id)
 {
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//log_amx( "DEBUG :: Hook_boost -> player %s ", debugname );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		log_amx( "DEBUG :: Hook_boost -> player %s ", debugname );
 	}
 
 	new user_origin[3], velocity[3], null[3], A[3];
@@ -2353,9 +2356,9 @@ public Hook_DEBUG( id )
 
 	if( CVAR_DEBUG_MODE )
 	{
-		//new debugname[32];
-		//get_user_name ( id, debugname, 31 );
-		//log_amx( "DEBUG :: Hook_DEBUG -> player %s ", debugname );
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		log_amx( "DEBUG :: Hook_DEBUG -> player %s ", debugname );
 	}
 
 

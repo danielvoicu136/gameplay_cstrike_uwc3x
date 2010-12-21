@@ -1138,7 +1138,7 @@ public check_weap( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				//log_amx("Debug:: check_weap ->unammo [ %s ] = Primary or Secondary weapon - Reloading", name );
+				log_amx("Debug:: check_weap ->unammo [ %s ] = Primary or Secondary weapon - Reloading", name );
 			}
 
 			reloadAmmo(id);
@@ -1147,7 +1147,7 @@ public check_weap( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				//log_amx("Debug:: check_weap ->unammo [ %s ] = NOT Primary or Secondary weapon", name );
+				log_amx("Debug:: check_weap ->unammo [ %s ] = NOT Primary or Secondary weapon", name );
 			}
 
 		}
@@ -1438,7 +1438,7 @@ public change_weapon( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				//log_amx("Debug:: check_weap ->unammo [ %s ] = Primary or Secondary weapon - Reloading", name );
+				log_amx("Debug:: check_weap ->unammo [ %s ] = Primary or Secondary weapon - Reloading", name );
 			}
 
 			reloadAmmo(id);
@@ -1447,12 +1447,11 @@ public change_weapon( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				//log_amx("Debug:: check_weap ->unammo [ %s ] = NOT Primary or Secondary weapon", name );
+				log_amx("Debug:: check_weap ->unammo [ %s ] = NOT Primary or Secondary weapon", name );
 			}
 
 		}
 	}
-
 
 	//See if the have the ice bomb skill
 	if( p_skills[id][SKILLIDX_ICENADE] )
@@ -1467,10 +1466,8 @@ public change_weapon( id )
 			// flash icon if frost grenade is out
 			if( hasFrostNade[id] )
 			{
-
 				if( Util_Should_Msg_Client( id ) )
 				{
-
 					message_begin(MSG_ONE,gmsgStatusIcon,{0,0,0},id);
 					write_byte(2); // status (0=hide, 1=show, 2=flash)
 					write_string("dmg_cold"); // sprite name
@@ -1483,10 +1480,8 @@ public change_weapon( id )
 		}
 		else if(hasFrostNade[id])
 		{
-
 			if( Util_Should_Msg_Client( id ) )
 			{
-
 				message_begin(MSG_ONE,gmsgStatusIcon,{0,0,0},id);
 				write_byte(1); // status (0=hide, 1=show, 2=flash)
 				write_string("dmg_cold"); // sprite name
@@ -1532,4 +1527,3 @@ public hook_drop( id )
 
 	return PLUGIN_CONTINUE;
 }
-
