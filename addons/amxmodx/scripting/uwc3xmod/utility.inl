@@ -931,8 +931,7 @@ public PreCache_Sprites ( )
 	medicspr = precache_model ( "sprites/medic3.spr" );
 	shieldspr = precache_model ( "sprites/shield3.spr" );
 	medshieldspr = precache_model ( "sprites/medshield1.spr" );
-	rotmedshieldspr = precache_model ( "sprites/medshield1.spr" );
-	//rotmedshieldspr = precache_model ( "sprites/rotmedshield.spr" );
+	rotmedshieldspr = precache_model ( "sprites/rotmedshield.spr" );
 	blast = precache_model ( "sprites/blast2.spr" );
 	gatespr = precache_model ( "sprites/gate1.spr" );
 	cbgreen = precache_model ( "sprites/bm7.spr" );
