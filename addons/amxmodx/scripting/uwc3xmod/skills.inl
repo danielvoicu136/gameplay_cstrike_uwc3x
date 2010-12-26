@@ -1736,7 +1736,7 @@ public Skills_AdminLoad( id )
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print( id, print_center, "%L", id, "NO_ACCESS" );
+				client_print( id, print_center, "%L", id, "NO_ACCESS", MOD );
 			}
 			return PLUGIN_HANDLED;
 		}
