@@ -1,3 +1,4 @@
+
 public GetStorageType()
 {
 	new tempDBTYpe = 1;
@@ -51,48 +52,15 @@ public LoadXPConfig()
 
 public LoadXPCommand( id )
 {
-	if ( GetStorageType() == 1 )
-	{
-		//Load SQL Stuff
-		LoadXPMySQL ( id );	
-	}
-	else if ( GetStorageType() == 2 )
-	{
-		//Load SQL Lite Stuff
-		LoadXPSQLLite ( id );	
-	}
-	else
-	{
-		log_amx("ERROR:: Could not determine Storage Type in LoadXP");
-	}
-
-	new speedparm[1];
-	speedparm[0] = id;
-	Set_Speed( speedparm );
-
+	LoadXP ( id );
 	return PLUGIN_CONTINUE;
 }
 public LoadXP ( id )
 {
-	/* REMOVING THIS PART TO FIX A BUG 
-	if( is_user_bot ( id ) )
-	{
-		xpreadytoload[id] = 0;
-		return PLUGIN_CONTINUE;
-	}
-	*/
-
 	if ( GetStorageType() == 1 )
 	{
 		//Load SQL Stuff
-		if( CVAR_SQL_METHOD == 1)
-		{
-			LoadXPMySQL ( id );	
-		}
-		else
-		{
-			LoadXPMySQL2 ( id );	
-		}
+		LoadXPMySQL ( id );	
 	}
 	else if ( GetStorageType() == 2 )
 	{
@@ -121,6 +89,7 @@ public LoadSkillSet( id, skillsetIDX )
 	{
 		//Load SQL Lite Stuff
 		LoadSkillSetSQLLite ( id, skillsetIDX );	
+		log_amx("ERROR:: Skill Sets not enabled for sqllite");
 	}
 	else
 	{
@@ -132,7 +101,6 @@ public LoadSkillSet( id, skillsetIDX )
 	Set_Speed( speedparm );
 
 	return PLUGIN_CONTINUE;
-
 }
 
 public DeleteSkillSet( id, skillsetIDX )
@@ -176,12 +144,6 @@ public SaveSkillSet( id, skillsetIDX )
 }
 public SaveXP ( id )
 {
-	/* REMOVING THIS PART TO FIX A BUG 
-	if( is_user_bot ( id ) )
-	{
-		return PLUGIN_CONTINUE;
-	}
-	*/
 
 	if ( GetStorageType() == 1 )
 	{
@@ -257,13 +219,6 @@ public SaveAllPlayersXP ( )
 	
 	for ( new i=0; i < numofplayers; i++ )
 	{
-		/* REMOVING TO FIX XP BUG
-		if( is_user_bot ( players[i] ) )
-		{
-			continue;
-		}
-		*/
-
 		SaveXP ( players[i] );
 	}
 	

@@ -357,13 +357,11 @@ public new_round ( id )
 	healingwaves[id] = 0;
 
 	if ( playerhasspawned[id] )
-	{
-	
+	{	
 		if ( p_skills[id][SKILLIDX_SERPWARD] )
 		{
 			// Serpent Ward
 			serpents[id] = p_serpent[p_skills[id][SKILLIDX_SERPWARD]-1];
-
 			if ( USE_ENH && ( p_attribs[id][ATTRIBIDX_INT] >= INT_SERPENT_LEVEL ) )
 			{
 				serpents[id] += INT_SERPENT_BONUS;

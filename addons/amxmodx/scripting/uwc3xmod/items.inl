@@ -1204,14 +1204,15 @@ public check_weap( id )
 
 public change_weapon( id )
 {
-	if ( !uwc3x )
+
+	if ( !uwc3x || !is_user_connected( id ) )
 	{
 		return PLUGIN_CONTINUE;
 	}
 
-	if ( !is_user_connected( id ) )
+	if (freezetime || !is_user_alive(id))
 	{
-		return PLUGIN_CONTINUE;
+		return PLUGIN_HANDLED;
 	}
 
 	if ( playeritem2[id] == INFERNO )
@@ -1419,16 +1420,6 @@ public change_weapon( id )
 	new wpnid = read_data(2);
 	new name[32];
 	get_user_name( id , name, 31);
-
-	//if(unammo[id])
-	//{
-	//	new clip = read_data(3);
-
-	//	if( IsWeaponPrimary( wpnid ) || IsWeaponSecondary( wpnid ) &&  (clip == 0) )
-	//	{
-	//		reloadAmmo(id);
-	//	}
-	//}
 
 	if(unammo[id])
 	{

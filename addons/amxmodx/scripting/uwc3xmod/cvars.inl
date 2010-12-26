@@ -241,7 +241,7 @@ new SAVED_SKILLSETS;
 new CVAR_SAVED_SKILLSETS
 
 //SQL Method
-new SQL_METHOD, CVAR_SQL_METHOD;
+//new SQL_METHOD, CVAR_SQL_METHOD;
 
 new ENABLE_UWC3X;
 new SAVE_BY;
@@ -433,7 +433,7 @@ public Register_Cvars ( )
 	SAVE_XP_SQL						=			register_cvar ( "mp_save_method",				"1"				 );
 	XP_MULTIPLIER					=			register_cvar ( "mp_xpmultiplier",				"1.50"			 );
 	SAVE_XP							=			register_cvar ( "mp_savexp",					"1"				 );
-	SQL_METHOD						=			register_cvar ( "mp_sql_method",				"2"				 );
+	//SQL_METHOD						=			register_cvar ( "mp_sql_method",				"2"				 );
 
 	//redirection system
 	REDIRECT_BOTTOM_SERVER			=			register_cvar ( "UWX_rdsvr_bottom",				"0"				 );
@@ -706,7 +706,7 @@ public Bind_Cvars ( )
 	//Set Numbers
 	CVAR_ENABLE_UWC3X			=	get_pcvar_num ( ENABLE_UWC3X );
 	CVAR_SAVE_BY				=	get_pcvar_num ( SAVE_BY );
-	CVAR_SQL_METHOD				=	get_pcvar_num ( SQL_METHOD );
+	//CVAR_SQL_METHOD				=	get_pcvar_num ( SQL_METHOD );
 	CVAR_REDIRECT_BOTTOM_LEVEL	=	get_pcvar_num ( REDIRECT_BOTTOM_LEVEL );
 	CVAR_REDIRECT_MIDDLE_LEVEL	=	get_pcvar_num ( REDIRECT_MIDDLE_LEVEL );
 	CVAR_REDIRECT_TOP_LEVEL		=	get_pcvar_num ( REDIRECT_TOP_LEVEL );

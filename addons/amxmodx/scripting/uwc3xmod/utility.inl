@@ -22,24 +22,6 @@ bool:Util_Is_Valid_Player( id )
 	return false;
 }
 
-/*
-Removed this one and replaced with the one above to make sure it works better
-bool:Util_Is_Valid_Player( id )
-{
-	if( id < 1 || id > MAX_PLAYERS )
-	{
-		return false;
-	}
-
-	if( is_user_connected( id ) && ( pev( id, pev_flags ) & FL_CLIENT ) )
-	{
-		return true;
-	}
-
-	return false;
-}
-*/
-
 bool:Util_Should_Msg_Client( id )
 {
 	if( Util_Is_Valid_Player(id) && !is_user_bot( id ) )
@@ -439,7 +421,6 @@ public Check_UWC3X ( )
 
 public amx_restartround(id, level)
 {
-
 	if ( ! ( get_user_flags ( id ) & CVAR_ADMIN_DEFAULT_FLAG ) )
 	{
 		if ( id != 0 )
@@ -460,7 +441,6 @@ public amx_restartround(id, level)
 
 	// [9-30-04] Added logging of amx_givexp ( ) command - K2mia
 	log_amx ( "Command Issuesd :: amx_restartround ( ) by %s time %d", name, iTime );
-
 	restart_round_command(iTime);
 	return PLUGIN_CONTINUE;
 }
@@ -473,6 +453,8 @@ public restart_round_command(time)
 
 public Initialize_PlayerData ( id, limited )
 {
+	//clear the hud chats
+	hudchat_clear(id);
 
 	unammo[id]				= false;
 	badaim[id]				= false;
@@ -1124,24 +1106,7 @@ public admin_loc ( id )
 	}
 	return PLUGIN_HANDLED;
 }
-//public debug_info ( id, enemy )
-//{
-//	if( Util_Should_Msg_Client(id) )
-//	{
-//		client_print ( 0, print_console, "%L", 0, "DEBUG_INFO_HEADER" );
-//	}
-//
-//	for ( new j=1; j<MAX_LEVEL; j++ )
-//	{
-//		if( Util_Should_Msg_Client(id) )
-//		{
-//			client_print ( 0, print_console, "%L", 0, "DEBUG_INFO_LINE", j, xpgiven_lev[j], xplevel_lev[j], attrib_pt_cost, resist_pt_cost );
-//		}
-//
-//	}
-//
-//	return PLUGIN_CONTINUE;
-//}
+
 public toggle_lowres ( id )
 {
 
@@ -1155,7 +1120,8 @@ public toggle_lowres ( id )
 		lowres[id] = false;
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print ( id, print_chat, "%L", id, "LOW_RES_OFF", MOD );
+			HudChatShow(id, "LOW_RES_OFF", MOD);
+			//client_print ( id, print_chat, "%L", id, "LOW_RES_OFF", MOD );
 		}
 	}
 	else
@@ -1163,7 +1129,8 @@ public toggle_lowres ( id )
 		lowres[id] = true;
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print ( id, print_chat, "%L", id, "LOW_RES_ON", MOD );
+			HudChatShow(id, "LOW_RES_ON", MOD);
+			//client_print ( id, print_chat, "%L", id, "LOW_RES_ON", MOD );
 		}
 	}
 
@@ -1183,18 +1150,19 @@ public do_examine ( id )
 	if ( ( 0 < friend <= MAX_PLAYERS ) && ( friend != id ) && is_user_alive ( id ) && is_user_alive ( friend ) )
 	{
 		// id has a friend to examine
-		new sReport[64] = "";
+		//new sReport[64] = "";
 		new fname[32];
 		get_user_name ( friend, fname, 31 );
 
-		set_hudmessage ( 200, 100, 0, -1.0, 0.35, 0, 1.0, 7.0, 0.1, 0.2, 2 );
+		//set_hudmessage ( 200, 100, 0, -1.0, 0.35, 0, 1.0, 7.0, 0.1, 0.2, 2 );
 
 		if ( get_user_team ( id ) != get_user_team ( friend ) )
 		{
-			format ( sReport, 64, "%L", id, "EXAMINE_ENEMY", fname );
+			//format ( sReport, 64, "%L", id, "EXAMINE_ENEMY", fname );
 			if( Util_Should_Msg_Client(id) )
 			{
-				show_hudmessage ( id, sReport );
+				HudChatShow(id, "EXAMINE_ENEMY", fname);
+				//show_hudmessage ( id, sReport );
 			}
 			return PLUGIN_HANDLED;
 		}
@@ -1202,10 +1170,11 @@ public do_examine ( id )
 		new fhp = get_user_health ( friend );
 		new farmor = get_user_armor ( friend );
 
-		format ( sReport, 64, "%L", id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor );
+		//format ( sReport, 64, "%L", id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor );
 		if( Util_Should_Msg_Client(id) )
 		{
-			show_hudmessage ( id, sReport );
+			HudChatShow(id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor);
+			//show_hudmessage ( id, sReport );
 		}
 	}
 
@@ -1299,7 +1268,8 @@ public showStatus ( id )
 
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
-				show_hudmessage ( id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
+				//show_hudmessage ( id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
+				HudChatShow(id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
 			}
 
 		}
@@ -1307,12 +1277,12 @@ public showStatus ( id )
 		{
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
-				set_hudmessage ( color1,50,color2,-1.0,0.60,1, 0.01, 3.0, 0.01, 0.01, 4 );
-				show_hudmessage ( id,name );
+				HudChatShow(id,name);
+				//set_hudmessage ( color1,50,color2,-1.0,0.60,1, 0.01, 3.0, 0.01, 0.01, 4 );
+				//show_hudmessage ( id,name );
 			}
 		}
 	}
-
 }
 public BuyZone ( id )
 {
@@ -1520,7 +1490,8 @@ public Fwd_Touch(Ent, id)
 		//message to client telling them of the blocked pickup
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
-			client_print ( id, print_center, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD );
+			HudChatShow(id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
+			//client_print ( id, print_center, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD );
 		}
 
 		return FMRES_SUPERCEDE;
@@ -1786,7 +1757,8 @@ public hookDrop(id)
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print ( id, print_center, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD );
+			HudChatShow(id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
+			//client_print ( id, print_center, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD );
 		}
 
 		return PLUGIN_HANDLED;

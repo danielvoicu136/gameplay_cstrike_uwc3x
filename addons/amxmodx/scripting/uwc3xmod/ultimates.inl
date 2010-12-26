@@ -130,13 +130,13 @@ public cooldownGate ( parm[1] )
 	new id = parm[0];
 	gateused[id] = false;
 
-	//if( CVAR_DEBUG_MODE )
-	//{
-	//	new debugname[32];
-	//	get_user_name ( id, debugname, 31 );
-	//	client_print( id, print_console, "[%s DEBUG] cooldownGate -> Setting gateused[id] = FALSE for player %s so now there is NO delay", MOD, debugname );
-	//	log_amx( "DEBUG :: cooldownGate -> Setting gateused[id] = FALSE for player %s so now there is NO delay", debugname );
-	//}
+	if( CVAR_DEBUG_MODE )
+	{
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		client_print( id, print_console, "[%s DEBUG] cooldownGate -> Setting gateused[id] = FALSE for player %s so now there is NO delay", MOD, debugname );
+		log_amx( "DEBUG :: cooldownGate -> Setting gateused[id] = FALSE for player %s so now there is NO delay", debugname );
+	}
 
 	ultimateused[id] = false;
 	icon_controller ( id );
@@ -165,11 +165,16 @@ public Ult_Can_Use ( id , IDX )
 		return false;
 	}
 
-	if( Util_Should_Msg_Client_Dead(id) || !is_user_alive( id ) )
+	if( !is_user_alive( id ) )
 	{
-		client_print ( id, print_chat, "%L", id, "SHHH_DEAD_MESSAGE", MOD );
+		if( Util_Should_Msg_Client_Dead(id))
+		{
+			client_print ( id, print_chat, "%L", id, "SHHH_DEAD_MESSAGE", MOD );
+		}
+
 		return false;
 	}
+
 
 	if ( freezetime )
 	{
@@ -179,6 +184,24 @@ public Ult_Can_Use ( id , IDX )
 			show_hudmessage ( id, "You may not use your ultimate during freezetime" );
 		}
 
+		return false;
+	}
+	else if( ultimateused[id])
+	{
+		if( Util_Should_Msg_Client(id) )
+		{
+			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
+			show_hudmessage ( id, "Your ultimates are not ready to be used." );
+		}
+		return false;
+	}
+	else if( !ultlearned[id])
+	{
+		if( Util_Should_Msg_Client(id) )
+		{
+			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
+			show_hudmessage ( id, "You do not have any ultimates trained." );
+		}
 		return false;
 	}
 
@@ -201,6 +224,10 @@ public Ult_Can_Use ( id , IDX )
 		}
 		return false;
 	}
+
+
+
+
 
 	if ( IDX == SKILLIDX_FSTRIKE && !p_skills[id][SKILLIDX_FSTRIKE] )
 	{

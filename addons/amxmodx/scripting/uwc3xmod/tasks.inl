@@ -1,4 +1,46 @@
 
+
+public __TaskShowHudChat()
+{
+	new message[__HUDCHAT_MAXMSGLEN];
+	new messages[((__HUDCHAT_MAXMSGLEN - 1) * __HUDCHAT_MAXLINES) + __HUDCHAT_MAXLINES];
+	new m, len;
+	
+	for(new id = 1; id <= __HUDCHAT_MAXPLAYERS; id++)
+	{
+		if(is_user_connected(id))
+		{
+			len = 0;
+			
+			for(m = 0; m < __HUDCHAT_MSGCOUNT[id]; m++)
+			{
+				ArrayGetString(__HUDCHAT_MESSAGES[id], m, message, charsmax(message));
+				
+				len += formatex(messages[len], charsmax(message) - len, "%s%s", (len > 0) ? "^n" : "", message);
+			}
+			
+			set_hudmessage(__HUDCHAT_R, __HUDCHAT_G, __HUDCHAT_B, __HUDCHAT_POS_X, __HUDCHAT_POS_Y, 0, 0.0, (__HUDCHAT_UPDATEINTERVAL + 0.1), 0.0, 0.0, __HUDCHAT_CHANNEL);
+			show_hudmessage(id, "%s", messages);
+		}
+	}
+}
+
+public __TaskRemoveHudChat(taskid)
+{
+	new id = taskid - __HUDCHAT_TASKID_REMOVE;
+	
+	if(__HUDCHAT_MSGCOUNT[id] > 0)
+	{
+		ArrayDeleteItem(__HUDCHAT_MESSAGES[id], 0);
+		
+		if(--__HUDCHAT_MSGCOUNT[id] > 0)
+		{
+			set_task(__HUDCHAT_REMOVETIME, "__TaskRemoveHudChat", taskid);
+		}
+	}
+}
+
+
 /* GENERIC */
 public Task_Reset_Immunity ( parm[2] )
 {

@@ -112,7 +112,6 @@ public LoadSQLVars ( )
 
 		//Create Skill Sets table
 		SkillSets_Table ( );
-
 	}
 
 	return PLUGIN_CONTINUE;
@@ -971,15 +970,15 @@ public LogError( Handle:Query, sQuery[], sError[], iErrNum, failstate, sFunction
 }
 public MySQLClose()
 {
-	//if ( g_SqlTuple )
-	//{
-	//	SQL_FreeHandle( g_SqlTuple );
-	//}
+	if ( g_SqlTuple )
+	{
+		SQL_FreeHandle( g_SqlTuple );
+	}
 
-	//if ( SqlConnection )
-	//{
-	//	SQL_FreeHandle( SqlConnection );
-	//}
+	if ( SqlConnection )
+	{
+		SQL_FreeHandle( SqlConnection );
+	}
 }
 
 

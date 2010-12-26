@@ -71,9 +71,6 @@ public ability_wcbless ( id )
         {
             xpbonus += ( BLESSXP * p_level[id] );
         }
-
-        
-
         
         if ( get_user_armor ( friendID ) <= 0 )
         {
@@ -87,7 +84,6 @@ public ability_wcbless ( id )
         }
         set_user_health_log ( friendID, maxhealth[friendID] );
         set_user_armor_log ( friendID, maxarmor[friendID] );
-        
         
         //Curing any negative effect on target
         if ( p_skills[id][SKILLIDX_BLESS] >= 1 )
@@ -181,7 +177,6 @@ public ability_wcward ( id )
 			if( Util_Should_Msg_Client(id) )
 			{
 				set_hudmessage ( 200, 100, 0, 0.2, 0.3, 0, 1.0, 5.0, 0.1, 0.2, 2 );
-				client_print ( id, print_chat, "%L", id, "SERPENTWARD_PLACED", serpents[id] );
 				show_hudmessage ( id, "%L", LANG_PLAYER, "SERPENTWARD_PLACED", serpents[id] );
 			}
 		}
@@ -191,7 +186,6 @@ public ability_wcward ( id )
 			{
 				new serpentCount = p_serpent[p_skills[id][SKILLIDX_SERPWARD]-1];
 				set_hudmessage ( 200, 100, 0, 0.2, 0.3, 0, 1.0, 5.0, 0.1, 0.2, 2 );
-				client_print ( id, print_chat, "%L", id, "SERPENTWARD_ALLGONE", serpentCount );
 				show_hudmessage ( id, "%L", LANG_PLAYER, "SERPENTWARD_ALLGONE", serpentCount );
 			}
 		}
@@ -789,7 +783,8 @@ public ability_wcmend ( id )
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print ( id, print_chat, "%L", id, "MENDWOUNDS_MAX_HEALS", MOD );
+				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_MAX_HEALS", MOD );
+				HudChatShow(id, "MENDWOUNDS_MAX_HEALS", MOD);
 			}
 
 			return PLUGIN_HANDLED;
@@ -803,7 +798,8 @@ public ability_wcmend ( id )
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print ( id, print_chat, "%L", id, "MENDWOUNDS_NOT_HURT", MOD, friend_name );
+				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_NOT_HURT", MOD, friend_name );
+				HudChatShow(id, "MENDWOUNDS_NOT_HURT", MOD, friend_name);
 			}
 
 			return PLUGIN_HANDLED;
@@ -896,11 +892,16 @@ public ability_wcmend ( id )
 		if ( cured_burns && cured_poison && cured_disease )
 		{
 			xpbonus += xplevel_lev[p_level[id]];
-			client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_ALL", MOD, friend_name, xpbonus );
+			if( Util_Should_Msg_Client(id) )
+			{
+				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_ALL", MOD, friend_name, xpbonus );
+				HudChatShow(id, "MENDWOUNDS_CURED_ALL", MOD, friend_name, xpbonus);
+			}
 
 			if( is_user_connected( friendID ) && !is_user_bot(friendID) )
 			{
-				client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_ALL_MESSAGE", MOD, name );
+				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_ALL_MESSAGE", MOD, name );
+				HudChatShow(friendID, "MENDWOUNDS_CURED_ALL_MESSAGE", MOD, name);
 			}
 		}
 		else if ( cured_burns && ( cured_poison || cured_disease ) )
@@ -909,12 +910,14 @@ public ability_wcmend ( id )
 
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_TWO", MOD, friend_name, xpbonus );
+				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_TWO", MOD, friend_name, xpbonus );
+				HudChatShow(id, "MENDWOUNDS_CURED_TWO", MOD, friend_name, xpbonus);
 			}
 
 			if( is_user_connected( friendID ) && !is_user_bot(friendID) )
 			{
-				client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_TWO_MESSAGE", MOD, name );
+				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_TWO_MESSAGE", MOD, name );
+				HudChatShow(friendID, "MENDWOUNDS_CURED_TWO_MESSAGE", MOD, name);
 			}
 		}
 		else if ( cured_poison && cured_disease )
@@ -923,12 +926,14 @@ public ability_wcmend ( id )
 
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_TWO2", MOD, friend_name, xpbonus );
+				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_TWO2", MOD, friend_name, xpbonus );
+				HudChatShow(id, "MENDWOUNDS_CURED_TWO2", MOD, friend_name, xpbonus);
 			}
 
 			if( Util_Should_Msg_Client(friendID) )
 			{
-				client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_TWO_MESSAGE2", MOD, name );
+				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_TWO_MESSAGE2", MOD, name );
+				HudChatShow(friendID, "MENDWOUNDS_CURED_TWO_MESSAGE2", MOD, name);
 			}
 		}
 		else if ( cured_poison || cured_disease )
@@ -937,24 +942,28 @@ public ability_wcmend ( id )
 
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_ONE", MOD, friend_name, xpbonus );
+				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_ONE", MOD, friend_name, xpbonus );
+				HudChatShow(id, "MENDWOUNDS_CURED_ONE", MOD, friend_name, xpbonus);
 			}
 
 			if( Util_Should_Msg_Client(friendID) )
 			{
-				client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_ONE_MESSAGE", MOD, name );
+				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_ONE_MESSAGE", MOD, name );
+				HudChatShow(friendID, "MENDWOUNDS_CURED_ONE_MESSAGE", MOD, name);
 			}
 		}
 		else
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED", MOD, friend_name, xpbonus );
+				HudChatShow(id, "MENDWOUNDS_CURED", MOD, friend_name, xpbonus);
+				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED", MOD, friend_name, xpbonus );
 			}
 
 			if( is_user_connected( friendID ) && !is_user_bot(friendID) )
 			{
-				client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_MESSAGE", MOD, name );
+				HudChatShow(friendID, "MENDWOUNDS_CURED_MESSAGE", MOD, name);
+				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_MESSAGE", MOD, name );
 			}
 		}
 
@@ -970,12 +979,6 @@ public ability_wcmend ( id )
 	else if ( Util_Should_Msg_Client_Dead ( id ) )
 	{
 		client_print ( id, print_chat, "%L", id, "SHHH_DEAD_MESSAGE", MOD );
-	}
-	else
-	{
-		//emit_sound ( id, CHAN_ITEM, "buttons/button10.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-		//new sound[32] = {"buttons/button10.wav"};
-		//client_cmd ( id, "spk ^"%s^"", sound );
 	}
 
 	return PLUGIN_HANDLED;

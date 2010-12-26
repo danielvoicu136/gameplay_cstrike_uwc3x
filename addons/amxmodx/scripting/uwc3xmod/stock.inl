@@ -1,3 +1,139 @@
+
+
+stock __HUDCHAT_R = 255;
+stock __HUDCHAT_G = 255;
+stock __HUDCHAT_B = 255;
+
+stock __HUDCHAT_CHANNEL = 2;
+stock Float:__HUDCHAT_REMOVETIME = 5.0;
+stock Array:__HUDCHAT_MESSAGES[33];
+stock __HUDCHAT_MSGCOUNT[33];
+stock __HUDCHAT_MAXPLAYERS;
+
+stock hudchat_init()
+{
+	__HUDCHAT_MAXPLAYERS = get_maxplayers();
+	
+	for(new i = 1; i <= __HUDCHAT_MAXPLAYERS; i++)
+	{
+		__HUDCHAT_MESSAGES[i] = ArrayCreate(__HUDCHAT_MAXMSGLEN);
+		__HUDCHAT_MSGCOUNT[i] = 0;
+	}
+	
+	set_task(__HUDCHAT_UPDATEINTERVAL, "__TaskShowHudChat", __HUDCHAT_TASKID_UPDATE, .flags = "b");
+}
+
+stock hudchat_end()
+{
+	for(new i = 1; i <= __HUDCHAT_MAXPLAYERS; i++)
+	{
+		ArrayDestroy(__HUDCHAT_MESSAGES[i]);
+		__HUDCHAT_MSGCOUNT[i] = 0;
+		
+		remove_task(i + __HUDCHAT_TASKID_REMOVE);
+	}
+}
+
+stock hudchat_update()
+{
+	__TaskShowHudChat();
+	
+	remove_task(__HUDCHAT_TASKID_UPDATE);
+	set_task(__HUDCHAT_UPDATEINTERVAL, "__TaskShowHudChat", __HUDCHAT_TASKID_UPDATE, .flags = "b");
+}
+
+stock hudchat_get_maxlines()
+{
+	return __HUDCHAT_MAXLINES;
+}
+
+stock hudchat_set_color(r, g, b)
+{
+	__HUDCHAT_R = (r & 255);
+	__HUDCHAT_G = (g & 255);
+	__HUDCHAT_B = (b & 255);
+}
+
+stock hudchat_get_color(&r, &g, &b)
+{
+	r = __HUDCHAT_R;
+	g = __HUDCHAT_G;
+	b = __HUDCHAT_B;
+}
+
+stock hudchat_set_removetime(Float:_time)
+{
+	if(_time > 0.0 )
+	{
+		__HUDCHAT_REMOVETIME = _time;
+	}
+}
+
+stock Float:hudchat_get_removetime()
+{
+	return __HUDCHAT_REMOVETIME;
+}
+
+stock hudchat_set_channel(channel)
+{
+	if(1 <= channel <= 4)
+	{
+		__HUDCHAT_CHANNEL = channel;
+	}
+}
+
+stock hudchat_get_channel()
+{
+	return __HUDCHAT_CHANNEL;
+}
+
+stock hudchat_show(id, const msg[], any:...)
+{
+	new message[__HUDCHAT_MAXMSGLEN];
+	vformat(message, charsmax(message), msg, 3);
+	
+	if(id)
+	{
+		while(__HUDCHAT_MSGCOUNT[id] >= __HUDCHAT_MAXLINES)
+		{
+			ArrayDeleteItem(__HUDCHAT_MESSAGES[id], 0);
+			__HUDCHAT_MSGCOUNT[id]--;
+		}
+		
+		ArrayPushString(__HUDCHAT_MESSAGES[id], message);
+		
+		new taskid = id + __HUDCHAT_TASKID_REMOVE;
+		
+		remove_task(taskid);
+		set_task(__HUDCHAT_REMOVETIME, "__TaskRemoveHudChat", taskid);
+	}
+	else
+	{
+		for(id = 1; id <= __HUDCHAT_MAXPLAYERS; id++)
+		{
+			hudchat_show(id, "%s", message);
+		}
+	}
+}
+
+stock hudchat_clear(id)
+{
+	if(id)
+	{
+		ArrayClear(__HUDCHAT_MESSAGES[id]);
+		__HUDCHAT_MSGCOUNT[id] = 0;
+		
+		remove_task(id + __HUDCHAT_TASKID_REMOVE);
+	}
+	else
+	{
+		for(id = 1; id <= __HUDCHAT_MAXPLAYERS; id++)
+		{
+			hudchat_clear(id);
+		}
+	}
+}
+
 stock user_spawn( index )
 {
 	return spawn(index);
