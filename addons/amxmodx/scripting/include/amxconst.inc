@@ -11,9 +11,7 @@
 #endif
 #define _amxconst_included
 
-#define AMXX_VERSION		1.763
-#define AMXX_VERSION_NUM	176
-stock const AMXX_VERSION_STR[]="1.76c"
+#include <svn_version>
 
 #define M_PI 3.1415926535
 
@@ -47,6 +45,7 @@ stock const AMXX_VERSION_STR[]="1.76c"
 #define FLAG_AUTHID		(1<<2)	/* flag "c" */
 #define FLAG_IP			(1<<3)	/* flag "d" */
 #define FLAG_NOPASS		(1<<4)	/* flag "e" */
+#define FLAG_CASE_SENSITIVE	(1<<10) /* flag "k" */
 
 #define PLUGIN_CONTINUE		0	/* Results returned by public functions */
 #define PLUGIN_HANDLED		1	/* stop other plugins */
@@ -173,14 +172,14 @@ enum {
 	print_console,
 	print_chat,
 	print_center,
-}
+};
 
 /* Destination types for engclient_print() */
 enum {
 	engprint_console = 0,
 	engprint_center,
 	engprint_chat,
-}
+};
 
 /* Render for set_user_rendering() */
 enum {
@@ -190,7 +189,7 @@ enum {
 	kRenderGlow,			/* src*a+dest -- No Z buffer checks */
 	kRenderTransAlpha,		/* src*srca+dest*(1-srca) */
 	kRenderTransAdd,		/* src*a+dest */
-}
+};
 
 /* Fx for set_user_rendering() */
 enum {
@@ -215,14 +214,14 @@ enum {
 	kRenderFxExplode,		/* Scale up really big! */
 	kRenderFxGlowShell,		/* Glowing Shell */
 	kRenderFxClampMinScale,		/* Keep this sprite from getting very small (SPRITES only!) */
-}
+};
 
 /* Type for force_unmodified() */
 enum {
 	force_exactfile = 0,		/* File on client must exactly match server's file */
 	force_model_samebounds,		/* For model files only, the geometry must fit in the same bbox */
 	force_model_specifybounds,	/* For model files only, the geometry must fit in the specified bbox */
-}
+};
 
 /* Status for get_module() */
 enum {
@@ -240,6 +239,7 @@ enum {
 #define AMX_FLAG_COMPACT  0x04  /* compact encoding */
 #define AMX_FLAG_BYTEOPC  0x08  /* opcode is a byte (not a cell) */
 #define AMX_FLAG_NOCHECKS 0x10  /* no array bounds checking; no STMT opcode */
+#define AMX_FLAG_OLDFILE  0x20	/* Old AMX Mod plugin */
 #define AMX_FLAG_NTVREG 0x1000  /* all native functions are registered */
 #define AMX_FLAG_JITC   0x2000  /* abstract machine is JIT compiled */
 #define AMX_FLAG_BROWSE 0x4000  /* busy browsing */
@@ -282,26 +282,6 @@ enum {
 #define FORWARD_ONLY_NEW	2
 #define FORWARD_ALL		3
 
-#define MEXIT_ALL	1
-#define MEXIT_NORMAL	0
-#define MEXIT_NEVER	-1
-
-#define MENUPAD_NONE		0	//no padding (default)
-#define MENUPAD_PAGE		1	//pads based on items per page
-
-#define MPROP_PERPAGE	1	//NUM - items per page.  0=no paginating, 7=default
-#define MPROP_BACKNAME	2	//STRING - name of "back" button
-#define MPROP_NEXTNAME	3	//STRING - name of "more" button
-#define MPROP_EXITNAME	4	//STRING - name of "exit" button
-#define MPROP_TITLE	5	//STRING - sets menu title
-#define MPROP_EXIT	6	//NUM - sets how "Exit" appears on the menu
-#define MPROP_ORDER	7	//Sets the back/next/exit order
-				//Send an 3-cell array with MENU_EXIT etc in the order
-				//(from 0-2), 0 being first
-#define MPROP_NOCOLORS	8	//NUM - sets whether colors are not auto (0=default)
-#define MPROP_PADMENU	9	//NUM - sets how the ending portions of a menu are padded
-				//i.e. 2 items, 7 per page, with endings at slots 5/6/7.
-
 #define SND_SPAWNING		(1<<8)		// we're spawing, used in some cases for ambients 
 #define SND_STOP		(1<<5)		// stop sound
 #define SND_CHANGE_VOL		(1<<6)		// change sound vol
@@ -311,4 +291,12 @@ enum LibType
 {
 	LibType_Library,
 	LibType_Class
+};
+
+enum AdminProp
+{
+	AdminProp_Auth = 0,
+	AdminProp_Password,
+	AdminProp_Access,
+	AdminProp_Flags
 };

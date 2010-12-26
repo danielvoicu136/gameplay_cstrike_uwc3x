@@ -27,7 +27,7 @@
 enum {
   XMF_DAMAGE = 0,
   XMF_DEATH,
-}
+};
 
 /* Use this function to register forwards */
 native register_statsfwd( ftype );
@@ -42,7 +42,7 @@ forward client_death(killer,victim,wpnindex,hitplace,TK);
 
 /* Custom Weapon Support */
 /* function will return index of new weapon */
-native custom_weapon_add( wpnname[],melee = 0,logname[]="" ); 
+native custom_weapon_add( const wpnname[],melee = 0,const logname[]="" ); 
 /* Function will pass damage done by this custom weapon to stats module and other plugins */
 native custom_weapon_dmg( weapon, att, vic, damage, hitplace=0 ); 
 /* Function will pass info about custom weapon shot to stats module */
@@ -133,3 +133,13 @@ native tfc_setweaponammo(index, value);
  * Use the TFC_GOALITEM_* constants to determine the owning team.
  */
 native tfc_get_user_goalitem(index, &team);
+
+/* Returns 1 if the player is a spy and is currently feigning death */
+native tfc_is_user_feigning(index);
+
+/* Returns 1 if the two teams are allies, 0 otherwise 
+ * Note: Team must be 1->4
+ *       Team 0 will always return 0
+ *       Any other team will result in an error
+ */
+native tfc_is_team_ally(TeamA,TeamB);

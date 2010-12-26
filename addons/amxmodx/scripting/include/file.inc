@@ -83,7 +83,7 @@ native fgets(file, buffer[], maxlength);
 native fputs(file, const text[]);
 
 //Writes a line to the file
-native fprintf(file, const fmt[], {Float,Sql,Result,_}:...);
+native fprintf(file, const fmt[], any:...);
 
 //Sets the current position in a file (see SEEK_ values above)
 native fseek(file, position, start);
@@ -97,12 +97,16 @@ native fputc(file, data);
 native fungetc(file, data);
 
 //Return the size of a file
-native filesize(const filename[], {Float,Sql,Result,_}:...);
+native filesize(const filename[], any:...);
 
 //Attempts to remove a directory.
 //Note that you cannot remove a directory that has files on most
 // operating systems.
 native rmdir(const path[]);
+
+/* Returns 0 on success, like the POSIX specification */
+native mkdir(const dirname[]);
+
 
 //Delete a file (delete_file macro)
 native unlink(const filename[]);
@@ -111,3 +115,20 @@ native unlink(const filename[]);
 native open_dir(dir[], firstfile[], length);
 native next_file(dirh, buffer[], length);
 native close_dir(dirh);
+
+/**
+ * Loads a file using the LoadFileForMe engine function.
+ *
+ * The data is truncated if there is not enough space.  No null-terminator 
+ * is applied; the data is the raw contents of the file.
+ *
+ * @param file			File to load (may be a file from the GCF).
+ * @param buffer		Buffer to store file contents.
+ * @param maxlength		Maximum size of the file buffer.
+ * @param length		Variable to store the file length.  This may return 
+ *						a number larger than the buffer size.
+ * @return				-1 if the file could not be loaded.  Otherwise, 
+ *						the number of cells actually written to the buffer 
+ *						are returned.
+ */
+native LoadFileForMe(const file[], buffer[], maxlength, &length=0);

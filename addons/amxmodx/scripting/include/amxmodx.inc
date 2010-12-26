@@ -21,6 +21,9 @@
 #include <messages>
 #include <vector>
 #include <sorting>
+#include <cellarray>
+#include <celltrie>
+#include <newmenus>
 
 /* Function is called just after server activation.
 * Good place for configuration loading, commands and cvars registration. */
@@ -67,7 +70,7 @@ forward client_command(id);
 /* Called when client is entering to a game. */
 forward client_putinserver(id);
 
-/* Sets informations about plugin. */
+/* Sets informations about plugin. Returns the plugin id of the calling plugin. */
 native register_plugin(const plugin_name[],const version[],const author[]);
 
 /* Precache model. Can be used only in plugin_precache() function.*/
@@ -77,7 +80,7 @@ native precache_model(const name[]);
 native precache_sound(const name[]);
 
 /* Precaches any file. */
-native precache_generic(szFile[]);
+native precache_generic(const szFile[]);
 
 /* Sets info for player. */
 native set_user_info(index,const info[],const value[]);
@@ -97,16 +100,16 @@ native get_localinfo(const info[],output[],len);
 native show_motd(player,const message[],const header[]="");
 
 /* Sends message to player. Set index to 0 to send text globaly. */
-native client_print(index,type,const message[],{Float,Sql,Result,_}:...);
+native client_print(index,type,const message[],any:...);
 
 /* Sends message to player by engine. Set index to 0 to send text globaly. */
-native engclient_print(player,type,const message[],{Float,Sql,Result,_}:...);
+native engclient_print(player,type,const message[],any:...);
 
 /* Sends message to console. */
-native console_print(id,const message[],{Float,Sql,Result,_}:...);
+native console_print(id,const message[],any:...);
 
 /* Sends command to console. */
-native console_cmd(id,const cmd[],{Float,Sql,Result,_}:...);
+native console_cmd(id,const cmd[],any:...);
 
 /* Registers event on which a given function will be called
 * Flags:
@@ -115,13 +118,15 @@ native console_cmd(id,const cmd[],{Float,Sql,Result,_}:...);
 * "c" - send only once when repeated to other players.
 * "d" - call if is send to dead player.
 * "e" - to alive.
+* NOTE: Due to a long-standing bug that would break compatibility with old plugins,
+*       the client id should be checked for alive/dead state if you use d or e.
 * Examples for conditions:
 * "2=c4" - 2nd parameter of message must be sting "c4".
 * "3>10" - 3rd parameter must be greater then 10.
 * "3!4" - 3rd must be different from 4.
 * "2&Buy" - 2nd parameter of message must contain "Buy" substring.
 * "2!Buy" - 2nd parameter of message can't contain "Buy" substring. */
-native register_event(const event[],const function[],const flags[],cond[]="", ... );
+native register_event(const event[],const function[],const flags[],const cond[]="", ... );
 
 /* Registers log event on which the given function will be called
 * Examples for conditions:
@@ -141,16 +146,16 @@ native register_logevent(const function[], argsnum,  ... );
 native set_hudmessage(red=200, green=100, blue=0, Float:x=-1.0, Float:y=0.35, effects=0, Float:fxtime=6.0, Float:holdtime=12.0, Float:fadeintime=0.1, Float:fadeouttime=0.2,channel=4);
 
 /* Displays HUD message to given player. */
-native show_hudmessage(index,const message[],{Float,Sql,Result,_}:...);
+native show_hudmessage(index,const message[],any:...);
 
 /* Displays menu. Keys have bit values (key 1 is (1<<0), key 5 is (1<<4) etc.). */
-native show_menu(index,keys,const menu[], time = -1, title[] = "");
+native show_menu(index,keys,const menu[], time = -1, const title[] = "");
 
 /* Gets value from client messages.
 * When you are asking for string the array and length is needed (read_data(2,name,len)).
 * Integer is returned by function (new me = read_data(3)).
 * Float is set in second parameter (read_data(3,value)). */
-native read_data(value, {Float,Sql,Result,_}:... );
+native read_data(value, any:... );
 
 /* Returns number of values in client message. */
 native read_datanum();
@@ -171,7 +176,7 @@ native parse_loguser(const text[], name[], nlen, &userid = -2, authid[] = "", al
 
 /* Prints message to server console.
 * You may use text formating (f.e. server_print("%-32s %.2f!","hello",7.345)) */
-native server_print(const message[], {Float,Sql,Result,_}:...);
+native server_print(const message[], any:...);
 
 /* Returns 1 or 0. */
 native is_map_valid(const mapname[]);
@@ -239,7 +244,7 @@ native user_has_weapon(index,weapon,setweapon=-1);
 
 /* Returns id of currently carried weapon. Gets also 
 * ammount of ammo in clip and backpack. */
-native get_user_weapon(index,&clip,&ammo);
+native get_user_weapon(index,&clip=0,&ammo=0);
 
 /* Gets ammo and clip from current weapon. */
 native get_user_ammo(index,weapon,&clip,&ammo);
@@ -305,13 +310,13 @@ native user_kill(index,flag=0);
 *  ...      - optional parameters
 * Return value:
 *  always 0 */
-native log_amx(const string[], {Float,Sql,Result,_}:...);
+native log_amx(const string[], any:...);
 
 /* Sends message to standard HL logs. */
-native log_message(const message[],{Float,Sql,Result,_}:...);
+native log_message(const message[],any:...);
 
 /* Sends log message to specified file. */
-native log_to_file(const file[],const message[],{Float,Sql,Result,_}:...);
+native log_to_file(const file[],const message[],any:...);
 
 /* Returns number of players put in server. 
 * If flag is set then also connecting are counted. */
@@ -367,16 +372,16 @@ native find_player(const flags[], ... );
 native remove_quotes(text[]);
 
 /* Executes command on player. */
-native client_cmd(index,const command[],{Float,Sql,Result,_}:...);
+native client_cmd(index,const command[],any:...);
 
 /* This is an emulation of a client command (commands aren't send to client!).
 * It allows to execute some commands on players and bots.
 * Function is excellent for forcing to do an action related to a game (not settings!).
 * The command must stand alone but in arguments you can use spaces. */
-native engclient_cmd(index,const command[],arg1[]="",arg2[]="");
+native engclient_cmd(index,const command[],const arg1[]="",const arg2[]="");
 
 /* Executes command on a server console. */
-native server_cmd(const command[],{Float,Sql,Result,_}:...);
+native server_cmd(const command[],any:...);
 
 /* Sets a cvar to given value. */
 native set_cvar_string(const cvar[],const value[]);
@@ -450,7 +455,7 @@ native parse_time(const input[],const format[], time = -1);
 * "b" - loop task.
 * "c" - do task on time after a map timeleft.
 * "d" - do task on time before a map timelimit. */
-native set_task(Float:time,const function[],id = 0,parameter[]="",len = 0,flags[]="", repeat = 0);
+native set_task(Float:time,const function[],id = 0,const parameter[]="",len = 0,const flags[]="", repeat = 0);
 
 /* Removes all tasks with given id. If outside var is 
 * set then a task can be removed also when
@@ -463,8 +468,7 @@ native change_task(id = 0, Float:newTime=1.0, outside = 0);
 /* Returns 1 if task under given id exists. */
 native task_exists(id = 0, outside = 0);
 
-/* Sets flags for player. Set flags to -1 if you want to clear all flags.
-* You can use different settings by changing the id, which is from range 0 - 31. */
+/* Sets the users flags with the assignment by bitwise OR operator. */
 native set_user_flags(index,flags=-1,id=0);
 
 /* Gets flags from player. Set index to 0 if you want to read flags from server. */
@@ -474,19 +478,23 @@ native get_user_flags(index,id=0);
 native remove_user_flags(index,flags=-1,id=0);
 
 /* Registers function which will be called from client console. 
+ * Set FlagManager to 1 to make FlagManager always include this command
+ * Set FlagManager to 0 to make FlagManager never include this command
  * Returns the command ID.
  */
-native register_clcmd(const client_cmd[],const function[],flags=-1, info[]="");
+native register_clcmd(const client_cmd[],const function[],flags=-1, const info[]="", FlagManager=-1);
 
 /* Registers function which will be called from any console. 
+ * Set FlagManager to 1 to make FlagManager always include this command
+ * Set FlagManager to 0 to make FlagManager never include this command
  * Returns the command ID.
  */
-native register_concmd(const cmd[],const function[],flags=-1, info[]="");
+native register_concmd(const cmd[],const function[],flags=-1, const info[]="", FlagManager=-1);
 
 /* Registers function which will be called from server console. 
  * Returns the command ID.
  */
-native register_srvcmd(const server_cmd[],const function[],flags=-1, info[]="");
+native register_srvcmd(const server_cmd[],const function[],flags=-1, const info[]="");
 
 /* Gets info about client command. */
 native get_clcmd(index, command[], len1, &flags, info[], len2, flag);
@@ -534,7 +542,7 @@ native get_user_menu(index,&id,&keys);
 native server_exec();
 
 /* Emits sound. Sample must be precached. */
-native emit_sound(index, channel, sample[], Float:vol, Float:att,flags, pitch);
+native emit_sound(index, channel, const sample[], Float:vol, Float:att,flags, pitch);
 
 /* Registers new cvar for HL engine.
  * Returns the cvar pointer for get/set_pcvar functions.
@@ -600,15 +608,30 @@ native get_module(id, name[], nameLen, author[], authorLen, version[], versionLe
 /* Returns number of currently registered modules */
 native get_modulesnum();
 
-/* Checks whether a plugin is loaded. If it is not, the return value is -1, otherwise
-* the return value is the plugin id. The function is case insensitive. */
-native is_plugin_loaded(const name[]);
+/**
+ * Checks whether a plugin is loaded by the given registered name (such as "Admin Base"), or, optionally
+ * the given filename ("admin.amxx").
+ *
+ * @param name			Either the plugin name to lookup, or the plugin filename to lookup.
+ * @param usefilename	Set to true if you want to search for the plugin by the filename, false to search
+ *						by the plugin's registered name.
+ *
+ * @return				Plugin ID of the matching plugin on a successful search, -1 on a failed search.
+ *
+ * @note				Prior to 1.8, this function would only search for plugins registered names, not
+ *						the filename.
+ *
+ * @note				The plugin registered name search is a case insensitive search, however, the plugin
+ *						filename search is case sensitive.
+ */
+native is_plugin_loaded(const name[], bool:usefilename=false);
 
 /* Gets info about plugin by given index.
  * Function returns -1 if plugin doesn't exist with given index. 
  * Note: the [...] portion should not be used, and is only for backward compatibility.
+ * Use index of -1 to use the calling plugin's ID.
  */
-native get_plugin(index,filename[],len1,name[],len2,version[],len3,author[],len4,status[],len5,...);
+native get_plugin(index,filename[]="",len1=0,name[]="",len2=0,version[]="",len3=0,author[]="",len4=0,status[]="",len5=0,...);
 
 /* Returns number of all loaded plugins. */
 native get_pluginsnum();
@@ -618,21 +641,21 @@ native get_pluginsnum();
 * param2 name of plugin (all depends on flags).
 * Flags:
 * "a" - pause whole plugin.
-* "b" - pause function.
 * "c" - look outside the plugin (by given plugin name).
 * "d" - set "stopped" status when pausing whole plugin.
-* "e" - set "locked" status when pausing whole plugin.
 *       In this status plugin is unpauseable.
 * Example: pause("ac","myplugin.amxx") 
-*          pause("bc","myfunc","myplugin.amxx") */
-native pause(flag[], const param1[]="",const param2[]="");
+*
+* Note: There used to be the b and e flags as well,
+* which have been deprecated and are no longer used.
+*/
+native pause(const flag[], const param1[]="",const param2[]="");
 
 /* Unpauses function or plugin.
 * Flags:
 * "a" - unpause whole plugin.
-* "b" - unpause function.
 * "c" - look outside the plugin (by given plugin name). */
-native unpause(flag[], const param1[]="",const param2[]="");
+native unpause(const flag[], const param1[]="",const param2[]="");
 
 /* Call a function in this / an another plugin by name.
 * Parameters:
@@ -677,7 +700,7 @@ native callfunc_push_floatrf(& Float: value);
  *  which is only kept for special backwards compatibility.
  */
 native callfunc_push_str(const VALUE[], bool:copyback=true);
-native callfunc_push_array(VALUE[], array_size, bool:copyback=true);
+native callfunc_push_array(const VALUE[], array_size, bool:copyback=true);
 
 /* Make the actual call.
 * Return value of the function called. */
@@ -689,7 +712,7 @@ forward inconsistent_file(id,const filename[], reason[64] );
 
 /* Forces the client and server to be running with the same
 * version of the specified file ( e.g., a player model ). */
-native force_unmodified(force_type, mins[3] , maxs[3], const filename[]);
+native force_unmodified(force_type, const mins[3] , const maxs[3], const filename[]);
 
 /* Calculates the md5 keysum of a string */
 native md5(const szString[], md5buffer[34]);
@@ -697,23 +720,22 @@ native md5(const szString[], md5buffer[34]);
 /* Calculates the md5 keysum of a file */
 native md5_file(const file[], md5buffer[34]);
 
-/* Returns the internal flags set on the called plugin's state
+/* Returns the internal flags set on the plugin's state
  * If hdr is 1, it will return the pcode flags rather than state flags.
+ *
+ * Use a plid of -1 to get the flags for the calling plugin.
  */
-native plugin_flags(hdr=0);
+native plugin_flags(hdr=0, plid=-1);
 
-/* When using modules that aren't part of AMX Mod X base package, do
-* a require_module("modulename") for each of them within the plugin_modules()
-* forward. Module name is the one listed when doing "amxx modules" in server
-* console. */
+/**
+ * @deprecated
+ * Do not use!
+ */
 forward plugin_modules();
 
 native require_module(const module[]);
 
 native is_amd64_server();
-
-/* Returns 0 on success, like the POSIX specification */
-native mkdir(const dirname[]);
 
 /* Returns plugin id searched by file/name.  Returns INVALID_PLUGIN_ID on failure. */
 native find_plugin_byfile(const filename[], ignoreCase=1);
@@ -732,16 +754,19 @@ forward plugin_natives();
  */
 native register_native(const name[], const handler[], style=0);
 
-/* Registers a library.  You can put #pragma library <name> in your include files,
- * and plugins that use your include without loading your plugin will get a nice
- * error message.
+/* Registers a library.  To mark a library as required, place the following
+ * in your include file:
+ *  #pragma reqlib <name>
+ *  #if !defined AMXMODX_NOAUTOLOAD
+ *   #pragma loadlib <name>
+ *  #endif
  */
 native register_library(const library[]);
 
 /* Logs an error in your native, and breaks into the debugger.
  * Acts as if the calling plugin had the error.
  */
-native log_error(error, const fmt[], ...);
+native log_error(error, const fmt[], any:...);
 
 // More Dynamic Native System Stuff
 // Each of these natives affects one of the parameters sent to your native.
@@ -774,72 +799,8 @@ native set_float_byref(param, Float:value);
 // Or copies an array from you to the calling plugin
 native get_array(param, dest[], size);
 native get_array_f(param, Float:dest[], size);
-native set_array(param, source[], size);
-native set_array_f(param, Float:source[], size);
-
-/** The new menu natives */
-//If you set ml to 1, everything will be preformatted
-// with the multi-lingual system.
-//NOTE: ml=1 currently is not enabled.
-//handler[] will be called when someone presses a key on your menu
-native menu_create(title[], handler[], ml=0);
-
-//Creates a menu item callback handler.  
-//The callback handler is passed the playerid, menuid, and itemid.
-//It can return either ITEM_IGNORE, ITEM_ENABLED, or ITEM_DISABLED.
-native menu_makecallback(function[]);
-
-//Adds an item to a menu.  When displayed, the name will be shown.
-//If the player does not have the access it is disabled.
-//If you set callback, the callback will be called before the item is printed on the screen.
-//this lets you change it in real time depending on conditions.
-native menu_additem(menu, const name[], const command[]="", paccess=0, callback=-1);
-
-//returns how many pages are in a menu
-native menu_pages(menu);
-
-//returns how many items are in a menu
-native menu_items(menu);
-
-//displays a menu to a player
-//page of the menu starts at 0.  there are 7 items to a page.
-//back/exit/next/more whatever are automatically added as needed.
-//you cannot use this to show a menu to everyone at once!
-native menu_display(id, menu, page);
-
-//Given a page on a menu and a keypress on that page, returns the item id selected.
-//if the item is less than 0, a special option was chosen (such as MENU_EXIT)
-native menu_find_id(menu, page, key);
-
-//Gets/sets info about a menu option
-native menu_item_getinfo(menu, item, &access, command[], cmdlen, name[]="", namelen=0, &callback);
-
-native menu_item_setname(menu, item, name[]);
-native menu_item_setcmd(menu, item, cmd[]);
-native menu_item_setcall(menu, item, callback=-1);
-
-//Destroys a menu - invalidates the handle
-//This is safe, as it will go through the players and make
-// sure they don't have this menu set anymore.
-native menu_destroy(menu);
-
-//Gets info about a player's menu.  Returns 1 if the player is viewing a menu.
-//menu will be >0 for a valid oldmenu.  newmenu will be != -1 for a valid newmenu.
-native player_menu_info(id, &menu, &newmenu);
-
-//adds a blank line to a menu.
-//if slot is nonzero (default), the blank line will increase
-//the numbering rather than just shifting down.
-native menu_addblank(menu, slot=1);
-
-//Sets a menu property.  See amxconst.inc for various menu properties.
-//The third value depends on the property
-native menu_setprop(menu, prop, ...);
-
-//Cancels a player's menu, effectively forcing the player to select MENU_EXIT
-//The menu will still exist on their screen but any results are invalidated,
-//and the callback is invoked.
-native menu_cancel(player);
+native set_array(param, const source[], size);
+native set_array_f(param, const Float:source[], size);
 
 // Dispatches a client cvar query
 //  id: Player id
@@ -943,7 +904,7 @@ native set_module_filter(const handler[]);
  * Note that the plugin's filename is prepending to your message:
  *  [myplugin.amxx] MESSAGE
  */
-native abort(error, const fmt[]="", {Float,_}:...);
+native abort(error, const fmt[]="", any:...);
 
 /**
  * Checks if a specific module is loaded.  This is the exact same method AMX Mod X 
@@ -986,7 +947,7 @@ native CreateHudSyncObj(num=0, ...);
  * You must use set_hudmessage, although the channel parameter is 
  *  entirely ignored.
  */
-native ShowSyncHudMsg(target, syncObj, const fmt[], ...);
+native ShowSyncHudMsg(target, syncObj, const fmt[], any:...);
 
 /**
  * Clears the display on a HudSync Object.  This is essentially the same
@@ -1010,7 +971,7 @@ native set_fail_state(const err_msg[]);
 //Returns the reference address of the variable passed in.
 //This address is local to the plugin, and not a full CPU address
 //pass the variable as the first parameter
-native get_var_addr(...);
+native get_var_addr(any:...);
 
 //Returns the value of an address.  This dereferences something returned by
 // get_var_addr().  Attempting to pass in a value beyond stack or heap limits
@@ -1048,13 +1009,13 @@ native CreateOneForward(plugin_id, const name[], ...);
  * prepares an array.  use this and pass the result into
  * ExecuteForward() instead of the array itself.
  */
-native PrepareArray(array[], size, copyback=0);
+native PrepareArray(const array[], size, copyback=0);
 
 /**
  * executes a forward.  returns result in ret.
  * returns 1 for success, 0 for failure.
  */
-native ExecuteForward(forward_handle, &ret, {Float,_}:...);
+native ExecuteForward(forward_handle, &ret, any:...);
 
 /**
  * Destroys/deallocates any type of forward
@@ -1079,6 +1040,7 @@ native set_pcvar_num(pcvar, num);
 native Float:get_pcvar_float(pcvar);
 native set_pcvar_float(pcvar, Float:num);
 native get_pcvar_string(pcvar, string[], maxlen);
+native set_pcvar_string(pcvar, const string[]);
 
 /**
  * Sets a whole array to a certain value.
@@ -1091,5 +1053,29 @@ native arrayset(array[], value, size);
  */
 native get_weaponid(const name[]);
 
+/**
+ * Adds an admin to the dynamic admin storage
+ * for lookup at a later time
+ */
+native admins_push(const AuthData[], const Password[], Access, Flags);
+
+/**
+ * Gets the number of admins in the dynamic admin
+ * storage list
+ */
+native admins_num();
+
+/**
+ * Gets information about a dynamically stored admin
+ * Use the enum AdminProp
+ * Returns an integer value: AdminProp_Access, AdminProp_Flags
+ * Sets the buffer string: AdminProp_Auth, AdminProp_Password
+ */
+native admins_lookup(num, AdminProp:Property, Buffer[]="", BufferSize=0);
+
+/**
+ * Clears the list of dynamically stored admins
+ */
+native admins_flush();
 // Keep this always at the bottom of this file
 #include <message_stocks>

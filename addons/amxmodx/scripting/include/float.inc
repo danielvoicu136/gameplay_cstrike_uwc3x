@@ -19,13 +19,13 @@ enum floatround_method {
 	floatround_floor,
 	floatround_ceil,
 	floatround_tozero
-}
+};
 
 enum anglemode {
 	radian = 0,
 	degrees,
 	grades
-}
+};
 
 /* Convert an integer into a floating point value */
 native Float:float(value);
@@ -82,10 +82,10 @@ native Float:floatabs(Float:value);
 
 /* Return the angle of a sine, cosine or tangent.
  * The output angle may be in radians, degrees, or grades. */
-native Float:floatatan(Float:angle, radix);
-native Float:floatacos(Float:angle, radix);
-native Float:floatasin(Float:angle, radix);
-native Float:floatatan2(Float:x, Float:y, radix);
+native Float:floatatan(Float:angle, {anglemode,_}:radix);
+native Float:floatacos(Float:angle, {anglemode,_}:radix);
+native Float:floatasin(Float:angle, {anglemode,_}:radix);
+native Float:floatatan2(Float:x, Float:y, {anglemode,_}:radix);
 
 #pragma rational Float
 
@@ -102,7 +102,7 @@ stock Float:operator--(Float:oper)
 	return oper-1.0;
 
 stock Float:operator-(Float:oper)
-	return oper^Float:((-1)^((-1)/2)); /* IEEE values are sign/magnitude */
+    return oper^Float:cellmin; /* IEEE values are sign/magnitude */
 
 stock Float:operator*(Float:oper1, oper2)
 	return floatmul(oper1, float(oper2)); /* "*" is commutative */
@@ -177,3 +177,37 @@ stock bool:operator!(Float:oper)
 forward operator%(Float:oper1, Float:oper2);
 forward operator%(Float:oper1, oper2);
 forward operator%(oper1, Float:oper2);
+
+
+stock Float:floatmin(Float:ValueA, Float:ValueB)
+{
+	if (ValueA<=ValueB)
+	{
+		return ValueA;
+	}
+	
+	return ValueB;
+}
+
+stock Float:floatmax(Float:ValueA, Float:ValueB)
+{
+	if (ValueA>=ValueB)
+	{
+		return ValueA;
+	}
+	
+	return ValueB;
+}
+stock Float:floatclamp(Float:Value, Float:MinValue, Float:MaxValue)
+{
+	if (Value<=MinValue)
+	{
+		return MinValue;
+	}
+	if (Value>=MaxValue)
+	{
+		return MaxValue;
+	}
+	
+	return Value;
+}

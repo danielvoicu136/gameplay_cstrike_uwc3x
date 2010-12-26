@@ -295,3 +295,61 @@ native cs_set_user_zoom(index, type, mode);
 /* Returns how a user is zooming during the native call. Values correspond to the above enum, but will return 0 if an error occurred.
  */
 native cs_get_user_zoom(index);
+
+/* Returns the submodel setting of the player.
+ * If this is 1, then the user has a backpack or defuser on their model (depending on team)
+ */
+native cs_get_user_submodel(index);
+
+/* Sets the submodel setting of the player.
+ * If this is 1, then the user has a backpack or defuser on their model (depending on team)
+ * 0 removes it.
+ */
+native cs_set_user_submodel(index, value);
+
+/* Gets or sets the user's last activity time.  This is the time that CS's internal afk kicker
+ * checks to see who has been afk too long.
+ */
+native Float:cs_get_user_lastactivity(index);
+
+native cs_set_user_lastactivity(index, Float:value);
+
+/* Gets or sets the number of hostages that a user has killed.
+ */
+native cs_get_user_hostagekills(index);
+
+native cs_set_user_hostagekills(index, value);
+
+/* Gets or sets the time that the hostage was last used.
+ */
+native Float:cs_get_hostage_lastuse(index);
+
+native cs_set_hostage_lastuse(index, Float:value);
+
+/* Gets or sets the time which the hostage can next be used.
+ */
+native Float:cs_get_hostage_nextuse(index);
+
+native cs_set_hostage_nextuse(index, Float:value);
+
+/* Gets or sets the time in which the C4 will explode.
+ */
+native Float:cs_get_c4_explode_time(index);
+
+native cs_set_c4_explode_time(index, Float:value);
+
+/* Gets or sets whether the C4 is being defused.
+ */
+native bool:cs_get_c4_defusing(c4index);
+
+native cs_set_c4_defusing(c4index, bool:defusing);
+/**
+ * Called when CS internally fires a command to a player.  It does this for a few 
+ * functions, most notably rebuy/autobuy functionality.  This is also used to pass
+ * commands to CZ bots internally.
+ *
+ * @param id			Client index.
+ * @param cmd			Command string.
+ * @return				PLUGIN_HANDLED to block, PLUGIN_CONTINUE for normal operation.
+ */
+forward CS_InternalCommand(id, const cmd[]);

@@ -20,10 +20,11 @@
 /* The actual return value of the function, use these instead of PLUGIN_HANDLED etc when
  * returning from registered forwards.
  */
-#define FMRES_HANDLED	2
-#define FMRES_SUPERCEDE	4
-#define FMRES_IGNORED	1
-#define FMRES_OVERRIDE	3
+#define FMRES_IGNORED	1	// Calls target function, returns normal value
+#define FMRES_HANDLED	2	// Tells metamod you did something, still calls target function and returns normal value
+#define FMRES_OVERRIDE	3	// Supposed to still call the target function but return your value instead
+							// however this does not work properly with metamod; use supercede instead.
+#define FMRES_SUPERCEDE	4	// Block the target call, and use your return value (if applicable)
 
 // Use this with GetInfoKeyBuffer if you want the server's localinfo buffer
 #define FM_NULLENT		-1
@@ -118,7 +119,8 @@ enum {
 	// Returns pointer to info buffer that can be used with the infobuffer param of InfoKeyValue, SetKeyValue, and SetClientKeyValue
 	EngFunc_GetInfoKeyBuffer,			// char*)			(edict_t *e);
 	EngFunc_AlertMessage,				// void )			(ALERT_TYPE atype, char *szFmt, ...);
-	EngFunc_ClientPrintf				// void )			(edict_t* pEdict, PRINT_TYPE ptype, const char *szMsg);
+	EngFunc_ClientPrintf,				// void )			(edict_t* pEdict, PRINT_TYPE ptype, const char *szMsg);
+	EngFunc_ServerPrint					// void )			(const char *szMsg);
 };
 
 /* Used with dllfunc()
@@ -528,7 +530,7 @@ enum {
 	FM_GameShutdown,
 	FM_ShouldCollide,
 	
-	//LATE ADDITIONS (v1.71)
+	// LATE ADDITIONS (v1.71)
 	FM_ClientUserInfoChanged,
 	
 	// LATE ADDITIONS (v1.75)
@@ -539,7 +541,10 @@ enum {
 	FM_CreateInstBaseline,
 	FM_CreateBaseline,
 	FM_GetInfoKeyBuffer,
-	FM_ClientPrintf
+	FM_ClientPrintf,
+	
+	// LATE ADDITIONS (v1.80)
+	FM_ServerPrint
 };
 
 enum TraceResult

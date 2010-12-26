@@ -31,14 +31,14 @@ enum Sql
 {
 	SQL_FAILED=0,
 	SQL_OK
-}
+};
 
 enum Result
 {
 	RESULT_FAILED=-1,
 	RESULT_NONE,
 	RESULT_OK
-}
+};
 
 /* This will return a number equal to or below 0 on failure.
  * If it does fail, the error will be mirrored in dbi_error()
@@ -53,13 +53,13 @@ native Sql:dbi_connect(_host[], _user[], _pass[], _dbname[], _error[]="", _maxle
  * If greater than zero, make sure to call dbi_free_result() on it!
  *  The return is a handle to the result set
  */
-native Result:dbi_query(Sql:_sql, _query[], {Float,_}:...);
+native Result:dbi_query(Sql:_sql, _query[], any:...);
 
 /* Has the same usage as dbi_query, but this native returns by
  * reference the number of rows affected in the query. If the
  * query fails rows will be equal to -1.
  */
-native Result:dbi_query2(Sql:_sql, &rows, _query[], {Float,_}:...);
+native Result:dbi_query2(Sql:_sql, &rows, _query[], any:...);
 
 /* Returns 0 on failure or End of Results.
  * Advances result pointer by one row.
@@ -119,20 +119,27 @@ native dbi_field_name(Result:result, field, name[], maxLength);
 
 /* This function can be used to find out if a table in a Sqlite database exists.
  */
-stock bool:sqlite_table_exists(Sql:sql, table[]) {
-	new bool:exists
-	new query[128]
-	format(query, 127, "SELECT name FROM sqlite_master WHERE type='table' AND name='%s' LIMIT 1;", table)
+stock bool:sqlite_table_exists(Sql:sql, table[]) 
+{
+	new bool:exists;
+	new query[128];
+	format(query, 127, "SELECT name FROM sqlite_master WHERE type='table' AND name='%s' LIMIT 1;", table);
 
-	new Result:result = dbi_query(sql, query)
+	new Result:result = dbi_query(sql, query);
 
 	if (dbi_nextrow(result))
-		exists = true
+	{
+		exists = true;
+	}
 	else
-		exists = false
+	{
+		exists = false;
+	}
 
 	if (result > RESULT_NONE)
-		dbi_free_result(result)
+	{
+		dbi_free_result(result);
+	}
 
-	return exists
+	return exists;
 }
