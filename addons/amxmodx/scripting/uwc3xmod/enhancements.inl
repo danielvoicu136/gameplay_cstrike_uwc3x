@@ -3,7 +3,7 @@ public Initialize_Enhancements ( )
 {
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("Debug:: Initialize_Enhancements() : CVAR_ENABLE_ENHANCEMENTS=%d", CVAR_ENABLE_ENHANCEMENTS );
+		log_amx( "[UWC3X] Debug:: Initialize_Enhancements() : CVAR_ENABLE_ENHANCEMENTS=%d", CVAR_ENABLE_ENHANCEMENTS );
 	}
 
 	// If attribute enhancements allowed but no min. level set use default
@@ -12,7 +12,7 @@ public Initialize_Enhancements ( )
 		USE_ENH = 1;
 		if ( CVAR_DEBUG_MODE )
 		{
-			log_amx( "Debug:: CVAR_ENHANCEMENT_MIN_LEVEL=%d", CVAR_ENHANCEMENT_MIN_LEVEL );
+			log_amx( "[UWC3X] Debug:: CVAR_ENHANCEMENT_MIN_LEVEL=%d", CVAR_ENHANCEMENT_MIN_LEVEL );
 		}
 
 		if ( CVAR_ENHANCEMENT_MIN_LEVEL )
@@ -24,33 +24,33 @@ public Initialize_Enhancements ( )
 			enh_minlevel = ENH_MIN_LEVEL;
 		}
 
-		log_amx ( "Enhancements ON with minimum level set to [%d]", enh_minlevel );
+		log_amx( "[UWC3X] Enhancements ON with minimum level set to [%d]", enh_minlevel );
 
 		if ( CVAR_RESIST_MAX_TRAINABLE )
 		{
 			RESIST_MAX_VALUE = CVAR_RESIST_MAX_TRAINABLE;
-			log_amx ( "Override Detected : Max Resist Value [%d]", RESIST_MAX_VALUE );
+			log_amx( "[UWC3X] Override Detected : Max Resist Value [%d]", RESIST_MAX_VALUE );
 		}
 
 		if ( CVAR_ATTRIBS_MAX_POINTS )
 		{
 			ATTRIB_MAX_PTS = CVAR_ATTRIBS_MAX_POINTS;
-			log_amx ( "Override Detected : Max Attrib Pts [%d]", ATTRIB_MAX_PTS );
+			log_amx( "[UWC3X] Override Detected : Max Attrib Pts [%d]", ATTRIB_MAX_PTS );
 		}
 
 		if ( CVAR_RESIST_MAX_POINTS )
 		{
 			RESIST_MAX_PTS = CVAR_RESIST_MAX_POINTS;
-			log_amx ( "Override Detected : Max Resist Pts [%d]", RESIST_MAX_PTS );
+			log_amx( "[UWC3X] Override Detected : Max Resist Pts [%d]", RESIST_MAX_PTS );
 		}
 	}
 	else
 	{
-		log_amx ( "Enhancements are DISABLED" );
+		log_amx( "[UWC3X] Enhancements are DISABLED" );
 		USE_ENH = 0;
 	}
 
-	log_amx("Enhancements Initialized [OK]");
+	log_amx( "[UWC3X] Enhancements Initialized [OK]");
 
 }
 
@@ -724,7 +724,7 @@ public Bot_Pick_Attribs( id )
 {
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx( "DEBUG :: Bot_Pick_Attribs -> Bot is picking Attributes" );
+		log_amx( "[UWC3X] DEBUG :: Bot_Pick_Attribs -> Bot is picking Attributes" );
 	}
 
 	//new acount = get_attribcount( id );
@@ -743,7 +743,7 @@ public Bot_Pick_Attribs( id )
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			log_amx( "DEBUG :: Bot_Pick_Attribs -> attrib_num=%d, apts=%d", attrib_num, apts);
+			log_amx( "[UWC3X] DEBUG :: Bot_Pick_Attribs -> attrib_num=%d, apts=%d", attrib_num, apts);
 		}
 
 		switch( attrib_num )
@@ -767,7 +767,7 @@ public Bot_Pick_Resists( id )
 {
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx( "DEBUG :: Bot_Pick_Resists -> Bot is picking Resistances" );
+		log_amx( "[UWC3X] DEBUG :: Bot_Pick_Resists -> Bot is picking Resistances" );
 	}
 
 	//new acount = get_resistcount( id );
@@ -786,7 +786,7 @@ public Bot_Pick_Resists( id )
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			log_amx( "DEBUG :: Bot_Pick_Resists -> res_num=%d, rpts=%d", res_num, rpts);
+			log_amx( "[UWC3X] DEBUG :: Bot_Pick_Resists -> res_num=%d, rpts=%d", res_num, rpts);
 		}
 	}
 

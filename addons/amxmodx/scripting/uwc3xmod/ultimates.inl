@@ -135,7 +135,7 @@ public cooldownGate ( parm[1] )
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
 		client_print( id, print_console, "[%s DEBUG] cooldownGate -> Setting gateused[id] = FALSE for player %s so now there is NO delay", MOD, debugname );
-		log_amx( "DEBUG :: cooldownGate -> Setting gateused[id] = FALSE for player %s so now there is NO delay", debugname );
+		log_amx( "[UWC3X] DEBUG :: cooldownGate -> Setting gateused[id] = FALSE for player %s so now there is NO delay", debugname );
 	}
 
 	ultimateused[id] = false;
@@ -510,7 +510,7 @@ public Ult_Can_Use ( id , IDX )
 			new debugname[32];
 			get_user_name ( id, debugname, 31 );
 			client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - HOOK -> Player:%s Hook Count:%d Skill points:%d allowed hooks:%d ", MOD, debugname, HookCount[id],p_skills[id][SKILLIDX_HOOK], p_hooks[p_skills[id][SKILLIDX_HOOK]] );
-			log_amx( "DEBUG :: Ult_Can_Use - HOOK -> Player:%s Hook Count:%d Skill points:%d allowed hooks:%d ", debugname, HookCount[id],p_skills[id][SKILLIDX_HOOK], p_hooks[p_skills[id][SKILLIDX_HOOK]] );
+			log_amx( "[UWC3X] DEBUG :: Ult_Can_Use - HOOK -> Player:%s Hook Count:%d Skill points:%d allowed hooks:%d ", debugname, HookCount[id],p_skills[id][SKILLIDX_HOOK], p_hooks[p_skills[id][SKILLIDX_HOOK]] );
 		}
 
 		if(HookCount[id] == 0 )
@@ -532,7 +532,7 @@ public Ult_Can_Use ( id , IDX )
 			new debugname[32];
 			get_user_name ( id, debugname, 31 );
 			client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - GRAB -> Player:%s GRAB Count:%d Skill points:%d allowed GRABS:%d ", MOD, debugname, GrabCount[id],p_skills[id][SKILLIDX_GRAB], p_grabs[p_skills[id][SKILLIDX_GRAB]] );
-			log_amx( "DEBUG :: Ult_Can_Use - GRAB -> Player:%s GRAB Count:%d Skill points:%d allowed GRABS:%d ", debugname,GrabCount[id],p_skills[id][SKILLIDX_GRAB], p_grabs[p_skills[id][SKILLIDX_GRAB]] );
+			log_amx( "[UWC3X] DEBUG :: Ult_Can_Use - GRAB -> Player:%s GRAB Count:%d Skill points:%d allowed GRABS:%d ", debugname,GrabCount[id],p_skills[id][SKILLIDX_GRAB], p_grabs[p_skills[id][SKILLIDX_GRAB]] );
 		}
 
 		if(GrabCount[id] == 0 )
@@ -554,7 +554,7 @@ public Ult_Can_Use ( id , IDX )
 			new debugname[32];
 			get_user_name ( id, debugname, 31 );
 			client_print( id, print_console, "[%s DEBUG] Ult_Can_Use - ROPE -> Player:%s ROPE Count:%d Skill points:%d allowed ROPES:%d ", MOD, debugname, RopeCount[id],p_skills[id][SKILLIDX_ROPE], p_ropes[p_skills[id][SKILLIDX_ROPE]] );
-			log_amx( "DEBUG :: Ult_Can_Use - ROPE -> Player:%s ROPE Count:%d Skill points:%d allowed ROPES:%d ", debugname,RopeCount[id],p_skills[id][SKILLIDX_ROPE], p_ropes[p_skills[id][SKILLIDX_ROPE]] );
+			log_amx( "[UWC3X] DEBUG :: Ult_Can_Use - ROPE -> Player:%s ROPE Count:%d Skill points:%d allowed ROPES:%d ", debugname,RopeCount[id],p_skills[id][SKILLIDX_ROPE], p_ropes[p_skills[id][SKILLIDX_ROPE]] );
 		}
 
 		if(RopeCount[id] == 0 )
@@ -617,7 +617,7 @@ public Set_Ult_Count( id )
 
 	if( CVAR_DEBUG_MODE )
 	{
-		log_amx( "DEBUG :: Set_Ult_Count -> ultlearned[id] = %d", ultlearned[id] );
+		log_amx( "[UWC3X] DEBUG :: Set_Ult_Count -> ultlearned[id] = %d", ultlearned[id] );
 	}
 
 }
@@ -1023,7 +1023,7 @@ public Ult_Suicide_Bomber ( id )
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
 					set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-					show_hudmessage( id , "%L", LANG_PLAYER, "ULTIMATE_WCSUICIDE_ARMED" );
+					show_hudmessage( id , "%L", id, "ULTIMATE_WCSUICIDE_ARMED" );
 
 					if ( file_exists ( "sound/uwc3x/suicide_charging.wav" ) == 1 )
 					{
@@ -1899,12 +1899,12 @@ public rope_on(id)
 		}
 		else
 		{
-			//if( CVAR_DEBUG_MODE )
-			//{
-			//	new debugname[32];
-			//	get_user_name ( id, debugname, 31 );
-			//	log_amx( "DEBUG :: rope_on -> player %s  RopesLeft=%d", debugname, RopeCount[id] );
-			//}
+			if( CVAR_DEBUG_MODE )
+			{
+				new debugname[32];
+				get_user_name ( id, debugname, 31 );
+				log_amx( "[UWC3X] DEBUG :: rope_on -> player %s  RopesLeft=%d", debugname, RopeCount[id] );
+			}
 
 			if( RopeCount[id] == 0 )
 			{
@@ -1925,11 +1925,6 @@ public rope_off(id)
 {
 	rope[id]=false;
 	ultimateused[id] = false;
-
-	//new cooldownRopeParm[1];
-	//cooldownRopeParm[0] = id;
-	//set_task(CVAR_GRAB_COOLDOWN, "cooldownGrab", TASK_ROPE_COOLDOWN+id, cooldownRopeParm, 1);
-	
 	return PLUGIN_HANDLED;
 }
 
@@ -2074,7 +2069,7 @@ public grab_on2(id)
 						if ( CVAR_DEBUG_MODE )
 						{
 							client_print( id, print_console, "DEBUG :: TASK_GRAB_Search -> failed to resist" );
-							log_amx( "DEBUG :: TASK_GRAB_Search -> failed to resist" );
+							log_amx( "[UWC3X] DEBUG :: TASK_GRAB_Search -> failed to resist" );
 						}	
 					
 						client_print(id, print_chat, "%L", id, "GRAB_FOUND", MOD);
@@ -2086,7 +2081,7 @@ public grab_on2(id)
 						if ( CVAR_DEBUG_MODE )
 						{
 							client_print( id, print_console, "DEBUG :: grabem -> resisted" );
-							log_amx( "Debug :: grabem -> resisted" );
+							log_amx( "[UWC3X] Debug :: grabem -> resisted" );
 						}	
 					}
 				}
@@ -2119,7 +2114,7 @@ public grabem(id,target)
 		get_user_name ( target, name1, 31 );
 		get_user_name ( id, name2, 31 );
 		client_print(id, print_console, "DEBUG :: grabem -> player %s target:%s", name2, name1 );
-		log_amx( "Debug :: grabem -> player %s target:%s", name2, name1 );
+		log_amx( "[UWC3X] Debug :: grabem -> player %s target:%s", name2, name1 );
 	}	
 
 	set_rendering2(target,kRenderFxGlowShell,255,0,0,kRenderTransAlpha,70);
@@ -2153,7 +2148,7 @@ public grabem(id,target)
 		{
 			new debugname[32];
 			get_user_name ( id, debugname, 31 );
-			log_amx( "DEBUG :: grabem -> player %s  GrabsLeft=%d", debugname, GrabCount[id] );
+			log_amx( "[UWC3X] DEBUG :: grabem -> player %s  GrabsLeft=%d", debugname, GrabCount[id] );
 		}
 
 		if( GrabCount[id] == 0 )
@@ -2352,7 +2347,7 @@ public hook_on ( id )
 		{
 			new debugname[32];
 			get_user_name ( id, debugname, 31 );
-			log_amx( "DEBUG :: Ult_Hook -> player %s  HooksLeft=%d", debugname, HookCount[id] );
+			log_amx( "[UWC3X] DEBUG :: Ult_Hook -> player %s  HooksLeft=%d", debugname, HookCount[id] );
 		}
 
 		if( HookCount[id] == 0 )
@@ -2472,7 +2467,7 @@ public Ult_Hook( id )
 	{
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
-		log_amx( "DEBUG :: Ult_Hook -> player %s  wchook HOOK_COUNT_IDX=%d   HOOKCOUNTint=%d", debugname, HOOK_COUNT_IDX, HOOKCOUNTint );
+		log_amx( "[UWC3X] DEBUG :: Ult_Hook -> player %s  wchook HOOK_COUNT_IDX=%d   HOOKCOUNTint=%d", debugname, HOOK_COUNT_IDX, HOOKCOUNTint );
 	}
 
 	if ( is_user_alive ( id ) && !ultimateused[id] && !hooked[id] )
@@ -2495,7 +2490,7 @@ public Ult_Hook( id )
 			{
 				new debugname[32];
 				get_user_name ( id, debugname, 31 );
-				log_amx( "DEBUG :: Ult_Hook -> player %s  HooksLeft=%d", debugname, HooksLeft );
+				log_amx( "[UWC3X] DEBUG :: Ult_Hook -> player %s  HooksLeft=%d", debugname, HooksLeft );
 			}
 
 			if( HooksLeft == 0 )
@@ -2540,6 +2535,6 @@ public DO_HOOK(id)
 	{
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
-		log_amx( "DEBUG :: DO_HOOK -> player %s  in function", debugname );
+		log_amx( "[UWC3X] DEBUG :: DO_HOOK -> player %s  in function", debugname );
 	}
 }

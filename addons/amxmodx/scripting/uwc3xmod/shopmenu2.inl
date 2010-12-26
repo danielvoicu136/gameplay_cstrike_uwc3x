@@ -306,7 +306,7 @@ public Gloves_Give_Nade ( parm[2] )
 		if( Util_Should_Msg_Client(id) )
 		{
 			set_hudmessage( 0, 100, 0, 0.05, 0.65, 2, 0.02, 3.0, 0.01, 0.1, 3);
-			show_hudmessage( id , "%L", LANG_PLAYER, "GLOVE_NADE_GIVEN" );
+			show_hudmessage( id , "%L", id, "GLOVE_NADE_GIVEN" );
 		}
 	
 		give_item( id , "weapon_hegrenade" );
@@ -336,7 +336,7 @@ public Nade_Timer ( parm[2] )
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			show_hudmessage( id , "%L", LANG_PLAYER, "GLOVE_TIMER", nadetime[parm[0]] );
+			show_hudmessage( id , "%L", id, "GLOVE_TIMER", nadetime[parm[0]] );
 		}
 	}
 	

@@ -688,7 +688,7 @@ public Register_Cvars ( )
 	FATAL_CHANCE				=				register_cvar ( "UWX_fatal_slay_chance",		"0.02"		 );
 	BLESS_XP                    =            	register_cvar ( "UWX_BLESS_XP",                	"400"        );          	
 	
-	log_amx("Cvars Initialized [OK]");
+	log_amx( "[UWC3X] Cvars Initialized [OK]");
 }
 
 public Bind_Cvars ( )
@@ -915,7 +915,7 @@ public Bind_Cvars ( )
 	CVAR_FATAL_CHANCE			=	get_pcvar_float( FATAL_CHANCE );
 	CVAR_BLESS_XP            	=   get_pcvar_num ( BLESS_XP );
 	
-	log_amx("Bound CVARS [OK]");
+	log_amx( "[UWC3X] Bound CVARS [OK]");
 
 }
 
@@ -928,14 +928,14 @@ public Exec_User_CFG ( )
 
 	if ( file_exists( cfgfile ) )
 	{
-		log_amx( "UWC3X Startup :: Loading Configuration File [ UWC3X.cfg ]..." );
+		log_amx( "[UWC3X] Startup :: Loading Configuration File [ UWC3X.cfg ]..." );
 		server_cmd( "exec %s", cfgfile);
-		log_amx( "UWC3X Startup :: Configuration File Loaded [OK]" );
-		log_amx( "User Config File Initialized [OK]");
+		log_amx( "[UWC3X] Startup :: Configuration File Loaded [OK]" );
+		log_amx( "[UWC3X] User Config File Initialized [OK]");
 	}
 	else
 	{
-		log_amx( "UWC3X Startup ERROR :: Configuration File NOT FOUND [ Using Default settings ]" );
-		log_amx( "User Config File Initialized [FAILED ] - File not found");
+		log_amx( "[UWC3X] Startup ERROR :: Configuration File NOT FOUND [ Using Default settings ]" );
+		log_amx( "[UWC3X] User Config File Initialized [FAILED ] - File not found");
 	}
 }

@@ -1138,7 +1138,7 @@ public check_weap( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				log_amx("Debug:: check_weap ->unammo [ %s ] = Primary or Secondary weapon - Reloading", name );
+				log_amx( "[UWC3X] Debug:: check_weap ->unammo [ %s ] = Primary or Secondary weapon - Reloading", name );
 			}
 
 			reloadAmmo(id);
@@ -1147,7 +1147,7 @@ public check_weap( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				log_amx("Debug:: check_weap ->unammo [ %s ] = NOT Primary or Secondary weapon", name );
+				log_amx( "[UWC3X] Debug:: check_weap ->unammo [ %s ] = NOT Primary or Secondary weapon", name );
 			}
 
 		}
@@ -1429,7 +1429,7 @@ public change_weapon( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				log_amx("Debug:: check_weap ->unammo [ %s ] = Primary or Secondary weapon - Reloading", name );
+				log_amx( "[UWC3X] Debug:: check_weap ->unammo [ %s ] = Primary or Secondary weapon - Reloading", name );
 			}
 
 			reloadAmmo(id);
@@ -1438,7 +1438,7 @@ public change_weapon( id )
 		{
 			if ( CVAR_DEBUG_MODE )
 			{
-				log_amx("Debug:: check_weap ->unammo [ %s ] = NOT Primary or Secondary weapon", name );
+				log_amx( "[UWC3X] Debug:: check_weap ->unammo [ %s ] = NOT Primary or Secondary weapon", name );
 			}
 
 		}

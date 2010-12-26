@@ -80,7 +80,7 @@ public Buy_Item3( id , key )
 {
     if ( CVAR_DEBUG_MODE )
     {
-        //log_amx("Debug:: In Buy_item3 : id=%d key=%d", id, key );
+        log_amx( "[UWC3X] Debug:: In Buy_item3 : id=%d key=%d", id, key );
     }
 
     if ( !uwc3x )
@@ -109,7 +109,7 @@ public Buy_Item3( id , key )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 3.0, 0.1, 0.2, 1); 
-            show_hudmessage(id, "%L", LANG_PLAYER, "SM3_HEAL", MOD);
+            show_hudmessage(id, "%L", id, "SM3_HEAL", MOD);
             if ( file_exists( "sound/uwc3x/shopmenu/sm3_heal.wav" ) == 1 )
             {
                 emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_heal.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
@@ -128,7 +128,7 @@ public Buy_Item3( id , key )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 3.0, 0.1, 0.2, 1);
-            show_hudmessage(id, "%L", LANG_PLAYER, "SM3_INVIS", MOD);
+            show_hudmessage(id, "%L", id, "SM3_INVIS", MOD);
             if ( file_exists( "sound/uwc3x/shopmenu/sm3_inv.wav" ) == 1 )
             {
                 emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_inv.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
@@ -147,7 +147,7 @@ public Buy_Item3( id , key )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 5.0, 0.1, 0.2, 1);
-            show_hudmessage(id, "%L", LANG_PLAYER, "SM3_INVUL", MOD);
+            show_hudmessage(id, "%L", id, "SM3_INVUL", MOD);
             if ( file_exists( "sound/uwc3x/shopmenu/sm3_invul.wav" ) == 1 )
                 emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_invul.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
         }
@@ -163,7 +163,7 @@ public Buy_Item3( id , key )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 3.0, 0.1, 0.2, 1);
-            show_hudmessage(id, "%L", LANG_PLAYER, "SM3_GATE", MOD);
+            show_hudmessage(id, "%L", id, "SM3_GATE", MOD);
             if ( file_exists( "sound/uwc3x/shopmenu/sm3_gate.wav" ) == 1 )
             {
                 emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_gate.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
@@ -181,7 +181,7 @@ public Buy_Item3( id , key )
             if( Util_Should_Msg_Client(id) )
             {
                 set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 5.0, 0.1, 0.2, 1);
-                show_hudmessage(id, "%L", LANG_PLAYER, "SM3_DISEASE", MOD);
+                show_hudmessage(id, "%L", id, "SM3_DISEASE", MOD);
                 if ( file_exists( "sound/uwc3x/shopmenu/sm3_cure.wav" ) == 1 )
                 {
                     emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_cure.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
@@ -199,7 +199,7 @@ public Buy_Item3( id , key )
             if( Util_Should_Msg_Client(id) )
             {
                 set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 5.0, 0.1, 0.2, 1);
-                show_hudmessage(id, "%L", LANG_PLAYER, "SM3_POISON", MOD);
+                show_hudmessage(id, "%L", id, "SM3_POISON", MOD);
                 if ( file_exists( "sound/uwc3x/shopmenu/sm3_cure.wav" ) == 1 )
                 {
                     emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_cure.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
@@ -218,7 +218,7 @@ public Buy_Item3( id , key )
             if( Util_Should_Msg_Client(id) )
             {
                 set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 5.0, 0.1, 0.2, 1);
-                show_hudmessage(id, "%L", LANG_PLAYER, "SM3_FIRE", MOD);
+                show_hudmessage(id, "%L", id, "SM3_FIRE", MOD);
                 if ( file_exists( "sound/uwc3x/shopmenu/sm3_fire.wav" ) == 1 )
                 {
                     emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_fire.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
@@ -236,7 +236,7 @@ public Buy_Item3( id , key )
             if( Util_Should_Msg_Client(id) )
             {
                 set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 5.0, 0.1, 0.2, 1);
-                show_hudmessage(id, "%L", LANG_PLAYER, "SM3_ROT", MOD);
+                show_hudmessage(id, "%L", id, "SM3_ROT", MOD);
                 if ( file_exists( "sound/uwc3x/shopmenu/sm3_cure.wav" ) == 1 )
                 {
                     emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_cure.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
@@ -267,7 +267,7 @@ public Buy_Item3( id , key )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 5.0, 0.1, 0.2, 1);
-            show_hudmessage(id, "%L", LANG_PLAYER, "SM3_NOHEX", MOD);
+            show_hudmessage(id, "%L", id, "SM3_NOHEX", MOD);
             if ( file_exists( "sound/uwc3x/shopmenu/sm3_dehex.wav" ) == 1 )
             {
                 emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_dehex.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );

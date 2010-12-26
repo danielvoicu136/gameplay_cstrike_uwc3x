@@ -440,7 +440,7 @@ public amx_restartround(id, level)
 	get_user_name ( id, name, 31 );
 
 	// [9-30-04] Added logging of amx_givexp ( ) command - K2mia
-	log_amx ( "Command Issuesd :: amx_restartround ( ) by %s time %d", name, iTime );
+	log_amx( "[UWC3X] Command Issuesd :: amx_restartround ( ) by %s time %d", name, iTime );
 	restart_round_command(iTime);
 	return PLUGIN_CONTINUE;
 }
@@ -795,7 +795,7 @@ public fullupdate ( id )
 	get_user_name ( id, name, 31 );
 	get_user_authid( id, steamid, 31 );
 
-	log_amx ( "FULLUPDATE: User:%s  SteamID:%s  -- Attempted to use the fullupdate command!", name, steamid );
+	log_amx( "[UWC3X] FULLUPDATE: User:%s  SteamID:%s  -- Attempted to use the fullupdate command!", name, steamid );
 	return PLUGIN_HANDLED;
 }
 
@@ -956,10 +956,10 @@ public Check_Redirection_Level_System ( )
 	if ( CVAR_REDIRECT_TOP_LEVEL != 0 )
 	{
 		forwardontolevel[2] = CVAR_REDIRECT_TOP_LEVEL;
-		log_amx ( "SGR's UCW3 Redirection System : UW_rdlvl_top -> %d", CVAR_REDIRECT_TOP_LEVEL );
+		log_amx( "[UWC3X] Redirection System : UW_rdlvl_top -> %d", CVAR_REDIRECT_TOP_LEVEL );
 
 		get_pcvar_string ( REDIRECT_TOP_SERVER, forwardontoserver[2], 64 );
-		log_amx ( "SGR's UCW3 Redirection System : UW_rdsvr_top --> %s", forwardontoserver[2] );
+		log_amx( "[UWC3X] Redirection System : UW_rdsvr_top --> %s", forwardontoserver[2] );
 	}
 
 	if ( CVAR_REDIRECT_MIDDLE_LEVEL != 0 )
@@ -974,25 +974,24 @@ public Check_Redirection_Level_System ( )
 		get_pcvar_string ( REDIRECT_BOTTOM_SERVER, forwardontoserver[0], 64 );
 	}
 
-
 	if ( forwardontolevel[2] && levelredirection )
 	{
-		log_amx ( "SGR's UCW3 Redirection System : Greater than level %d --> %s", forwardontolevel[2], forwardontoserver[2] );
+		log_amx( "[UWC3X] Redirection System : Greater than level %d --> %s", forwardontolevel[2], forwardontoserver[2] );
 	}
 
 	if ( forwardontolevel[1] && levelredirection )
 	{
-		log_amx ( "SGR's UCW3 Redirection System : Greater than level %d --> %s", forwardontolevel[1], forwardontoserver[1] );
+		log_amx( "[UWC3X] Redirection System : Greater than level %d --> %s", forwardontolevel[1], forwardontoserver[1] );
 	}
 
 	if ( forwardontolevel[0] && levelredirection )
 	{
-		log_amx ( "SGR's UCW3 Redirection System : Greater than level %d --> %s" ,forwardontolevel[0], forwardontoserver[0] );
+		log_amx( "[UWC3X] Redirection System : Greater than level %d --> %s" ,forwardontolevel[0], forwardontoserver[0] );
 	}
 	else
 	{
 		levelredirection = false;
-		log_amx ( "SGR's UCW3 Redirection System : ERROR No bottom redirection level. --> Deactivated" );
+		log_amx( "[UWC3X] Redirection System : ERROR No bottom redirection level. --> Deactivated" );
 	}
 
 }
@@ -1120,7 +1119,7 @@ public toggle_lowres ( id )
 		lowres[id] = false;
 		if( Util_Should_Msg_Client(id) )
 		{
-			HudChatShow(id, "LOW_RES_OFF", MOD);
+			hudchat_show(id, "LOW_RES_OFF", MOD);
 			//client_print ( id, print_chat, "%L", id, "LOW_RES_OFF", MOD );
 		}
 	}
@@ -1129,7 +1128,7 @@ public toggle_lowres ( id )
 		lowres[id] = true;
 		if( Util_Should_Msg_Client(id) )
 		{
-			HudChatShow(id, "LOW_RES_ON", MOD);
+			hudchat_show(id, "LOW_RES_ON", MOD);
 			//client_print ( id, print_chat, "%L", id, "LOW_RES_ON", MOD );
 		}
 	}
@@ -1161,7 +1160,7 @@ public do_examine ( id )
 			//format ( sReport, 64, "%L", id, "EXAMINE_ENEMY", fname );
 			if( Util_Should_Msg_Client(id) )
 			{
-				HudChatShow(id, "EXAMINE_ENEMY", fname);
+				hudchat_show(id, "EXAMINE_ENEMY", fname);
 				//show_hudmessage ( id, sReport );
 			}
 			return PLUGIN_HANDLED;
@@ -1173,7 +1172,7 @@ public do_examine ( id )
 		//format ( sReport, 64, "%L", id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor );
 		if( Util_Should_Msg_Client(id) )
 		{
-			HudChatShow(id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor);
+			hudchat_show(id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor);
 			//show_hudmessage ( id, sReport );
 		}
 	}
@@ -1269,7 +1268,7 @@ public showStatus ( id )
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
 				//show_hudmessage ( id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
-				HudChatShow(id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
+				hudchat_show(id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
 			}
 
 		}
@@ -1277,7 +1276,7 @@ public showStatus ( id )
 		{
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
-				HudChatShow(id,name);
+				hudchat_show(id,name);
 				//set_hudmessage ( color1,50,color2,-1.0,0.60,1, 0.01, 3.0, 0.01, 0.01, 4 );
 				//show_hudmessage ( id,name );
 			}
@@ -1490,7 +1489,7 @@ public Fwd_Touch(Ent, id)
 		//message to client telling them of the blocked pickup
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
-			HudChatShow(id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
+			hudchat_show(id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
 			//client_print ( id, print_center, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD );
 		}
 
@@ -1526,16 +1525,6 @@ public logevent_round_start ( )
 		//set_user_maxspeed ( id,240.0 );
 		set_user_maxspeed ( players[i],240.0 );
 		set_task ( 0.1, "unfreezespeed", TASK_UNFREEZE_SPEED );
-
-		//new steamid[32];
-		//get_user_authid( id, steamid, 31 )
-		//if(  equali( steamid, "STEAM_0:1:9083362" ) )
-		//{
-		//	new name[32];
-		//	get_user_name ( id, name, 31 );
-		//	log_amx( "DEBUG :: logevent_round_start -> Set_Speed -> %s", name )
-		//}
-
 		set_task ( 0.1, "Set_Speed", TASK_SET_SPEED, parm, 1 );
 
 		if ( CVAR_BLINK_START_DISABLED )
@@ -1723,7 +1712,7 @@ public monitor_players ( )
 				{
 					if ( CVAR_DEBUG_MODE )
 					{
-						log_amx ( "In monitor_players ( ) :: [%s] Kept health ( Voodoo Active or Respawned ) Has= ( %d ) Max= ( %d )", pname, get_user_health ( id ), health );
+						log_amx( "[UWC3X] In monitor_players ( ) :: [%s] Kept health ( Voodoo Active or Respawned ) Has= ( %d ) Max= ( %d )", pname, get_user_health ( id ), health );
 					}
 				}
 				else
@@ -1732,7 +1721,7 @@ public monitor_players ( )
 					{
 						if ( ( get_user_health ( id ) - health ) > allowed_diff )
 						{
-							log_amx ( "In monitor_players ( ) :: [%s] Reset health ( Voodoo Inactive  or Respawn grace over ) Has= ( %d ) Max= ( %d )", pname, get_user_health ( id ), health );
+							log_amx( "[UWC3X] In monitor_players ( ) :: [%s] Reset health ( Voodoo Inactive  or Respawn grace over ) Has= ( %d ) Max= ( %d )", pname, get_user_health ( id ), health );
 						}
 					}
 
@@ -1757,7 +1746,7 @@ public hookDrop(id)
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			HudChatShow(id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
+			hudchat_show(id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
 			//client_print ( id, print_center, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD );
 		}
 

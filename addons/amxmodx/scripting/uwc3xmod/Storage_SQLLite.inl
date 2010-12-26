@@ -13,16 +13,16 @@ public IsSQLiteConnected ( )
 public LoadSQLLiteConfig ( )
 {
 	//No configs to load for sqlite
-	log_amx ( "[UWC3X] SQLite :: Loading Config..." );
+	log_amx( "[UWC3X] SQLite :: Loading Config..." );
+	LoadSQLLiteVars();
 	return PLUGIN_CONTINUE;
-
 }
 
 
 public LoadSQLLiteVars ( )
 {
 	//Load the Cvars into locally used strings
-	log_amx ( "[UWC3X] SQLite :: Setting Vars..." );
+	log_amx( "[UWC3X] SQLite :: Setting Vars..." );
 
 	//Create handle and then the connection
 	g_SqlTuple = SQL_MakeDbTuple ( "", "", "", CVAR_MYSQL_DATABASE );
@@ -33,13 +33,13 @@ public LoadSQLLiteVars ( )
 	//Check for an error
 	if ( !SqlConnection )
 	{
-		log_amx ( "Error connecting to SQL database : %s", g_Error );
+		log_amx( "[UWC3X] Error connecting to SQL database : %s", g_Error );
 		bDBConn = false;
 		return PLUGIN_CONTINUE;
 	}
 	else
 	{
-		log_amx ( "UWC3X SQL :: Connected [OK]" );
+		log_amx( "[UWC3X] SQL :: Connected [OK]" );
 		bDBConn = true;
 	}
 
@@ -90,9 +90,9 @@ public LoadSQLLiteVars ( )
 	{
 		// if there were any problems
 		SQL_QueryError ( Query, g_Error, 511 );
-		log_amx ( "UWC3X SQLLite :: Error creating table" );
-		log_amx ( "Error:: %s", g_Error );
-		log_amx ( "Query:: %s", squery );
+		log_amx( "[UWC3X] SQLLite :: Error creating table" );
+		log_amx( "[UWC3X] Error:: %s", g_Error );
+		log_amx( "[UWC3X] Query:: %s", squery );
 	}
 	else
 	{
@@ -162,9 +162,9 @@ public LoadXPSQLLite ( id )
 	{
 		// if there were any problems
 		SQL_QueryError ( Query, g_Error, 511 );
-		log_amx ( "UWC3X SQLLite :: Error Getting player XP" );
-		log_amx ( "Error:: %s", g_Error );
-		log_amx ( "Query:: %s", squery );
+		log_amx( "[UWC3X] SQLLite :: Error Getting player XP" );
+		log_amx( "[UWC3X] Error:: %s", g_Error );
+		log_amx( "[UWC3X] Query:: %s", squery );
 	}
 	else
 	{
@@ -225,7 +225,7 @@ public SaveXPSQLLite ( id )
 					playerxp[id] = xplevel_lev[CVAR_BOT_LEVEL];
 					if( CVAR_DEBUG_MODE )
 					{
-						log_amx( "DEBUG :: SQLLite SaveXPSQLLite -> is_user_bot1 name %s auth %s xp %d", tempVar, steamid, playerxp[id] );
+						log_amx( "[UWC3X] DEBUG :: SQLLite SaveXPSQLLite -> is_user_bot1 name %s auth %s xp %d", tempVar, steamid, playerxp[id] );
 					}
 				}
 				else
@@ -277,9 +277,9 @@ public SaveXPSQLLite ( id )
 	{
 		// if there were any problems
 		SQL_QueryError ( Query, g_Error, 511 );
-		log_amx ( "UWC3X SQLLite :: Error Saving player XP" );
-		log_amx ( "Error:: %s", g_Error );
-		log_amx ( "Query:: %s", squery );
+		log_amx( "[UWC3X] SQLLite :: Error Saving player XP" );
+		log_amx( "[UWC3X] Error:: %s", g_Error );
+		log_amx( "[UWC3X] Query:: %s", squery );
 	}
 	else
 	{
@@ -323,7 +323,7 @@ public DeleteSkillSetSQLLite ( id, skillsetIDX )
 	skills_id = skillsetIDX;
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("DEBUG: SQLIte->DeleteSkillSetSQLLite" );
+		log_amx( "[UWC3X] DEBUG: SQLIte->DeleteSkillSetSQLLite" );
 	}
 
 	//Set the Query
@@ -334,9 +334,9 @@ public DeleteSkillSetSQLLite ( id, skillsetIDX )
 	{
 		// if there were any problems
 		SQL_QueryError ( Query, g_Error, 511 );
-		log_amx ( "UWC3X SQLLite :: Error Deleting player skill set" );
-		log_amx ( "Error:: %s", g_Error );
-		log_amx ( "Query:: %s", squery );
+		log_amx( "[UWC3X] SQLLite :: Error Deleting player skill set" );
+		log_amx( "[UWC3X] Error:: %s", g_Error );
+		log_amx( "[UWC3X] Query:: %s", squery );
 	}
 	else
 	{
@@ -400,7 +400,7 @@ public SaveSkillSetSQLLite( id, skillsetIDX )
 	skills_id = skillsetIDX;
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("DEBUG: SQLLite->SaveSkillSetSQLLite: Set SQL_ThreadQuery" );
+		log_amx( "[UWC3X] DEBUG: SQLLite->SaveSkillSetSQLLite: Set SQL_ThreadQuery" );
 	}
 
 	//Set the Query
@@ -411,9 +411,9 @@ public SaveSkillSetSQLLite( id, skillsetIDX )
 	{
 		// if there were any problems
 		SQL_QueryError ( Query, g_Error, 511 );
-		log_amx ( "UWC3X SQLLite :: Error Saving player skill set" );
-		log_amx ( "Error:: %s", g_Error );
-		log_amx ( "Query:: %s", squery );
+		log_amx( "[UWC3X] SQLLite :: Error Saving player skill set" );
+		log_amx( "[UWC3X] Error:: %s", g_Error );
+		log_amx( "[UWC3X] Query:: %s", squery );
 	}
 	else
 	{
@@ -474,7 +474,7 @@ public LoadSkillSetSQLLite( id, skillsetIDX )
 	skills_id = skillsetIDX;
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("DEBUG: SQLLite->LoadSkillSetSQLLite: Set SQL_ThreadQuery" );
+		log_amx( "[UWC3X] DEBUG: SQLLite->LoadSkillSetSQLLite: Set SQL_ThreadQuery" );
 	}
 
 	SQL_ThreadQuery ( g_SqlTuple, "_LoadSkillSet", squery );

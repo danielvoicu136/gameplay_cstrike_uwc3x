@@ -16,15 +16,15 @@ public LoadSQLConfig ( )
 
 	if ( file_exists ( sql_cfgfile ) )
 	{
-		log_amx ( "UWC3X SQL :: Loading SQL Configuration File..." );
+		log_amx( "[UWC3X] SQL :: Loading SQL Configuration File..." );
 		server_cmd ( "exec %s", sql_cfgfile );
 
-		log_amx ( "UWC3X SQL :: SQL Configuration File Loaded [OK]" );
+		log_amx( "[UWC3X] SQL :: SQL Configuration File Loaded [OK]" );
 		LoadSQLVars ( );
 	}
 	else
 	{
-		log_amx ( "UWC3X SQL :: No SQL Configuration File -- NOT SAVING XP..." );
+		log_amx( "[UWC3X] SQL :: No SQL Configuration File -- NOT SAVING XP..." );
 	}
 
 	return PLUGIN_CONTINUE;
@@ -32,7 +32,7 @@ public LoadSQLConfig ( )
 public LoadSQLVars ( )
 {
 	//Load the Cvars into locally used strings
-	log_amx ( "UWC3X SQL PCVARS :: Config Report: host= ( %s ) user= ( %s ) pass= ( * ) db= ( %s )", CVAR_MYSQL_HOSTNAME, CVAR_MYSQL_USERNAME, CVAR_MYSQL_DATABASE );
+	log_amx( "[UWC3X] SQL PCVARS :: Config Report: host= ( %s ) user= ( %s ) pass= ( * ) db= ( %s )", CVAR_MYSQL_HOSTNAME, CVAR_MYSQL_USERNAME, CVAR_MYSQL_DATABASE );
 
 	//Create handle and then the connection
 	g_SqlTuple = SQL_MakeDbTuple ( CVAR_MYSQL_HOSTNAME, CVAR_MYSQL_USERNAME, CVAR_MYSQL_PASSWORD, CVAR_MYSQL_DATABASE );
@@ -43,13 +43,13 @@ public LoadSQLVars ( )
 	//Check for an error
 	if ( !SqlConnection )
 	{
-		log_amx ( "Error connecting to SQL database : %s", g_Error );
+		log_amx( "[UWC3X] Error connecting to SQL database : %s", g_Error );
 		bDBConn = false;
 		return PLUGIN_CONTINUE;
 	}
 	else
 	{
-		log_amx ( "UWC3X SQL :: Connected [OK]" );
+		log_amx( "[UWC3X] SQL :: Connected [OK]" );
 		bDBConn = true;
 	}
 
@@ -100,9 +100,9 @@ public LoadSQLVars ( )
 	{
 		// if there were any problems
 		SQL_QueryError ( Query, g_Error, 511 );
-		log_amx ( "UWC3X SQL :: Error creating table" );
-		log_amx ( "Error:: %s", g_Error );
-		log_amx ( "Query:: %s", squery );
+		log_amx( "[UWC3X] SQL :: Error creating table" );
+		log_amx( "[UWC3X] Error:: %s", g_Error );
+		log_amx( "[UWC3X] Query:: %s", squery );
 	}
 	else
 	{
@@ -121,7 +121,7 @@ public SkillSets_Table ( )
 {
 	if( CVAR_SAVED_SKILLSETS )
 	{
-		log_amx ( "UWC3X SQL :: Using Saved Skill Sets [OK]" );
+		log_amx( "[UWC3X] SQL :: Using Saved Skill Sets [OK]" );
 		//Create handle and then the connection
 		g_SqlTuple = SQL_MakeDbTuple ( CVAR_MYSQL_HOSTNAME, CVAR_MYSQL_USERNAME, CVAR_MYSQL_PASSWORD, CVAR_MYSQL_DATABASE );
 
@@ -131,13 +131,13 @@ public SkillSets_Table ( )
 		//Check for an error
 		if ( !SqlConnection )
 		{
-			log_amx ( "UWC3X SQL :: Created Skill Sets Table [FAILED]" );
-			log_amx ( "Error connecting to SQL database : %s", g_Error );
+			log_amx( "[UWC3X] SQL :: Created Skill Sets Table [FAILED]" );
+			log_amx( "[UWC3X] Error connecting to SQL database : %s", g_Error );
 			bDBConn = false;
 			return PLUGIN_CONTINUE;
 		}
 
-		log_amx ( "UWC3X SQL :: Connected [OK]" );
+		log_amx( "[UWC3X] SQL :: Connected [OK]" );
 
 		if( CVAR_SAVE_BY == 2 )
 		{
@@ -179,9 +179,9 @@ public SkillSets_Table ( )
 		{
 			// if there were any problems
 			SQL_QueryError ( Query, g_Error, 511 );
-			log_amx ( "UWC3X SQL :: Error creating table" );
-			log_amx ( "Error:: %s", g_Error );
-			log_amx ( "Query:: %s", squery );
+			log_amx( "[UWC3X] SQL :: Error creating table" );
+			log_amx( "[UWC3X] Error:: %s", g_Error );
+			log_amx( "[UWC3X] Query:: %s", squery );
 		}
 		else
 		{
@@ -190,12 +190,12 @@ public SkillSets_Table ( )
 			SQL_FreeHandle ( SqlConnection );
 		}
 
-		log_amx ( "UWC3X SQL :: Created Skill Sets Table [OK]" );
+		log_amx( "[UWC3X] SQL :: Created Skill Sets Table [OK]" );
 		return PLUGIN_CONTINUE;
 	}
 	else
 	{
-		log_amx ( "UWC3X SQL :: Using Saved Skill Sets [NO]" );
+		log_amx( "[UWC3X] SQL :: Using Saved Skill Sets [NO]" );
 		return PLUGIN_CONTINUE;
 	}
 
@@ -241,13 +241,13 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("DEBUG: MySQL->_LoadXP: Attempting to load XP " );
+		log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: Attempting to load XP " );
 	}
 
 	// error checking
 	if(FailState == TQUERY_CONNECT_FAILED)
 	{
-		log_amx("Error: Could not connect to SQL database in LoadXPHandle.");
+		log_amx( "[UWC3X] Error: Could not connect to SQL database in LoadXPHandle.");
 
 		if( Util_Should_Msg_Client(id) )
 		{
@@ -257,9 +257,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 	}
 	else if(FailState == TQUERY_QUERY_FAILED)
 	{
-		log_amx("UWC3X SQL :: Error in LoadXPHandle");
+		log_amx( "[UWC3X] SQL :: Error in LoadXPHandle");
 		SQL_QueryError(Query,g_Error,511);
-		log_amx("ERROR %s",g_Error);
+		log_amx( "[UWC3X] ERROR %s",g_Error);
 
 		if( Util_Should_Msg_Client(id) )
 		{
@@ -271,14 +271,14 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 	if(Errcode)
 	{
-		log_amx("Error:_LoadXP - %d", Errcode);
+		log_amx( "[UWC3X] Error:_LoadXP - %d", Errcode);
 		return PLUGIN_HANDLED;
 	}
 
 	if ( CVAR_DEBUG_MODE )
 	{
 		get_user_name ( id, tempVar, 63 );
-		log_amx("Debug:: SaveXPHandle : No error, attepting to load XP and skills for %s", tempVar );
+		log_amx( "[UWC3X] Debug:: SaveXPHandle : No error, attepting to load XP and skills for %s", tempVar );
 	}
 
 	//Now that we have no errors, I will reset the xp loading var, this is in case there are
@@ -287,7 +287,7 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("DEBUG: MySQL->_LoadXP: NumResults=%d", NumResults);
+		log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: NumResults=%d", NumResults);
 	}
 
 	if ( !NumResults || NumResults == 0 || is_user_bot( id ) )
@@ -302,12 +302,12 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 		// this is for new players who do not yet exist in the database, existing players are below
 		if ( CVAR_DEBUG_MODE )
 		{
-			log_amx("DEBUG: MySQL->_LoadXP: CVAR_ENABLE_STARTING_SYSTEM=%d", CVAR_ENABLE_STARTING_SYSTEM);
+			log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: CVAR_ENABLE_STARTING_SYSTEM=%d", CVAR_ENABLE_STARTING_SYSTEM);
 		}
 
 		if ( CVAR_DEBUG_MODE && is_user_bot( id ) )
 		{
-			log_amx("DEBUG: MySQL->_LoadXP: Player is a bot");
+			log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: Player is a bot");
 		}
 		
 		if ( CVAR_ENABLE_STARTING_SYSTEM )
@@ -316,7 +316,7 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 			{
 				if ( CVAR_DEBUG_MODE )
 				{
-					log_amx("DEBUG: MySQL->_LoadXP: No Records, client %s given %d starting XP ", tempVar, CVAR_STARTING_XP);
+					log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: No Records, client %s given %d starting XP ", tempVar, CVAR_STARTING_XP);
 				}
 
 				if( Util_Should_Msg_Client(id) )
@@ -334,7 +334,7 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 				{
 					if ( CVAR_DEBUG_MODE )
 					{
-						log_amx("DEBUG: MySQL->_LoadXP: Player is BOT - > BOT %s set to level %d", tempVar, CVAR_BOT_LEVEL);
+						log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: Player is BOT - > BOT %s set to level %d", tempVar, CVAR_BOT_LEVEL);
 					}
 
 					playerxp[id] = xplevel_lev[CVAR_BOT_LEVEL];
@@ -343,7 +343,7 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 				{
 					if ( CVAR_DEBUG_MODE )
 					{
-						log_amx("DEBUG: MySQL->_LoadXP: No Records, client %s set to level %d", tempVar, CVAR_STARTING_LEVEL);
+						log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: No Records, client %s set to level %d", tempVar, CVAR_STARTING_LEVEL);
 					}
 
 					if( Util_Should_Msg_Client(id) )
@@ -485,7 +485,7 @@ public _SaveXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 	// error checking
 	if(FailState == TQUERY_CONNECT_FAILED)
 	{
-		log_amx("Error: Could not connect to SQL database in SaveXPHandle.");
+		log_amx( "[UWC3X] Error: Could not connect to SQL database in SaveXPHandle.");
 		if( is_user_connected( player_id ) && !is_user_bot( player_id ) )
 		{
 			client_print(player_id, print_chat, "%L", player_id, "SAVE_XP_FAILURE" );
@@ -494,9 +494,9 @@ public _SaveXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 	}
 	else if(FailState == TQUERY_QUERY_FAILED)
 	{
-		log_amx("UWC3X SQL :: Error in SaveXPHandle");
+		log_amx( "[UWC3X] SQL :: Error in SaveXPHandle");
 		SQL_QueryError(Query,g_Error,511);
-		log_amx("ERROR %s",g_Error);
+		log_amx( "[UWC3X] ERROR %s",g_Error);
 		if( is_user_connected( player_id ) && !is_user_bot( player_id ) )
 		{
 			client_print(player_id, print_chat, "%L", player_id, "SAVE_XP_FAILURE" );
@@ -506,7 +506,7 @@ public _SaveXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 	if(Errcode )
 	{
-		log_amx("Error:SaveXPHandle - %s",Error);
+		log_amx( "[UWC3X] Error:SaveXPHandle - %s",Error);
 		return PLUGIN_HANDLED;
 	}
 
@@ -569,8 +569,8 @@ public LoadXPMySQL2( id )
 	//Check for an error
 	if ( !SqlConnection )
 	{
-		log_amx ( "UWC3X SQL :: Loading XP :: Connected [FAILED]" );
-		log_amx ( "Error connecting to SQL database : %s", g_Error );
+		log_amx( "[UWC3X] SQL :: Loading XP :: Connected [FAILED]" );
+		log_amx( "[UWC3X] Error connecting to SQL database : %s", g_Error );
 		return PLUGIN_CONTINUE;
 	}
 
@@ -582,9 +582,9 @@ public LoadXPMySQL2( id )
 	{
 		// if there were any problems
 		SQL_QueryError ( Query, g_Error, 511 );
-		log_amx ( "UWC3X SQL :: Error Loading players XP" );
-		log_amx ( "Error:: %s", g_Error );
-		log_amx ( "Query:: %s", squery );
+		log_amx( "[UWC3X] SQL :: Error Loading players XP" );
+		log_amx( "[UWC3X] Error:: %s", g_Error );
+		log_amx( "[UWC3X] Query:: %s", squery );
 	}
 	else
 	{
@@ -613,7 +613,7 @@ public LoadXPMySQL2( id )
 		
 			if ( CVAR_DEBUG_MODE && is_user_bot( id ) )
 			{
-				log_amx("DEBUG: MySQL->_LoadXP: Player is a bot");
+				log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: Player is a bot");
 			}
 
 			//If starting XP is enabled, do the check
@@ -657,7 +657,7 @@ public LoadXPMySQL2( id )
 				playerxp[id] = xp;
 				if ( CVAR_DEBUG_MODE )
 				{
-					log_amx("DEBUG: MySQL->_LoadXP: Set xp to %d", xp);
+					log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: Set xp to %d", xp);
 				}
 			}
 			else
@@ -721,7 +721,7 @@ public LoadXPMySQL2( id )
 				{
 					if ( CVAR_DEBUG_MODE )
 					{
-						log_amx("DEBUG: MySQL->_LoadXP: No Records, client %s given %d starting XP ", tempVar, CVAR_STARTING_XP);
+						log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: No Records, client %s given %d starting XP ", tempVar, CVAR_STARTING_XP);
 					}
 
 					if( Util_Should_Msg_Client(id) )
@@ -789,7 +789,7 @@ public LoadXPMySQL2( id )
 
 		if( CVAR_DEBUG_MODE )
 		{
-			log_amx( "DEBUG :: MySQL -> Ultimates allowed after loading = %d", ultlearned[id] );
+			log_amx( "[UWC3X] DEBUG :: MySQL -> Ultimates allowed after loading = %d", ultlearned[id] );
 		}
 
 		//Free the stuff
@@ -797,7 +797,7 @@ public LoadXPMySQL2( id )
 		SQL_FreeHandle ( SqlConnection );
 	}
 
-	log_amx ( "UWC3X SQL :: Loading XP :: [Done]" );
+	log_amx( "[UWC3X] SQL :: Loading XP :: [Done]" );
 	return PLUGIN_CONTINUE;
 
 }
@@ -899,7 +899,7 @@ public SaveXPMySQL ( id )
 					playerxp[id] = xplevel_lev[CVAR_BOT_LEVEL];
 					if( CVAR_DEBUG_MODE )
 					{
-						log_amx( "DEBUG :: MySQL SaveXPMySQL -> is_user_bot1 name %s auth %s xp %d", tempVar, steamid, playerxp[id] );
+						log_amx( "[UWC3X] DEBUG :: MySQL SaveXPMySQL -> is_user_bot1 name %s auth %s xp %d", tempVar, steamid, playerxp[id] );
 					}
 				}
 				else
@@ -949,20 +949,20 @@ public SaveXPMySQL ( id )
 
 public LogError( Handle:Query, sQuery[], sError[], iErrNum, failstate, sFunction[] )
 {
-	log_amx( "[MYSQLX] Threaded query error, location: %s", sFunction );
-	log_amx( "[MYSQLX] Message: %s (%d)", sError, iErrNum );
-	log_amx( "[MYSQLX] Query statement: %s ", sQuery );
+	log_amx( "[UWC3X] Threaded query error, location: %s", sFunction );
+	log_amx( "[UWC3X] Message: %s (%d)", sError, iErrNum );
+	log_amx( "[UWC3X] Query statement: %s ", sQuery );
 
 	// Connection failed
 	if ( failstate == TQUERY_CONNECT_FAILED )
 	{
-		log_amx( "[MYSQLX] Fail state: Connection Failed" );
+		log_amx( "[UWC3X] Fail state: Connection Failed" );
 	}
 
 	// Query failed
 	else if ( failstate == TQUERY_QUERY_FAILED )
 	{
-		log_amx( "[MYSQLX] Fail state: Query Failed" );
+		log_amx( "[UWC3X] Fail state: Query Failed" );
 	}
 
 	// Free the handle
@@ -989,19 +989,19 @@ public TableHandle(FailState,Handle:Query,Error[],Errcode,Data[],DataSize)
 	// lots of error checking
 	if(FailState == TQUERY_CONNECT_FAILED)
 	{
-		log_amx("Error: Could not connect to SQL database in TableHandle.");
+		log_amx( "[UWC3X] Error: Could not connect to SQL database in TableHandle.");
 		set_fail_state("Could not connect to SQL database in TableHandle.");
 	}
 	else if(FailState == TQUERY_QUERY_FAILED)
 	{
-		log_amx("UWC3X SQL :: Error creating table.");
+		log_amx( "[UWC3X] SQL :: Error creating table.");
 		SQL_QueryError(Query,g_Error,511);
-		log_amx("ERROR %s",g_Error);
+		log_amx( "[UWC3X] ERROR %s",g_Error);
 		set_fail_state("Could not execute query in TableHandle.");
 	}
 
 	if(Errcode)
-		log_amx("TableHandle - Error on query: %s",Error);
+		log_amx( "[UWC3X] TableHandle - Error on query: %s",Error);
 
 	return PLUGIN_CONTINUE;
 }
@@ -1011,19 +1011,19 @@ public QueryHandle(FailState,Handle:Query,Error[],Errcode,Data[],DataSize)
 	// lots of error checking
 	if(FailState == TQUERY_CONNECT_FAILED)
 	{
-		log_amx("Error: Could not connect to SQL database in QueryHandle.");
+		log_amx( "[UWC3X] Error: Could not connect to SQL database in QueryHandle.");
 		set_fail_state("Could not connect to SQL database in QueryHandle.");
 	}
 	else if(FailState == TQUERY_QUERY_FAILED)
 	{
-		log_amx("UWC3X SQL :: Error in QueryHandle");
+		log_amx( "[UWC3X] SQL :: Error in QueryHandle");
 		SQL_QueryError(Query,g_Error,511);
-		log_amx("ERROR %s",g_Error);
+		log_amx( "[UWC3X] ERROR %s",g_Error);
 		set_fail_state("Could not execute query in QueryHandle.");
 	}
 
 	if(Errcode)
-		log_amx("Error: QueryHandle - Code %d", ErrorCode);
+		log_amx( "[UWC3X] Error: QueryHandle - Code %d", ErrorCode);
 
 	return PLUGIN_CONTINUE;
 }
@@ -1034,7 +1034,7 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 	// lots of error checking
 	if(FailState == TQUERY_CONNECT_FAILED)
 	{
-		log_amx("Error: Could not connect to SQL database in _SaveSkillSet.");
+		log_amx( "[UWC3X] Error: Could not connect to SQL database in _SaveSkillSet.");
 
 		if( Util_Should_Msg_Client(player_id) )
 		{
@@ -1045,9 +1045,9 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 	}
 	else if(FailState == TQUERY_QUERY_FAILED)
 	{
-		log_amx("UWC3X SQL :: Error in _SaveSkillSet");
+		log_amx( "[UWC3X] SQL :: Error in _SaveSkillSet");
 		SQL_QueryError(Query,g_Error,511);
-		log_amx("ERROR %s",g_Error);
+		log_amx( "[UWC3X] ERROR %s",g_Error);
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
@@ -1057,7 +1057,7 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 
 	if(Errcode)
 	{
-		log_amx("Error:_SaveSkillSet - %d", Errcode);
+		log_amx( "[UWC3X] Error:_SaveSkillSet - %d", Errcode);
 		return PLUGIN_HANDLED;
 	}
 
@@ -1065,7 +1065,7 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 	{
 		new tempVar[64];
 		get_user_name ( player_id, tempVar, 63 );
-		log_amx("Debug:: MySQL->_SaveSkillSet : No error, attepting to Save skillset %d for %s", skills_id, tempVar );
+		log_amx( "[UWC3X] Debug:: MySQL->_SaveSkillSet : No error, attepting to Save skillset %d for %s", skills_id, tempVar );
 	}
 
 	if( Util_Should_Msg_Client(player_id) )
@@ -1084,7 +1084,7 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 	// lots of error checking
 	if(FailState == TQUERY_CONNECT_FAILED)
 	{
-		log_amx("Error: Could not connect to SQL database in _LoadSkillSet.");
+		log_amx( "[UWC3X] Error: Could not connect to SQL database in _LoadSkillSet.");
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_ERROR", MOD);
@@ -1094,9 +1094,9 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 	}
 	else if(FailState == TQUERY_QUERY_FAILED)
 	{
-		log_amx("UWC3X SQL :: Error in _LoadSkillSet");
+		log_amx( "[UWC3X] SQL :: Error in _LoadSkillSet");
 		SQL_QueryError(Query,g_Error,511);
-		log_amx("ERROR %s",g_Error);
+		log_amx( "[UWC3X] ERROR %s",g_Error);
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_ERROR", MOD);
@@ -1106,7 +1106,7 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 
 	if(Errcode)
 	{
-		log_amx("Error:_LoadSkillSet - %d", Errcode);
+		log_amx( "[UWC3X] Error:_LoadSkillSet - %d", Errcode);
 		return PLUGIN_HANDLED;
 	}
 
@@ -1190,7 +1190,7 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 	// lots of error checking
 	if(FailState == TQUERY_CONNECT_FAILED)
 	{
-		log_amx("Error: Could not connect to SQL database in _DelSkillSet.");
+		log_amx( "[UWC3X] Error: Could not connect to SQL database in _DelSkillSet.");
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			client_print(player_id, print_chat, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
@@ -1200,9 +1200,9 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 	}
 	else if(FailState == TQUERY_QUERY_FAILED)
 	{
-		log_amx("UWC3X SQL :: Error in _DelSkillSet");
+		log_amx( "[UWC3X] SQL :: Error in _DelSkillSet");
 		SQL_QueryError(Query,g_Error,511);
-		log_amx("ERROR %s",g_Error);
+		log_amx( "[UWC3X] ERROR %s",g_Error);
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			client_print(player_id, print_chat, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
@@ -1212,7 +1212,7 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 
 	if(Errcode)
 	{
-		log_amx("Error:_DelSkillSet - %d", Errcode);
+		log_amx( "[UWC3X] Error:_DelSkillSet - %d", Errcode);
 		return PLUGIN_HANDLED;
 	}
 
@@ -1253,7 +1253,7 @@ public DeleteSkillSetMySQL ( id, skillsetIDX )
 	skills_id = skillsetIDX;
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("DEBUG: MySQL->DeleteSkillSetMySQL: Set SQL_ThreadQuery" );
+		log_amx( "[UWC3X] DEBUG: MySQL->DeleteSkillSetMySQL: Set SQL_ThreadQuery" );
 	}
 
 	SQL_ThreadQuery ( g_SqlTuple, "_DelSkillSet", squery );
@@ -1312,7 +1312,7 @@ public SaveSkillSetMySQL( id, skillsetIDX )
 	skills_id = skillsetIDX;
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("DEBUG: MySQL->SaveSkillSetMySQL: Set SQL_ThreadQuery" );
+		log_amx( "[UWC3X] DEBUG: MySQL->SaveSkillSetMySQL: Set SQL_ThreadQuery" );
 	}
 
 	SQL_ThreadQuery ( g_SqlTuple, "_SaveSkillSet", squery );
@@ -1368,7 +1368,7 @@ public LoadSkillSetMySQL( id, skillsetIDX )
 	skills_id = skillsetIDX;
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("DEBUG: MySQL->LoadSkillSetMySQL: Set SQL_ThreadQuery" );
+		log_amx( "[UWC3X] DEBUG: MySQL->LoadSkillSetMySQL: Set SQL_ThreadQuery" );
 	}
 
 	SQL_ThreadQuery ( g_SqlTuple, "_LoadSkillSet", squery );

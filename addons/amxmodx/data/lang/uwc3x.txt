@@ -119,7 +119,7 @@ WARNING_FULLUPDATE = FULLUPDATE: User:%s SteamID:%s  -- Attempted to use the ful
 RELOAD_XP = Your XP and Skill are attempting to be reloaded
 RELOAD_XP_NO_AUTH = You can not reload your skills and XP as you are not yet Steam Authorized [STEAM_ID:PENDING]
 DELETE_XP = [%s] Your skills/attributes/resistances and XP have been reset to 0.
-COMAND_ISSUED = [%s] %s issued
+COMAND_ISSUED = %s issued
 NO_MATCHING_CLIENTS = No clients in such team
 SAME_TEAM = He's on your team, DON'T SHOOT
 

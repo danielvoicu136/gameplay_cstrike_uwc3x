@@ -307,7 +307,7 @@ public Set_Skill_Limits ( )
 	//set the base skill effectiveness percentages
 	Set_Skill_Base ( );
 
-	log_amx("Skill Limits Initialized [OK]");
+	log_amx( "[UWC3X] Skill Limits Initialized [OK]");
 }
 public SetAdminOnlySkills ( )
 {
@@ -663,7 +663,7 @@ public set_skill ( id, key )
 			new mapname[32];
 			get_mapname(mapname,31);
 			new skillcount = get_skillcount( id );
-			log_amx( "DEBUG #4: In set_skill() Mapname=(%s) Player=(%s) skill_key=(%d)<%s> Level=(%d) #Skills=(%d), skillpts=(%d)", mapname, name, key, skillname, p_level[id], skillcount, skillpts );
+			log_amx( "[UWC3X] DEBUG #4: In set_skill() Mapname=(%s) Player=(%s) skill_key=(%d)<%s> Level=(%d) #Skills=(%d), skillpts=(%d)", mapname, name, key, skillname, p_level[id], skillcount, skillpts );
 		}
 
 		// Prevent player from selecting new skills after dropping them - Marticus
@@ -1886,13 +1886,13 @@ public Set_Hook_Count( id )
 		has_rope[id]=true
 	}
 	
-	//if( CVAR_DEBUG_MODE )
-	//{
-	//	new debugname[32];
-	//	get_user_name ( id, debugname, 31 );
-	//	client_print( id, print_console, "[%s DEBUG] Set_Hook_Count -> Player:%s Points: GRAB:%d HOOK:%d ROPE:%d Available GRAB:%d HOOK:%d ROPE:%d", MOD, debugname,GrabSkills,HookSkills,RopeSkills,GrabsAvail,HooksAvail,RopesAvail );
-	//	log_amx( "DEBUG :: Set_Hook_Count -> Player:%s Points: GRAB:%d HOOK:%d ROPE:%d Available GRAB:%d HOOK:%d ROPE:%d", debugname,GrabSkills,HookSkills,RopeSkills,GrabsAvail,HooksAvail,RopesAvail );
-	//}
+	if( CVAR_DEBUG_MODE )
+	{
+		new debugname[32];
+		get_user_name ( id, debugname, 31 );
+		client_print( id, print_console, "[%s DEBUG] Set_Hook_Count -> Player:%s Points: GRAB:%d HOOK:%d ROPE:%d Available GRAB:%d HOOK:%d ROPE:%d", MOD, debugname,GrabSkills,HookSkills,RopeSkills,GrabsAvail,HooksAvail,RopesAvail );
+		log_amx( "[UWC3X] DEBUG :: Set_Hook_Count -> Player:%s Points: GRAB:%d HOOK:%d ROPE:%d Available GRAB:%d HOOK:%d ROPE:%d", debugname,GrabSkills,HookSkills,RopeSkills,GrabsAvail,HooksAvail,RopesAvail );
+	}
 	
 	return PLUGIN_CONTINUE;
 }
@@ -1930,7 +1930,7 @@ public Set_Phoenix_Count( id )
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			log_amx("Debug:: randomnumber=%f teamnumber=%d chance=%f", randomnumber, teamnumber, pheonix_chance);
+			log_amx( "[UWC3X] Debug:: randomnumber=%f teamnumber=%d chance=%f", randomnumber, teamnumber, pheonix_chance);
 		}
 		
 		if ( randomnumber <= pheonix_chance )
@@ -2101,20 +2101,11 @@ public Skills_Check( id, sethealth )
 
 	icon_controller( id );
 
-	//new steamid[32];
-	//get_user_authid( id, steamid, 31 )
-	//if(  equali( steamid, "STEAM_0:1:9083362" ) )
-	//{
-	//	new name[32];
-	//	get_user_name ( id, name, 31 );
-	//	log_amx( "DEBUG :: Skills_Check -> Set_Speed -> %s", name )
-	//}
 	new speedparm[1];
 	speedparm[0] = id;
 	Set_Speed( speedparm );
 
 	return PLUGIN_CONTINUE;
-
 }
 
 public Set_Speed( parm[1] )
@@ -2205,17 +2196,6 @@ public Skill_Rot_Handler ( id )
 	//Set them to stunned, in 2 seconds at the set task it will reset to slowed rotting speed anyways
 	set_user_maxspeed( id, 1.0 );
 
-	//new steamid[32];
-	//get_user_authid( id, steamid, 31 )
-	//if(  equali( steamid, "STEAM_0:1:9083362" ) )
-	//{
-
-	//	new name[32];
-	//	get_user_name ( id, name, 31 );
-	//	log_amx( "DEBUG :: Skill_Rot_Handler -> Set_Speed -> %s", name )
-
-	//}
-
 	//SET THEIR ROTTING SPEED
 	new parm[1];
 	parm[0] = id;
@@ -2250,10 +2230,7 @@ public Skill_RotUser_Bleed( id )
 			message_end();
 		}
 	}
-
-
 }
-
 
 
 /* HOOK */
@@ -2283,7 +2260,7 @@ public HOOK_beamentpoint(id)
 	{
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
-		log_amx( "DEBUG :: HOOK_beamentpoint -> player %s ", debugname );
+		log_amx( "[UWC3X] DEBUG :: HOOK_beamentpoint -> player %s ", debugname );
 	}
 	
 }
@@ -2294,7 +2271,7 @@ public HOOK_killbeam(id)
 	{
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
-		log_amx( "DEBUG :: HOOK_killbeam -> player %s ", debugname );
+		log_amx( "[UWC3X] DEBUG :: HOOK_killbeam -> player %s ", debugname );
 	}
 
 	message_begin( MSG_BROADCAST, SVC_TEMPENTITY );
@@ -2310,7 +2287,7 @@ public HOOK_release(id)
 	{
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
-		log_amx( "DEBUG :: HOOK_release -> player %s pressed wchook bind key twice", debugname );
+		log_amx( "[UWC3X] DEBUG :: HOOK_release -> player %s pressed wchook bind key twice", debugname );
 	}
 
 	hooked[id] = false;
@@ -2329,7 +2306,7 @@ public Hook_boost(id)
 	{
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
-		log_amx( "DEBUG :: Hook_boost -> player %s ", debugname );
+		log_amx( "[UWC3X] DEBUG :: Hook_boost -> player %s ", debugname );
 	}
 
 	new user_origin[3], velocity[3], null[3], A[3];
@@ -2358,7 +2335,7 @@ public Hook_DEBUG( id )
 	{
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
-		log_amx( "DEBUG :: Hook_DEBUG -> player %s ", debugname );
+		log_amx( "[UWC3X] DEBUG :: Hook_DEBUG -> player %s ", debugname );
 	}
 
 

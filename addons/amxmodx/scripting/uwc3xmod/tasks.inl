@@ -1,5 +1,4 @@
 
-
 public __TaskShowHudChat()
 {
 	new message[__HUDCHAT_MAXMSGLEN];
@@ -68,7 +67,7 @@ public Initialize_Tasks ( )
 	// Task_Award_FrostNades used by Frost Nades skill - awards a frost nade every 30 seconds
 	set_task ( 30.00,		"Task_Award_FrostNades",	TASK_DO_NOW,		"",		0,	"b"		 );
 
-	log_amx("Tasks Initialized [OK]");
+	log_amx( "[UWC3X] Tasks Initialized [OK]");
 }
 
 public Task_Award_FrostNades( )
@@ -324,7 +323,7 @@ public Task_Gate_User ( parm[6] )
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
 		client_print( id, print_console, "[%s DEBUG] Task_Gate_User -> Setting gateused[id] =true for player %s so now there is a 5 second delay", MOD, debugname );
-		log_amx( "DEBUG :: Task_Gate_User -> Setting gateused[id] =true for player %s so now there is a 5 second delay", debugname );
+		log_amx( "[UWC3X] DEBUG :: Task_Gate_User -> Setting gateused[id] =true for player %s so now there is a 5 second delay", debugname );
 	}
 
 	gateused[id] = true;
@@ -392,7 +391,7 @@ public Task_Blink_Controller ( parm[2] )
 			if( Util_Should_Msg_Client(id) )
 			{
 				set_hudmessage ( 255, 255, 10, -1.0, -0.4, 1, 0.5, 3.0, 0.2, 0.2, 5 );
-				show_hudmessage ( id, "%L", LANG_PLAYER, "ULTIMATE_TELEPORT_FAILED" );
+				show_hudmessage ( id, "%L", id, "ULTIMATE_TELEPORT_FAILED" );
 			}
 
 			set_user_origin ( id, oldLocation );
@@ -437,7 +436,7 @@ public Task_Blink_Controller ( parm[2] )
 						if( Util_Should_Msg_Client(id) )
 						{
 							set_hudmessage ( 255, 255, 10, -1.0, -0.4, 1, 0.5, 5.0, 0.2, 0.2, 5 );
-							show_hudmessage( id , "%L", LANG_PLAYER, "ULTIMATE_TEPELORT_IMMUNE" );
+							show_hudmessage( id , "%L", id, "ULTIMATE_TEPELORT_IMMUNE" );
 						}
 
 						set_user_origin ( id, oldLocation );
@@ -1064,7 +1063,7 @@ public TASK_SHIELD_Search( parm[2] )
 		HasTeamShield[teammate]=true;
 		if( CVAR_DEBUG_MODE)
 		{
-			log_amx( "DEBUG :: TASK_SHIELD_Search -> TeamShield -> Shielder: %s Player: %s HasTeamShield[teammate]=true", name2, name );
+			log_amx( "[UWC3X] DEBUG :: TASK_SHIELD_Search -> TeamShield -> Shielder: %s Player: %s HasTeamShield[teammate]=true", name2, name );
 		}
 
 		p_PlayerShieldedBy[teammate] = id;
@@ -1147,7 +1146,7 @@ public TASK_SHIELD_CHECK ( parm[3] )
 		HasTeamShield[id]=true;
 		if( CVAR_DEBUG_MODE)
 		{
-			log_amx( "DEBUG :: TASK_SHIELD_CHECK( ) -> TeamShield -> Setting HasTeamShield[teammate]=true");
+			log_amx( "[UWC3X] DEBUG :: TASK_SHIELD_CHECK( ) -> TeamShield -> Setting HasTeamShield[teammate]=true");
 		}
 
 		p_PlayerShieldedBy[id] = teammate;
@@ -1176,7 +1175,7 @@ public TASK_SHIELD_CHECK ( parm[3] )
 		HasTeamShield[id]=false;
 		if( CVAR_DEBUG_MODE)
 		{
-			log_amx( "DEBUG :: TASK_SHIELD_CHECK( ) -> TeamShield -> Setting HasTeamShield[teammate]=false -> Expired");
+			log_amx( "[UWC3X] DEBUG :: TASK_SHIELD_CHECK( ) -> TeamShield -> Setting HasTeamShield[teammate]=false -> Expired");
 		}
 
 		//Set cooldown
@@ -1719,123 +1718,6 @@ public Task_Destroy_Roots ( args[] )
 	remove_entity ( args[0] );
 }
 
-//
-//public searchtarget ( parm[] )
-//{
-//	new iparm[2], waitparm[6];
-//	new enemyz, body, counter;
-//	new tmp_immunity = 0, id = parm[0];
-//
-//	if ( !Util_Is_Valid_Player( id ) )
-//	{
-//		log_amx( "Debug :: Task_Search_Event_Entangle -> Invalid playerID");
-//		issearching[id] = true;
-//		icon_controller ( id );
-//		return PLUGIN_CONTINUE;
-//	}
-//
-//	get_user_aiming ( id, enemyz, body );
-//
-//	if ( !Util_Is_Valid_Player( enemyz ) )
-//	{
-//		log_amx( "Debug :: Task_Search_Event_Entangle -> Invalid enemyzID");
-//		issearching[id] = true;
-//		icon_controller ( id );
-//		return PLUGIN_CONTINUE;
-//	}
-//
-//	if( temp_immunity[enemyz] || playeritem[enemyz]==IMMUNITY || hasblink[enemyz] )
-//	{
-//		tmp_immunity = 1;
-//		log_amx( "Debug :: Task_Search_Event_Entangle -> tmp_immunity =1 ");
-//	}
-//
-//	if ( 0 < enemyz <=32 && ( get_user_team ( enemyz ) != get_user_team ( id ) ) && is_user_alive ( id ) && is_user_alive ( enemyz ) )
-//	{
-//		if ( temp_immunity[enemyz] || playeritem[enemyz]==IMMUNITY || hasblink[enemyz] || magic_saving_throw ( enemyz ) )
-//		{
-//			log_amx( "Debug :: Task_Search_Event_Entangle -> Resisted ");
-//			temp_immunity[enemyz] = true;
-//
-//			if ( Util_Should_Msg_Client( enemyz ) )
-//			{
-//				client_print ( enemyz, print_chat, "%L", enemyz, "ULTIMATE_ENGANGLE_RESISTANT", MOD );
-//			}
-//
-//			iparm[0] = enemyz;
-//			copy( iparm[1], 31, "Entangling roots" );
-//			set_task ( 5.0, "Task_Reset_Immunity", TASK_RESET_IMMUNITY + id, iparm, 2 );
-//		}
-//
-//		if ( !stunned[enemyz] && !temp_immunity[enemyz] )
-//		{
-//			log_amx( "Debug :: Task_Search_Event_Entangle -> Got em ");
-//			issearching[id] = false;
-//			ultimateused[id] = true;
-//			icon_controller ( id );
-//
-//			if ( Util_Should_Msg_Client( id ) )
-//			{
-//				if ( file_exists ( "sound/uwc3x/entanglingrootstarget1.wav" ) == 1 )
-//				{
-//					emit_sound ( id, CHAN_ITEM, "uwc3x/entanglingrootstarget1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-//				}
-//				else
-//				{
-//					if ( file_exists ( "sound/weapons/cbar_hitbod3.wav" ) == 1 )
-//					{
-//						emit_sound ( id,CHAN_ITEM, "weapons/cbar_hitbod3.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-//					}
-//				}
-//			}
-//
-//			waitparm[0] = enemyz;
-//			waitparm[1] = 100;
-//			waitparm[5] = floatround ( get_user_maxspeed ( enemyz ) );
-//			set_user_maxspeed ( enemyz,1.0 );
-//			Task_Entangle_Stop ( waitparm );
-//
-//			stunned[enemyz] = true;
-//			new cooldownparm[1];
-//			cooldownparm[0] = id;
-//			set_task ( CVAR_ENTANGLE_COOLDOWN, "cooldown", 50 + id, cooldownparm, 1 );
-//		}
-//	}
-//	else
-//	{
-//		log_amx( "Debug :: Task_Search_Event_Entangle -> Still Searching ");
-//		issearching[id] = true;
-//		icon_controller ( id );
-//		counter = parm[1];
-//
-//		while ( counter >= 0 )
-//		{
-//			counter -= 10;
-//			if ( counter == 0 )
-//			{
-//				if( Util_Should_Msg_Client( id ) )
-//				{
-//					emit_sound ( id, CHAN_ITEM, "turret/tu_ping.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-//				}
-//			}
-//		}
-//		--parm[1];
-//
-//		if ( parm[1]>0 && get_user_health ( id ) > 0 )
-//		{
-//			log_amx( "Debug :: Task_Search_Event_Entangle -> Search again ");
-//			set_task ( 0.1, "Task_Search_Event_Entangle", TASK_ULTIMATE_ENTANGLE_SEARCH + id, parm, 2 );
-//		}
-//		else
-//		{
-//			issearching[id] = false;
-//			icon_controller ( id );
-//		}
-//	}
-//
-//	return PLUGIN_CONTINUE;
-//}
-
 
 public searchtarget(parm[2])
 {
@@ -2240,7 +2122,7 @@ public Task_Reset_Shopmenu3( parm[] )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 3.0, 0.1, 0.2, 1);
-            show_hudmessage(id, "%L", LANG_PLAYER, "SM3_CAN_BUY", MOD);
+            show_hudmessage(id, "%L", id, "SM3_CAN_BUY", MOD);
         }
 
     }
@@ -2249,7 +2131,7 @@ public Task_Reset_Shopmenu3( parm[] )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 5.0, 0.1, 0.2, 1);
-            show_hudmessage(id, "%L", LANG_PLAYER, "SM3_VULNERABLE", MOD);
+            show_hudmessage(id, "%L", id, "SM3_VULNERABLE", MOD);
         }
     }
     else if( reset_item == 3 )
@@ -2258,7 +2140,7 @@ public Task_Reset_Shopmenu3( parm[] )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage(0, 255, 255, 0.0, 0.55, 0, 6.0, 3.0, 0.1, 0.2, 1);
-            show_hudmessage(id, "%L", LANG_PLAYER, "SM3_VISIBLE", MOD);
+            show_hudmessage(id, "%L", id, "SM3_VISIBLE", MOD);
             if ( file_exists( "sound/uwc3x/shopmenu/sm3_inv_done.wav" ) == 1 )
             {
                 emit_sound( id, CHAN_STATIC, "uwc3x/shopmenu/sm3_inv_done.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
@@ -2342,7 +2224,7 @@ public Task_locust_function( id )
 			show_hudmessage(id,"No valid targets found, please try again later!");
 		}
 
-		log_amx("DEBUG :: Task_locust_function -> count=0");
+		log_amx( "[UWC3X] DEBUG :: Task_locust_function -> count=0");
 		return PLUGIN_CONTINUE;
 	}
 
@@ -2373,7 +2255,7 @@ public Task_locust_function( id )
 
 	if( CVAR_DEBUG_MODE)
 	{
-		log_amx("DEBUG :: Task_locust_function -> VALID Player=%d %s  -> Moving on", parm[6], debugname );
+		log_amx( "[UWC3X] DEBUG :: Task_locust_function -> VALID Player=%d %s  -> Moving on", parm[6], debugname );
 	}
 
 	new origin[3], origin2[3];
@@ -2436,7 +2318,7 @@ public Task_locust_drawfunnels(parm[])
 
 		if( CVAR_DEBUG_MODE)
 		{
-			log_amx("DEBUG :: Task_locust_drawfunnels -> Locusts Avoided Resistance Check - Caster=%s Player %s ", name2, name );
+			log_amx( "[UWC3X] DEBUG :: Task_locust_drawfunnels -> Locusts Avoided Resistance Check - Caster=%s Player %s ", name2, name );
 		}
 
 		ultimateused[caster]=true;
@@ -2446,7 +2328,7 @@ public Task_locust_drawfunnels(parm[])
 
 	if( CVAR_DEBUG_MODE)
 	{
-		log_amx("DEBUG :: Task_locust_drawfunnels -> Locusts Hit - Caster=%s Player %s", name2, name );
+		log_amx( "[UWC3X] DEBUG :: Task_locust_drawfunnels -> Locusts Hit - Caster=%s Player %s", name2, name );
 	}
 	get_user_origin(id,origin);
 
@@ -2501,7 +2383,7 @@ public Task_locust_drawfunnels(parm[])
 			
 			if( CVAR_DEBUG_MODE)
 			{
-				log_amx("DEBUG :: Task_locust_drawfunnels -> pDamageMultiplier=%d actual_damage=%d", pDamageMultiplier, actual_damage );
+				log_amx( "[UWC3X] DEBUG :: Task_locust_drawfunnels -> pDamageMultiplier=%d actual_damage=%d", pDamageMultiplier, actual_damage );
 			}
 
 			do_damage(id, caster, actual_damage, 15, 3, 0, 0, 0);
@@ -2676,7 +2558,7 @@ public Task_Switch_UnlimitedAmmoOn( id )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("Debug:: Task_Switch_UnlimitedAmmoOff -> unammo[ %s ] = ON ", name );
+		log_amx( "[UWC3X] Debug:: Task_Switch_UnlimitedAmmoOff -> unammo[ %s ] = ON ", name );
 	}
 
 	unammo[id] = true;
@@ -2697,7 +2579,7 @@ public Task_Switch_UnlimitedAmmoOff( parm[] )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("Debug:: Task_Switch_UnlimitedAmmoOff -> unammo[ %s ] = OFF ", name );
+		log_amx( "[UWC3X] Debug:: Task_Switch_UnlimitedAmmoOff -> unammo[ %s ] = OFF ", name );
 	}
 
 
@@ -3159,7 +3041,7 @@ public TASK_hooktask(parm[])
 	{
 		new debugname[32];
 		get_user_name ( id, debugname, 31 );
-		log_amx( "DEBUG :: TASK_hooktask -> player %s - Hook style=%d", debugname, CVAR_HOOK_STYLE );
+		log_amx( "[UWC3X] DEBUG :: TASK_hooktask -> player %s - Hook style=%d", debugname, CVAR_HOOK_STYLE );
 	}
 
 }
@@ -3187,7 +3069,7 @@ public TASK_GRAB_Search( parm[2] )
 				if ( CVAR_DEBUG_MODE )
 				{
 					client_print( id, print_console, "DEBUG :: TASK_GRAB_Search -> failed to resist" );
-					log_amx( "DEBUG :: TASK_GRAB_Search -> failed to resist" );
+					log_amx( "[UWC3X] DEBUG :: TASK_GRAB_Search -> failed to resist" );
 				}
 
 				grabem(id,target);
@@ -3197,7 +3079,7 @@ public TASK_GRAB_Search( parm[2] )
 				if ( CVAR_DEBUG_MODE )
 				{
 					client_print( id, print_console, "DEBUG :: grabem -> resisted" );
-					log_amx( "Debug :: grabem -> resisted" );
+					log_amx( "[UWC3X] Debug :: grabem -> resisted" );
 				}
 			}
 		}

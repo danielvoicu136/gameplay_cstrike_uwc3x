@@ -209,11 +209,11 @@ public new_round ( id )
 				
 				if( Ult_TooMany(id) )
 				{
-					log_amx ( "TOO MANY ULTIMATES: ( %s ) level= ( %d ) allowed=( %d ) ultcount= ( %d )", pname, p_level[id], p_maxultimates[id], Get_Ult_Count( id ) );
+					log_amx( "[UWC3X] TOO MANY ULTIMATES: ( %s ) level= ( %d ) allowed=( %d ) ultcount= ( %d )", pname, p_level[id], p_maxultimates[id], Get_Ult_Count( id ) );
 				}
 				else
 				{
-					log_amx ( "TOO MANY SKILLPOINTS: ( %s ) level= ( %d ) skillcount= ( %d )", pname, p_level[id], skillcount );
+					log_amx( "[UWC3X] TOO MANY SKILLPOINTS: ( %s ) level= ( %d ) skillcount= ( %d )", pname, p_level[id], skillcount );
 				}
 			}
 

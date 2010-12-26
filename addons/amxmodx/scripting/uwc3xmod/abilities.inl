@@ -22,7 +22,7 @@ public ability_wcbless ( id )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-            show_hudmessage( id , "%L", LANG_PLAYER, "ABILITY_DURING_FREEZETIME" );
+            show_hudmessage( id , "%L", id, "ABILITY_DURING_FREEZETIME" );
         }
         return PLUGIN_HANDLED;
     }
@@ -32,7 +32,7 @@ public ability_wcbless ( id )
         if( Util_Should_Msg_Client(id) )
         {
             set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-            show_hudmessage ( id, "%L", LANG_PLAYER, "ULTIMATE_DELAY_MESSAGE", CVAR_ULTIMATE_DELAY );
+            show_hudmessage ( id, "%L", id, "ULTIMATE_DELAY_MESSAGE", CVAR_ULTIMATE_DELAY );
         }
         return PLUGIN_HANDLED;
     }
@@ -177,7 +177,7 @@ public ability_wcward ( id )
 			if( Util_Should_Msg_Client(id) )
 			{
 				set_hudmessage ( 200, 100, 0, 0.2, 0.3, 0, 1.0, 5.0, 0.1, 0.2, 2 );
-				show_hudmessage ( id, "%L", LANG_PLAYER, "SERPENTWARD_PLACED", serpents[id] );
+				show_hudmessage ( id, "%L", id, "SERPENTWARD_PLACED", serpents[id] );
 			}
 		}
 		else
@@ -186,7 +186,7 @@ public ability_wcward ( id )
 			{
 				new serpentCount = p_serpent[p_skills[id][SKILLIDX_SERPWARD]-1];
 				set_hudmessage ( 200, 100, 0, 0.2, 0.3, 0, 1.0, 5.0, 0.1, 0.2, 2 );
-				show_hudmessage ( id, "%L", LANG_PLAYER, "SERPENTWARD_ALLGONE", serpentCount );
+				show_hudmessage ( id, "%L", id, "SERPENTWARD_ALLGONE", serpentCount );
 			}
 		}
 	}
@@ -404,7 +404,7 @@ public ability_wcrepair ( id )
 		if( Util_Should_Msg_Client(id) )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-			show_hudmessage( id , "%L", LANG_PLAYER, "ABILITY_DURING_FREEZETIME" );
+			show_hudmessage( id , "%L", id, "ABILITY_DURING_FREEZETIME" );
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -414,7 +414,7 @@ public ability_wcrepair ( id )
 		if( Util_Should_Msg_Client(id) )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-			show_hudmessage ( id, "%L", LANG_PLAYER, "ULTIMATE_DELAY_MESSAGE", CVAR_ULTIMATE_DELAY );
+			show_hudmessage ( id, "%L", id, "ULTIMATE_DELAY_MESSAGE", CVAR_ULTIMATE_DELAY );
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -592,7 +592,7 @@ public ability_wcdispell ( id )
 		if( Util_Should_Msg_Client(id) )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-			show_hudmessage( id , "%L", LANG_PLAYER, "ABILITY_DURING_FREEZETIME" );
+			show_hudmessage( id , "%L", id, "ABILITY_DURING_FREEZETIME" );
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -602,7 +602,7 @@ public ability_wcdispell ( id )
 		if( Util_Should_Msg_Client(id) )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-			show_hudmessage ( id, "%L", LANG_PLAYER, "ULTIMATE_DELAY_MESSAGE", CVAR_ULTIMATE_DELAY );
+			show_hudmessage ( id, "%L", id, "ULTIMATE_DELAY_MESSAGE", CVAR_ULTIMATE_DELAY );
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -738,7 +738,7 @@ public ability_wcmend ( id )
 		if( Util_Should_Msg_Client(id) )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-			show_hudmessage( id , "%L", LANG_PLAYER, "ABILITY_DURING_FREEZETIME" );
+			show_hudmessage( id , "%L", id, "ABILITY_DURING_FREEZETIME" );
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -748,7 +748,7 @@ public ability_wcmend ( id )
 		if( Util_Should_Msg_Client(id) )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
-			show_hudmessage ( id, "%L", LANG_PLAYER, "ULTIMATE_DELAY_MESSAGE", CVAR_ULTIMATE_DELAY );
+			show_hudmessage ( id, "%L", id, "ULTIMATE_DELAY_MESSAGE", CVAR_ULTIMATE_DELAY );
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -784,7 +784,7 @@ public ability_wcmend ( id )
 			if( Util_Should_Msg_Client(id) )
 			{
 				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_MAX_HEALS", MOD );
-				HudChatShow(id, "MENDWOUNDS_MAX_HEALS", MOD);
+				hudchat_show(id, "MENDWOUNDS_MAX_HEALS", MOD);
 			}
 
 			return PLUGIN_HANDLED;
@@ -799,7 +799,7 @@ public ability_wcmend ( id )
 			if( Util_Should_Msg_Client(id) )
 			{
 				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_NOT_HURT", MOD, friend_name );
-				HudChatShow(id, "MENDWOUNDS_NOT_HURT", MOD, friend_name);
+				hudchat_show(id, "MENDWOUNDS_NOT_HURT", MOD, friend_name);
 			}
 
 			return PLUGIN_HANDLED;
@@ -895,13 +895,13 @@ public ability_wcmend ( id )
 			if( Util_Should_Msg_Client(id) )
 			{
 				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_ALL", MOD, friend_name, xpbonus );
-				HudChatShow(id, "MENDWOUNDS_CURED_ALL", MOD, friend_name, xpbonus);
+				hudchat_show(id, "MENDWOUNDS_CURED_ALL", MOD, friend_name, xpbonus);
 			}
 
 			if( is_user_connected( friendID ) && !is_user_bot(friendID) )
 			{
 				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_ALL_MESSAGE", MOD, name );
-				HudChatShow(friendID, "MENDWOUNDS_CURED_ALL_MESSAGE", MOD, name);
+				hudchat_show(friendID, "MENDWOUNDS_CURED_ALL_MESSAGE", MOD, name);
 			}
 		}
 		else if ( cured_burns && ( cured_poison || cured_disease ) )
@@ -911,13 +911,13 @@ public ability_wcmend ( id )
 			if( Util_Should_Msg_Client(id) )
 			{
 				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_TWO", MOD, friend_name, xpbonus );
-				HudChatShow(id, "MENDWOUNDS_CURED_TWO", MOD, friend_name, xpbonus);
+				hudchat_show(id, "MENDWOUNDS_CURED_TWO", MOD, friend_name, xpbonus);
 			}
 
 			if( is_user_connected( friendID ) && !is_user_bot(friendID) )
 			{
 				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_TWO_MESSAGE", MOD, name );
-				HudChatShow(friendID, "MENDWOUNDS_CURED_TWO_MESSAGE", MOD, name);
+				hudchat_show(friendID, "MENDWOUNDS_CURED_TWO_MESSAGE", MOD, name);
 			}
 		}
 		else if ( cured_poison && cured_disease )
@@ -927,13 +927,13 @@ public ability_wcmend ( id )
 			if( Util_Should_Msg_Client(id) )
 			{
 				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_TWO2", MOD, friend_name, xpbonus );
-				HudChatShow(id, "MENDWOUNDS_CURED_TWO2", MOD, friend_name, xpbonus);
+				hudchat_show(id, "MENDWOUNDS_CURED_TWO2", MOD, friend_name, xpbonus);
 			}
 
 			if( Util_Should_Msg_Client(friendID) )
 			{
 				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_TWO_MESSAGE2", MOD, name );
-				HudChatShow(friendID, "MENDWOUNDS_CURED_TWO_MESSAGE2", MOD, name);
+				hudchat_show(friendID, "MENDWOUNDS_CURED_TWO_MESSAGE2", MOD, name);
 			}
 		}
 		else if ( cured_poison || cured_disease )
@@ -943,26 +943,26 @@ public ability_wcmend ( id )
 			if( Util_Should_Msg_Client(id) )
 			{
 				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED_ONE", MOD, friend_name, xpbonus );
-				HudChatShow(id, "MENDWOUNDS_CURED_ONE", MOD, friend_name, xpbonus);
+				hudchat_show(id, "MENDWOUNDS_CURED_ONE", MOD, friend_name, xpbonus);
 			}
 
 			if( Util_Should_Msg_Client(friendID) )
 			{
 				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_ONE_MESSAGE", MOD, name );
-				HudChatShow(friendID, "MENDWOUNDS_CURED_ONE_MESSAGE", MOD, name);
+				hudchat_show(friendID, "MENDWOUNDS_CURED_ONE_MESSAGE", MOD, name);
 			}
 		}
 		else
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				HudChatShow(id, "MENDWOUNDS_CURED", MOD, friend_name, xpbonus);
+				hudchat_show(id, "MENDWOUNDS_CURED", MOD, friend_name, xpbonus);
 				//client_print ( id, print_chat, "%L", id, "MENDWOUNDS_CURED", MOD, friend_name, xpbonus );
 			}
 
 			if( is_user_connected( friendID ) && !is_user_bot(friendID) )
 			{
-				HudChatShow(friendID, "MENDWOUNDS_CURED_MESSAGE", MOD, name);
+				hudchat_show(friendID, "MENDWOUNDS_CURED_MESSAGE", MOD, name);
 				//client_print ( friendID, print_chat, "%L", friendID, "MENDWOUNDS_CURED_MESSAGE", MOD, name );
 			}
 		}

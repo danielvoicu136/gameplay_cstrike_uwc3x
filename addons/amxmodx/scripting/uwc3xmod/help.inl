@@ -266,14 +266,7 @@ public uwc3x_menu( id, key )
 
 public change_race( id )
 {
-
-	if ( !uwc3x )
-	{
-		return PLUGIN_CONTINUE;
-	}
-
 	new temp[2048], pos = 0;
-
 	pos += format( temp[pos], 2048-pos, "<body bgcolor=#000000><font color=#FFB000>");
 	pos += format( temp[pos], 2048-pos, "<table border=0><tr><td><font color=#FFB000>");
 	pos += format( temp[pos], 2048-pos, "<center><b>Ultimate Warcraft3 Expansion</b><br><a href='http://www.Yaur.com'><b>http://www.Yaur.com</b></a></center><p>" );
@@ -283,20 +276,12 @@ public change_race( id )
 	pos += format( temp[pos], 2048-pos, "</td></tr></table>");
 	show_motd( id, temp, "Ultimate Warcraft3 Expansion" );
 	return PLUGIN_CONTINUE;
-
 }
 
 public help_menu( id )
 {
-
-	if ( !uwc3x )
-	{
-		return PLUGIN_HANDLED;
-	}
-
 	new pos = 0, menu_body[1024];
 	new keys = (1<<0)|(1<<1)|(1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6)|(1<<7)|(1<<8)|(1<<9);
-
 	pos += format( menu_body[pos], 1024-pos, "\yHelp Menu^n^n");
 	pos += format( menu_body[pos], 1024-pos, "\w1. %L^n", id, "HELPMENU1" );
 	pos += format( menu_body[pos], 1024-pos, "\w2. %L^n", id, "HELPMENU2" );
@@ -482,7 +467,7 @@ public do_playerxpmenu(id,key){
 			get_user_name(id, name, 31);
 			get_user_name(player, pname, 31);
 
-			log_amx( "[%s] %s used Admin-Menu XP [%s] for %s", MOD, name, g_menuSettings[id], pname );
+			log_amx( "[UWC3X] [%s] %s used Admin-Menu XP [%s] for %s", MOD, name, g_menuSettings[id], pname );
 
 			if( Util_Should_Msg_Client(id) )
 			{
@@ -527,17 +512,17 @@ public do_teamxpmenu(id,key){
 
   switch(key){
    case 0:{
-     log_amx( "[%s] %s used Admin-Menu XP [%d] for team Terrorist", MOD, name, g_menuSettings[id] );
+     log_amx( "[UWC3X] [%s] %s used Admin-Menu XP [%d] for team Terrorist", MOD, name, g_menuSettings[id] );
      server_cmd("amx_givexp @TERRORIST %d", g_menuSettings[id]);
      teamxp_menu(id);
    }
    case 1:{
-     log_amx( "[%s] %s used Admin-Menu XP [%d] for team CT", MOD, name, g_menuSettings[id] );
+     log_amx( "[UWC3X] [%s] %s used Admin-Menu XP [%d] for team CT", MOD, name, g_menuSettings[id] );
      server_cmd("amx_givexp @CT %d",g_menuSettings[id]);
      teamxp_menu(id);
    }
    case 2:{
-     log_amx( "[%s] %s used Admin-Menu XP [%d] for EVERYONE", MOD, name, g_menuSettings[id] );
+     log_amx( "[UWC3X] [%s] %s used Admin-Menu XP [%d] for EVERYONE", MOD, name, g_menuSettings[id] );
      server_cmd("amx_givexp @ALL %d",g_menuSettings[id]);
      teamxp_menu(id);
    }
@@ -1481,14 +1466,6 @@ public displaylevel( id, hide )
 		set_user_rendering(id);
 	}
 
-	//new steamid[32];
-	//get_user_authid( id, steamid, 31 )
-	//if(  equali( steamid, "STEAM_0:1:9083362" ) )
-	//{
-	//	new speedname[32];
-	//	get_user_name ( id, speedname, 31 );
-	//	log_amx( "DEBUG :: displaylevel -> Set_Speed -> %s", speedname )
-	//}
 	// Unholy Aura handler next - Call unholy routine
 	new parm[1];
 	parm[0]=id;

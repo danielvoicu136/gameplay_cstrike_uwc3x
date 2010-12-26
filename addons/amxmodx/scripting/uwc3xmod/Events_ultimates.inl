@@ -124,7 +124,7 @@ public EVENT_Suicide_Implosion ( parm[] )
 {
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx( "DEBUG :: EVENT_Suicide_Implosion -> start()");
+		log_amx( "[UWC3X] DEBUG :: EVENT_Suicide_Implosion -> start()");
 	}
 
 	new id = parm[0];
@@ -146,7 +146,7 @@ public EVENT_Suicide_Implosion ( parm[] )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx( "DEBUG :: EVENT_Suicide_Implosion -> end()");
+		log_amx( "[UWC3X] DEBUG :: EVENT_Suicide_Implosion -> end()");
 	}
 	return PLUGIN_CONTINUE;
 
@@ -157,7 +157,7 @@ public EVENT_Suicide_Blast ( parm[] )
 {
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx( "DEBUG :: EVENT_Suicide_Blast -> start()");
+		log_amx( "[UWC3X] DEBUG :: EVENT_Suicide_Blast -> start()");
 	}
 
 	new id = parm[0];
@@ -230,7 +230,7 @@ public EVENT_Suicide_Blast ( parm[] )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx( "DEBUG :: EVENT_Suicide_Blast -> end()");
+		log_amx( "[UWC3X] DEBUG :: EVENT_Suicide_Blast -> end()");
 	}
 
 	return PLUGIN_CONTINUE;
@@ -306,7 +306,7 @@ public EVENT_Set_On_Fire ( args[] )
 		if ( CVAR_DEBUG_MODE )
 		{
 			client_print( killer, print_console, "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, damage );
-			log_amx( "[%s DEBUG] Wisdom modified damage - NEW damage=( %d )", MOD, damage );
+			log_amx( "[UWC3X] DEBUG :: Wisdom modified damage - NEW damage=( %d )", damage );
 		}
 	}
 

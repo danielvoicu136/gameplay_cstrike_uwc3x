@@ -152,9 +152,9 @@ public Buy_Item( id , key )
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			//new tempVar[64];
-			//get_user_name ( id, tempVar, 63 );
-			//log_amx("Buy_Item: Buy Tome -> Player: %s Current Amount: %d New Amount: %d", tempVar, playertombs[id], p_tomes);
+			new tempVar[64];
+			get_user_name ( id, tempVar, 63 );
+			log_amx( "[UWC3X] DEBUG :: Buy_Item: Buy Tome -> Player: %s Current Amount: %d New Amount: %d", tempVar, playertombs[id], p_tomes);
 		}
 
 		playertombs[id] = p_tomes;
@@ -195,7 +195,7 @@ public Buy_Item( id , key )
 			{
 				new name[32];
 				get_user_name(id, name, 31);
-				log_amx( "In buy_item() :: [%s] Bought Health Has=(%d) Max=(%d)",name, get_user_health(id), maxhealth[id] );
+				log_amx( "[UWC3X] DEBUG :: In buy_item() :: [%s] Bought Health Has=(%d) Max=(%d)",name, get_user_health(id), maxhealth[id] );
 			}
 		}
 	}

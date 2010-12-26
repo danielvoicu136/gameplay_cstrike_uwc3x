@@ -175,12 +175,12 @@ public XP_SetMultiplier ( )
 {
 	if( CVAR_DEBUG_MODE)
 	{
-		log_amx("CVAR_WEAPON_MULTIPLIER=%d", CVAR_WEAPON_MULTIPLIER);
+		log_amx( "[UWC3X] CVAR_WEAPON_MULTIPLIER=%d", CVAR_WEAPON_MULTIPLIER);
 	}
 
 	if ( !CVAR_WEAPON_MULTIPLIER )
 	{
-		log_amx("XP Multiplier Initialized [FAILED] - mp_weaponxpmodifier Cvar not present");
+		log_amx( "[UWC3X] XP Multiplier Initialized [FAILED] - mp_weaponxpmodifier Cvar not present");
 	}
 	else
 	{
@@ -218,7 +218,7 @@ public XP_SetMultiplier ( )
 		weaponxpmultiplier[CSW_SMOKEGRENADE]= 1.0;
 		weaponxpmultiplier[CSW_FLASHBANG]	= 1.0;
 	}
-	log_amx("XP Multiplier Initialized [OK]");
+	log_amx( "[UWC3X] XP Multiplier Initialized [OK]");
 
 } 
 
@@ -362,7 +362,7 @@ public amx_takexp ( id, level )
 	iXP = str_to_num ( xp );
 
 	// [9-30-04] Added logging of amx_givexp ( ) command - K2mia
-	log_amx ( "%L amx_takexp ( ) %s %s", id, "COMAND_ISSUED", MOD, name, arg, xp );
+	log_amx( "[UWC3X] %L amx_takexp ( ) %s %s", id, "COMAND_ISSUED", MOD, name, arg, xp );
 
 	if ( equali ( arg, "@ALL" ) )
 	{
@@ -462,7 +462,7 @@ public amx_resetresists( id, level )
 	read_argv ( 1, arg, 31 );
 	get_user_name ( id, name, 31 );
 
-	log_amx ( "%L amx_resetresists ( ) reset player %s attribs", id, "COMAND_ISSUED", MOD, name, arg );
+	log_amx( "[UWC3X] %L amx_resetresists ( ) reset player %s attribs", id, "COMAND_ISSUED", MOD, name, arg );
 
 	if ( equali ( arg, "@ALL" ) )
 	{
@@ -547,7 +547,7 @@ public amx_reseteverything( id, level )
 	read_argv ( 1, arg, 31 );
 	get_user_name ( id, name, 31 );
 
-	log_amx ( "%L amx_reseteverything ( ) reset player %s attribs", id, "COMAND_ISSUED", MOD, name, arg );
+	log_amx( "[UWC3X] %L amx_reseteverything ( ) reset player %s attribs", id, "COMAND_ISSUED", MOD, name, arg );
 
 	if ( equali ( arg, "@ALL" ) )
 	{
@@ -639,7 +639,7 @@ public amx_resetattribs( id, level )
 	read_argv ( 1, arg, 31 );
 	get_user_name ( id, name, 31 );
 
-	log_amx ( "%L amx_resetattribs ( ) reset player %s attribs", id, "COMAND_ISSUED", MOD, name, arg );
+	log_amx( "[UWC3X] %L amx_resetattribs ( ) reset player %s attribs", id, "COMAND_ISSUED", MOD, name, arg );
 
 	if ( equali ( arg, "@ALL" ) )
 	{
@@ -725,7 +725,7 @@ public amx_resetskills( id, level )
 	read_argv ( 1, arg, 31 );
 	get_user_name ( id, name, 31 );
 
-	log_amx ( "%L amx_resetskills ( ) reset player %s skills", id, "COMAND_ISSUED", MOD, name, arg );
+	log_amx( "[UWC3X] %L amx_resetskills ( ) reset player %s skills", id, "COMAND_ISSUED", MOD, name, arg );
 
 	if ( equali ( arg, "@ALL" ) )
 	{
@@ -816,7 +816,7 @@ public amx_setlevel ( id, level )
 	iLevel = str_to_num ( newlevel );
 	xp_needed = xplevel_lev[iLevel];
 
-	log_amx ( "%L amx_setlevel ( ) %s %s", id, "COMAND_ISSUED", MOD, name, arg, iLevel );
+	log_amx( "[UWC3X] %L amx_setlevel ( ) %s %s", id, "COMAND_ISSUED", MOD, name, arg, iLevel );
 
 	if ( equali ( arg, "@ALL" ) )
 	{
@@ -942,7 +942,7 @@ public amx_givexp ( id, level )
 	iXP = str_to_num ( xp );
 
 	// [9-30-04] Added logging of amx_givexp ( ) command - K2mia
-	log_amx ( "%L amx_givexp ( ) %s %s", id, "COMAND_ISSUED", MOD, name, arg, xp );
+	log_amx( "[UWC3X] %L amx_givexp ( ) %s %s", id, "COMAND_ISSUED", name, arg, xp );
 
 	if ( equali ( arg, "@ALL" ) )
 	{

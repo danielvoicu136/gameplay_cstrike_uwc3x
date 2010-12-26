@@ -5,7 +5,7 @@ public GetStorageType()
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx("Debug:: GetStorageType() : CVAR_SAVE_XP_SQL=%d", CVAR_SAVE_XP_SQL );	
+		log_amx( "[UWC3X] Debug:: GetStorageType() : CVAR_SAVE_XP_SQL=%d", CVAR_SAVE_XP_SQL );	
 	}
 
 	if ( CVAR_SAVE_XP_SQL == 1 )
@@ -18,7 +18,7 @@ public GetStorageType()
 	}
 	else
 	{
-		log_amx("ERROR:: Could not determine Storage Type in GetStorageType - default to MySQL");
+		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in GetStorageType - default to MySQL");
 	}
 
 	return tempDBTYpe;
@@ -34,18 +34,18 @@ public LoadXPConfig()
 		//moved SQL Stuff to the one config file
 		//replaced with this function instead
 		LoadSQLVars();
-		log_amx("XP Config Initialized [OK]");
+		log_amx( "[UWC3X] XP Config Initialized [OK]");
 	}
 	else if ( GetStorageType() == 2 )
 	{
 		//Load SQL Lite Stuff
-		LoadSQLLiteConfig ( );	
-		log_amx("XP Config Initialized [OK]");
+		LoadSQLLiteConfig();	
+		log_amx( "[UWC3X] XP Config Initialized [OK]");
 	}
 	else
 	{
-		log_amx("ERROR:: Could not determine Storage Type in LoadXPConfig");
-		log_amx("XP Config Initialized [FAILED]");
+		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in LoadXPConfig");
+		log_amx( "[UWC3X] XP Config Initialized [FAILED]");
 	}
 
 }
@@ -69,7 +69,7 @@ public LoadXP ( id )
 	}
 	else
 	{
-		log_amx("ERROR:: Could not determine Storage Type in LoadXP");
+		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in LoadXP");
 	}
 
 	new speedparm[1];
@@ -89,11 +89,11 @@ public LoadSkillSet( id, skillsetIDX )
 	{
 		//Load SQL Lite Stuff
 		LoadSkillSetSQLLite ( id, skillsetIDX );	
-		log_amx("ERROR:: Skill Sets not enabled for sqllite");
+		log_amx( "[UWC3X] ERROR:: Skill Sets not enabled for sqllite");
 	}
 	else
 	{
-		log_amx("ERROR:: Could not determine Storage Type in LoadXP");
+		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in LoadXP");
 	}
 
 	new speedparm[1];
@@ -117,7 +117,7 @@ public DeleteSkillSet( id, skillsetIDX )
 	}
 	else
 	{
-		log_amx("ERROR:: Could not determine Storage Type in DeleteSkillSet");
+		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in DeleteSkillSet");
 	}
 
 	return PLUGIN_CONTINUE;
@@ -137,7 +137,7 @@ public SaveSkillSet( id, skillsetIDX )
 	}
 	else
 	{
-		log_amx("ERROR:: Could not determine Storage Type in SaveSkillSet");
+		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in SaveSkillSet");
 	}
 
 	return PLUGIN_CONTINUE;
@@ -157,7 +157,7 @@ public SaveXP ( id )
 	}
 	else
 	{
-		log_amx("ERROR:: Could not determine Storage Type in SaveXP");
+		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in SaveXP");
 	}
 
 	return PLUGIN_CONTINUE;
