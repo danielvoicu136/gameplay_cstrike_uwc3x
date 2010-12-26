@@ -49,7 +49,7 @@
 
 new const UWC3XNAME[]		=	"Ultimate Warcraft3 Expansion"
 new const UWC3XAUTHOR[]		=	"-=[Yaur]=-"
-new const UWC3XVERSION[]	=	"1.0.73"
+new const UWC3XVERSION[]	=	"1.0.76"
 
 #pragma reqclass	xstats
 #pragma reqlib		engine
@@ -68,7 +68,7 @@ new const UWC3XVERSION[]	=	"1.0.73"
 #include <cstrike>
 #include <dbi>
 #include <sqlx>
-
+ 
 //Inline Code files
 #include "uwc3xmod/defines.inl"
 #include "uwc3xmod/vars.inl"
@@ -103,6 +103,7 @@ new const UWC3XVERSION[]	=	"1.0.73"
 
 #include "uwc3xmod/tasks.inl"
 #include "uwc3xmod/xp.inl"
+#include "uwc3xmod/chat.inl"
 
 /* BEGIN CODE */
 
@@ -158,12 +159,6 @@ public client_infochanged(id) {
 /* Added support to fix players losing XP to STEAM_ID_PENDING -Marticus 11/15/05 */ 
 public client_authorized ( id )
 { 
-	//if( is_user_bot( id ) )
-	//{
-	//	xpreadytoload[id] = 0;
-	//	return PLUGIN_CONTINUE;
-	//}
-
 	if ( CVAR_SAVE_XP ) 
 	{
 		xpreadytoload[id] = 1;
@@ -171,7 +166,6 @@ public client_authorized ( id )
 	
 	PlayerAuthed[id] = true;
 	CheckUserName(id);
-	
 	return PLUGIN_CONTINUE ;
 } 
 
@@ -217,6 +211,9 @@ public plugin_init ( )
 	
 	//Set the initial Tasks we need
 	Initialize_Tasks ( );
+	
+	//Init the hud messages
+	InitHud();
 	
 	// set_task calls for functions needed by init or to run continuously
 	set_task ( 10.0, "Check_UWC3X", TASK_CHECK_UWC3X, "", 0, "b" );
@@ -267,11 +264,11 @@ public set_variables ( )
 
 public client_connect ( id )
 {
+	hudchat_clear(id);
 	client_cmd ( id, "hud_centerid 0" );
 	g_specMode[id] = false;
 
 	// Initialize player data ( NOT limited init mode )
-	
 	if( CVAR_DEBUG_MODE)
 	{
 		log_amx( "DEBUG :: SMA -> Initializing Player data - non limited" );
@@ -301,7 +298,7 @@ public client_connect ( id )
 
 public client_disconnect ( id )
 {
-
+	hudchat_clear(id);
 	PlayerAuthed[id]	= false;	// Reset teh Authorized Steam Setting
 	g_specMode[id]		= false;	// Reset spectator status for player
 	isburning[id]		= 0;		// Reset burning status for player ( flamethrower )
@@ -519,5 +516,6 @@ public plugin_end ( )
 		SaveAllPlayersXP ( );
 	}
 	
+	EndHud();
 	return PLUGIN_CONTINUE;
 }
