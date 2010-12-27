@@ -26,19 +26,16 @@ public GetStorageType()
 
 public LoadXPConfig()
 {
+
 	if ( GetStorageType() == 1 )
 	{
-		//Load SQL Stuff
-		//LoadSQLConfig ( );	
-
-		//moved SQL Stuff to the one config file
-		//replaced with this function instead
+		SQL_SetAffinity("mysql")
 		LoadSQLVars();
 		log_amx( "[UWC3X] XP Config Initialized [OK]");
 	}
 	else if ( GetStorageType() == 2 )
 	{
-		//Load SQL Lite Stuff
+		SQL_SetAffinity("sqlite")
 		LoadSQLLiteConfig();	
 		log_amx( "[UWC3X] XP Config Initialized [OK]");
 	}
@@ -47,7 +44,6 @@ public LoadXPConfig()
 		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in LoadXPConfig");
 		log_amx( "[UWC3X] XP Config Initialized [FAILED]");
 	}
-
 }
 
 public LoadXPCommand( id )

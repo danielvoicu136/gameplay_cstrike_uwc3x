@@ -8,27 +8,6 @@ public IsDBConnected ( )
 	return false;
 }
 
-public LoadSQLConfig ( )
-{
-	new sql_cfgfile[81];
-	get_configsdir ( sql_cfgfile, 80 );
-	format ( sql_cfgfile, 80, "%s/UWC3X/UWC3X_sql.cfg", sql_cfgfile );
-
-	if ( file_exists ( sql_cfgfile ) )
-	{
-		log_amx( "[UWC3X] SQL :: Loading SQL Configuration File..." );
-		server_cmd ( "exec %s", sql_cfgfile );
-
-		log_amx( "[UWC3X] SQL :: SQL Configuration File Loaded [OK]" );
-		LoadSQLVars ( );
-	}
-	else
-	{
-		log_amx( "[UWC3X] SQL :: No SQL Configuration File -- NOT SAVING XP..." );
-	}
-
-	return PLUGIN_CONTINUE;
-}
 public LoadSQLVars ( )
 {
 	//Load the Cvars into locally used strings
