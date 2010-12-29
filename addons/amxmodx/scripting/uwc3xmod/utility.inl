@@ -711,8 +711,6 @@ public check_say ( id )
 		Show_Items_Info2 ( id );
 	else if ( equali ( said,"^"/itemsinfo3^"" ) || equali ( said,"^"itemsinfo3^"" ) )
 		Show_Items_Info3 ( id );
-	//else if ( equali ( said,"^"/examine^"" ) || equali ( said,"^"examine^"" ) )
-	//	do_examine ( id );
 	else if ( equali ( said,"^"/toggle_lowres^"" ) || equali ( said,"^"toggle_lowres^"" ) )
 		toggle_lowres ( id );
 	else if ( equali ( said, "^"/rings^"" ) || equali ( said,"^"rings^"" ) || equali ( said,"^"/rings5^"" ) || equali ( said,"^"rings5^"" ) )
@@ -1141,53 +1139,6 @@ public toggle_lowres ( id )
 
 	return PLUGIN_HANDLED;
 }
-public do_examine ( id )
-{
-
-	if ( !uwc3x )
-	{
-		return PLUGIN_HANDLED;
-	}
-
-	new friend, body;
-	get_user_aiming ( id, friend, body );
-
-	if ( ( 0 < friend <= MAX_PLAYERS ) && ( friend != id ) && is_user_alive ( id ) && is_user_alive ( friend ) )
-	{
-		// id has a friend to examine
-		//new sReport[64] = "";
-		new fname[32];
-		get_user_name ( friend, fname, 31 );
-
-		//set_hudmessage ( 200, 100, 0, -1.0, 0.35, 0, 1.0, 7.0, 0.1, 0.2, 2 );
-
-		if ( get_user_team ( id ) != get_user_team ( friend ) )
-		{
-			//format ( sReport, 64, "%L", id, "EXAMINE_ENEMY", fname );
-			if( Util_Should_Msg_Client(id) )
-			{
-				hudchat_show(id, "%L", id, "EXAMINE_ENEMY", fname);
-				hudchat_update(id);
-				//show_hudmessage ( id, sReport );
-			}
-			return PLUGIN_HANDLED;
-		}
-
-		new fhp = get_user_health ( friend );
-		new farmor = get_user_armor ( friend );
-
-		//format ( sReport, 64, "%L", id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor );
-		if( Util_Should_Msg_Client(id) )
-		{
-			hudchat_show(id, "%L", id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor);
-			hudchat_update(id);
-			//show_hudmessage ( id, sReport );
-		}
-	}
-
-	return PLUGIN_HANDLED;
-}
-
 
 public setSpecMode ( id )
 {

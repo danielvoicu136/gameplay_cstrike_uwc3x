@@ -66,8 +66,6 @@ public Initialize_CLCMD ( )
 	register_clcmd ( "saveskills",		"ShowSaveText",		-1,			"-In long term XP mode, saves your skills" );
 	register_clcmd ( "reloadskills",	"Skills_Reload",	-1,			"-Reloads the default saved set of skills" );
 	register_clcmd ( "reloadxp",		"XP_Reload",		-1,			"-Reloads your XP in case it didnt load properly" );
-	//register_clcmd ( "examine",			"do_examine",		-1,			"-Allows a player to examine the health and armor of a teammate" );
-	//register_clcmd ( "/examine",		"do_examine",		-1,			"-Allows a player to examine the health and armor of a teammate" );
 	register_clcmd ( "toggle_lowres",	"toggle_lowres",	-1,			"-Toggle low-res mode on/off" );
 	register_clcmd ( "xp_table",		"XP_ShowTable",		-1,			"-Displays the XP table" );
 
