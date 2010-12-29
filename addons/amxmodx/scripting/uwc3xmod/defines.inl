@@ -401,10 +401,10 @@
 
 #define _hudchat_included
 #define __HUDCHAT_MAXLINES		5
-#define __HUDCHAT_MAXMSGLEN		128
+#define __HUDCHAT_MAXMSGLEN		175
 #define __HUDCHAT_UPDATEINTERVAL	0.5
 
-#define __HUDCHAT_POS_X			0.25
+#define __HUDCHAT_POS_X			0.30
 #define __HUDCHAT_POS_Y			0.10
 
 #define __HUDCHAT_TASKID_UPDATE		32462847

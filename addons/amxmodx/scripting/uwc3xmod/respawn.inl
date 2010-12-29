@@ -15,7 +15,7 @@ public func_spawn ( parm[2] )
 	}
 
 	//generic catch all
-	Initialize_PlayerData(id, true);
+	//Initialize_PlayerData(id, true);
 
 	new team[32];
 	get_user_team ( id, team, 31 );
@@ -64,6 +64,8 @@ public func_spawn ( parm[2] )
 	Remove_Grab( id );
 
 	set_task ( 0.1, "spawn_player", 2,parm, 2 );
+
+	parm[1] = 0;
 	set_task ( 0.3, "spawn_player", 2,parm, 2 );
 	set_task ( 0.5, "Give_Items", 2, parm, 2 );
 
@@ -143,10 +145,10 @@ public reset_respawngod ( args[] )
 	p_spawnprotection[id] = 0;
 	hasgodmode[id] = false;
 
-	if( Util_Should_Msg_Client(id) )
+	if( Util_Should_Msg_Client(id) && args[1] )
 	{
 		//client_print ( id, print_chat, "%L", id, "RESPAWN_GRACE_END", MOD );
-		hudchat_show(id, "%L", id, "RESPAWN_GRACE_END", MOD);
+		hudchat_show(id, "%L", id, "RESPAWN_GRACE_END");
 		hudchat_update(id);
 	}
 
@@ -159,23 +161,27 @@ public check_for_reviving ( victim_id )
 
 	if ( get_user_team ( victim_id ) == TEAM_T && pheonixexistsT > 0 )
 	{
-		if ( CVAR_DEBUG_MODE )
-		{
-			log_amx( "[UWC3X] Debug:: In TEAM_T pheonix respawn check");
-		}
+		//if ( CVAR_DEBUG_MODE )
+		//{
+		//	log_amx( "[UWC3X] Debug:: In TEAM_T pheonix respawn check");
+		//}
 
 		for ( y = 0; y < numberofplayers; ++y )
 		{
 			new id = players[y];
-			if ( CVAR_DEBUG_MODE )
-			{
-				log_amx( "[UWC3X] Debug:: get_availskillpts(id)=%d", get_availskillpts(id) );
-				log_amx( "[UWC3X] Debug:: phoenix(id)=%d", phoenix[id] );
-				log_amx( "[UWC3X] Debug:: to_be_revived(victim_id)=%d", to_be_revived[victim_id] );
-				log_amx( "[UWC3X] Debug:: endround=%d", endround );
-				log_amx( "[UWC3X] Debug:: changingteam[victim_id]=%d", changingteam[victim_id] );
-				log_amx( "[UWC3X] Debug:: is_user_alive(id)=%d", is_user_alive(id) );
-			}
+			new name[32];
+			get_user_name ( id, name, 31 );
+
+			//if ( CVAR_DEBUG_MODE )
+			//{
+			//	new name2[32];
+			//	get_user_name ( victim_id, name2, 31 );
+			//	log_amx( "[UWC3X] Debug:: %s - get_availskillpts(id)=%d", name, get_availskillpts(id) );
+			//	log_amx( "[UWC3X] Debug:: %s - phoenix(id)=%d", name, phoenix[id] );
+			//	log_amx( "[UWC3X] Debug:: %s - to_be_revived(victim_id)=%s", name, name2 );
+			//	log_amx( "[UWC3X] Debug:: %s - endround=%d", name, endround );
+			//	log_amx( "[UWC3X] Debug:: %s - is_user_alive(id)=%d", name, is_user_alive(id) );
+			//}
 
 			if ( !get_availskillpts ( id ) && phoenix[id] && !to_be_revived[victim_id] && !endround && id!=victim_id && !changingteam[victim_id] && is_user_alive ( id ) && ( get_user_team ( id )==get_user_team ( victim_id ) ) && !is_user_alive ( victim_id ) && get_user_team ( victim_id )!=SPEC )
 			{
@@ -183,21 +189,21 @@ public check_for_reviving ( victim_id )
 				{
 					log_amx( "[UWC3X] Debug:: In TEAM_T player is respawned!");
 				}
+
 				phoenix[id] = false;
 				phoenix[victim_id]=false;
-				new parm[2], name[32];
+				new parm[2];
 				parm[0] = victim_id;
 
 				// Spawns player
 				set_task ( 0.7, "func_spawn", 2, parm, 2 ) ;
-				get_user_name ( id, name, 31 );
 
 				if( Util_Should_Msg_Client(id) )
 				{
 					//set_hudmessage ( 200, 100, 0, -1.6, 0.1, 0, 1.0, 5.0, 0.1, 0.2, 2 );
 					//show_hudmessage ( victim_id, "%s has revived you", name );
 					//client_print ( victim_id, print_chat, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name );
-					hudchat_show(victim_id, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name);
+					hudchat_show(victim_id, "%L", victim_id, "PHEONIX_REVIVE4", name);
 					hudchat_update(victim_id);
 				}
 
@@ -217,7 +223,7 @@ public check_for_reviving ( victim_id )
 				{
 					//client_print ( id, print_chat, "%L", id,"PHEONIX_REVIVE2", MOD, name, xpbonus );
 					//show_hudmessage ( id, "%You have revived %s, way to go!", name );
-					hudchat_show(id, "%L", id, "PHEONIX_REVIVE2", MOD, name, xpbonus);
+					hudchat_show(id, "%L", id, "PHEONIX_REVIVE2", name, xpbonus);
 					hudchat_update(id);
 				}
 
@@ -229,30 +235,30 @@ public check_for_reviving ( victim_id )
 	}
 	else if ( get_user_team ( victim_id )== TEAM_CT && pheonixexistsCT > 0 )
 	{
-		if ( CVAR_DEBUG_MODE )
-		{
-			log_amx( "[UWC3X] Debug:: In TEAM_CT pheonix respawn check");
-		}
+		//if ( CVAR_DEBUG_MODE )
+		//{
+		//	log_amx( "[UWC3X] Debug:: In TEAM_CT pheonix respawn check");
+		//}
 		for ( y = 0; y < numberofplayers; ++y )
 		{
 			new id = players[y];
 
-			if ( CVAR_DEBUG_MODE )
-			{
-				log_amx( "[UWC3X] Debug:: get_availskillpts(id)=%d", get_availskillpts(id) );
-				log_amx( "[UWC3X] Debug:: phoenix(id)=%d", phoenix[id] );
-				log_amx( "[UWC3X] Debug:: to_be_revived(victim_id)=%d", to_be_revived[victim_id] );
-				log_amx( "[UWC3X] Debug:: endround=%d", endround );
-				log_amx( "[UWC3X] Debug:: changingteam[victim_id]=%d", changingteam[victim_id] );
-				log_amx( "[UWC3X] Debug:: is_user_alive(id)=%d", is_user_alive(id) );
-			}
+			//if ( CVAR_DEBUG_MODE )
+			//{
+			//	log_amx( "[UWC3X] Debug:: get_availskillpts(id)=%d", get_availskillpts(id) );
+			//	log_amx( "[UWC3X] Debug:: phoenix(id)=%d", phoenix[id] );
+			//	log_amx( "[UWC3X] Debug:: to_be_revived(victim_id)=%d", to_be_revived[victim_id] );
+			//	log_amx( "[UWC3X] Debug:: endround=%d", endround );
+			//	log_amx( "[UWC3X] Debug:: changingteam[victim_id]=%d", changingteam[victim_id] );
+			//	log_amx( "[UWC3X] Debug:: is_user_alive(id)=%d", is_user_alive(id) );
+			//}
 
 			if (!get_availskillpts(id) && phoenix[id] && !to_be_revived[victim_id] && !endround && id!=victim_id && !changingteam[victim_id] && is_user_alive(id) && get_user_team(id)==get_user_team(victim_id) && !is_user_alive(victim_id) && get_user_team(victim_id)!=SPEC)
 			{
-				if ( CVAR_DEBUG_MODE )
-				{
-					log_amx( "[UWC3X] Debug:: In TEAM_CT player is respawned!");
-				}
+				//if ( CVAR_DEBUG_MODE )
+				//{
+				//	log_amx( "[UWC3X] Debug:: In TEAM_CT player is respawned!");
+				//}
 
 				phoenix[id] = false;
 				phoenix[victim_id]=false;
@@ -268,7 +274,7 @@ public check_for_reviving ( victim_id )
 					//set_hudmessage ( 200, 100, 0, -1.6, 0.1, 0, 1.0, 5.0, 0.1, 0.2, 2 );
 					//show_hudmessage ( victim_id, "%s has revived you", name );
 					//client_print ( victim_id, print_chat, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name );
-					hudchat_show(victim_id, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name);
+					hudchat_show(victim_id, "%L", victim_id, "PHEONIX_REVIVE4", name);
 					hudchat_update(victim_id);
 				}
 
@@ -287,7 +293,7 @@ public check_for_reviving ( victim_id )
 				{
 					//client_print ( id, print_chat, "%L", id,"PHEONIX_REVIVE2", MOD, name, xpbonus );
 					//show_hudmessage ( id, "%You have revived %s, way to go!", name );
-					hudchat_show(id, "%L", id, "PHEONIX_REVIVE2", MOD, name, xpbonus);
+					hudchat_show(id, "%L", id, "PHEONIX_REVIVE2", name, xpbonus);
 					hudchat_update(id);
 				}
 

@@ -325,7 +325,7 @@ public admin_menu( id )
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print( id, print_console, "%L", id, "NO_ACCESS", MOD );
+				client_print( id, print_console, "%L", id, "NO_ACCESS");
 			}
 
 			return PLUGIN_HANDLED;
@@ -1060,7 +1060,7 @@ public cmd_whois( id, arg[] )
 
 	if (!pid)
 	{
-		hudchat_show(id, "%L", id, "WHOIS_NOTFOUND", MOD, arg);
+		hudchat_show(id, "%L", id, "WHOIS_NOTFOUND", arg);
 		hudchat_update(id);
 		return PLUGIN_HANDLED;
 	}
@@ -1087,20 +1087,20 @@ public cmd_whois( id, arg[] )
 	format( stemp, 1024, "Ultimates: %d/%d<br>", ultlearned[id], p_maxultimates[id] );
 	add( message, 4096, stemp );
 	add( message, 4096, "</td><td width=50%><font color=#FFB000>" );
+	
 	if (p_level[pid] == (MAX_LEVEL-1))
 	{
-		//format( stemp, 1024, "XP: %d<br>", playerxp[pid] );
+		format( stemp, 1024, "XP: %d<br>", playerxp[pid] );
 	}
 	else
 	{
-		format( stemp, 1024, "XP: %d / %d<br>",
-		playerxp[pid], xplevel_lev[p_level[pid]+1] );
+		format( stemp, 1024, "XP: %d / %d<br>", playerxp[pid], xplevel_lev[p_level[pid]+1] );
 	}
 
 	add( message, 4096, stemp );
 	if (p_level[pid] == (MAX_LEVEL-1))
 	{
-		//add( message, 4096, "XP Needed: NA<br>" );
+		add( message, 4096, "Max Level Achieved<br>" );
 	}
 	else
 	{
@@ -1162,6 +1162,7 @@ public cmd_whois( id, arg[] )
             copy(sname, 31, skillset7[j-48]);
         else if (j <= 64)
             copy(sname, 31, skillset8[j-56]);
+
         if (p_skills[pid][j])
         {
             bHasASkill = true;
@@ -1169,16 +1170,20 @@ public cmd_whois( id, arg[] )
             add(temp,1024,temp2);
         }
     }
+
     if (!bHasASkill)
     {
         add(temp,1024, "No skills trained");
     }
-    add( message, 2048, temp );
+    
+	add( message, 2048, temp );
     add( message, 2048, "</td></tr>" );
     add( message,2048,"</table></center><br /><br />^n^n" );
-    new mtitle[64];
+    
+	new mtitle[64];
     format( mtitle, 64, "Character Sheet for %s", name );
-    show_motd( id, message, mtitle );
+    
+	show_motd( id, message, mtitle );
     return PLUGIN_HANDLED;
 }  
 
@@ -1577,7 +1582,7 @@ public player_skills( id )
 
 	if( Util_Should_Msg_Client(id) )
 	{
-		hudchat_show(id, "%L", id, "PLAYERSKILLS", MOD);
+		hudchat_show(id, "%L", id, "PLAYERSKILLS");
 		hudchat_update(id);
 		//client_print( id, print_chat, "%L", id, "PLAYERSKILLS", MOD);
 	}

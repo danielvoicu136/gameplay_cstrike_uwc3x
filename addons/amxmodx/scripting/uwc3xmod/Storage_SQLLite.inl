@@ -10,6 +10,7 @@ public IsSQLiteConnected ( )
 }
 
 
+
 public LoadSQLLiteConfig ( )
 {
 	//No configs to load for sqlite
@@ -190,8 +191,21 @@ public SkillSetsSqlLite_Table ( )
 }
 
 
+
+
 public LoadXPSQLLite ( id )
 {
+
+	if ( CVAR_ENABLE_UWC3X != 1 )
+	{
+		return PLUGIN_HANDLED;
+	}
+
+	if ( CVAR_SAVE_XP != 1 )
+	{
+		return PLUGIN_CONTINUE;
+	}
+
 
 	if ( CVAR_ENABLE_UWC3X != 1 )
 	{
@@ -236,6 +250,20 @@ public LoadXPSQLLite ( id )
 
 	player_id = id;
 
+	//Create handle and then the connection
+	g_SqlTuple = SQL_MakeDbTuple ( CVAR_MYSQL_HOSTNAME, CVAR_MYSQL_USERNAME, CVAR_MYSQL_PASSWORD, CVAR_MYSQL_DATABASE );
+
+	//Try and connect
+	SqlConnection = SQL_Connect ( g_SqlTuple, ErrorCode, g_Error, 511 );
+
+	//Check for an error
+	if ( !SqlConnection )
+	{
+		log_amx( "[UWC3X] SQLLite :: Loading XP :: Connected [FAILED]" );
+		log_amx( "[UWC3X] Error connecting to SQLLite database : %s", g_Error );
+		return PLUGIN_CONTINUE;
+	}
+
 	//Set the Query
 	Query = SQL_PrepareQuery ( SqlConnection, squery );
 
@@ -244,17 +272,234 @@ public LoadXPSQLLite ( id )
 	{
 		// if there were any problems
 		SQL_QueryError ( Query, g_Error, 511 );
-		log_amx( "[UWC3X] SQLLite :: Error Getting player XP" );
+		log_amx( "[UWC3X] SQLLite :: Error Loading players XP" );
 		log_amx( "[UWC3X] Error:: %s", g_Error );
 		log_amx( "[UWC3X] Query:: %s", squery );
 	}
 	else
 	{
+		new id = player_id;
+		new ip[32];
+		new xp = 0;
+		new pid[32];
+		new skills[MAX_SKILLS] = 0;
+		new att[MAX_ATTRIBS] = 0;
+		new res[MAX_RESISTS] = 0;
+
+		//Now that we have no errors, I will reset the xp loading var, this is in case there are
+		//errors so that it will continue to retry
+		NumResults = SQL_NumResults(Query);
+
+		if ( !NumResults || NumResults == 0 || is_user_bot( id ) )
+		{
+			//no data exists
+			if( Util_Should_Msg_Client(id) )
+			{
+				//client_print ( id, print_chat, "%L", id, "LOAD_XP_NO_DATA", MOD );
+				hudchat_show(player_id, "%L", player_id, "LOAD_XP_NO_DATA");
+				hudchat_update(player_id);
+			}
+
+			//If the enable starting XP is turned on, then give them the XP
+			// this is for new players who do not yet exist in the database, existing players are below
+		
+			if ( CVAR_DEBUG_MODE && is_user_bot( id ) )
+			{
+				log_amx( "[UWC3X] DEBUG: SQLLite->_LoadXP: Player is a bot");
+			}
+
+			//If starting XP is enabled, do the check
+			if ( CVAR_ENABLE_STARTING_SYSTEM )
+			{
+				if( CVAR_STARTING_METHOD == 1 )
+				{
+					//It is enabled and its set to XP based, so check to see if the starting XP is higher then what they have now
+					if ( xp < CVAR_STARTING_XP )
+					{
+						//it must be, so lets set their XP and let them know
+						xp = CVAR_STARTING_XP;
+						if( Util_Should_Msg_Client(id) )
+						{
+							//client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_XP_MESSAGE", CVAR_STARTING_XP );
+							hudchat_show(player_id, "%L", player_id, "STARTING_XP_MESSAGE", CVAR_STARTING_XP);
+							hudchat_update(player_id);
+						}
+					}
+				}
+				else
+				{
+					//Override default level if its a bot and use the bot level cvar
+					if( is_user_bot(id))
+					{
+						xp = xplevel_lev[CVAR_BOT_LEVEL];
+					}
+					else
+					{
+						//It is enabled and its set to XP based, so check to see if the starting XP is higher then what they have now
+						if ( xp < xplevel_lev[CVAR_STARTING_LEVEL] )
+						{
+							//it must be, so lets set their XP and let them know
+							xp = xplevel_lev[CVAR_STARTING_LEVEL];
+							if( Util_Should_Msg_Client(id) )
+							{
+								//client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_LEVEL_MESSAGE", xp );
+								hudchat_show(player_id, "%L", player_id, "STARTING_LEVEL_MESSAGE", xp);
+								hudchat_update(player_id);
+							}
+						}
+					}
+				}
+
+				playerxp[id] = xp;
+				if ( CVAR_DEBUG_MODE )
+				{
+					log_amx( "[UWC3X] DEBUG: SQLLite->_LoadXP: Set xp to %d", xp);
+				}
+			}
+			else
+			{
+				if( Util_Should_Msg_Client(id) )
+				{
+					//client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_XP_DISABLED" );
+					hudchat_show(player_id, "%L", player_id, "STARTING_XP_DISABLED");
+					hudchat_update(player_id);
+				}
+			}
+
+			xpreadytoload[id] = 0;
+			return PLUGIN_CONTINUE;
+		}
+		else
+		{
+			new sName[64];
+			new temp[32], sqlField;
+
+			//They have data, lets load it
+			//Set the PlayerID, XP, IP, and Last time
+			SQL_ReadResult ( Query, 0, pid, 31 );
+			xp = SQL_ReadResult ( Query, 1 );
+			SQL_ReadResult ( Query, 2, ip, 31 );
+			SQL_ReadResult ( Query, 3, mtimet, 31 );
+
+			copy( temp, 31, "name");
+			sqlField = SQL_FieldNameToNum(Query, temp)
+			SQL_ReadResult ( Query, sqlField, sName, 63 );
+
+			//Start setting the skills
+			for ( new k = 1; k < (MAX_SKILLS); k++ )
+			{
+				format( temp, 31, "skill%d", k);
+				sqlField = SQL_FieldNameToNum(Query, temp)
+				skills[k] = SQL_ReadResult ( Query, sqlField );
+			}
+
+			//Set the attributes
+			for ( new k = 1; k < (MAX_ATTRIBS); k++ )
+			{
+				format( temp, 31, "att%d", k);
+				sqlField = SQL_FieldNameToNum(Query, temp)
+				att[k] = SQL_ReadResult ( Query, sqlField );
+
+				//If the attrib is less then the base, or greater then max, reset to base
+				if( ( ATTRIB_MAX_VALUE < att[k] ) || ( att[k] < ATTRIB_BASE ) )
+					att[k] = ATTRIB_BASE;
+			}
+
+			//Set the resistances
+			for ( new k = 1; k < (MAX_RESISTS); k++ )
+			{
+				format( temp, 31, "res%d", k);
+				sqlField = SQL_FieldNameToNum(Query, temp)
+				res[k] = SQL_ReadResult ( Query, sqlField );
+			}
+
+			if ( CVAR_ENABLE_STARTING_SYSTEM )
+			{
+				if( CVAR_STARTING_METHOD == 1 )
+				{
+					if ( CVAR_DEBUG_MODE )
+					{
+						log_amx( "[UWC3X] DEBUG: SQLLite->_LoadXP: No Records, client %s given %d starting XP ", tempVar, CVAR_STARTING_XP);
+					}
+
+					if( Util_Should_Msg_Client(id) )
+					{
+						//client_print(id, print_chat, "%L", "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP );
+						hudchat_show(id, "%L", id, "LOAD_XP_STARTING_XP", CVAR_STARTING_XP);
+						hudchat_update(id);
+					}
+
+					playerxp[id] = CVAR_STARTING_XP;
+
+				}
+				else
+				{
+					//Override default level if its a bot and use the bot level cvar
+					if( is_user_bot(id))
+					{
+						playerxp[id] = xplevel_lev[CVAR_BOT_LEVEL];
+					}
+					else
+					{
+						if( Util_Should_Msg_Client(id) )
+						{
+							//client_print(id, print_chat, "%L", "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL );
+							hudchat_show(id, "%L", id, "LOAD_XP_STARTING_LEVEL", CVAR_STARTING_LEVEL);
+							hudchat_update(id);
+						}
+
+						playerxp[id] = xplevel_lev[CVAR_STARTING_LEVEL];
+					}
+				}
+			}
+
+			playerxp[id] = xp;
+			displaylevel ( id, 0 );
+			p_attribs[id] = att;
+			p_resists[id] = res;
+
+		}
+
+		//Set Player Value
+		Set_Wisdom_Bonuses( id );
+		p_skills[id] = skills;
+
+		//Check for admin only skills, if they have any, dont add them to the users skill array
+		for ( new i = 1; i < MAX_SKILLS; i++ )
+		{
+			if ( CVAR_ENABLE_ADMIN_ONLY_SKILLS )
+			{
+				if ( !admin_only[p_skills[id][i]] )
+				{
+					skills[i] = p_skills[id][i];
+				}
+			}
+
+			if ( ( p_skills[id][i] >= 1 ) && ( skill_ultimates[i][0] ) && ( !admin_only[p_skills[id][i]] ) )
+			{
+				if( Util_Should_Msg_Client(id) )
+				{
+					client_print ( id, print_console, "%L", id, "ULTIMATE_RETRIEVED", MOD, skill_ultimates[i][0] );
+				}
+			}
+		}
+		
+		Set_Ult_Count( id );
+
+		p_skills[id] = skills;
+		xpreadytoload[id] = 0;
+
+		if( CVAR_DEBUG_MODE )
+		{
+			log_amx( "[UWC3X] DEBUG :: SQLLite -> Ultimates allowed after loading = %d", ultlearned[id] );
+		}
+
 		//Free the stuff
 		SQL_FreeHandle ( Query );
 		SQL_FreeHandle ( SqlConnection );
 	}
 
+	log_amx( "[UWC3X] SQLLite :: Loading XP :: [Done]" );
 	return PLUGIN_CONTINUE;
 
 }
@@ -562,6 +807,8 @@ public LoadSkillSetSQLLite( id, skillsetIDX )
 	SQL_ThreadQuery ( g_SqlTuple, "_LoadSkillSet", squery );
 	return PLUGIN_CONTINUE;
 }
+
+
 
 public SQLLiteClose ( )
 {

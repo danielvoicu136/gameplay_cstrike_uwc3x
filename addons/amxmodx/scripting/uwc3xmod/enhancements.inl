@@ -741,10 +741,10 @@ public Bot_Pick_Attribs( id )
 		p_attribs[id][attrib_num] += 1;
 		apts--;
 
-		if ( CVAR_DEBUG_MODE )
-		{
-			log_amx( "[UWC3X] DEBUG :: Bot_Pick_Attribs -> attrib_num=%d, apts=%d", attrib_num, apts);
-		}
+		//if ( CVAR_DEBUG_MODE )
+		//{
+		//	log_amx( "[UWC3X] DEBUG :: Bot_Pick_Attribs -> attrib_num=%d, apts=%d", attrib_num, apts);
+		//}
 
 		switch( attrib_num )
 		{
@@ -783,15 +783,7 @@ public Bot_Pick_Resists( id )
 			
 		p_resists[id][res_num] += 1;
 		rpts--;
-
-		if ( CVAR_DEBUG_MODE )
-		{
-			log_amx( "[UWC3X] DEBUG :: Bot_Pick_Resists -> res_num=%d, rpts=%d", res_num, rpts);
-		}
 	}
 
 	return PLUGIN_CONTINUE;
 }
-
-
-/* something ? */

@@ -427,7 +427,7 @@ public amx_restartround(id, level)
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print ( id, print_console, "%L", id, "NO_ACCESS", MOD );
+				client_print ( id, print_console, "%L", id, "NO_ACCESS" );
 			}
 
 			return PLUGIN_HANDLED;
@@ -1121,7 +1121,7 @@ public toggle_lowres ( id )
 		lowres[id] = false;
 		if( Util_Should_Msg_Client(id) )
 		{
-			hudchat_show(id, "%L", id, "LOW_RES_OFF", MOD);
+			hudchat_show(id, "%L", id, "LOW_RES_OFF");
 			hudchat_update(id);
 			//client_print ( id, print_chat, "%L", id, "LOW_RES_OFF", MOD );
 		}
@@ -1131,7 +1131,7 @@ public toggle_lowres ( id )
 		lowres[id] = true;
 		if( Util_Should_Msg_Client(id) )
 		{
-			hudchat_show(id, "%L", id, "LOW_RES_ON", MOD);
+			hudchat_show(id, "%L", id, "LOW_RES_ON");
 			hudchat_update(id);
 			//client_print ( id, print_chat, "%L", id, "LOW_RES_ON", MOD );
 		}
@@ -1147,101 +1147,119 @@ public setSpecMode ( id )
 	g_specMode[ id ] = ( arg[10] == '2' ) ? true : false;
 }
 
-public showRank ( id )
-{
 
-	if ( !CVAR_SPECTATOR_INFO )
-	{
-		return PLUGIN_CONTINUE;
-	}
 
-	if ( !g_specMode[id] )
-	{
-		return PLUGIN_CONTINUE;
-	}
+//public hideStatus ( id )
+//{
+//	if ( CVAR_SHOW_PLAYER )
+//	{
+//		if( Util_Should_Msg_Client(id) )
+//		{
+//			set_hudmessage ( 0,0,0,0.0,0.0,0, 0.0, 0.01, 0.0, 0.0, 4 );
+//			show_hudmessage ( id,"" );
+//		}
+//	}
+//}
+//public showRank ( id )
+//{
+//
+//	if ( !CVAR_SPECTATOR_INFO )
+//	{
+//		return PLUGIN_CONTINUE;
+//	}
+//
+//	if ( !g_specMode[id] )
+//	{
+//		return PLUGIN_CONTINUE;
+//	}
+//
+//	new a = read_data ( 2 );
+//
+//	if ( !is_user_connected ( a ) )
+//	{
+//		return PLUGIN_CONTINUE;
+//	}
+//
+//	new name[32];
+//	get_user_name ( a, name, 31 );
+//
+//	if ( playerxp[a] < 0 )
+//	{
+//		playerxp[a] = 0;
+//	}
+//
+//	return PLUGIN_CONTINUE;
+//
+//}
+//
+//public showStatus ( id )
+//{
+//	new pid = read_data ( 2 );
+//
+//	if ( get_user_team ( id )==get_user_team ( pid ) && ( playeritem2[pid]==CHAMELEON || skinchanged[pid] ) && is_user_alive ( pid ) )
+//	{
+//		if( Util_Should_Msg_Client_Alive( id ) )
+//		{
+//			client_print ( id, print_center, "%L", id, "SAME_TEAM" );
+//			if ( file_exists ( "sound/uwc3x/antend.wav" ) ==1 )
+//			{
+//				emit_sound ( id,CHAN_ITEM, "uwc3x/antend.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+//			}
+//		}
+//	}
+//
+//	if ( CVAR_SHOW_PLAYER && !freezetime )
+//	{
+//		new name[32], color1 = 0,color2 = 0;
+//		get_user_name ( pid, name, 31 );
+//
+//		if ( get_user_team ( pid ) == 1 )
+//		{
+//			color1 = 255;
+//		}
+//		else
+//		{
+//			color2 = 255;
+//		}
+//
+//		if ( g_friend[id] == 1 )
+//		{
+//			set_hudmessage ( color1,50,color2,-1.0,0.60,1, 0.01, 3.0, 0.01, 0.01, 4 );
+//			new health = get_user_health ( pid );
+//
+//			if ( health>1500 )
+//			{
+//				health = health-2048;
+//			}
+//			else if ( health>500 )
+//			{
+//				health = health-1024;
+//			}
+//
+//			if( Util_Should_Msg_Client_Alive( id ) )
+//			{
+//				//show_hudmessage ( id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
+//				hudchat_show(id, "%L", id, "EXAMINE_ENEMY_HPAP", name, health, get_user_armor ( pid ));
+//				hudchat_update(id);
+//			}
+//		}
+//		else
+//		{
+//			if( Util_Should_Msg_Client_Alive( id ) )
+//			{
+//				hudchat_show(id,name);
+//				hudchat_update(id);
+//				//set_hudmessage ( color1,50,color2,-1.0,0.60,1, 0.01, 3.0, 0.01, 0.01, 4 );
+//				//show_hudmessage ( id,name );
+//			}
+//		}
+//	}
+//}
+//
+//
 
-	new a = read_data ( 2 );
 
-	if ( !is_user_connected ( a ) )
-	{
-		return PLUGIN_CONTINUE;
-	}
 
-	new name[32];
-	get_user_name ( a, name, 31 );
-
-	if ( playerxp[a] < 0 )
-	{
-		playerxp[a] = 0;
-	}
-
-	return PLUGIN_CONTINUE;
-
-}
-
-public showStatus ( id )
-{
-	new pid = read_data ( 2 );
-
-	if ( get_user_team ( id )==get_user_team ( pid ) && ( playeritem2[pid]==CHAMELEON || skinchanged[pid] ) && is_user_alive ( pid ) )
-	{
-		if( Util_Should_Msg_Client_Alive( id ) )
-		{
-			client_print ( id, print_center, "%L", id, "SAME_TEAM" );
-			if ( file_exists ( "sound/uwc3x/antend.wav" ) ==1 )
-			{
-				emit_sound ( id,CHAN_ITEM, "uwc3x/antend.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-			}
-		}
-	}
-
-	if ( CVAR_SHOW_PLAYER && !freezetime )
-	{
-		new name[32], color1 = 0,color2 = 0;
-		get_user_name ( pid, name, 31 );
-
-		if ( get_user_team ( pid ) == 1 )
-		{
-			color1 = 255;
-		}
-		else
-		{
-			color2 = 255;
-		}
-
-		if ( g_friend[id] == 1 )
-		{
-			set_hudmessage ( color1,50,color2,-1.0,0.60,1, 0.01, 3.0, 0.01, 0.01, 4 );
-			new health = get_user_health ( pid );
-
-			if ( health>1500 )
-			{
-				health = health-2048;
-			}
-			else if ( health>500 )
-			{
-				health = health-1024;
-			}
-
-			if( Util_Should_Msg_Client_Alive( id ) )
-			{
-				//show_hudmessage ( id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
-				hudchat_show(id, "%L", id, "EXAMINE_ENEMY_HPAP", name, health, get_user_armor ( pid ));
-				hudchat_update(id);
-			}
-		}
-		else
-		{
-			if( Util_Should_Msg_Client_Alive( id ) )
-			{
-				hudchat_show(id,name);
-				hudchat_update(id);
-				//set_hudmessage ( color1,50,color2,-1.0,0.60,1, 0.01, 3.0, 0.01, 0.01, 4 );
-				//show_hudmessage ( id,name );
-			}
-		}
-	}
-}
 public BuyZone ( id )
 {
 	if ( read_data ( 1 ) )
@@ -1259,18 +1277,6 @@ public BuyZone ( id )
 public setTeam ( id )
 {
 	g_friend[id] = read_data ( 2 );
-}
-
-public hideStatus ( id )
-{
-	if ( CVAR_SHOW_PLAYER )
-	{
-		if( Util_Should_Msg_Client(id) )
-		{
-			set_hudmessage ( 0,0,0,0.0,0.0,0, 0.0, 0.01, 0.0, 0.0, 4 );
-			show_hudmessage ( id,"" );
-		}
-	}
 }
 
 public set_buytime ( )

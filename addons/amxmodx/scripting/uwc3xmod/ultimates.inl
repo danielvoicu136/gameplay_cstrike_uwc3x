@@ -169,7 +169,9 @@ public Ult_Can_Use ( id , IDX )
 	{
 		if( Util_Should_Msg_Client_Dead(id))
 		{
-			client_print ( id, print_chat, "%L", id, "SHHH_DEAD_MESSAGE", MOD );
+			//client_print ( id, print_chat, "%L", id, "SHHH_DEAD_MESSAGE" );
+			hudchat_show(id, "%L", id, "SHHH_DEAD_MESSAGE");
+			hudchat_update(id);
 		}
 
 		return false;
@@ -604,22 +606,19 @@ public Get_Ult_Count( id )
 public Set_Ult_Count( id )
 {
 	new count = 0;
-
 	for ( new j = 1; j < MAX_SKILLS; j++ )
 	{
-		if( skill_ultimates[j][0]  && p_skills[id][j] )
+		if( skill_ultimates[j][0] && p_skills[id][j] )
 		{
 			count++;
 		}
 	}
 
 	ultlearned[id]=count;
-
 	if( CVAR_DEBUG_MODE )
 	{
 		log_amx( "[UWC3X] DEBUG :: Set_Ult_Count -> ultlearned[id] = %d", ultlearned[id] );
 	}
-
 }
 
 /* Chain Lightning */

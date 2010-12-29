@@ -7,9 +7,9 @@ public RegisterEvents ( )
 	register_event ( "TextMsg",			"Target_Bombed",	"a",	"2&#Target_Bombed"				 );
 	register_event ( "TextMsg",			"setSpecMode",		"bd",	"2&ec_Mod"						 );
 	register_event ( "StatusValue",		"setTeam",			"be",	"1=1"							 );
-	register_event ( "StatusValue",		"showStatus",		"be",	"1=2",		"2!0"				 );
-	register_event ( "StatusValue",		"hideStatus",		"be",	"1=1",		"2=0"				 );
-	register_event ( "StatusValue",		"showRank",			"bd",	"1=2"							 );
+	//register_event ( "StatusValue",		"showStatus",		"be",	"1=2",		"2!0"				 );
+	//register_event ( "StatusValue",		"hideStatus",		"be",	"1=1",		"2=0"				 );
+	//register_event ( "StatusValue",		"showRank",			"bd",	"1=2"							 );
 	register_event ( "StatusIcon",		"BuyZone",			"be",	"2=buyzone"						 );
 	register_event ( "StatusIcon",		"got_defuse",		"be",	"1=1",		"1=2",	"2=defuser" );
 	register_event ( "ResetHUD",		"new_round",		"b"										 );
@@ -497,7 +497,7 @@ public new_round ( id )
 	set_task ( 3.0, "monitor_players", TASK_MONITOR_PLAYERS );
 
 	buytime = true;
-	checkmap ( );
+	checkmap();
 	new parm[2];
 	parm[0] = id;
 
@@ -1130,7 +1130,7 @@ public Event_Team_Win( TEAM )
 				if( is_user_connected( players[a] ) && !is_user_bot( players[a] ) )
 				{
 					//client_print ( players[a], print_center, "%L", players[a], "WON_ROUND_XP", MOD, sName, temp );
-					hudchat_show(players[a], "%L", players[a], "WON_ROUND_XP", MOD, sName, temp);
+					hudchat_show(players[a], "%L", players[a], "WON_ROUND_XP",  sName, temp);
 					hudchat_update(players[a]);
 				}
 			}
@@ -1229,7 +1229,7 @@ public Event_Planted_Bomb( id )
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
 			//client_print ( id, print_center, "%L", id, "BOMB_PLANT_XP1", MOD, sName, temp );
-			hudchat_show(id, "%L", id, "BOMB_PLANT_XP1", MOD, sName, temp);
+			hudchat_show(id, "%L", id, "BOMB_PLANT_XP1",  sName, temp);
 			hudchat_update(id);
 		}
 	}
@@ -1254,8 +1254,8 @@ public Event_Planted_Bomb( id )
 
 				if( is_user_connected( targetid ) && !is_user_bot( targetid ) )
 				{
-					client_print ( targetid, print_center, "%L", targetid, "BOMB_PLANT_XP2", MOD, sName, temp );
-					hudchat_show(targetid, "%L", targetid, "BOMB_PLANT_XP2", MOD, sName, temp);
+					//client_print ( targetid, print_center, "%L", targetid, "BOMB_PLANT_XP2", MOD, sName, temp );
+					hudchat_show(targetid, "%L", targetid, "BOMB_PLANT_XP2",  sName, temp);
 					hudchat_update(targetid);
 				}
 			}
@@ -1286,7 +1286,7 @@ public Event_Defused_Bomb( id )
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
 			//client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP1", MOD, sName, temp );
-			hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP1", MOD, sName, temp, temp);
+			hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP1",  sName, temp, temp);
 			hudchat_update(id);
 		}
 	}
@@ -1314,7 +1314,7 @@ public Event_Defused_Bomb( id )
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
 					//client_print ( targetid, print_center, "%L", targetid, "BOMB_DEFUSE_XP2", MOD, sName, temp );
-					hudchat_show(targetid, "%L", targetid, "BOMB_DEFUSE_XP2", MOD, sName, temp);
+					hudchat_show(targetid, "%L", targetid, "BOMB_DEFUSE_XP2",  sName, temp);
 					hudchat_update(targetid);
 				}
 			}
@@ -1340,7 +1340,7 @@ public Event_Defuse_Try( id, Kit )
 					if( Util_Should_Msg_Client_Alive( id ) )
 					{
 						//client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP3", MOD, sName, temp );
-						hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP3", MOD, sName, temp );
+						hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP3",  sName, temp );
 						hudchat_update(id);
 					}
 				}
@@ -1350,7 +1350,7 @@ public Event_Defuse_Try( id, Kit )
 					if( Util_Should_Msg_Client_Alive( id ) )
 					{
 						//client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP4", MOD, id, temp );
-						hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP4", MOD, id, temp);
+						hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP4",  id, temp);
 						hudchat_update(id);
 					}
 				}
@@ -1377,7 +1377,7 @@ public Event_Spawn_Bomb( id )
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
 				//client_print ( id, print_center, "%L", id, "BOMB_SPAWN", MOD, sName, temp );
-				hudchat_show(id, "%L", id, "BOMB_SPAWN", MOD, sName, temp);
+				hudchat_show(id, "%L", id, "BOMB_SPAWN", sName, temp);
 				hudchat_update(id);
 			}
 		}
@@ -1400,7 +1400,7 @@ public Event_Bomb_Got( id, PickedUp )
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
 					//client_print ( id, print_center, "%L", id, "BOMB_PICKUP", MOD, sName, temp );
-					hudchat_show(id, "%L", id, "BOMB_PICKUP", MOD, sName, temp);
+					hudchat_show(id, "%L", id, "BOMB_PICKUP", sName, temp);
 					hudchat_update(id);
 				}
 
@@ -1415,7 +1415,7 @@ public Event_Bomb_Got( id, PickedUp )
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
 					//client_print ( id, print_center, "%L", id, "BOMB_DROP", MOD, sName, temp );
-					hudchat_show(id, "%L", id, "BOMB_DROP", MOD, sName, temp);
+					hudchat_show(id, "%L", id, "BOMB_DROP", sName, temp);
 					hudchat_update(id);
 				}
 
@@ -1443,7 +1443,7 @@ public Event_Hostage( id, Touched, Rescued, Killed )
 		if( Util_Should_Msg_Client_Alive( id ))
 		{
 			//client_print ( id, print_center, "%L", id, "HOSTAGE_KILL", MOD,sName, ( temp ) );
-			hudchat_show(id, "%L", id, "HOSTAGE_KILL", MOD,sName, ( temp ));
+			hudchat_show(id, "%L", id, "HOSTAGE_KILL",sName, ( temp ));
 			hudchat_update(id);
 		}
 	}
@@ -1455,7 +1455,7 @@ public Event_Hostage( id, Touched, Rescued, Killed )
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
 			//client_print ( id, print_center, "%L", id, "HOSTAGE_TOUCH", MOD, sName, temp );
-			hudchat_show(id, "%L", id, "HOSTAGE_TOUCH", MOD, sName, temp);
+			hudchat_show(id, "%L", id, "HOSTAGE_TOUCH", sName, temp);
 			hudchat_update(id);
 		}
 	}
@@ -1471,7 +1471,7 @@ public Event_Hostage( id, Touched, Rescued, Killed )
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
 			//client_print ( id, print_center, "%L", id, "HOSTAGE_RESCUE1", MOD, sName, temp );
-			hudchat_show(id, "%L", id, "HOSTAGE_RESCUE1", MOD, sName, temp);
+			hudchat_show(id, "%L", id, "HOSTAGE_RESCUE1", sName, temp);
 			hudchat_update(id);
 		}
 
@@ -1500,7 +1500,7 @@ public Event_Hostage( id, Touched, Rescued, Killed )
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
 					//client_print ( targetid, print_center, "%L", targetid, "HOSTAGE_RESCUE2", MOD, sName, temp );
-					hudchat_show(targetid, "%L", targetid, "HOSTAGE_RESCUE2", MOD, sName, temp);
+					hudchat_show(targetid, "%L", targetid, "HOSTAGE_RESCUE2", sName, temp);
 					hudchat_update(targetid);
 				}
 			}
@@ -1541,7 +1541,7 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
 				//client_print ( id, print_center, "%L", id, "VIP_KILL", MOD, sName, temp, sNameVIP );
-				hudchat_show(id, "%L", id, "VIP_KILL", MOD, sName, temp, sNameVIP);
+				hudchat_show(id, "%L", id, "VIP_KILL", sName, temp, sNameVIP);
 				hudchat_update(id);
 			}
 		}
@@ -1558,7 +1558,7 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
 				//client_print ( id, print_center, "%L", id, "VIP_SPAWN", MOD, sName, temp );
-				hudchat_show(id, "%L", id, "VIP_SPAWN", MOD, sName, temp);
+				hudchat_show(id, "%L", id, "VIP_SPAWN",  sName, temp);
 				hudchat_update(id);
 			}
 		}
@@ -1576,7 +1576,7 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
 			//client_print ( id, print_center, "%L", id, "VIP_ESCAPE1", MOD, sName, temp );
-			hudchat_show(id, "%L", id, "VIP_ESCAPE1", MOD, sName, temp);
+			hudchat_show(id, "%L", id, "VIP_ESCAPE1",  sName, temp);
 			hudchat_update(id);
 		}
 
@@ -1601,7 +1601,7 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 				if( Util_Should_Msg_Client_Alive( targetid ) )
 				{
 					//client_print ( targetid, print_center, "%L", targetid, "VIP_ESCAPE2", MOD, nName, temp, sName );
-					hudchat_show(targetid, "%L", targetid, "VIP_ESCAPE2", MOD, nName, temp, sName);
+					hudchat_show(targetid, "%L", targetid, "VIP_ESCAPE2",  nName, temp, sName);
 					hudchat_update(targetid);
 				}
 			}

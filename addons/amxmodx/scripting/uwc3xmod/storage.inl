@@ -58,7 +58,7 @@ public LoadXP ( id )
 	if ( GetStorageType() == 1 )
 	{
 		//Load SQL Stuff
-		LoadXPMySQL ( id );	
+		LoadXPMySQL2 ( id );	
 	}
 	else if ( GetStorageType() == 2 )
 	{
@@ -173,7 +173,7 @@ public SaveSinglePlayerXP ( id )
 		if( Util_Should_Msg_Client(id) )
 		{
 			//client_print ( id,print_chat,"%L", id, "SAVE_XP_DISABLED", MOD );
-			hudchat_show(id, "%L", id, "SAVE_XP_DISABLED", MOD);
+			hudchat_show(id, "%L", id, "SAVE_XP_DISABLED");
 			hudchat_update(id);
 		}
 	
@@ -183,7 +183,7 @@ public SaveSinglePlayerXP ( id )
 	if( Util_Should_Msg_Client(id) )
 	{
 		//client_print ( id,print_chat, "%L", id, "SAVING_XP_NOW", MOD );
-		hudchat_show(id, "%L", id, "SAVING_XP_NOW", MOD);
+		hudchat_show(id, "%L", id, "SAVING_XP_NOW");
 		hudchat_update(id);
 	}
 

@@ -145,4 +145,6 @@ public Initialize_CLCMD ( )
 	register_concmd ( "amx_givemole",		"Amx_GiveMole",				-1,		"-Admin make a mole command" );
 	register_concmd ( "playerskills",		"player_skills",			-1,		"-Displays the players rank and skills" );
 	register_concmd ( "setskillset",		"Skills_Check_SkillSet",	-1,		"-Displays the players rank and skills" );
+	register_concmd ( "amx_maxresists",		"amx_maxresists",			-1,		"-Console command used to max players resists" );
+	register_concmd ( "amx_maxattribs",		"amx_maxattribs",			-1,		"-Console command used to max players resists" );
 }

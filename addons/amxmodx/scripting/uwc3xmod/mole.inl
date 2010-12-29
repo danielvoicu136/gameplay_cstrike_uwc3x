@@ -18,7 +18,7 @@ public Amx_GiveMole( id, level, cid )
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print( id, print_console, "%L", id, "NO_ACCESS", MOD );
+				client_print( id, print_console, "%L", id, "NO_ACCESS");
 			}
 		
 			return PLUGIN_HANDLED;

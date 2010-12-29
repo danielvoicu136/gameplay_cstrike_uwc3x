@@ -8,7 +8,7 @@ SAY = say
 IN_CONSOLE = In console:
 PLAYER_NAME = player_name
 UWC3X_VERSION = You are playing %s version %s by %s
-PLAYERSKILLS = [%s] /Playerskills is deprecated, please use /who instead.
+PLAYERSKILLS = /Playerskills is deprecated, please use /who instead.
 
 XP_GIVE_MULT = Give Multiple Players XP
 XP_GIVE_ONE = Give Individual Players XP
@@ -37,18 +37,19 @@ UWC3X_XP_TABLE_HEADER = UWC3X XP Table for this Server:
 ENH_COST_TABLE = Attrib Pt Cost: %d E-XP , Resist Pt Cost: %d E-XP
 UWC3X_XP_TABLE = [level %d] XP: %d Total XP: %d
 
-NO_ACCESS = [%s] You have no access to that command
-COMMAND_DISABLED = [%s] This command has been disabled.
+NO_ACCESS = You have no access to that command
+COMMAND_DISABLED = This command has been disabled.
 ADMINMENU_OFF = The Admin Menu has been disabled on this server
 ADMIN_GIVEXP_LOG = [%s] %s used Admin-Menu XP [%s] for %s
-ADMIN_GIVEXP = [%s] The admin just awarded you %d experience.
+ADMIN_GIVEXP = The admin just awarded you %d experience.
 ADMIN_XP1 = Give %d XP
 
+ADMIN_MAX_RESISTS = [%s] The admin has given you max resistances.  What a nice guy!
+ADMIN_MAX_ATTRIBS = [%s] The admin has given you max attributes.  What a nice guy!
 ADMIN_RESET_SKILLS = [%s] The admin has reset your skills, please pick new ones on the next round
 ADMIN_RESET_ATTRIBS = [%s] The admin has reset your attribs, please pick new ones on the next round
 ADMIN_RESET_RESISTS = [%s] The admin has reset your resists, please pick new ones on the next round
 ADMIN_RESET_ALL = [%s] The admin has reset your charsheet, please pick new skills, attribs and resists on the next round
-
 
 ADMIN_XP_T_LOG = [%s] %s used Admin-Menu XP [%d] for team Terrorist
 ADMIN_XP_CT_LOG = [%s] %s used Admin-Menu XP [%d] for team CT
@@ -92,7 +93,7 @@ NEXT_PAGE = Next Page
 EXIT = Exit
 REQUIRED = required
 
-WHOIS_NOTFOUND = [%s] Could not find a matching player [%s]
+WHOIS_NOTFOUND = Could not find a matching player [%s]
 
 DEBUG1 = DEBUG #1: Mapname= ( %s ) Player= ( %s ) Level= ( %d ) #Skills= ( %d ) XP= ( %d )
 DEBUG2 = DEBUG #2: Server Max_Attribs= ( %d ) Apts_spent= ( %d ) Apts_left= ( %d )
@@ -114,13 +115,13 @@ ADMIN_SHOWXP = [%s] %s has %d XP
 ADMIN_GIVE_XP = [%s] The admin gave you %d experience
 ADMIN_SET_LEVEL = [%s] The admin has set your level to %d
 ADMIN_SET_LEVEL_RESPONSE = %s level has been set to %d
-ADMIN_TAKE_XP = [%s] The admin took %d experience away from you.
+ADMIN_TAKE_XP = The admin took %d experience away from you.
 ADMIN_SHOW_LOCATION = [%s] Your location is: <%d %d %d>
 WARNING_FULLUPDATE = FULLUPDATE: User:%s SteamID:%s  -- Attempted to use the fullupdate command!
 
 RELOAD_XP = Your XP and Skill are attempting to be reloaded
 RELOAD_XP_NO_AUTH = You can not reload your skills and XP as you are not yet Steam Authorized [STEAM_ID:PENDING]
-DELETE_XP = [%s] Your skills/attributes/resistances and XP have been reset to 0.
+DELETE_XP = Your skills/attributes/resistances and XP have been reset to 0.
 COMAND_ISSUED = %s issued
 NO_MATCHING_CLIENTS = No clients in such team
 SAME_TEAM = He's on your team, DON'T SHOOT
@@ -128,8 +129,8 @@ SAME_TEAM = He's on your team, DON'T SHOOT
 EXAMINE_ENEMY = Examining %s :: [ ENEMY ]
 EXAMINE_ENEMY_HPAP = Examining %s :: [ %d HP / %d ARM ]
 
-LOW_RES_OFF = [%s] You have toggled Low Res mode OFF
-LOW_RES_ON = [%s] You have toggled Low Res mode ON
+LOW_RES_OFF = You have toggled Low Res mode OFF
+LOW_RES_ON = You have toggled Low Res mode ON
 
 DEBUG_INFO_HEADER = Dumping debug info
 DEBUG_INFO_LINE = [%d] xpgiven= ( %d ) xplevel= ( %d ) attrib_pt_cost= ( %d ) resist_pt_cost= ( %d )
@@ -222,27 +223,24 @@ RESIST_MENU5 = protection against Chain Lightning attacks
 RESIST_MENU6 = protection against Flamethrower and Napalm Grenade fire-based attacks
 RESIST_MENU7 = Similar to a Necklace of Immunity with some exceptions made to attacks covered by other resistance types.
 
-WON_ROUND_XP = [%s] %s recieved %d XP for winning the round
-
-BOMB_SPAWN = [%s] %s recieved %d XP for spawning with the bomb.
-BOMB_DROP = [%s] %s lost the %d XP bomb carrying bonus.
-BOMB_PICKUP = [%s] %s gained %d XP for picking up the bomb.
-BOMB_PLANT_XP1 = [%s] %s recieved %d extra XP for personally planting the bomb.
-BOMB_PLANT_XP2 = [%s] %s recieved %d for supporting the bomb planting effort.
-BOMB_DEFUSE_XP1 = [%s] %s recieved %d extra XP for defusing the bomb.
-BOMB_DEFUSE_XP2 = [%s] %s recieved %d for supporting the bomb defusing effort.
-BOMB_DEFUSE_XP3 = [%s] %s recieved %d XP for cutting the red wire on the bomb.
-BOMB_DEFUSE_XP4 = [%s] %s recieved %d XP for attempting to defuse bare handed.^n
-
-HOSTAGE_KILL = [%s] %s lost %d XP for killing a hostage.
-HOSTAGE_TOUCH = [%s] %s recieved %d XP for beginning to escort the hostage to safety.
-HOSTAGE_RESCUE1 = [%s] %s is given %d XP for escorting a hostage to safety.
-HOSTAGE_RESCUE2 = [%s] %s recieved %d for supporting the hostage run.
-
-VIP_SPAWN = [%s] %s recieved %d XP for being so important.
-VIP_ESCAPE1 = [%s] %s gained %d XP for evading assasination.
-VIP_ESCAPE2 = [%s] %s recieved %d for helping the %s escape.
-VIP_KILL = [%s] %s gained %d XP for assinating %s the VIP.
+WON_ROUND_XP = %s recieved %d XP for winning the round
+BOMB_SPAWN = %s recieved %d XP for spawning with the bomb.
+BOMB_DROP = %s lost the %d XP bomb carrying bonus.
+BOMB_PICKUP = %s gained %d XP for picking up the bomb.
+BOMB_PLANT_XP1 = %s recieved %d extra XP for personally planting the bomb.
+BOMB_PLANT_XP2 = %s recieved %d for supporting the bomb planting effort.
+BOMB_DEFUSE_XP1 = %s recieved %d extra XP for defusing the bomb.
+BOMB_DEFUSE_XP2 = %s recieved %d for supporting the bomb defusing effort.
+BOMB_DEFUSE_XP3 = %s recieved %d XP for cutting the red wire on the bomb.
+BOMB_DEFUSE_XP4 = %s recieved %d XP for attempting to defuse bare handed.^n
+HOSTAGE_KILL = %s lost %d XP for killing a hostage.
+HOSTAGE_TOUCH = %s recieved %d XP for beginning to escort the hostage to safety.
+HOSTAGE_RESCUE1 = %s is given %d XP for escorting a hostage to safety.
+HOSTAGE_RESCUE2 = %s recieved %d for supporting the hostage run.
+VIP_SPAWN = %s recieved %d XP for being so important.
+VIP_ESCAPE1 = %s gained %d XP for evading assasination.
+VIP_ESCAPE2 = %s recieved %d for helping the %s escape.
+VIP_KILL = %s gained %d XP for assinating %s the VIP.
 
 DROPSKILL_MENU = Displays the drop skills menu
 DROPSKILL_WAIT = [%s] You must wait one round to select new skills after dropping them
@@ -267,32 +265,32 @@ ULT_TOO_MANY = [%s] You have spent too many skill points on ultimates, skills re
 SUICIDE_NO_FAN = [%s] You would have to first give up your Suicide Bomber to train Fan of Knives
 FAN_NO_SUICIDE = [%s] You would have to first give up your Fan of Knives to train Suicide Bomber
 
-SKILL_ERROR1 = [UWC3X Skillset Loader Error] Failed on player min level check
-SKILL_ERROR2 = [UWC3X Skillset Loader Error] Failed by trying to add more levels than current player level
-SKILL_ERROR3 = [UWC3X Skillset Loader Error] Failed on player is already trained in this skill
-SKILL_ERROR4 = [UWC3X Skillset Loader Error] Failed on player - he/she is trying to train a skill above its max ( if so, set it to the right max )
-SKILL_ERROR5 = [UWC3X Skillset Loader Error] Failed on players can only put 1 skill pt into a skill for each level over ( or equal ) to the min. level to train it
-SKILL_ERROR6 = [UWC3X Skillset Loader Error] Failed on player min level check
-SKILL_ERROR7 = [UWC3X Skillset Loader Error] Failed by trying to add more levels than current player level
+SKILL_ERROR1 = [UWC3X] Failed on player min level check
+SKILL_ERROR2 = [UWC3X] Failed by trying to add more levels than current player level
+SKILL_ERROR3 = [UWC3X] Failed on player is already trained in this skill
+SKILL_ERROR4 = [UWC3X] Failed on player - he/she is trying to train a skill above its max ( if so, set it to the right max )
+SKILL_ERROR5 = [UWC3X] Failed on players can only put 1 skill pt into a skill for each level over ( or equal ) to the min. level to train it
+SKILL_ERROR6 = [UWC3X] Failed on player min level check
+SKILL_ERROR7 = [UWC3X] Failed by trying to add more levels than current player level
 
 STEAL_SKIN_NOTICE = [%s] You must be trained in 1 level of Vampiric Aura and 3 levels of Leather Skin to train this skill
 CRIPPLE_NOTICE = [%s] You must be trained in 3 levels of Bash and 2 levels of TrueShot to train this skill
-STEAL_NOTICE2 =[UWC3X Skillset Loader Error] Failed on Only allow Steel Skin if Vampiric and Leather Skin trained
+STEAL_NOTICE2 =[UWC3X] Failed on Only allow Steel Skin if Vampiric and Leather Skin trained
 
 SYPHON_AMMO_NOMANA = [%s] Only one siphon skill is allowed, you would have to give up your Siphon Mana
 SYPHON_MANA_NOAMMO = [%s] Only one siphon skill is allowed, you would have to give up your Siphon Ammo
-SYPHON_ERROR1 = [UWC3X Skillset Loader Error] Failed on Allow only one siphon skill ( got cash )
-SYPHON_ERROR2 = [UWC3X Skillset Loader Error] Failed on Allow only one siphon skill ( got ammo )
+SYPHON_ERROR1 = [UWC3X] Failed on Allow only one siphon skill ( got cash )
+SYPHON_ERROR2 = [UWC3X] Failed on Allow only one siphon skill ( got ammo )
 
 CARAPACE_NO_THORNS = [%s] Only one damage shield skill is allowed, you would have to give up your Thorns Aura
 THORNS_NO_CARAPACE = [%s] Only one damage shield skill is allowed, you would have to give up your Spiked Carapace
-DAMAGE_SKILL_ERROR1 = [UWC3X Skillset Loader Error] Failed on Allow only one damage shield skill ( got carapace )
-DAMAGE_SKILL_ERROR2 = [UWC3X Skillset Loader Error] Failed on Allow only one damage shield skill ( got thorns )
-POISON_DISEASE_ERROR1 = [UWC3X Skillset Loader Error] Failed on Allow only one Shadow Strike / Carrion Beetles ( got sstrike )
-POISON_DISEASE_ERROR2 = [UWC3X Skillset Loader Error] Failed on Allow only one Shadow Strike / Carrion Beetles ( got beetles )
-POISON_DISEASE_ERROR3 = [UWC3X Skillset Loader Error] Failed on Allow only one Shadow Strike / Carrion Beetles ( got rot )
-POISON_DISEASE_ERROR4 = [UWC3X Skillset Loader Error] Failed on Allow only one Shadow Strike / Carrion Beetles ( got cripple )
-CRIPPLE_ERROR1 = [UWC3X Skillset Loader Error] You do not meet the skill requirements for cripple
+DAMAGE_SKILL_ERROR1 = [UWC3X] Failed on Allow only one damage shield skill ( got carapace )
+DAMAGE_SKILL_ERROR2 = [UWC3X] Failed on Allow only one damage shield skill ( got thorns )
+POISON_DISEASE_ERROR1 = [UWC3X] Failed on Allow only one Shadow Strike / Carrion Beetles ( got sstrike )
+POISON_DISEASE_ERROR2 = [UWC3X] Failed on Allow only one Shadow Strike / Carrion Beetles ( got beetles )
+POISON_DISEASE_ERROR3 = [UWC3X] Failed on Allow only one Shadow Strike / Carrion Beetles ( got rot )
+POISON_DISEASE_ERROR4 = [UWC3X] Failed on Allow only one Shadow Strike / Carrion Beetles ( got cripple )
+CRIPPLE_ERROR1 = [UWC3X] You do not meet the skill requirements for cripple
 
 SHADOW_NO_CARION = [%s] You would have to first give up your Carrion Beetles skill to train this
 CARION_NO_SHADOW = [%s] You would have to first give up your Shadow Strike skill to train this
@@ -435,20 +433,20 @@ RESETSKILLS_OFF = This server has disabled that option
 
 LOADSKILLSET_ON = Your skills will be loaded next round
 LOADSKILLSET_OFF = This server has disabled that option
-LOADSKILLSET = [%s] Your skills have been loaded from skillset %d
-LOADSKILLSET_NODATA = [%s] No data found for that SkillSet ID #%d
-LOADSKILLSET_ERROR = [%s] Error Retrieving Your Skillset Data. Please try again next map - Sorry.
+LOADSKILLSET = Your skills have been loaded from skillset %d
+LOADSKILLSET_NODATA = No data found for that SkillSet ID #%d
+LOADSKILLSET_ERROR = Error Retrieving Your Skillset Data. Please try again next map - Sorry.
 
 SAVESKILLSET_ON = Your skills will be saved next round
 SAVESKILLSET_OFF = This server has disabled that option
-SAVESKILLSET = [%s] Your skills have been saved to skillset %d
-SAVESKILLSET_ERROR = [%s] Error Saving Your Skillset Data. Please try again next map - Sorry.
+SAVESKILLSET = Your skills have been saved to skillset %d
+SAVESKILLSET_ERROR = Error Saving Your Skillset Data. Please try again next map - Sorry.
 
 SKILLSET_CANT_SAVE_LOAD = You can not Save your skill set becuase you are Loading a skillset.  Please wait a round then try again
 SKILLSET_CANT_LOAD_SAVE = You can not Load your skill set becuase you are Saving a skillset.  Please wait a round then try again
 
-DELETESKILLSET_ERROR = [%s] Error Deleting Your Skillset Data. Please try again next map - Sorry.
-DELETESKILLSET_OK = [%s] Your Skillset %d Data has been cleared.
+DELETESKILLSET_ERROR = Error Deleting Your Skillset Data. Please try again next map - Sorry.
+DELETESKILLSET_OK = Your Skillset %d Data has been cleared.
 SKILLSET_CANT_DEL_SAVE = You can not Delete your skill set becuase you are Saving a skillset.  Please wait a round then try again
 SKILLSET_CANT_DEL_LOAD = You can not Delete your skill set becuase you are Loading a skillset.  Please wait a round then try again
 DELSKILLSET_ON = Your SkillSet will be deleted
@@ -485,15 +483,15 @@ STARTING_LEVEL_MESSAGE = Congratulations! You have been awarded the new player s
 LOAD_XP_FAILURE = Error Retrieving Your XP+Skills Data. Sorry.
 LOAD_XP_QUERY_FAILURE = UWC3X SQL :: Error in LoadXPHandle
 LOAD_XP_CONNECT_FAILURE = Error: Could not connect to SQL database in _LoadXP.
-LOAD_XP_NO_DATA = [%s] No Saved Skills SQL Data Found for you
-LOAD_XP_STARTING_XP = [%s] Congratulations! You have been awarded the new player XP bonus of %d FREE XP
-LOAD_XP_STARTING_LEVEL = [%s] Congratulations! You have been awarded the new player starting level of %d 
+LOAD_XP_NO_DATA = No Saved Skills SQL Data Found for you
+LOAD_XP_STARTING_XP = Congratulations! You have been awarded the new player XP bonus of %d FREE XP
+LOAD_XP_STARTING_LEVEL = Congratulations! You have been awarded the new player starting level of %d 
 
 SAVEXP_FAILED_TO_RUN_QUERY = UWC3X SQL :: Error in _SaveXP
 SAVEXP_CONNECT_FAILED = Error: Could not connect to SQL database in _SaveXP
-SAVE_XP_FAILURE = Error Saving Your XP+Skills Data. Sorry :' ( 
-SAVE_XP_DISABLED = [%s] Long term XP mode is NOT enabled now.
-SAVING_XP_NOW = [%s] Saving all your UWC3X Data now.
+SAVE_XP_FAILURE = Error Saving Your XP+Skills Data. Sorry!
+SAVE_XP_DISABLED = Long term XP mode is NOT enabled now.
+SAVING_XP_NOW = Saving all your UWC3X Data now.
 SAVEXP_HUD_MESSAGE = Your XP, Skills, Attributes and Resistances will be saved when you disconnect, and on a map change.
 SAVEXP_CLIENT_MESSAGE = Your XP, Skills, Attributes and Resistances will be saved when you disconnect, and on a map change.
 
@@ -523,44 +521,44 @@ MOLE_BLIND = [%s] You are temporarily blind after coming into daylight.
 MOLE_READY = Mole location ready, sending you to : < %d %d %d>
 MOLE_JOIN_TEAM = Join a Team First!
 
-RESPAWN_GRACE_END = [%s] Your Respawn grace period has ended, Beware!
+RESPAWN_GRACE_END = Your Respawn grace period has ended, Beware!
 PHEONIX_REVIVE1 = %s has revived you
-PHEONIX_REVIVE2 = [%s] Your Phoenix has revived %s <%d XP>
+PHEONIX_REVIVE2 = Your Phoenix has revived %s <%d XP>
 PHEONIX_REVIVE3 = You have revived %s, way to go!
-PHEONIX_REVIVE4 = [%s] %s has revived you
+PHEONIX_REVIVE4 = %s has revived you
 
 SERPENTWARD_PLACED = Serpent Ward Placed, %d remaining
 SERPENTWARD_ALLGONE = You have already used all %d of your Serpent Wards
 SERPENTWARD_UNTRAINED = You do not know the Serpant Ward ultimate yet
-SERPENTWARD_MAGICPROTECT = [%s] Your magic resistance protects you from a Serpent Ward
+SERPENTWARD_MAGICPROTECT = Your magic resistance protects you from a Serpent Ward
 
 REPAIR_ARMOR_UNTRAINED = You do not know the Repair Armor ability yet
-REPAIR_ARMOR_XP_MESSAGE = [%s] You have made some repairs to your teammate's armor <%d XP>.
-REPAIR_ARMOR_MAX_REPAIRS = [%s] You have already performed the maximum number of repairs for this round
-REPAIR_ARMOR_UNNEEDED = [%s] %s does not need armor repair at this time
-REPAIR_ARMOR_MESSAGE = [%s] %s has made some repairs to your armor.
+REPAIR_ARMOR_XP_MESSAGE = You have made some repairs to your teammate's armor <%d XP>.
+REPAIR_ARMOR_MAX_REPAIRS = You have already performed the maximum number of repairs for this round
+REPAIR_ARMOR_UNNEEDED = %s does not need armor repair at this time
+REPAIR_ARMOR_MESSAGE = %s has made some repairs to your armor.
 
 DISPELL_UNTRAINED = You do not know the Dispell Hex ability yet
-DISPELL_NOT_HEXED = [%s] Your teammate isnt hexed at the moment.
-DISPELL_MESSAGE = [%s] %s has dispelled your hex.
-DISPELL_XP_MESSAGE = [%s] You have dispelled your teammate's hex <%d XP>.
-DISPELL_MAX_DISPELLS = [%s] You have already performed the maximum number of dispells for this round
+DISPELL_NOT_HEXED = Your teammate isnt hexed at the moment.
+DISPELL_MESSAGE = %s has dispelled your hex.
+DISPELL_XP_MESSAGE = You have dispelled your teammate's hex <%d XP>.
+DISPELL_MAX_DISPELLS = You have already performed the maximum number of dispells for this round
 
 MENDWOUNDS_UNTRAINED = You do not know the Mend Wounds ability yet
-MENDWOUNDS_MAX_HEALS = [%s] You have already mended the maximum number of wounds for this round
-MENDWOUNDS_NOT_HURT = [%s] %s does not have wounds to be mended at this time
-MENDWOUNDS_CURED_ALL = [%s] You have provided medical care to %s : tended burns, cured poison, cured disease <%d XP>
-MENDWOUNDS_CURED_ALL_MESSAGE = [%s] %s has provided the following medical care : tended burns, cured poison, cured disease
-MENDWOUNDS_CURED_TWO1 = [%s] You have provided medical care to %s : tended burns, cured poison ( or ) disease <%d XP>
-MENDWOUNDS_CURED_TWO_MESSAGE1 = [%s] %s has provided the following medical care : tended burns, cured poison ( or ) disease
-MENDWOUNDS_CURED_TWO2 = [%s] You have provided medical care to %s : cured poison and disease <%d XP>
-MENDWOUNDS_CURED_TWO_MESSAGE2 = [%s] %s has provided the following medical care : cured poison and disease
-MENDWOUNDS_CURED_ONE = [%s] You have provided medical care to %s : cured poison ( or ) disease <%d XP>
-MENDWOUNDS_CURED_ONE_MESSAGE = [%s] %s has provided the following medical care : cured poison ( or ) disease
-MENDWOUNDS_CURED = [%s] You have provided basic medical care to %s <%d XP>
-MENDWOUNDS_CURED_MESSAGE = [%s] %s has provided basic medical care to you
+MENDWOUNDS_MAX_HEALS = You have already mended the maximum number of wounds for this round
+MENDWOUNDS_NOT_HURT = %s does not have wounds to be mended at this time
+MENDWOUNDS_CURED_ALL = You have provided medical care to %s : tended burns, cured poison, cured disease <%d XP>
+MENDWOUNDS_CURED_ALL_MESSAGE = %s has provided the following medical care : tended burns, cured poison, cured disease
+MENDWOUNDS_CURED_TWO1 = You have provided medical care to %s : tended burns, cured poison ( or ) disease <%d XP>
+MENDWOUNDS_CURED_TWO_MESSAGE1 = %s has provided the following medical care : tended burns, cured poison ( or ) disease
+MENDWOUNDS_CURED_TWO2 = You have provided medical care to %s : cured poison and disease <%d XP>
+MENDWOUNDS_CURED_TWO_MESSAGE2 = %s has provided the following medical care : cured poison and disease
+MENDWOUNDS_CURED_ONE = You have provided medical care to %s : cured poison ( or ) disease <%d XP>
+MENDWOUNDS_CURED_ONE_MESSAGE = %s has provided the following medical care : cured poison ( or ) disease
+MENDWOUNDS_CURED = You have provided basic medical care to %s <%d XP>
+MENDWOUNDS_CURED_MESSAGE = %s has provided basic medical care to you
 
-SHHH_DEAD_MESSAGE = [%s] Shhhh, you are dead, act like it.
+SHHH_DEAD_MESSAGE = Shhhh, you are dead, act like it.
 RESISTANCE_ENDED = [%s] Your magic resistance to %s has ended
 
 SM3_DISEASE2 = Whoah, you suddenly start feeling a little better....
@@ -828,10 +826,10 @@ GRAB_NO_HOOK = [%s] You have to give up your Hook Shot to train Grab
 ROPE_NO_GRAB = [%s] You have to give up your Grab to train Ninja Rope
 HOOK_NO_GRAB = [%s] You have to give up your Grab to train Hook Shot  
 
-BLESS_UNTRAINED = [%s] You do not know the Blessing ability yet
-BLESS_MAX_BLESS = [%s] You have already performed a blessing for this round
-BLESS_GET = [%s] %s has blessed you.
-BLESS_CAST = [%s] You bless %s and gain <%d XP>
+BLESS_UNTRAINED = You do not know the Blessing ability yet
+BLESS_MAX_BLESS = You have already performed a blessing for this round
+BLESS_GET = %s has blessed you.
+BLESS_CAST = You bless %s and gain <%d XP>
 
 BLESS_DESC = Blessing: Heals your teammate, cures any negative effects and sets his hp and armor to maximum + extra 30hp. Awards XP.
 

@@ -215,10 +215,14 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 	new res[MAX_RESISTS] = 0;
 	new tempVar[64];
 
-	if ( CVAR_DEBUG_MODE )
-	{
+	new tempVar44[64], tempVar55[64];
+	get_user_name ( id, tempVar44, 63 );
+	get_user_authid ( id, tempVar55, 63 );
+
+	//if ( CVAR_DEBUG_MODE )
+	//{
 		log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: Attempting to load XP " );
-	}
+	//}
 
 	// error checking
 	if(FailState == TQUERY_CONNECT_FAILED)
@@ -231,6 +235,7 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 			hudchat_show(id, "%L", id, "LOAD_XP_FAILURE");
 			hudchat_update(id);
 		}
+		log_amx( "[UWC3X] DEBUG :: MySQL LoadXPMySQL -> :: [END]^n" );
 		return PLUGIN_HANDLED;
 	}
 	else if(FailState == TQUERY_QUERY_FAILED)
@@ -246,20 +251,22 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 			hudchat_update(id);
 		}
 
+		log_amx( "[UWC3X] DEBUG :: MySQL LoadXPMySQL -> :: [END]^n" );
 		return PLUGIN_HANDLED;
 	}
 
 	if(Errcode)
 	{
 		log_amx( "[UWC3X] Error:_LoadXP - %d", Errcode);
+		log_amx( "[UWC3X] DEBUG :: MySQL LoadXPMySQL -> :: [END]^n" );
 		return PLUGIN_HANDLED;
 	}
 
-	if ( CVAR_DEBUG_MODE )
-	{
+	//if ( CVAR_DEBUG_MODE )
+	//{
 		get_user_name ( id, tempVar, 63 );
-		log_amx( "[UWC3X] Debug:: SaveXPHandle : No error, attepting to load XP and skills for %s", tempVar );
-	}
+		log_amx( "[UWC3X] Debug :: _LoadXP : No error, attepting to load XP and skills for %s", tempVar );
+	//}
 
 	//Now that we have no errors, I will reset the xp loading var, this is in case there are
 	//errors so that it will continue to retry
@@ -267,7 +274,7 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 	if ( CVAR_DEBUG_MODE )
 	{
-		log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: NumResults=%d", NumResults);
+		log_amx( "[UWC3X] DEBUG :: MySQL->_LoadXP: NumResults=%d", NumResults);
 	}
 
 	if ( !NumResults || NumResults == 0 || is_user_bot( id ) )
@@ -275,14 +282,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 		//no data exists
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print ( id, print_chat, "%L", id, "LOAD_XP_NO_DATA", MOD );
-		}
-
-		//If the enable starting XP is turned on, then give them the XP
-		// this is for new players who do not yet exist in the database, existing players are below
-		if ( CVAR_DEBUG_MODE )
-		{
-			log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: CVAR_ENABLE_STARTING_SYSTEM=%d", CVAR_ENABLE_STARTING_SYSTEM);
+			//client_print ( id, print_chat, "%L", id, "LOAD_XP_NO_DATA", MOD );
+			hudchat_show(id, "%L", id, "LOAD_XP_NO_DATA");
+			hudchat_update(id);
 		}
 
 		if ( CVAR_DEBUG_MODE && is_user_bot( id ) )
@@ -302,7 +304,7 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 				if( Util_Should_Msg_Client(id) )
 				{
 					//client_print(id, print_chat, "%L", id, "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP );
-					hudchat_show(id, "%L", id, "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP);
+					hudchat_show(id, "%L", id, "LOAD_XP_STARTING_XP", CVAR_STARTING_XP);
 					hudchat_update(id);
 				}
 
@@ -331,7 +333,7 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 					if( Util_Should_Msg_Client(id) )
 					{
 						//client_print(id, print_chat, "%L", id, "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL );
-						hudchat_show(id, "%L", id, "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL);
+						hudchat_show(id, "%L", id, "LOAD_XP_STARTING_LEVEL", CVAR_STARTING_LEVEL);
 						hudchat_update(id);
 					}
 
@@ -340,7 +342,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 			}
 		}
 
+		Set_Ult_Count( id );
 		xpreadytoload[id] = 0;
+		log_amx( "[UWC3X] DEBUG :: MySQL LoadXPMySQL -> name %s auth %s :: [END]^n", tempVar44, tempVar55 );
 		return PLUGIN_CONTINUE;
 
 	}
@@ -463,8 +467,11 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 		}
 	}
 
+	Set_Ult_Count( id );
 	p_skills[id] = skills;
 	xpreadytoload[id] = 0;
+	log_amx( "[UWC3X] DEBUG :: MySQL LoadXPMySQL -> name %s auth %s :: [END]^n", tempVar44, tempVar55 );
+
 	return PLUGIN_CONTINUE;
 }
 
@@ -487,6 +494,7 @@ public _SaveXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 		log_amx( "[UWC3X] SQL :: Error in SaveXPHandle");
 		SQL_QueryError(Query,g_Error,511);
 		log_amx( "[UWC3X] ERROR %s",g_Error);
+
 		if( is_user_connected( player_id ) && !is_user_bot( player_id ) )
 		{
 			//client_print(player_id, print_chat, "%L", player_id, "SAVE_XP_FAILURE" );
@@ -494,6 +502,13 @@ public _SaveXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 			hudchat_update(player_id);
 		}
 		return PLUGIN_HANDLED;
+	}
+	else
+	{
+		if( CVAR_DEBUG_MODE )
+		{
+			log_amx( "[UWC3X] DEBUG :: MySQL _SaveXP -> No Error" );
+		}
 	}
 
 	if(Errcode )
@@ -520,6 +535,10 @@ public LoadXPMySQL2( id )
 	}
 
 	new tempVar[64], tempVar2[64];
+	get_user_name ( id, tempVar2, 63 );
+
+	log_amx( "[UWC3X] SQL :: Loading XP for user %s :: [Start]", tempVar2);
+
 	if( CVAR_SAVE_BY == 2 )
 	{
 		copy( tempVar, 32, "name");
@@ -592,22 +611,28 @@ public LoadXPMySQL2( id )
 		//errors so that it will continue to retry
 		NumResults = SQL_NumResults(Query);
 
+		if ( CVAR_DEBUG_MODE && is_user_bot( id ) )
+		{
+			log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: NumResults=%d", NumResults);
+		}
+
+
 		if ( !NumResults || NumResults == 0 || is_user_bot( id ) )
 		{
 			//no data exists
 			if( Util_Should_Msg_Client(id) )
 			{
 				//client_print ( id, print_chat, "%L", id, "LOAD_XP_NO_DATA", MOD );
-				hudchat_show(player_id, "%L", player_id, "LOAD_XP_NO_DATA", MOD);
+				hudchat_show(player_id, "%L", player_id, "LOAD_XP_NO_DATA");
 				hudchat_update(player_id);
 			}
 
 			//If the enable starting XP is turned on, then give them the XP
 			// this is for new players who do not yet exist in the database, existing players are below
 		
-			if ( CVAR_DEBUG_MODE && is_user_bot( id ) )
+			if ( CVAR_DEBUG_MODE )
 			{
-				log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: Player is a bot");
+				log_amx( "[UWC3X] DEBUG: MySQL->_LoadXP: Player is a bot or has no results from query");
 			}
 
 			//If starting XP is enabled, do the check
@@ -669,7 +694,6 @@ public LoadXPMySQL2( id )
 			}
 
 			xpreadytoload[id] = 0;
-			return PLUGIN_CONTINUE;
 		}
 		else
 		{
@@ -727,7 +751,7 @@ public LoadXPMySQL2( id )
 					if( Util_Should_Msg_Client(id) )
 					{
 						//client_print(id, print_chat, "%L", "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP );
-						hudchat_show(id, "%L", id, "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP);
+						hudchat_show(id, "%L", id, "LOAD_XP_STARTING_XP", CVAR_STARTING_XP);
 						hudchat_update(id);
 					}
 
@@ -746,7 +770,7 @@ public LoadXPMySQL2( id )
 						if( Util_Should_Msg_Client(id) )
 						{
 							//client_print(id, print_chat, "%L", "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL );
-							hudchat_show(id, "%L", id, "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL);
+							hudchat_show(id, "%L", id, "LOAD_XP_STARTING_LEVEL", CVAR_STARTING_LEVEL);
 							hudchat_update(id);
 						}
 
@@ -820,6 +844,10 @@ public LoadXPMySQL ( id )
 	}
 
 	new tempVar[64], tempVar2[64];
+	get_user_name ( id, tempVar, 63 );
+	get_user_authid ( id, tempVar2, 63 );
+	log_amx( "[UWC3X] DEBUG :: MySQL LoadXPMySQL -> name %s auth %s :: [Start]", tempVar, tempVar2 );
+
 	if( CVAR_SAVE_BY == 2 )
 	{
 		copy( tempVar, 32, "name");
@@ -908,6 +936,11 @@ public SaveXPMySQL ( id )
 				}
 				else
 				{
+					//if( CVAR_DEBUG_MODE )
+					//{
+					log_amx( "[UWC3X] DEBUG :: MySQL SaveXPMySQL -> User is Human - name %s auth %s xp %d", tempVar, steamid, playerxp[id] );
+					//}
+
 					if ( playerxp[id] <= xplevel_lev[CVAR_STARTING_LEVEL] )
 					{
 						playerxp[id] = xplevel_lev[CVAR_STARTING_LEVEL];
@@ -1043,7 +1076,7 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			//client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
-			hudchat_show(player_id, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "SAVESKILLSET_ERROR");
 			hudchat_update(player_id);
 		}
 
@@ -1057,7 +1090,7 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			//client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
-			hudchat_show(player_id, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "SAVESKILLSET_ERROR");
 			hudchat_update(player_id);
 		}
 		return PLUGIN_HANDLED;
@@ -1079,7 +1112,7 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 	if( Util_Should_Msg_Client(player_id) )
 	{
 		//client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET", MOD, skills_id );
-		hudchat_show(player_id, "%L", player_id, "SAVESKILLSET", MOD, skills_id);
+		hudchat_show(player_id, "%L", player_id, "SAVESKILLSET", skills_id);
 		hudchat_update(player_id);
 	}
 
@@ -1139,7 +1172,7 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			//client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_NODATA", MOD, skills_id);
-			hudchat_show(player_id, "%L", player_id, "LOADSKILLSET_NODATA", MOD, skills_id);
+			hudchat_show(player_id, "%L", player_id, "LOADSKILLSET_NODATA", skills_id);
 			hudchat_update(player_id);
 		}
 		return PLUGIN_CONTINUE;
@@ -1196,7 +1229,7 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 	if( Util_Should_Msg_Client(player_id) )
 	{
 		//client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET", MOD, skills_id );
-		hudchat_show(player_id, "%L", player_id, "LOADSKILLSET", MOD, skills_id);
+		hudchat_show(player_id, "%L", player_id, "LOADSKILLSET", skills_id);
 		hudchat_update(player_id);
 	}
 
@@ -1212,7 +1245,7 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			//client_print(player_id, print_chat, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
-			hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_ERROR");
 			hudchat_update(player_id);
 		}
 
@@ -1226,7 +1259,7 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 		if( Util_Should_Msg_Client(player_id) )
 		{
 			//client_print(player_id, print_chat, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
-			hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_ERROR");
 			hudchat_update(player_id);
 		}
 		return PLUGIN_HANDLED;
@@ -1241,7 +1274,7 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 	if( Util_Should_Msg_Client(player_id) )
 	{
 		//client_print( player_id, print_chat, "%L", player_id, "DELETESKILLSET_OK", MOD, skills_id );
-		hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_OK", MOD, skills_id);
+		hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_OK", skills_id);
 		hudchat_update(player_id);
 	}
 

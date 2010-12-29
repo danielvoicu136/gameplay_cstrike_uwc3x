@@ -1055,19 +1055,19 @@ public damage_event( id )
 	if ( p_skills[id][SKILLIDX_THORNS] && !p_evadethisshot[id] )
 	{
 		damage = read_data( 2 );
-		new orig_dmg = damage;
+		//new orig_dmg = damage;
 
 		damage = floatround( float( damage ) * p_thorns[p_skills[id][SKILLIDX_THORNS]-1] );
 		damage = ( damage < THORNS_MAX_DMG ) ? damage : THORNS_MAX_DMG;
 
-		if ( CVAR_DEBUG_MODE )
-		{
-			new idname[32], ename[32];
-			get_user_name( id, idname, 31 );
-			get_user_name( enemy, ename, 31 );
-			client_print( enemy, print_console, "THORNS DEBUG: You attacked %s ( has thorns ) orig_dmg=( %d ) thorns_dmg=( %d ) orig_health=( %d ) after_thorns_health=( %d )", idname, orig_dmg, damage, get_user_health( enemy ), ( get_user_health( enemy )-damage ) );
-			log_amx( "[UWC3X] THORNS DEBUG: %s attacked %s ( has thorns ) orig_dmg=( %d ) thorns_dmg=( %d ) orig_health=( %d ) after_thorns_health=( %d )", ename, idname, orig_dmg, damage, get_user_health( enemy ), ( get_user_health( enemy )-damage ) );
-		}
+		//if ( CVAR_DEBUG_MODE )
+		//{
+		//	new idname[32], ename[32];
+		//	get_user_name( id, idname, 31 );
+		//	get_user_name( enemy, ename, 31 );
+		//	client_print( enemy, print_console, "THORNS DEBUG: You attacked %s ( has thorns ) orig_dmg=( %d ) thorns_dmg=( %d ) orig_health=( %d ) after_thorns_health=( %d )", idname, orig_dmg, damage, get_user_health( enemy ), ( get_user_health( enemy )-damage ) );
+		//	log_amx( "[UWC3X] THORNS DEBUG: %s attacked %s ( has thorns ) orig_dmg=( %d ) thorns_dmg=( %d ) orig_health=( %d ) after_thorns_health=( %d )", ename, idname, orig_dmg, damage, get_user_health( enemy ), ( get_user_health( enemy )-damage ) );
+		//}
 
 		do_damage( enemy, id, damage, 2, 2, weapon, bodypart, 0 );
 

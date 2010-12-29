@@ -1736,7 +1736,7 @@ public Skills_AdminLoad( id )
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print( id, print_center, "%L", id, "NO_ACCESS", MOD );
+				client_print( id, print_center, "%L", id, "NO_ACCESS");
 			}
 			return PLUGIN_HANDLED;
 		}
@@ -1930,7 +1930,7 @@ public Set_Phoenix_Count( id )
 
 		if ( CVAR_DEBUG_MODE )
 		{
-			log_amx( "[UWC3X] Debug:: randomnumber=%f teamnumber=%d chance=%f", randomnumber, teamnumber, pheonix_chance);
+			log_amx( "[UWC3X] Debug ->Set_Phoenix_Count :: randomnumber=%f teamnumber=%d chance=%f", randomnumber, teamnumber, pheonix_chance);
 		}
 		
 		if ( randomnumber <= pheonix_chance )
