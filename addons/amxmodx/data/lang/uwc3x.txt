@@ -7,7 +7,7 @@ EVERYONE = Everyone
 SAY = say
 IN_CONSOLE = In console:
 PLAYER_NAME = player_name
-
+UWC3X_VERSION = You are playing %s version %s by %s
 PLAYERSKILLS = [%s] /Playerskills is deprecated, please use /who instead.
 
 XP_GIVE_MULT = Give Multiple Players XP
@@ -91,6 +91,8 @@ NO_SKILL = skill being developed
 NEXT_PAGE = Next Page
 EXIT = Exit
 REQUIRED = required
+
+WHOIS_NOTFOUND = [%s] Could not find a matching player [%s]
 
 DEBUG1 = DEBUG #1: Mapname= ( %s ) Player= ( %s ) Level= ( %d ) #Skills= ( %d ) XP= ( %d )
 DEBUG2 = DEBUG #2: Server Max_Attribs= ( %d ) Apts_spent= ( %d ) Apts_left= ( %d )

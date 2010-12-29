@@ -662,7 +662,11 @@ public check_say ( id )
 	else if ( equali ( said,"^"/resetresists^"" ) || equali ( said,"^"resetresists^"" ) )
 		Reset_Resists ( id );
 	else if ( equali ( said,"^"/uwc3xversion^"" ) || equali ( said,"^"uwc3xversion^"" ) || equali ( said,"^"/modinfo^"" ) || equali ( said,"^"modinfo^"" ) )
-		client_print( id, print_chat, "You are playing %s version %s by %s",UWC3XNAME,UWC3XVERSION,UWC3XAUTHOR );
+	{
+		//client_print( id, print_chat, "You are playing %s version %s by %s",UWC3XNAME,UWC3XVERSION,UWC3XAUTHOR );
+		hudchat_show(id, "%L", id, "UWC3X_VERSION", UWC3XNAME,UWC3XVERSION,UWC3XAUTHOR);
+		hudchat_update(id);
+	}
 	else if ( equali ( said,"^"/reseteverything^"" ) || equali ( said,"^"reseteverything^"" ) || equali ( said,"^"/resetall^"" ) || equali ( said,"^"resetall^"" ) )
 	{
 		Reset_Resists ( id );
@@ -1119,7 +1123,8 @@ public toggle_lowres ( id )
 		lowres[id] = false;
 		if( Util_Should_Msg_Client(id) )
 		{
-			hudchat_show(id, "LOW_RES_OFF", MOD);
+			hudchat_show(id, "%L", id, "LOW_RES_OFF", MOD);
+			hudchat_update(id);
 			//client_print ( id, print_chat, "%L", id, "LOW_RES_OFF", MOD );
 		}
 	}
@@ -1128,7 +1133,8 @@ public toggle_lowres ( id )
 		lowres[id] = true;
 		if( Util_Should_Msg_Client(id) )
 		{
-			hudchat_show(id, "LOW_RES_ON", MOD);
+			hudchat_show(id, "%L", id, "LOW_RES_ON", MOD);
+			hudchat_update(id);
 			//client_print ( id, print_chat, "%L", id, "LOW_RES_ON", MOD );
 		}
 	}
@@ -1160,7 +1166,8 @@ public do_examine ( id )
 			//format ( sReport, 64, "%L", id, "EXAMINE_ENEMY", fname );
 			if( Util_Should_Msg_Client(id) )
 			{
-				hudchat_show(id, "EXAMINE_ENEMY", fname);
+				hudchat_show(id, "%L", id, "EXAMINE_ENEMY", fname);
+				hudchat_update(id);
 				//show_hudmessage ( id, sReport );
 			}
 			return PLUGIN_HANDLED;
@@ -1172,7 +1179,8 @@ public do_examine ( id )
 		//format ( sReport, 64, "%L", id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor );
 		if( Util_Should_Msg_Client(id) )
 		{
-			hudchat_show(id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor);
+			hudchat_show(id, "%L", id, "EXAMINE_ENEMY_HPAP", fname, fhp, farmor);
+			hudchat_update(id);
 			//show_hudmessage ( id, sReport );
 		}
 	}
@@ -1234,7 +1242,6 @@ public showStatus ( id )
 				emit_sound ( id,CHAN_ITEM, "uwc3x/antend.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
 			}
 		}
-
 	}
 
 	if ( CVAR_SHOW_PLAYER && !freezetime )
@@ -1268,15 +1275,16 @@ public showStatus ( id )
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
 				//show_hudmessage ( id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
-				hudchat_show(id,"%s -- %d HP / %d AP", name, health, get_user_armor ( pid ) );
+				hudchat_show(id, "%L", id, "EXAMINE_ENEMY_HPAP", name, health, get_user_armor ( pid ));
+				hudchat_update(id);
 			}
-
 		}
 		else
 		{
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
 				hudchat_show(id,name);
+				hudchat_update(id);
 				//set_hudmessage ( color1,50,color2,-1.0,0.60,1, 0.01, 3.0, 0.01, 0.01, 4 );
 				//show_hudmessage ( id,name );
 			}
@@ -1297,15 +1305,10 @@ public BuyZone ( id )
 	return PLUGIN_CONTINUE;
 }
 
-
-
-
-
 public setTeam ( id )
 {
 	g_friend[id] = read_data ( 2 );
 }
-
 
 public hideStatus ( id )
 {
@@ -1489,7 +1492,8 @@ public Fwd_Touch(Ent, id)
 		//message to client telling them of the blocked pickup
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
-			hudchat_show(id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
+			hudchat_show(id, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
+			hudchat_update(id);
 			//client_print ( id, print_center, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD );
 		}
 
@@ -1732,7 +1736,6 @@ public monitor_players ( )
 	}
 
 	set_task ( 10.0, "monitor_players", TASK_MONITOR_PLAYERS );
-
 	return PLUGIN_CONTINUE;
 }
 
@@ -1746,7 +1749,8 @@ public hookDrop(id)
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			hudchat_show(id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
+			hudchat_show(id, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD);
+			hudchat_update(id);
 			//client_print ( id, print_center, "%L", id, "ULTIMATE_DEPOWER_ENEMY2", MOD );
 		}
 
@@ -1839,9 +1843,7 @@ public UTIL_IsInView(id,target)
 		return true
 
 	return false
-
 }
-
 
 
 public Float:radius_calucation(Float:origin1[3],Float:origin2[3],Float:radius,Float:maxVal,Float:minVal)

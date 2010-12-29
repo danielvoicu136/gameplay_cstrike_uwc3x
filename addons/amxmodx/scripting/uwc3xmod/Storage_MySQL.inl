@@ -88,15 +88,12 @@ public LoadSQLVars ( )
 		//Free the stuff
 		SQL_FreeHandle ( Query );
 		SQL_FreeHandle ( SqlConnection );
-
-		//Create Skill Sets table
-		SkillSets_Table ( );
 	}
 
 	return PLUGIN_CONTINUE;
 }
 
-public SkillSets_Table ( )
+public SkillSetsMySQL_Table ( )
 {
 	if( CVAR_SAVED_SKILLSETS )
 	{
@@ -230,7 +227,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print(id, print_chat, "%L", id, "LOAD_XP_FAILURE" );
+			//client_print(id, print_chat, "%L", id, "LOAD_XP_FAILURE" );
+			hudchat_show(id, "%L", id, "LOAD_XP_FAILURE");
+			hudchat_update(id);
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -242,7 +241,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print(id, print_chat, "%L", id, "LOAD_XP_FAILURE" );
+			//client_print(id, print_chat, "%L", id, "LOAD_XP_FAILURE" );
+			hudchat_show(id, "%L", id, "LOAD_XP_FAILURE");
+			hudchat_update(id);
 		}
 
 		return PLUGIN_HANDLED;
@@ -300,7 +301,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 				if( Util_Should_Msg_Client(id) )
 				{
-					client_print(id, print_chat, "%L", id, "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP );
+					//client_print(id, print_chat, "%L", id, "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP );
+					hudchat_show(id, "%L", id, "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP);
+					hudchat_update(id);
 				}
 
 				playerxp[id] = CVAR_STARTING_XP;
@@ -327,7 +330,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 					if( Util_Should_Msg_Client(id) )
 					{
-						client_print(id, print_chat, "%L", id, "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL );
+						//client_print(id, print_chat, "%L", id, "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL );
+						hudchat_show(id, "%L", id, "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL);
+						hudchat_update(id);
 					}
 
 					playerxp[id] = xplevel_lev[CVAR_STARTING_LEVEL];
@@ -395,7 +400,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 
 					if( Util_Should_Msg_Client(id) )
 					{
-						client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_XP_MESSAGE", CVAR_STARTING_XP );
+						//client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_XP_MESSAGE", CVAR_STARTING_XP );
+						hudchat_show(id, "%L", id, "STARTING_XP_MESSAGE", CVAR_STARTING_XP);
+						hudchat_update(id);
 					}
 				}
 			}
@@ -415,7 +422,9 @@ public _LoadXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 						xp = xplevel_lev[CVAR_STARTING_LEVEL];
 						if( Util_Should_Msg_Client(id) )
 						{
-							client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_LEVEL_MESSAGE", xp );
+							//client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_LEVEL_MESSAGE", xp );
+							hudchat_show(id, "%L", id, "STARTING_LEVEL_MESSAGE", xp);
+							hudchat_update(id);
 						}
 					}
 				}
@@ -467,7 +476,9 @@ public _SaveXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 		log_amx( "[UWC3X] Error: Could not connect to SQL database in SaveXPHandle.");
 		if( is_user_connected( player_id ) && !is_user_bot( player_id ) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "SAVE_XP_FAILURE" );
+			//client_print(player_id, print_chat, "%L", player_id, "SAVE_XP_FAILURE" );
+			hudchat_show(player_id, "%L", player_id, "SAVE_XP_FAILURE");
+			hudchat_update(player_id);
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -478,7 +489,9 @@ public _SaveXP ( FailState, Handle:Query, Error[], Errcode, Data[], DataSize )
 		log_amx( "[UWC3X] ERROR %s",g_Error);
 		if( is_user_connected( player_id ) && !is_user_bot( player_id ) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "SAVE_XP_FAILURE" );
+			//client_print(player_id, print_chat, "%L", player_id, "SAVE_XP_FAILURE" );
+			hudchat_show(player_id, "%L", player_id, "SAVE_XP_FAILURE");
+			hudchat_update(player_id);
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -584,7 +597,9 @@ public LoadXPMySQL2( id )
 			//no data exists
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print ( id, print_chat, "%L", id, "LOAD_XP_NO_DATA", MOD );
+				//client_print ( id, print_chat, "%L", id, "LOAD_XP_NO_DATA", MOD );
+				hudchat_show(player_id, "%L", player_id, "LOAD_XP_NO_DATA", MOD);
+				hudchat_update(player_id);
 			}
 
 			//If the enable starting XP is turned on, then give them the XP
@@ -607,7 +622,9 @@ public LoadXPMySQL2( id )
 						xp = CVAR_STARTING_XP;
 						if( Util_Should_Msg_Client(id) )
 						{
-							client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_XP_MESSAGE", CVAR_STARTING_XP );
+							//client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_XP_MESSAGE", CVAR_STARTING_XP );
+							hudchat_show(player_id, "%L", player_id, "STARTING_XP_MESSAGE", CVAR_STARTING_XP);
+							hudchat_update(player_id);
 						}
 					}
 				}
@@ -627,7 +644,9 @@ public LoadXPMySQL2( id )
 							xp = xplevel_lev[CVAR_STARTING_LEVEL];
 							if( Util_Should_Msg_Client(id) )
 							{
-								client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_LEVEL_MESSAGE", xp );
+								//client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_LEVEL_MESSAGE", xp );
+								hudchat_show(player_id, "%L", player_id, "STARTING_LEVEL_MESSAGE", xp);
+								hudchat_update(player_id);
 							}
 						}
 					}
@@ -643,7 +662,9 @@ public LoadXPMySQL2( id )
 			{
 				if( Util_Should_Msg_Client(id) )
 				{
-					client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_XP_DISABLED" );
+					//client_print ( id, print_chat, "[%s] %L", id, MOD, "STARTING_XP_DISABLED" );
+					hudchat_show(player_id, "%L", player_id, "STARTING_XP_DISABLED");
+					hudchat_update(player_id);
 				}
 			}
 
@@ -705,7 +726,9 @@ public LoadXPMySQL2( id )
 
 					if( Util_Should_Msg_Client(id) )
 					{
-						client_print(id, print_chat, "%L", "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP );
+						//client_print(id, print_chat, "%L", "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP );
+						hudchat_show(id, "%L", id, "LOAD_XP_STARTING_XP", MOD, CVAR_STARTING_XP);
+						hudchat_update(id);
 					}
 
 					playerxp[id] = CVAR_STARTING_XP;
@@ -722,7 +745,9 @@ public LoadXPMySQL2( id )
 					{
 						if( Util_Should_Msg_Client(id) )
 						{
-							client_print(id, print_chat, "%L", "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL );
+							//client_print(id, print_chat, "%L", "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL );
+							hudchat_show(id, "%L", id, "LOAD_XP_STARTING_LEVEL", MOD, CVAR_STARTING_LEVEL);
+							hudchat_update(id);
 						}
 
 						playerxp[id] = xplevel_lev[CVAR_STARTING_LEVEL];
@@ -1017,7 +1042,9 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 
 		if( Util_Should_Msg_Client(player_id) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
+			//client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
+			hudchat_update(player_id);
 		}
 
 		return PLUGIN_HANDLED;
@@ -1029,7 +1056,9 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 		log_amx( "[UWC3X] ERROR %s",g_Error);
 		if( Util_Should_Msg_Client(player_id) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
+			//client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "SAVESKILLSET_ERROR", MOD);
+			hudchat_update(player_id);
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -1049,7 +1078,9 @@ public _SaveSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 
 	if( Util_Should_Msg_Client(player_id) )
 	{
-		client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET", MOD, skills_id );
+		//client_print(player_id, print_chat, "%L", player_id, "SAVESKILLSET", MOD, skills_id );
+		hudchat_show(player_id, "%L", player_id, "SAVESKILLSET", MOD, skills_id);
+		hudchat_update(player_id);
 	}
 
 	return PLUGIN_CONTINUE;
@@ -1066,7 +1097,9 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 		log_amx( "[UWC3X] Error: Could not connect to SQL database in _LoadSkillSet.");
 		if( Util_Should_Msg_Client(player_id) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_ERROR", MOD);
+			//client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "LOADSKILLSET_ERROR", MOD);
+			hudchat_update(player_id);
 		}
 
 		return PLUGIN_HANDLED;
@@ -1078,7 +1111,9 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 		log_amx( "[UWC3X] ERROR %s",g_Error);
 		if( Util_Should_Msg_Client(player_id) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_ERROR", MOD);
+			//client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "LOADSKILLSET_ERROR", MOD);
+			hudchat_update(player_id);
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -1103,7 +1138,9 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 		//No results, tell them and then exit
 		if( Util_Should_Msg_Client(player_id) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_NODATA", MOD, skills_id);
+			//client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_NODATA", MOD, skills_id);
+			hudchat_show(player_id, "%L", player_id, "LOADSKILLSET_NODATA", MOD, skills_id);
+			hudchat_update(player_id);
 		}
 		return PLUGIN_CONTINUE;
 	}
@@ -1158,7 +1195,9 @@ public _LoadSkillSet( FailState, Handle:Query, Error[], Errcode, Data[], DataSiz
 
 	if( Util_Should_Msg_Client(player_id) )
 	{
-		client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET", MOD, skills_id );
+		//client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET", MOD, skills_id );
+		hudchat_show(player_id, "%L", player_id, "LOADSKILLSET", MOD, skills_id);
+		hudchat_update(player_id);
 	}
 
 	return PLUGIN_CONTINUE;
@@ -1172,7 +1211,9 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 		log_amx( "[UWC3X] Error: Could not connect to SQL database in _DelSkillSet.");
 		if( Util_Should_Msg_Client(player_id) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
+			//client_print(player_id, print_chat, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
+			hudchat_update(player_id);
 		}
 
 		return PLUGIN_HANDLED;
@@ -1184,7 +1225,9 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 		log_amx( "[UWC3X] ERROR %s",g_Error);
 		if( Util_Should_Msg_Client(player_id) )
 		{
-			client_print(player_id, print_chat, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
+			//client_print(player_id, print_chat, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
+			hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_ERROR", MOD);
+			hudchat_update(player_id);
 		}
 		return PLUGIN_HANDLED;
 	}
@@ -1197,7 +1240,9 @@ public _DelSkillSet(FailState, Handle:Query, Error[], Errcode, Data[], DataSize 
 
 	if( Util_Should_Msg_Client(player_id) )
 	{
-		client_print( player_id, print_chat, "%L", player_id, "DELETESKILLSET_OK", MOD, skills_id );
+		//client_print( player_id, print_chat, "%L", player_id, "DELETESKILLSET_OK", MOD, skills_id );
+		hudchat_show(player_id, "%L", player_id, "DELETESKILLSET_OK", MOD, skills_id);
+		hudchat_update(player_id);
 	}
 
 	return PLUGIN_CONTINUE;

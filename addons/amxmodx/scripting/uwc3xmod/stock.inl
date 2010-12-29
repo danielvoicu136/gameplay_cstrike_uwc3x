@@ -5,9 +5,12 @@ stock __HUDCHAT_G = 255;
 stock __HUDCHAT_B = 255;
 
 stock __HUDCHAT_CHANNEL = 2;
+
 stock Float:__HUDCHAT_REMOVETIME = 5.0;
+
 stock Array:__HUDCHAT_MESSAGES[33];
 stock __HUDCHAT_MSGCOUNT[33];
+
 stock __HUDCHAT_MAXPLAYERS;
 
 stock hudchat_init()
@@ -19,8 +22,6 @@ stock hudchat_init()
 		__HUDCHAT_MESSAGES[i] = ArrayCreate(__HUDCHAT_MAXMSGLEN);
 		__HUDCHAT_MSGCOUNT[i] = 0;
 	}
-	
-	set_task(__HUDCHAT_UPDATEINTERVAL, "__TaskShowHudChat", __HUDCHAT_TASKID_UPDATE, .flags = "b");
 }
 
 stock hudchat_end()
@@ -31,15 +32,28 @@ stock hudchat_end()
 		__HUDCHAT_MSGCOUNT[i] = 0;
 		
 		remove_task(i + __HUDCHAT_TASKID_REMOVE);
+		remove_task(i + __HUDCHAT_TASKID_UPDATE);
 	}
 }
 
-stock hudchat_update()
+stock hudchat_update(id)
 {
-	__TaskShowHudChat();
-	
-	remove_task(__HUDCHAT_TASKID_UPDATE);
-	set_task(__HUDCHAT_UPDATEINTERVAL, "__TaskShowHudChat", __HUDCHAT_TASKID_UPDATE, .flags = "b");
+	if(id)
+	{
+		new taskid = id + __HUDCHAT_TASKID_UPDATE;
+		
+		__TaskShowHudChat(taskid);
+		
+		remove_task(taskid);
+		set_task(__HUDCHAT_UPDATEINTERVAL, "__TaskShowHudChat", taskid, .flags = "b");
+	}
+	else
+	{
+		for(id = 1; id <= __HUDCHAT_MAXPLAYERS; id++)
+		{
+			hudchat_update(id);
+		}
+	}
 }
 
 stock hudchat_get_maxlines()
@@ -76,10 +90,7 @@ stock Float:hudchat_get_removetime()
 
 stock hudchat_set_channel(channel)
 {
-	if(1 <= channel <= 4)
-	{
-		__HUDCHAT_CHANNEL = channel;
-	}
+	__HUDCHAT_CHANNEL = channel;
 }
 
 stock hudchat_get_channel()
@@ -101,6 +112,7 @@ stock hudchat_show(id, const msg[], any:...)
 		}
 		
 		ArrayPushString(__HUDCHAT_MESSAGES[id], message);
+		__HUDCHAT_MSGCOUNT[id]++;
 		
 		new taskid = id + __HUDCHAT_TASKID_REMOVE;
 		
@@ -124,6 +136,7 @@ stock hudchat_clear(id)
 		__HUDCHAT_MSGCOUNT[id] = 0;
 		
 		remove_task(id + __HUDCHAT_TASKID_REMOVE);
+		remove_task(id + __HUDCHAT_TASKID_UPDATE);
 	}
 	else
 	{

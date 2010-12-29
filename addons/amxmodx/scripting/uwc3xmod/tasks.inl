@@ -1,27 +1,23 @@
 
-public __TaskShowHudChat()
+public __TaskShowHudChat(id)
 {
+	id -= __HUDCHAT_TASKID_UPDATE;
+	
 	new message[__HUDCHAT_MAXMSGLEN];
 	new messages[((__HUDCHAT_MAXMSGLEN - 1) * __HUDCHAT_MAXLINES) + __HUDCHAT_MAXLINES];
 	new m, len;
 	
-	for(new id = 1; id <= __HUDCHAT_MAXPLAYERS; id++)
+	for(m = 0; m < __HUDCHAT_MSGCOUNT[id]; m++)
 	{
-		if(is_user_connected(id))
-		{
-			len = 0;
-			
-			for(m = 0; m < __HUDCHAT_MSGCOUNT[id]; m++)
-			{
-				ArrayGetString(__HUDCHAT_MESSAGES[id], m, message, charsmax(message));
-				
-				len += formatex(messages[len], charsmax(message) - len, "%s%s", (len > 0) ? "^n" : "", message);
-			}
-			
-			set_hudmessage(__HUDCHAT_R, __HUDCHAT_G, __HUDCHAT_B, __HUDCHAT_POS_X, __HUDCHAT_POS_Y, 0, 0.0, (__HUDCHAT_UPDATEINTERVAL + 0.1), 0.0, 0.0, __HUDCHAT_CHANNEL);
-			show_hudmessage(id, "%s", messages);
-		}
+		ArrayGetString(__HUDCHAT_MESSAGES[id], m, message, charsmax(message));
+		
+		len += formatex(messages[len], charsmax(messages) - len, "%s%s", (len > 0) ? "^n" : "", message);
 	}
+	
+	messages[len] = 0;
+	
+	set_hudmessage(__HUDCHAT_R, __HUDCHAT_G, __HUDCHAT_B, __HUDCHAT_POS_X, __HUDCHAT_POS_Y, 0, 0.0, (__HUDCHAT_UPDATEINTERVAL + 0.1), 0.0, 0.0, __HUDCHAT_CHANNEL);
+	show_hudmessage(id, "%s", messages);
 }
 
 public __TaskRemoveHudChat(taskid)

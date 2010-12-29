@@ -14,6 +14,9 @@ public func_spawn ( parm[2] )
 		playeritem2[id] = 0;
 	}
 
+	//generic catch all
+	Initialize_PlayerData(id, true);
+
 	new team[32];
 	get_user_team ( id, team, 31 );
 
@@ -50,19 +53,6 @@ public func_spawn ( parm[2] )
 	p_ShieldMaxDamageAbsorbed[id] = 0;
 	UsedTeamShield[id] = 0;
 	HasTeamShield[id]=false;
-
-	if ( CVAR_DEBUG_MODE )
-	{
-		log_amx( "[UWC3X] DEBUG :: func_spawn( ) -> TeamShield -> Reset their Team Shield");
-		new steamid[32];
-		get_user_authid( id, steamid, 31 )
-		if(  equali( steamid, "STEAM_0:1:9083362" ) )
-		{
-			new name[32];
-			get_user_name ( id, name, 31 );
-			log_amx( "[UWC3X] DEBUG :: func_spawn -> Set_Speed -> %s", name )
-		}
-	}
 
 	// [08-19-04] Fix to prevent MOLE item from being used on Respawn
 	hasrespawned[id] = true;
@@ -155,7 +145,9 @@ public reset_respawngod ( args[] )
 
 	if( Util_Should_Msg_Client(id) )
 	{
-		client_print ( id, print_chat, "%L", id, "RESPAWN_GRACE_END", MOD );
+		//client_print ( id, print_chat, "%L", id, "RESPAWN_GRACE_END", MOD );
+		hudchat_show(id, "%L", id, "RESPAWN_GRACE_END", MOD);
+		hudchat_update(id);
 	}
 
 	return PLUGIN_CONTINUE;
@@ -202,9 +194,11 @@ public check_for_reviving ( victim_id )
 
 				if( Util_Should_Msg_Client(id) )
 				{
-					set_hudmessage ( 200, 100, 0, -1.6, 0.1, 0, 1.0, 5.0, 0.1, 0.2, 2 );
-					show_hudmessage ( victim_id, "%s has revived you", name );
-					client_print ( victim_id, print_chat, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name );
+					//set_hudmessage ( 200, 100, 0, -1.6, 0.1, 0, 1.0, 5.0, 0.1, 0.2, 2 );
+					//show_hudmessage ( victim_id, "%s has revived you", name );
+					//client_print ( victim_id, print_chat, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name );
+					hudchat_show(victim_id, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name);
+					hudchat_update(victim_id);
 				}
 
 				get_user_name ( victim_id, name, 31 );
@@ -221,8 +215,10 @@ public check_for_reviving ( victim_id )
 
 				if( Util_Should_Msg_Client(id) )
 				{
-					client_print ( id, print_chat, "%L", id,"PHEONIX_REVIVE2", MOD, name, xpbonus );
-					show_hudmessage ( id, "%You have revived %s, way to go!", name );
+					//client_print ( id, print_chat, "%L", id,"PHEONIX_REVIVE2", MOD, name, xpbonus );
+					//show_hudmessage ( id, "%You have revived %s, way to go!", name );
+					hudchat_show(id, "%L", id, "PHEONIX_REVIVE2", MOD, name, xpbonus);
+					hudchat_update(id);
 				}
 
 				to_be_revived[victim_id] = true;
@@ -269,9 +265,11 @@ public check_for_reviving ( victim_id )
 
 				if( Util_Should_Msg_Client(id) )
 				{
-					set_hudmessage ( 200, 100, 0, -1.6, 0.1, 0, 1.0, 5.0, 0.1, 0.2, 2 );
-					show_hudmessage ( victim_id, "%s has revived you", name );
-					client_print ( victim_id, print_chat, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name );
+					//set_hudmessage ( 200, 100, 0, -1.6, 0.1, 0, 1.0, 5.0, 0.1, 0.2, 2 );
+					//show_hudmessage ( victim_id, "%s has revived you", name );
+					//client_print ( victim_id, print_chat, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name );
+					hudchat_show(victim_id, "%L", victim_id, "PHEONIX_REVIVE4", MOD, name);
+					hudchat_update(victim_id);
 				}
 
 				get_user_name ( victim_id, name, 31 );
@@ -287,8 +285,10 @@ public check_for_reviving ( victim_id )
 
 				if( Util_Should_Msg_Client(id) )
 				{
-					client_print ( id, print_chat, "%L", id,"PHEONIX_REVIVE2", MOD, name, xpbonus );
-					show_hudmessage ( id, "%You have revived %s, way to go!", name );
+					//client_print ( id, print_chat, "%L", id,"PHEONIX_REVIVE2", MOD, name, xpbonus );
+					//show_hudmessage ( id, "%You have revived %s, way to go!", name );
+					hudchat_show(id, "%L", id, "PHEONIX_REVIVE2", MOD, name, xpbonus);
+					hudchat_update(id);
 				}
 
 				to_be_revived[victim_id] = true;

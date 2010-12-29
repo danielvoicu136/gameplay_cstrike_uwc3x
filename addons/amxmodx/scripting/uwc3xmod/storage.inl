@@ -31,12 +31,14 @@ public LoadXPConfig()
 	{
 		SQL_SetAffinity("mysql")
 		LoadSQLVars();
+		SkillSetsMySQL_Table();
 		log_amx( "[UWC3X] XP Config Initialized [OK]");
 	}
 	else if ( GetStorageType() == 2 )
 	{
 		SQL_SetAffinity("sqlite")
 		LoadSQLLiteConfig();	
+		SkillSetsSqlLite_Table();	
 		log_amx( "[UWC3X] XP Config Initialized [OK]");
 	}
 	else
@@ -170,7 +172,9 @@ public SaveSinglePlayerXP ( id )
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print ( id,print_chat,"%L", id, "SAVE_XP_DISABLED", MOD );
+			//client_print ( id,print_chat,"%L", id, "SAVE_XP_DISABLED", MOD );
+			hudchat_show(id, "%L", id, "SAVE_XP_DISABLED", MOD);
+			hudchat_update(id);
 		}
 	
 		return PLUGIN_CONTINUE;
@@ -178,7 +182,9 @@ public SaveSinglePlayerXP ( id )
 
 	if( Util_Should_Msg_Client(id) )
 	{
-		client_print ( id,print_chat, "%L", id, "SAVING_XP_NOW", MOD );
+		//client_print ( id,print_chat, "%L", id, "SAVING_XP_NOW", MOD );
+		hudchat_show(id, "%L", id, "SAVING_XP_NOW", MOD);
+		hudchat_update(id);
 	}
 
 	SaveXP( id );	
@@ -188,9 +194,11 @@ public ShowSaveText ( id )
 {	
 	if( Util_Should_Msg_Client(id) )
 	{
-		set_hudmessage ( 200, 100, 0, -1.0, 0.35, 0, 1.0, 7.0, 0.1, 0.2, 2 );
-		show_hudmessage ( id, "Your XP, Skills, Attributes and Resistances will be saved when you disconnect, and on a map change." );
-		client_print ( id, print_chat, "[%s] %L", id, MOD, "SAVEXP_CLIENT_MESSAGE" );
+		//set_hudmessage ( 200, 100, 0, -1.0, 0.35, 0, 1.0, 7.0, 0.1, 0.2, 2 );
+		//show_hudmessage ( id, "Your XP, Skills, Attributes and Resistances will be saved when you disconnect, and on a map change." );
+		//client_print ( id, print_chat, "[%s] %L", id, MOD, "SAVEXP_CLIENT_MESSAGE" );
+		hudchat_show(id, "%L", id, "SAVEXP_CLIENT_MESSAGE");
+		hudchat_update(id);
 	}
 
 	return PLUGIN_CONTINUE;
@@ -232,5 +240,22 @@ public CloseDB ( )
 	{
 		//close SQL Lite Stuff
 		SQLLiteClose();	
+	}
+}
+
+public SkillSets_Table()
+{
+	if ( GetStorageType() == 1 )
+	{
+		SkillSetsMySQL_Table();
+	}
+	else if ( GetStorageType() == 2 )
+	{
+		SkillSetsSqlLite_Table();	
+	}
+	else
+	{
+		log_amx( "[UWC3X] ERROR:: Could not determine Storage Type in LoadXPConfig");
+		log_amx( "[UWC3X] XP Config Initialized [FAILED]");
 	}
 }

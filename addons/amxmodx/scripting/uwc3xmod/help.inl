@@ -325,7 +325,7 @@ public admin_menu( id )
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print( id, print_center, "%L", id, "NO_ACCESS", MOD );
+				client_print( id, print_console, "%L", id, "NO_ACCESS", MOD );
 			}
 
 			return PLUGIN_HANDLED;
@@ -336,7 +336,7 @@ public admin_menu( id )
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print( id, print_center, "%L", id, "ADMINMENU_OFF" );
+			client_print( id, print_console, "%L", id, "ADMINMENU_OFF" );
 		}
 
 		return PLUGIN_HANDLED;
@@ -471,7 +471,7 @@ public do_playerxpmenu(id,key){
 
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print(player, print_chat,"[%s] The admin just awarded you %d experience.",MOD,g_menuSettings[id]);
+				client_print(player, print_chat, "[%s] The admin just awarded you %d experience.",MOD,g_menuSettings[id]);
 			}
 
 			playerxp[player]+=g_menuSettings[id];
@@ -1053,56 +1053,60 @@ public character_sheet( id )
 
 public cmd_whois( id, arg[] )
 {
-    new name[32], j = 0;
-    new message[4096] = "", temp[1024] = "", stemp[1024] = "", temp2[64] = "", sname[64] = "";
-    new bool:bHasASkill = false;
-    new pid = cmd_target(id, arg, 0);
-    if (!pid)
-    {
-        client_print(id, print_chat, "[%s] Could not find a matching player [%s]", MOD, arg);
-        return PLUGIN_HANDLED;
-    }
-    get_user_name(pid, name, 31);
-    
-    // Calculate how many attrib/resist points can be spent
-    new extra_xp = (playerxp[id] - xplevel_lev[enh_minlevel]);
+	new name[32], j = 0;
+	new message[4096] = "", temp[1024] = "", stemp[1024] = "", temp2[64] = "", sname[64] = "";
+	new bool:bHasASkill = false;
+	new pid = cmd_target(id, arg, 0);
 
-    if (extra_xp < 0)
-        extra_xp = 0;
+	if (!pid)
+	{
+		hudchat_show(id, "%L", id, "WHOIS_NOTFOUND", MOD, arg);
+		hudchat_update(id);
+		return PLUGIN_HANDLED;
+	}
 
-    new exp = (extra_xp / 10);
+	get_user_name(pid, name, 31);
 
-    add( message, 4096, "<body bgcolor=#000000><font color=#33CCFF>" );
-    format( stemp, 1024, "<center><b>Character Sheet: %s</b></center><p>", name );
-    add( message, 4096, stemp );
-    add( message, 4096, "<center><table width=465 border=1 cellpadding=2 cellspacing=2>" );
-    add( message, 4096, "<tr><td width=50%><font color=#FFB000>" );
-    format( stemp, 1024, "Name: %s<br>", name );
-    add( message, 4096, stemp );
-    format( stemp, 1024, "Level: %d<br>", p_level[pid] );
-    add( message, 4096, stemp );
-    format( stemp, 1024, "Ultimates: %d/%d<br>", ultlearned[id], p_maxultimates[id] );
-    add( message, 4096, stemp );
-    add( message, 4096, "</td><td width=50%><font color=#FFB000>" );
-    if (p_level[pid] == (MAX_LEVEL-1))
-    {
-        //format( stemp, 1024, "XP: %d<br>", playerxp[pid] );
-    }
-    else
-    {
-        format( stemp, 1024, "XP: %d / %d<br>",
-        playerxp[pid], xplevel_lev[p_level[pid]+1] );
-    }
-    add( message, 4096, stemp );
-    if (p_level[pid] == (MAX_LEVEL-1))
-    {
-        //add( message, 4096, "XP Needed: NA<br>" );
-    }
-    else
-    {
-        format( stemp, 1024, "XP Needed: %d<br>", (xplevel_lev[p_level[pid]+1] - playerxp[pid]) );
-        add( message, 4096, stemp );
-    }
+	// Calculate how many attrib/resist points can be spent
+	new extra_xp = (playerxp[id] - xplevel_lev[enh_minlevel]);
+
+	if (extra_xp < 0)
+		extra_xp = 0;
+
+	new exp = (extra_xp / 10);
+
+	add( message, 4096, "<body bgcolor=#000000><font color=#33CCFF>" );
+	format( stemp, 1024, "<center><b>Character Sheet: %s</b></center><p>", name );
+	add( message, 4096, stemp );
+	add( message, 4096, "<center><table width=465 border=1 cellpadding=2 cellspacing=2>" );
+	add( message, 4096, "<tr><td width=50%><font color=#FFB000>" );
+	format( stemp, 1024, "Name: %s<br>", name );
+	add( message, 4096, stemp );
+	format( stemp, 1024, "Level: %d<br>", p_level[pid] );
+	add( message, 4096, stemp );
+	format( stemp, 1024, "Ultimates: %d/%d<br>", ultlearned[id], p_maxultimates[id] );
+	add( message, 4096, stemp );
+	add( message, 4096, "</td><td width=50%><font color=#FFB000>" );
+	if (p_level[pid] == (MAX_LEVEL-1))
+	{
+		//format( stemp, 1024, "XP: %d<br>", playerxp[pid] );
+	}
+	else
+	{
+		format( stemp, 1024, "XP: %d / %d<br>",
+		playerxp[pid], xplevel_lev[p_level[pid]+1] );
+	}
+
+	add( message, 4096, stemp );
+	if (p_level[pid] == (MAX_LEVEL-1))
+	{
+		//add( message, 4096, "XP Needed: NA<br>" );
+	}
+	else
+	{
+		format( stemp, 1024, "XP Needed: %d<br>", (xplevel_lev[p_level[pid]+1] - playerxp[pid]) );
+		add( message, 4096, stemp );
+	}
     
     format( stemp, 1024, "Enhancement XP: %d <br>", exp );
     add( message, 4096, stemp );
@@ -1573,9 +1577,10 @@ public player_skills( id )
 
 	if( Util_Should_Msg_Client(id) )
 	{
-		client_print( id, print_chat, "%L", id, "PLAYERSKILLS", MOD);
+		hudchat_show(id, "%L", id, "PLAYERSKILLS", MOD);
+		hudchat_update(id);
+		//client_print( id, print_chat, "%L", id, "PLAYERSKILLS", MOD);
 	}
 
 	return PLUGIN_CONTINUE;
 }
-

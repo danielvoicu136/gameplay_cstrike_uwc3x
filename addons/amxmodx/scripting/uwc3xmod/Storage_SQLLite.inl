@@ -33,13 +33,13 @@ public LoadSQLLiteVars ( )
 	//Check for an error
 	if ( !SqlConnection )
 	{
-		log_amx( "[UWC3X] Error connecting to SQL database : %s", g_Error );
+		log_amx( "[UWC3X] Error connecting to SQLite database : %s", g_Error );
 		bDBConn = false;
 		return PLUGIN_CONTINUE;
 	}
 	else
 	{
-		log_amx( "[UWC3X] SQL :: Connected [OK]" );
+		log_amx( "[UWC3X] SQLite :: Connected [OK]" );
 		bDBConn = true;
 	}
 
@@ -75,11 +75,11 @@ public LoadSQLLiteVars ( )
 	//If save by = 2 (by name) primary key is the name
 	if( CVAR_SAVE_BY == 2 )
 	{
-		format ( squery, 5096, "%s%s", squery, "DEFAULT '0', `name` VARCHAR ( 64 ) DEFAULT NULL, PRIMARY KEY ( `name` ) ) TYPE=MyISAM;" );
+		format ( squery, 5096, "%s%s", squery, "DEFAULT '0', `name` VARCHAR ( 64 ) DEFAULT NULL, PRIMARY KEY ( `name` ));" );
 	}
 	else
 	{
-		format ( squery, 5096, "%s%s", squery, "DEFAULT '0', `name` VARCHAR ( 64 ) DEFAULT NULL, PRIMARY KEY ( `steamid` ) ) TYPE=MyISAM;" );
+		format ( squery, 5096, "%s%s", squery, "DEFAULT '0', `name` VARCHAR ( 64 ) DEFAULT NULL, PRIMARY KEY ( `steamid`));" );
 	}
 
 	//Set the Query
@@ -99,9 +99,91 @@ public LoadSQLLiteVars ( )
 		//Free the stuff
 		SQL_FreeHandle ( Query );
 		SQL_FreeHandle ( SqlConnection );
+	}
 
-		//skillsets
-		SkillSets_Table();
+	return PLUGIN_CONTINUE;
+}
+
+public SkillSetsSqlLite_Table ( )
+{
+	if( CVAR_SAVED_SKILLSETS )
+	{
+		log_amx( "[UWC3X] SQLite :: Using Saved Skill Sets [OK]" );
+		//Create handle and then the connection
+		g_SqlTuple = SQL_MakeDbTuple ( CVAR_MYSQL_HOSTNAME, CVAR_MYSQL_USERNAME, CVAR_MYSQL_PASSWORD, CVAR_MYSQL_DATABASE );
+
+		//Try and connect
+		SqlConnection = SQL_Connect ( g_SqlTuple, ErrorCode, g_Error, 511 );
+
+		//Check for an error
+		if ( !SqlConnection )
+		{
+			log_amx( "[UWC3X] SQLite :: Created Skill Sets Table [FAILED]" );
+			log_amx( "[UWC3X] Error connecting to SQLite database : %s", g_Error );
+			bDBConn = false;
+			return PLUGIN_CONTINUE;
+		}
+
+		log_amx( "[UWC3X] SQLite :: Connected [OK]" );
+
+		if( CVAR_SAVE_BY == 2 )
+		{
+			format ( squery, 5096, "CREATE TABLE IF NOT EXISTS `%s_SkillSets` ( `name` VARCHAR(64), `skillsetid` INTEGER , ", CVAR_MYSQL_TABLE );
+		}
+		else
+		{
+			format ( squery, 5096, "CREATE TABLE IF NOT EXISTS `%s_SkillSets` ( `steamid` VARCHAR(32), `skillsetid` INTEGER , ", CVAR_MYSQL_TABLE );
+		} 
+
+		format ( squery, 5096, "%s%s", squery, "`skill1` SMALLINT DEFAULT '0', `skill2` SMALLINT DEFAULT '0', `skill3` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill4` SMALLINT DEFAULT '0', `skill5` SMALLINT DEFAULT '0', `skill6` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill7` SMALLINT DEFAULT '0', `skill8` SMALLINT DEFAULT '0', `skill9` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill10` SMALLINT DEFAULT '0', `skill11` SMALLINT DEFAULT '0', `skill12` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill13` SMALLINT DEFAULT '0', `skill14` SMALLINT DEFAULT '0', `skill15` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill16` SMALLINT DEFAULT '0', `skill17` SMALLINT DEFAULT '0', `skill18` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill19` SMALLINT DEFAULT '0', `skill20` SMALLINT DEFAULT '0', `skill21` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill22` SMALLINT DEFAULT '0', `skill23` SMALLINT DEFAULT '0', `skill24` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill25` SMALLINT DEFAULT '0', `skill26` SMALLINT DEFAULT '0', `skill27` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill28` SMALLINT DEFAULT '0', `skill29` SMALLINT DEFAULT '0', `skill30` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill31` SMALLINT DEFAULT '0', `skill32` SMALLINT DEFAULT '0', `skill33` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill34` SMALLINT DEFAULT '0', `skill35` SMALLINT DEFAULT '0', `skill36` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill37` SMALLINT DEFAULT '0', `skill38` SMALLINT DEFAULT '0', `skill39` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill40` SMALLINT DEFAULT '0', `skill41` SMALLINT DEFAULT '0', `skill42` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill43` SMALLINT DEFAULT '0', `skill44` SMALLINT DEFAULT '0', `skill45` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill46` SMALLINT DEFAULT '0', `skill47` SMALLINT DEFAULT '0', `skill48` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill49` SMALLINT DEFAULT '0', `skill50` SMALLINT DEFAULT '0', `skill51` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill52` SMALLINT DEFAULT '0', `skill53` SMALLINT DEFAULT '0', `skill54` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill55` SMALLINT DEFAULT '0', `skill56` SMALLINT DEFAULT '0', `skill57` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill58` SMALLINT DEFAULT '0', `skill59` SMALLINT DEFAULT '0', `skill60` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill61` SMALLINT DEFAULT '0', `skill62` SMALLINT DEFAULT '0', `skill63` SMALLINT DEFAULT '0', " );
+		format ( squery, 5096, "%s%s", squery, "`skill64` SMALLINT DEFAULT '0' );" );
+
+		//Set the Query
+		Query = SQL_PrepareQuery ( SqlConnection, squery );
+
+		// run the query
+		if ( !Query || !SQL_Execute ( Query ) )
+		{
+			// if there were any problems
+			SQL_QueryError ( Query, g_Error, 511 );
+			log_amx( "[UWC3X] SQLite :: Error creating table" );
+			log_amx( "[UWC3X] Error:: %s", g_Error );
+			log_amx( "[UWC3X] Query:: %s", squery );
+		}
+		else
+		{
+			//Free the stuff
+			SQL_FreeHandle ( Query );
+			SQL_FreeHandle ( SqlConnection );
+		}
+
+		log_amx( "[UWC3X] SQLite :: Created Skill Sets Table [OK]" );
+		return PLUGIN_CONTINUE;
+	}
+	else
+	{
+		log_amx( "[UWC3X] SQLite :: Using Saved Skill Sets [NO]" );
+		return PLUGIN_CONTINUE;
 	}
 
 	return PLUGIN_CONTINUE;

@@ -1129,9 +1129,10 @@ public Event_Team_Win( TEAM )
 
 				if( is_user_connected( players[a] ) && !is_user_bot( players[a] ) )
 				{
-					client_print ( players[a], print_center, "%L", players[a], "WON_ROUND_XP", MOD, sName, temp );
+					//client_print ( players[a], print_center, "%L", players[a], "WON_ROUND_XP", MOD, sName, temp );
+					hudchat_show(players[a], "%L", players[a], "WON_ROUND_XP", MOD, sName, temp);
+					hudchat_update(players[a]);
 				}
-
 			}
 
 			playerxp[players[a]] += temp;
@@ -1227,7 +1228,9 @@ public Event_Planted_Bomb( id )
 
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
-			client_print ( id, print_center, "%L", id, "BOMB_PLANT_XP1", MOD, sName, temp );
+			//client_print ( id, print_center, "%L", id, "BOMB_PLANT_XP1", MOD, sName, temp );
+			hudchat_show(id, "%L", id, "BOMB_PLANT_XP1", MOD, sName, temp);
+			hudchat_update(id);
 		}
 	}
 
@@ -1252,8 +1255,9 @@ public Event_Planted_Bomb( id )
 				if( is_user_connected( targetid ) && !is_user_bot( targetid ) )
 				{
 					client_print ( targetid, print_center, "%L", targetid, "BOMB_PLANT_XP2", MOD, sName, temp );
+					hudchat_show(targetid, "%L", targetid, "BOMB_PLANT_XP2", MOD, sName, temp);
+					hudchat_update(targetid);
 				}
-
 			}
 		}
 	}
@@ -1281,7 +1285,9 @@ public Event_Defused_Bomb( id )
 
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
-			client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP1", MOD, sName, temp );
+			//client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP1", MOD, sName, temp );
+			hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP1", MOD, sName, temp, temp);
+			hudchat_update(id);
 		}
 	}
 
@@ -1307,7 +1313,9 @@ public Event_Defused_Bomb( id )
 
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
-					client_print ( targetid, print_center, "%L", targetid, "BOMB_DEFUSE_XP2", MOD, sName, temp );
+					//client_print ( targetid, print_center, "%L", targetid, "BOMB_DEFUSE_XP2", MOD, sName, temp );
+					hudchat_show(targetid, "%L", targetid, "BOMB_DEFUSE_XP2", MOD, sName, temp);
+					hudchat_update(targetid);
 				}
 			}
 		}
@@ -1331,7 +1339,9 @@ public Event_Defuse_Try( id, Kit )
 					temp = ( 1/6 * DEFUSEXP ) + xpgiven_lev[p_level[id]];
 					if( Util_Should_Msg_Client_Alive( id ) )
 					{
-						client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP3", MOD, sName, temp );
+						//client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP3", MOD, sName, temp );
+						hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP3", MOD, sName, temp );
+						hudchat_update(id);
 					}
 				}
 				else
@@ -1339,7 +1349,9 @@ public Event_Defuse_Try( id, Kit )
 					temp = xpgiven_lev[p_level[id]];
 					if( Util_Should_Msg_Client_Alive( id ) )
 					{
-						client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP4", MOD, id, temp );
+						//client_print ( id, print_center, "%L", id, "BOMB_DEFUSE_XP4", MOD, id, temp );
+						hudchat_show(id, "%L", id, "BOMB_DEFUSE_XP4", MOD, id, temp);
+						hudchat_update(id);
 					}
 				}
 				playerxp[id] += temp;
@@ -1364,7 +1376,9 @@ public Event_Spawn_Bomb( id )
 
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
-				client_print ( id, print_center, "%L", id, "BOMB_SPAWN", MOD, sName, temp );
+				//client_print ( id, print_center, "%L", id, "BOMB_SPAWN", MOD, sName, temp );
+				hudchat_show(id, "%L", id, "BOMB_SPAWN", MOD, sName, temp);
+				hudchat_update(id);
 			}
 		}
 		displaylevel ( id, 1 );
@@ -1372,7 +1386,7 @@ public Event_Spawn_Bomb( id )
 }
 public Event_Bomb_Got( id, PickedUp )
 {
-	new sName[32], temp = 0;
+	new sName[32], temp = xpgiven_lev[p_level[id]];
 
 	if ( CVAR_BOMB_EVENT_BONUS )
 	{
@@ -1383,11 +1397,11 @@ public Event_Bomb_Got( id, PickedUp )
 			if( PickedUp )
 			{
 				// Picked up the bomb
-				temp = xpgiven_lev[p_level[id]];
-
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
-					client_print ( id, print_center, "%L", id, "BOMB_PICKUP", MOD, sName, temp );
+					//client_print ( id, print_center, "%L", id, "BOMB_PICKUP", MOD, sName, temp );
+					hudchat_show(id, "%L", id, "BOMB_PICKUP", MOD, sName, temp);
+					hudchat_update(id);
 				}
 
 				if( temp > 0 )
@@ -1398,11 +1412,11 @@ public Event_Bomb_Got( id, PickedUp )
 			else
 			{
 				// Dropped bomb
-				temp = xpgiven_lev[p_level[id]];
-
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
-					client_print ( id, print_center, "%L", id, "BOMB_DROP", MOD, sName, temp );
+					//client_print ( id, print_center, "%L", id, "BOMB_DROP", MOD, sName, temp );
+					hudchat_show(id, "%L", id, "BOMB_DROP", MOD, sName, temp);
+					hudchat_update(id);
 				}
 
 				if( temp > 0 )
@@ -1428,7 +1442,9 @@ public Event_Hostage( id, Touched, Rescued, Killed )
 
 		if( Util_Should_Msg_Client_Alive( id ))
 		{
-			client_print ( id, print_center, "%L", id, "HOSTAGE_KILL", MOD,sName, ( temp ) );
+			//client_print ( id, print_center, "%L", id, "HOSTAGE_KILL", MOD,sName, ( temp ) );
+			hudchat_show(id, "%L", id, "HOSTAGE_KILL", MOD,sName, ( temp ));
+			hudchat_update(id);
 		}
 	}
 	else if( Touched && CVAR_HOSTAGE_TOUCH_BONUS && CVAR_OBJECTIVES )
@@ -1438,7 +1454,9 @@ public Event_Hostage( id, Touched, Rescued, Killed )
 
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
-			client_print ( id, print_center, "%L", id, "HOSTAGE_TOUCH", MOD, sName, temp );
+			//client_print ( id, print_center, "%L", id, "HOSTAGE_TOUCH", MOD, sName, temp );
+			hudchat_show(id, "%L", id, "HOSTAGE_TOUCH", MOD, sName, temp);
+			hudchat_update(id);
 		}
 	}
 	else if( Rescued && CVAR_OBJECTIVES )
@@ -1448,12 +1466,13 @@ public Event_Hostage( id, Touched, Rescued, Killed )
 		get_user_origin ( id, origin );
 		get_user_team ( id, teamname, 31 );
 		get_players ( player, numplayers );
-
 		temp = 1 * xpgiven_lev[p_level[id]];
 
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
-			client_print ( id, print_center, "%L", id, "HOSTAGE_RESCUE1", MOD, sName, temp );
+			//client_print ( id, print_center, "%L", id, "HOSTAGE_RESCUE1", MOD, sName, temp );
+			hudchat_show(id, "%L", id, "HOSTAGE_RESCUE1", MOD, sName, temp);
+			hudchat_update(id);
 		}
 
 		// Supporters and self
@@ -1480,7 +1499,9 @@ public Event_Hostage( id, Touched, Rescued, Killed )
 
 				if( Util_Should_Msg_Client_Alive( id ) )
 				{
-					client_print ( targetid, print_center, "%L", targetid, "HOSTAGE_RESCUE2", MOD, sName, temp );
+					//client_print ( targetid, print_center, "%L", targetid, "HOSTAGE_RESCUE2", MOD, sName, temp );
+					hudchat_show(targetid, "%L", targetid, "HOSTAGE_RESCUE2", MOD, sName, temp);
+					hudchat_update(targetid);
 				}
 			}
 
@@ -1517,12 +1538,12 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 		if ( CVAR_VIP_KILL_XP_BONUS )
 		{
 			temp = VIP_KILL_BONUS + xpgiven_lev[p_level[id]];
-
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
-				client_print ( id, print_center, "%L", id, "VIP_KILL", MOD, sName, temp, sNameVIP );
+				//client_print ( id, print_center, "%L", id, "VIP_KILL", MOD, sName, temp, sNameVIP );
+				hudchat_show(id, "%L", id, "VIP_KILL", MOD, sName, temp, sNameVIP);
+				hudchat_update(id);
 			}
-
 		}
 	}
 	else if( Spawned )
@@ -1536,7 +1557,9 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 			temp = xpgiven_lev[p_level[id]];
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
-				client_print ( id,print_center, "%L", id, "VIP_SPAWN", MOD, sName, temp );
+				//client_print ( id, print_center, "%L", id, "VIP_SPAWN", MOD, sName, temp );
+				hudchat_show(id, "%L", id, "VIP_SPAWN", MOD, sName, temp);
+				hudchat_update(id);
 			}
 		}
 	}
@@ -1544,7 +1567,6 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 	{
 		// VIP escaped
 		new origin[3], teamname[32], player[32], numplayers, targetorigin[3], targetid, nName[31];
-
 		get_user_origin ( id, origin );
 		get_user_team ( id, teamname, 31 );
 		get_players ( player, numplayers );
@@ -1553,7 +1575,9 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 
 		if( Util_Should_Msg_Client_Alive( id ) )
 		{
-			client_print ( id,print_center, "%L", id, "VIP_ESCAPE1", MOD, sName, temp );
+			//client_print ( id, print_center, "%L", id, "VIP_ESCAPE1", MOD, sName, temp );
+			hudchat_show(id, "%L", id, "VIP_ESCAPE1", MOD, sName, temp);
+			hudchat_update(id);
 		}
 
 		for ( new i = 0; i < numplayers; ++i )
@@ -1576,7 +1600,9 @@ public Event_VIP ( id, Spawned, Escaped, Killed )
 
 				if( Util_Should_Msg_Client_Alive( targetid ) )
 				{
-					client_print ( targetid, print_center, "%L", targetid, "VIP_ESCAPE2", MOD, nName, temp, sName );
+					//client_print ( targetid, print_center, "%L", targetid, "VIP_ESCAPE2", MOD, nName, temp, sName );
+					hudchat_show(targetid, "%L", targetid, "VIP_ESCAPE2", MOD, nName, temp, sName);
+					hudchat_update(targetid);
 				}
 			}
 
@@ -1914,12 +1940,16 @@ public grenade_explode(ent)
 						
 						if( Util_Should_Msg_Client_Alive( player ) )
 						{
-							client_print ( player, print_center, "%L", player, "ULTIMATE_ICEBOMB_RESIST2", idname );
+							//client_print ( player, print_center, "%L", player, "ULTIMATE_ICEBOMB_RESIST2", idname );
+							hudchat_show(player, "%L", player, "ULTIMATE_ICEBOMB_RESIST2", idname);
+							hudchat_update(player);
 						}
 						
 						if( Util_Should_Msg_Client_Alive( owner ) )
 						{
-							client_print ( owner, print_center, "%L", owner, "ULTIMATE_ICEBOMB_RESIST4", ename );
+							//client_print ( owner, print_center, "%L", owner, "ULTIMATE_ICEBOMB_RESIST4", ename );
+							hudchat_show(owner, "%L", owner, "ULTIMATE_ICEBOMB_RESIST4", ename);
+							hudchat_update(owner);
 						}
 						
 						new iparm[2];
@@ -2003,5 +2033,4 @@ public grenade_explode(ent)
 		// get rid of the old grenade
 		remove_entity(ent);
 	}
-
 }

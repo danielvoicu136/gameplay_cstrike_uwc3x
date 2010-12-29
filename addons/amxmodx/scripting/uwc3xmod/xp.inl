@@ -305,7 +305,9 @@ public XP_DeleteXP ( id )
 	displaylevel ( id,1 );
 	if( Util_Should_Msg_Client(id) )
 	{
-		client_print ( id, print_chat, "%L", id, "DELETE_XP", MOD );
+		//client_print ( id, print_chat, "%L", id, "DELETE_XP", MOD );
+		hudchat_show(id, "%L", id, "DELETE_XP", MOD);
+		hudchat_update(id);
 	}		
 
 }
@@ -316,7 +318,9 @@ public XP_Reload ( id )
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print( id, print_center, "%L", id, "RELOAD_XP" );
+			//client_print( id, print_center, "%L", id, "RELOAD_XP" );
+			hudchat_show(id, "%L", id, "RELOAD_XP");
+			hudchat_update(id);
 		}		
 		xpreadytoload[id] = 1;
 
@@ -327,7 +331,9 @@ public XP_Reload ( id )
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print( id, print_center, "%L", id, "RELOAD_XP_NO_AUTH" );
+			//client_print( id, print_center, "%L", id, "RELOAD_XP_NO_AUTH" );
+			hudchat_show(id, "%L", id, "RELOAD_XP_NO_AUTH");
+			hudchat_update(id);
 		}		
 	}
 }
@@ -375,9 +381,11 @@ public amx_takexp ( id, level )
 			if( is_user_bot(players[a]))
 				continue;
 
-			if( Util_Should_Msg_Client(id) )
+			if( Util_Should_Msg_Client(players[a]) )
 			{
-				client_print ( players[a], print_chat, "%L", players[a], "ADMIN_TAKE_XP", MOD, iXP );
+				//client_print ( players[a], print_chat, "%L", players[a], "ADMIN_TAKE_XP", MOD, iXP );
+				hudchat_show(players[a], "%L", players[a], "ADMIN_TAKE_XP", MOD, iXP);
+				hudchat_update(players[a]);
 			}		
 				
 			playerxp[players[a]] -= iXP;
@@ -407,10 +415,13 @@ public amx_takexp ( id, level )
 			if( is_user_bot(players[a]))
 				continue;
 
-			if( Util_Should_Msg_Client(id) )
+			if( Util_Should_Msg_Client(players[a]) )
 			{
-				client_print ( players[a], print_chat, "%L", players[a], "ADMIN_TAKE_XP", iXP );
+				//client_print ( players[a], print_chat, "%L", players[a], "ADMIN_TAKE_XP", MOD, iXP );
+				hudchat_show(players[a], "%L", players[a], "ADMIN_TAKE_XP", MOD, iXP);
+				hudchat_update(players[a]);
 			}		
+
 			playerxp[players[a]]-= iXP;
 			displaylevel ( players[a],1 );
 		}
@@ -426,7 +437,9 @@ public amx_takexp ( id, level )
 
 		if( Util_Should_Msg_Client(id) )
 		{
-			client_print ( player, print_chat, "%L", player, "ADMIN_TAKE_XP", MOD, iXP );
+			//client_print ( id, print_chat, "%L", players[a], "ADMIN_TAKE_XP", MOD, iXP );
+			hudchat_show(id, "%L", id, "ADMIN_TAKE_XP", MOD, iXP);
+			hudchat_update(id);
 		}		
 		playerxp[player]-= iXP;
 		displaylevel ( player, 1 );
