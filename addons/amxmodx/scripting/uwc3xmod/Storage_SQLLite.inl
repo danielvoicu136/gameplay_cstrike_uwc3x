@@ -567,33 +567,45 @@ public SaveXPSQLLite ( id )
 	}
 
 	get_time ( "%d/%m/%Y %H:%M:%S", mtimet, 31 );
-	format ( squery, 4096, "REPLACE INTO `%s` SET steamid='%s', xp='%d',", CVAR_MYSQL_TABLE, steamid, playerxp[id] );
-	format ( squery, 4096, "%s mtime='%s' , skill1='%d' , skill2='%d' ,", squery, mtimet, p_skills[id][1], p_skills[id][2] ) ;
-	format ( squery, 4096, "%s skill3='%d' , skill4='%d' , skill5='%d' ,", squery,p_skills[id][3], p_skills[id][4], p_skills[id][5] );
-	format ( squery, 4096, "%s skill6='%d' , skill7='%d' , skill8='%d' ,", squery,p_skills[id][6], p_skills[id][7], p_skills[id][8] );
-	format ( squery, 4096, "%s skill9='%d' , skill10='%d', skill11='%d',", squery,p_skills[id][9], p_skills[id][10], p_skills[id][11] );
-	format ( squery, 4096, "%s skill12='%d', skill13='%d', skill14='%d',", squery,p_skills[id][12], p_skills[id][13], p_skills[id][14] );
-	format ( squery, 4096, "%s skill15='%d', skill16='%d', skill17='%d',", squery,p_skills[id][15], p_skills[id][16], p_skills[id][17] ) ;
-	format ( squery, 4096, "%s skill18='%d', skill19='%d', skill20='%d',", squery,p_skills[id][18], p_skills[id][19], p_skills[id][20] );
-	format ( squery, 4096, "%s skill21='%d', skill22='%d', skill23='%d',", squery,p_skills[id][21], p_skills[id][22], p_skills[id][23] );
-	format ( squery, 4096, "%s skill24='%d', skill25='%d', skill26='%d',", squery,p_skills[id][24], p_skills[id][25], p_skills[id][26] );
-	format ( squery, 4096, "%s skill27='%d', skill28='%d', skill29='%d',", squery,p_skills[id][27], p_skills[id][28], p_skills[id][29] );
-	format ( squery, 4096, "%s skill30='%d', skill31='%d', skill32='%d',", squery,p_skills[id][30], p_skills[id][31], p_skills[id][32] );
-	format ( squery, 4096, "%s skill33='%d', skill34='%d', skill35='%d',", squery,p_skills[id][33], p_skills[id][34], p_skills[id][35] );
-	format ( squery, 4096, "%s skill36='%d', skill37='%d', skill38='%d',", squery,p_skills[id][36], p_skills[id][37], p_skills[id][38] );
-	format ( squery, 4096, "%s skill39='%d', skill40='%d', skill41='%d',", squery,p_skills[id][39], p_skills[id][40], p_skills[id][41] );
-	format ( squery, 4096, "%s skill42='%d', skill43='%d', skill44='%d',", squery,p_skills[id][42], p_skills[id][43], p_skills[id][44] );
-	format ( squery, 4096, "%s skill45='%d', skill46='%d', skill47='%d',", squery,p_skills[id][45], p_skills[id][46], p_skills[id][47] );
-	format ( squery, 4096, "%s skill48='%d', skill49='%d', skill50='%d',", squery,p_skills[id][48], p_skills[id][49], p_skills[id][50] );
-	format ( squery, 4096, "%s skill51='%d', skill52='%d', skill53='%d',", squery,p_skills[id][51], p_skills[id][52], p_skills[id][53] );
-	format ( squery, 4096, "%s skill54='%d', skill55='%d', skill56='%d',", squery, p_skills[id][54],p_skills[id][55], p_skills[id][56] );
-	format ( squery, 4096, "%s skill57='%d', skill58='%d', skill59='%d',", squery,p_skills[id][57], p_skills[id][58], p_skills[id][59] );
-	format ( squery, 4096, "%s skill60='%d', skill61='%d', skill62='%d',", squery,p_skills[id][60], p_skills[id][61], p_skills[id][62] );
-	format ( squery, 4096, "%s skill63='%d', skill64='%d', ", squery, p_skills[id][63],p_skills[id][64] );
-	format ( squery, 4096, "%s att1='%d' , att2='%d' , att3='%d' , att4='%d' ,", squery, p_attribs[id][ATTRIBIDX_STR], p_attribs[id][ATTRIBIDX_INT], p_attribs[id][ATTRIBIDX_DEX], p_attribs[id][ATTRIBIDX_AGI] );
-	format ( squery, 4096, "%s att5='%d' , att6='%d' , res1='%d' , res2='%d' ,", squery, p_attribs[id][ATTRIBIDX_CON], p_attribs[id][ATTRIBIDX_WIS], p_resists[id][RESISTIDX_POISON], p_resists[id][RESISTIDX_DISEASE] );
-	format ( squery, 4096, "%s res3='%d' , res4='%d' , res5='%d' , res6='%d', res7='%d', name='%s' ;", squery, p_resists[id][RESISTIDX_ELECTRIC], p_resists[id][RESISTIDX_FIRE], p_resists[id][RESISTIDX_MAGIC], p_resists[id][RESISTIDX_ROT],p_resists[id][RESISTIDX_ICE], tempVar );
+	format ( squery, 4096, "REPLACE INTO `%s` ('steamid', 'xp', 'mtime', ", CVAR_MYSQL_TABLE)
+	for ( new k = 1; k < (MAX_SKILLS); k++ )
+	{
+		format( squery, 4096, "%s skill%d, ", squery, k);
+	}
 
+	for (  new k = 1; k < (MAX_ATTRIBS); k++ )
+	{
+		format( squery, 4096, "%s 'att%d', ", squery, squery, k);
+	}
+
+	for (  new k = 1; k < (MAX_RESISTS); k++ )
+	{
+		format( squery, 4096, "%s 'res%d', ", squery, squery, k);
+	}
+
+	format ( squery, 4096, "%s 'name') VALUES ('%s' , '%d' , '%s' ,", squery, steamid, playerxp[id], mtimet);
+
+	for ( new k = 1; k < (MAX_SKILLS); k++ )
+	{
+		format( squery, 4096, "%s '%d', ", squery, squery,p_skills[id][k]);
+	}
+
+	for ( new k = 1; k < (MAX_SKILLS); k++ )
+	{
+		format( squery, 4096, "%s '%d', ", squery, squery,p_skills[id][k]);
+	}
+
+	for (  new k = 1; k < (MAX_ATTRIBS); k++ )
+	{
+		format( squery, 4096, "%s '%d', ", squery, squery, p_attribs[id][k]);
+	}
+
+	for (  new k = 1; k < (MAX_RESISTS); k++ )
+	{
+		format( squery, 4096, "%s '%d', ", squery, squery, p_attribs[id][k]);
+	}
+
+	format ( squery, 4096, "%s '%s');", squery, tempVar) ;
 	player_id = id;
 
 	//Set the Query
@@ -692,37 +704,38 @@ public SaveSkillSetSQLLite( id, skillsetIDX )
 	{
 		new userName[63];
 		get_user_name ( id, userName, 63 );
-		format ( squery, 5096, "REPLACE INTO `%s_SkillSets` SET name='%s', skillsetid='%d',", CVAR_MYSQL_TABLE, userName, skillsetIDX );
+		format ( squery, 4096, "REPLACE INTO `%s_SkillSets` ('name', 'skillsetid', ", CVAR_MYSQL_TABLE)
 	}
 	else
 	{
 		get_user_authid ( id, steamid, 34 );
-		format ( squery, 5096, "REPLACE INTO `%s_SkillSets` SET steamid='%s', skillsetid='%d',", CVAR_MYSQL_TABLE, steamid, skillsetIDX );
+		format ( squery, 4096, "REPLACE INTO `%s_SkillSets` ('steamid', 'skillsetid', ", CVAR_MYSQL_TABLE)
 	}
-	
-	format ( squery, 4096, "%s skill1='%d' , skill2='%d' ,", squery, p_skills[id][1], p_skills[id][2] ) ;
-	format ( squery, 4096, "%s skill3='%d' , skill4='%d' , skill5='%d' ,", squery,p_skills[id][3], p_skills[id][4], p_skills[id][5] );
-	format ( squery, 4096, "%s skill6='%d' , skill7='%d' , skill8='%d' ,", squery,p_skills[id][6], p_skills[id][7], p_skills[id][8] );
-	format ( squery, 4096, "%s skill9='%d' , skill10='%d', skill11='%d',", squery,p_skills[id][9], p_skills[id][10], p_skills[id][11] );
-	format ( squery, 4096, "%s skill12='%d', skill13='%d', skill14='%d',", squery,p_skills[id][12], p_skills[id][13], p_skills[id][14] );
-	format ( squery, 4096, "%s skill15='%d', skill16='%d', skill17='%d',", squery,p_skills[id][15], p_skills[id][16], p_skills[id][17] ) ;
-	format ( squery, 4096, "%s skill18='%d', skill19='%d', skill20='%d',", squery,p_skills[id][18], p_skills[id][19], p_skills[id][20] );
-	format ( squery, 4096, "%s skill21='%d', skill22='%d', skill23='%d',", squery,p_skills[id][21], p_skills[id][22], p_skills[id][23] );
-	format ( squery, 4096, "%s skill24='%d', skill25='%d', skill26='%d',", squery,p_skills[id][24], p_skills[id][25], p_skills[id][26] );
-	format ( squery, 4096, "%s skill27='%d', skill28='%d', skill29='%d',", squery,p_skills[id][27], p_skills[id][28], p_skills[id][29] );
-	format ( squery, 4096, "%s skill30='%d', skill31='%d', skill32='%d',", squery,p_skills[id][30], p_skills[id][31], p_skills[id][32] );
-	format ( squery, 4096, "%s skill33='%d', skill34='%d', skill35='%d',", squery,p_skills[id][33], p_skills[id][34], p_skills[id][35] );
-	format ( squery, 4096, "%s skill36='%d', skill37='%d', skill38='%d',", squery,p_skills[id][36], p_skills[id][37], p_skills[id][38] );
-	format ( squery, 4096, "%s skill39='%d', skill40='%d', skill41='%d',", squery,p_skills[id][39], p_skills[id][40], p_skills[id][41] );
-	format ( squery, 4096, "%s skill42='%d', skill43='%d', skill44='%d',", squery,p_skills[id][42], p_skills[id][43], p_skills[id][44] );
-	format ( squery, 4096, "%s skill45='%d', skill46='%d', skill47='%d',", squery,p_skills[id][45], p_skills[id][46], p_skills[id][47] );
-	format ( squery, 4096, "%s skill48='%d', skill49='%d', skill50='%d',", squery,p_skills[id][48], p_skills[id][49], p_skills[id][50] );
-	format ( squery, 4096, "%s skill51='%d', skill52='%d', skill53='%d',", squery,p_skills[id][51], p_skills[id][52], p_skills[id][53] );
-	format ( squery, 4096, "%s skill54='%d', skill55='%d', skill56='%d',", squery, p_skills[id][54],p_skills[id][55], p_skills[id][56] );
-	format ( squery, 4096, "%s skill57='%d', skill58='%d', skill59='%d',", squery,p_skills[id][57], p_skills[id][58], p_skills[id][59] );
-	format ( squery, 4096, "%s skill60='%d', skill61='%d', skill62='%d',", squery,p_skills[id][60], p_skills[id][61], p_skills[id][62] );
-	format ( squery, 4096, "%s skill63='%d', skill64='%d' ;", squery, p_skills[id][63],p_skills[id][64] );
 
+	for ( new k = 1; k < (MAX_SKILLS); k++ )
+	{
+		format( squery, 4096, "%s skill%d, ", squery, k);
+	}
+
+	if( CVAR_SAVE_BY == 2 )
+	{
+		new userName[63];
+		get_user_name ( id, userName, 63 );
+		format ( squery, 4096, "%s) VALUES ('%s' , '%d' ,", squery, userName, skillsetIDX);
+	}
+	else
+	{
+		get_user_authid ( id, steamid, 34 );
+		format ( squery, 4096, "%s) VALUES ('%s' , '%d' ,", squery, steamid, skillsetIDX);
+	}
+
+
+	for ( new k = 1; k < (MAX_SKILLS); k++ )
+	{
+		format( squery, 4096, "%s '%d', ", squery, squery,p_skills[id][k]);
+	}
+
+	format ( squery, 4096, "%s);", squery) ;
 	player_id = id;
 	skills_id = skillsetIDX;
 	if ( CVAR_DEBUG_MODE )
@@ -799,12 +812,109 @@ public LoadSkillSetSQLLite( id, skillsetIDX )
 	
 	player_id = id;
 	skills_id = skillsetIDX;
+	new skills[MAX_SKILLS] = 0;
+	new tempVar[64];
+
 	if ( CVAR_DEBUG_MODE )
 	{
 		log_amx( "[UWC3X] DEBUG: SQLLite->LoadSkillSetSQLLite: Set SQL_ThreadQuery" );
 	}
 
-	SQL_ThreadQuery ( g_SqlTuple, "_LoadSkillSet", squery );
+	//Set the Query
+	Query = SQL_PrepareQuery ( SqlConnection, squery );
+
+	// run the query
+	if ( !Query || !SQL_Execute ( Query ) )
+	{
+		// if there were any problems
+		SQL_QueryError ( Query, g_Error, 511 );
+		log_amx( "[UWC3X] SQLLite :: Error Saving player XP" );
+		log_amx( "[UWC3X] Error:: %s", g_Error );
+		log_amx( "[UWC3X] Query:: %s", squery );
+		return PLUGIN_CONTINUE;
+	}
+	else
+	{
+		//Now that we have no errors, I will reset the xp loading var, this is in case there are
+		//errors so that it will continue to retry
+		NumResults = SQL_NumResults(Query);
+
+		if ( CVAR_DEBUG_MODE )
+		{
+			get_user_name ( player_id, tempVar, 63 );
+		}
+
+		if ( !NumResults || NumResults == 0 )
+		{
+			//No results, tell them and then exit
+			if( Util_Should_Msg_Client(player_id) )
+			{
+				//client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET_NODATA", MOD, skills_id);
+				hudchat_show(player_id, "%L", player_id, "LOADSKILLSET_NODATA", skills_id);
+				hudchat_update(player_id);
+			}
+			return PLUGIN_CONTINUE;
+		}
+		else
+		{
+
+			//Since they are resetting their skills, and choosing new ones
+			//Zero out anything they had previously so that the new ones can take effect
+			for ( new j=0; j<MAX_SKILLS; j++ )
+			{
+				// Set all skills to 0
+				p_skills[player_id][j]=0;
+			}
+
+			ultlearned[player_id] = 0;
+
+			if( p_attribs[player_id][ATTRIBIDX_WIS] >= 18 )
+			{
+				p_maxultimates[player_id] = MAX_ULTIMATES + 1;
+			}
+			else
+			{
+				p_maxultimates[player_id] = MAX_ULTIMATES;
+			}
+
+			new name[32];
+			get_user_name ( player_id, name, 31 );
+
+			new temp[32], sqlField;
+			//Start setting the skills
+			for ( new k = 1; k < (MAX_SKILLS); k++ )
+			{
+				format( temp, 31, "skill%d", k);
+				sqlField = SQL_FieldNameToNum(Query, temp)
+				skills[k] = SQL_ReadResult ( Query, sqlField );
+
+				if( skill_ultimates[k][0] && ( ultlearned[player_id] < p_maxultimates[player_id] ) )
+				{
+					if( Util_Should_Msg_Client(player_id) )
+					{
+						client_print ( player_id, print_console, "%L", player_id, "ULTIMATE_RETRIEVED", MOD, skill_ultimates[k][0] );
+					}
+
+					ultlearned[player_id]++;
+					Set_Ult_Count(player_id);
+				}
+			}
+		}
+
+		p_skills[player_id] = skills;
+		xpreadytoload[player_id] = 0;
+
+		if( Util_Should_Msg_Client(player_id) )
+		{
+			//client_print(player_id, print_chat, "%L", player_id, "LOADSKILLSET", MOD, skills_id );
+			hudchat_show(player_id, "%L", player_id, "LOADSKILLSET", skills_id);
+			hudchat_update(player_id);
+		}
+	}
+
+	//Free the stuff
+	SQL_FreeHandle ( Query );
+	SQL_FreeHandle ( SqlConnection );
 	return PLUGIN_CONTINUE;
 }
 
