@@ -187,7 +187,9 @@ public Buy_Item2( id , key )
 			{
 				if( Util_Should_Msg_Client(id) )
 				{
-					client_print( id , print_center , "%L", id, "GLOVE_RESTRICTED" );
+					//client_print( id , print_center , "%L", id, "GLOVE_RESTRICTED" );
+					hudchat_show(id, "%L", id, "GLOVE_RESTRICTED");
+					hudchat_update(id);
 				}
 			
 				// Fix for Gloves bug which still allowed it to be bought
@@ -228,7 +230,9 @@ public Buy_Item2( id , key )
 		{
 			if( Util_Should_Msg_Client(id) )
 			{
-				client_print( id , print_center , "%L", id, "RINGS_X5_MORE" );
+				hudchat_show(id, "%L", id, "RINGS_X5_MORE");
+				hudchat_update(id);
+				//client_print( id , print_center , "%L", id, "RINGS_X5_MORE" );
 			}
 		
 			return PLUGIN_HANDLED;
@@ -251,7 +255,9 @@ public Buy_Item2( id , key )
 					hasmole[id] = false;
 					if( Util_Should_Msg_Client(id) )
 					{
-						client_print( id , print_center , "%L", id, "MOLE_DISABLED_ADMIN" );
+						hudchat_show(id, "%L", id, "MOLE_DISABLED_ADMIN");
+						hudchat_update(id);
+						//client_print( id , print_center , "%L", id, "MOLE_DISABLED_ADMIN" );
 					}
 					
 					return PLUGIN_HANDLED;
@@ -265,7 +271,9 @@ public Buy_Item2( id , key )
 			{
 				if( Util_Should_Msg_Client(id) )
 				{
-					client_print( id , print_center , "%L", id, "MOLE_DISABLED_PLAYER" );
+					//client_print( id , print_center , "%L", id, "MOLE_DISABLED_PLAYER" );
+					hudchat_show(id, "%L", id, "MOLE_DISABLED_PLAYER");
+					hudchat_update(id);
 				}
 			
 				return PLUGIN_HANDLED;
@@ -282,9 +290,7 @@ public Buy_Item2( id , key )
 	}
 	
 	displaylevel( id , 3 );
-	
 	return PLUGIN_HANDLED;
-	
 }
 
 
@@ -305,8 +311,10 @@ public Gloves_Give_Nade ( parm[2] )
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			set_hudmessage( 0, 100, 0, 0.05, 0.65, 2, 0.02, 3.0, 0.01, 0.1, 3);
-			show_hudmessage( id , "%L", id, "GLOVE_NADE_GIVEN" );
+			//set_hudmessage( 0, 100, 0, 0.05, 0.65, 2, 0.02, 3.0, 0.01, 0.1, 3);
+			//show_hudmessage( id , "%L", id, "GLOVE_NADE_GIVEN" );
+			hudchat_show(id, "%L", id, "GLOVE_NADE_GIVEN");
+			hudchat_update(id);
 		}
 	
 		give_item( id , "weapon_hegrenade" );
@@ -336,7 +344,9 @@ public Nade_Timer ( parm[2] )
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			show_hudmessage( id , "%L", id, "GLOVE_TIMER", nadetime[parm[0]] );
+			//show_hudmessage( id , "%L", id, "GLOVE_TIMER", nadetime[parm[0]] );
+			hudchat_show(id, "%L", id, "GLOVE_TIMER", nadetime[parm[0]]);
+			hudchat_update(id);
 		}
 	}
 	
@@ -346,7 +356,9 @@ public Nade_Timer ( parm[2] )
 	{
 		if( Util_Should_Msg_Client(id) )
 		{
-			show_hudmessage( id , "If you could manage to stay alive I could provide you with more nades!" );
+			//show_hudmessage( id , "If you could manage to stay alive I could provide you with more nades!" );
+			hudchat_show(id, "%L", id, "GLOVE_DIED");
+			hudchat_update(id);
 		}
 	
 	}

@@ -1999,14 +1999,14 @@ public rope_prethink(id)
 	velocity2[0] = (rope_to[id][0] - origin1_F[0]) * 3.0;
 	velocity2[1] = (rope_to[id][1] - origin1_F[1]) * 3.0;
 
-	static Float:y;
-	y = velocity2[0]*velocity2[0] + velocity2[1]*velocity2[1];
+	static Float:yy;
+	yy = velocity2[0]*velocity2[0] + velocity2[1]*velocity2[1];
 
-	static Float:x;
-	x = ( CVAR_ROPE_SPEED * 20.0) / floatsqroot(y);
+	static Float:xx;
+	xx = ( CVAR_ROPE_SPEED * 20.0) / floatsqroot(yy);
 
-	velocity[0] += velocity2[0]*x;
-	velocity[1] += velocity2[1]*x;
+	velocity[0] += velocity2[0]*xx;
+	velocity[1] += velocity2[1]*xx;
 
 	if(rope_to[id][2] - origin1_F[2] >= rope_totaldis[id] && velocity[2]<0.0) velocity[2] *= -1;
 
@@ -2430,15 +2430,15 @@ public hook_prethink(id)
 	velocity[1] = (float(hook_to[id][1]) - float(origin1[1])) * 3.0;
 	velocity[2] = (float(hook_to[id][2]) - float(origin1[2])) * 3.0;
 
-	static Float:y;
-	y = velocity[0]*velocity[0] + velocity[1]*velocity[1] + velocity[2]*velocity[2];
+	static Float:yy;
+	yy = velocity[0]*velocity[0] + velocity[1]*velocity[1] + velocity[2]*velocity[2];
 
-	static Float:x;
-	x = ( CVAR_HOOK_SPEED * 120.0) / floatsqroot(y);
+	static Float:xx;
+	xx = ( CVAR_HOOK_SPEED * 120.0) / floatsqroot(yy);
 
-	velocity[0] *= x;
-	velocity[1] *= x;
-	velocity[2] *= x;
+	velocity[0] *= xx;
+	velocity[1] *= xx;
+	velocity[2] *= xx;
 
 	set_velo(id,velocity);
 

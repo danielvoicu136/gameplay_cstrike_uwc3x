@@ -425,6 +425,30 @@ public pfn_touch( ptr, ptd )
 	if ( ptr == 0 || equali( compare, "grenade_cluster" ) )
 		return PLUGIN_HANDLED;
 
+	if (ptd == 0)
+		return PLUGIN_CONTINUE
+		
+	new szClassName[32]
+	entity_get_string(ptd, EV_SZ_classname, szClassName, 31)
+	
+	if (ptr != 0)
+	{
+		new szClassNameOther[32]
+		entity_get_string(ptr, EV_SZ_classname, szClassNameOther, 31)
+		if(equal(szClassName, "Mine") && equal(szClassNameOther, "player"))
+		{
+			new owner = pev(ptd,pev_owner)
+			//Touch
+			if (get_user_team(owner) != get_user_team(ptr))
+			{
+				new Float:origin[3]
+				pev(ptd,pev_origin,origin)
+				Explode_Origin(owner,origin,55,150)
+				remove_entity(ptd)
+			}
+		}
+	}	
+
 	//Checks to see if it is a grenade cluster hitting another object. If it is it explodes and deals damage
 	if ( equali( identify, "grenade_cluster" ) )
 	{

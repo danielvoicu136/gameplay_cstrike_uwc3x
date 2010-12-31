@@ -73,10 +73,9 @@ public Set_Skill_Mins ( )
 	
 	skill_minlev[SKILLIDX_FATAL]		= 24;
 	
-	skill_minlev[SKILLIDX_BLESS]	= 31;
-	skill_minlev[SKILLIDX_NEWSKILL15]	= 51;
+	skill_minlev[SKILLIDX_BLESS]		= 31;
+	skill_minlev[SKILLIDX_MINE]			= 21;
 	skill_minlev[SKILLIDX_NEWSKILL16]	= 51;
-
 }
 
 
@@ -130,6 +129,7 @@ public Set_Skill_Max ( )
 	skill_limits[SKILLIDX_CLOAK]		= MAX_SKILL_LEVEL5;
 	skill_limits[SKILLIDX_CRIPPLE]		= MAX_SKILL_LEVEL1;
 	skill_limits[SKILLIDX_FATAL]		= MAX_SKILL_LEVEL5;
+	skill_limits[SKILLIDX_MINE]			= MAX_SKILL_LEVEL1;
 
 	//ultimates
 	skill_limits[SKILLIDX_SUICIDE]		= MAX_SKILL_LEVEL1;
@@ -154,10 +154,8 @@ public Set_Skill_Max ( )
 	skill_limits[SKILLIDX_GRAB]			= MAX_SKILL_LEVEL6;
 	skill_limits[SKILLIDX_ROPE]			= MAX_SKILL_LEVEL4;
 	
-	skill_limits[SKILLIDX_BLESS]	= MAX_SKILL_LEVEL1;
-	skill_limits[SKILLIDX_NEWSKILL15]	= MAX_SKILL_LEVEL1;
+	skill_limits[SKILLIDX_BLESS]		= MAX_SKILL_LEVEL1;
 	skill_limits[SKILLIDX_NEWSKILL16]	= MAX_SKILL_LEVEL1;
-
 
 	// Now set the skill_ultimates list for the ultimate indices
 
@@ -184,6 +182,7 @@ public Set_Skill_Max ( )
 	copy ( skill_ultimates[SKILLIDX_HOOK],			32, "wchook"			);
 	copy ( skill_ultimates[SKILLIDX_ROPE],			32, "wcrope"			);
 	copy ( skill_ultimates[SKILLIDX_GRAB],			32, "wcgrab"			);
+	copy ( skill_ultimates[SKILLIDX_MINE],			32, "wcmine"			);
 }
 
 public Set_Skill_Base ( )
@@ -311,10 +310,10 @@ public Set_Skill_Limits ( )
 }
 public SetAdminOnlySkills ( )
 {
+	admin_only[SKILLIDX_MINE] = true;
 	// [08-01-04] Admin Only sets skills reserved only for admins
 	if ( CVAR_ENABLE_ADMIN_ONLY_SKILLS )
 	{
-
 		if ( CVAR_ADMINSKILL_REPAIR == 1 )
 		{
 			admin_only[SKILLIDX_REPAIR] = true;
@@ -1809,6 +1808,31 @@ public Skills_Check_Tasks( id )
 	return PLUGIN_CONTINUE;
 }
 
+public Set_Mine_Count( id )
+{
+
+	if( is_user_bot( id ) )
+	{
+		player_b_mine[id] = 0;
+	}
+	else
+	{
+		log_amx( "[UWC3X] Setting Mine Count" );
+		if (p_skills[id][SKILLIDX_MINE])
+		{ 
+			player_b_mine[id] = p_mines[p_skills[id][SKILLIDX_MINE]-1];
+		}
+		else
+		{
+			player_b_mine[id] = 0;
+		}
+
+		log_amx( "[UWC3X] Mine Count = %d", player_b_mine[id] );
+	}
+
+	return PLUGIN_CONTINUE;
+}
+
 public Set_Ward_Count( id )
 {
 	if( is_user_bot( id ) )
@@ -2061,6 +2085,11 @@ public Skills_Award_Cloak ( id )
 
 public Skills_Check( id, sethealth )
 {
+	if( !is_user_bot( id ))
+	{
+		log_amx( "[UWC3X] Entering Skills_Check" );
+	}
+
 	new parm[2];
 	parm[0] = id;
 
@@ -2086,6 +2115,9 @@ public Skills_Check( id, sethealth )
 
 	// Give serpant wards if necessary
 	Set_Ward_Count( id );
+
+	//Set mine count
+	Set_Mine_Count( id );
 
 	// Count phoenixes for each team
 	Set_Phoenix_Count( id );
@@ -2726,6 +2758,12 @@ public Bot_Pick_Skills( id )
 			continue;
 		}
 
+		//no mines
+		if (skill_idx == SKILLIDX_MINE)
+		{
+			continue;
+		}
+
 		// If they have trueshot or crit strike, dont let them get a backfire
 		//Instead add another point into what they already have
 		if ((skill_idx == SKILLIDX_TRUESHOT) && (p_skills[id][SKILLIDX_CRITSTRIKE]))
@@ -2810,4 +2848,121 @@ public SkillHasBind( parm[1] )
 	}
 
 	return false;
+}
+
+public item_mine(id)
+{
+
+	if( !player_b_mine[id])
+	{
+		hudchat_show(id,"%L", id, "MINE_UNTRAINED")
+		hudchat_update(id)
+		return PLUGIN_CONTINUE
+	}
+
+	new count = 0
+	new ents = -1
+	ents = find_ent_by_owner(ents,"Mine",id)
+	while (ents > 0)
+	{
+		count++
+		ents = find_ent_by_owner(ents,"Mine",id)
+	}
+	
+	if (count >= player_b_mine[id])
+	{
+		hudchat_show(id,"%L", id, "MINE_MAX", player_b_mine[id])
+		hudchat_update(id)
+		return PLUGIN_CONTINUE
+	}
+
+	new origin[3]
+	pev(id,pev_origin,origin)
+		
+	new ent = Spawn_Ent("info_target")
+	set_pev(ent,pev_classname,"Mine")
+	set_pev(ent,pev_owner,id)
+	set_pev(ent,pev_movetype,MOVETYPE_TOSS)
+	set_pev(ent,pev_origin,origin)
+	set_pev(ent,pev_solid,SOLID_BBOX)
+	
+	engfunc(EngFunc_SetModel, ent, "models/mine.mdl")  
+	engfunc(EngFunc_SetSize,ent,Float:{-16.0,-16.0,0.0},Float:{16.0,16.0,2.0})
+	
+	drop_to_floor(ent)
+	entity_set_float(ent,EV_FL_nextthink,halflife_time() + 0.01) 
+	use_addtofullpack = true
+	
+	new cargs[2];
+	cargs[0] = id;
+	cargs[1] = ent;
+	set_task ( 15.0, "TASK_Cleanup_Mine", TASK_CLEANUP_MINE+id, cargs, 2 );
+
+	hudchat_show(id,"%L", id, "MINE_PLACED")
+	hudchat_update(id)
+	return PLUGIN_CONTINUE
+}
+
+
+
+public Use_Mine(id)
+{		
+	if (!is_user_alive(id) || freezetime)
+		return PLUGIN_CONTINUE
+	
+	/*See if USE button is used for anything else..
+	1) Close to bomb
+	2) Close to hostage
+	3) Close to switch
+	4) Close to door
+	*/
+	
+	new Float:origin[3]
+	pev(id, pev_origin, origin)
+	
+	//Func door and func door rotating
+	new aimid, body
+	get_user_aiming ( id, aimid, body ) 
+	
+	if (aimid > 0)
+	{
+		new classname[32]
+		pev(aimid,pev_classname,classname,31)
+		
+		if (equal(classname,"func_door_rotating") || equal(classname,"func_door") || equal(classname,"func_button"))
+		{
+			new Float:doororigin[3]
+			pev(aimid, pev_origin, doororigin)
+			
+			if (get_distance_f(origin, doororigin) < 70 && UTIL_In_FOV(id,aimid))
+				return PLUGIN_CONTINUE
+		}
+	}
+	
+	//Bomb condition
+	new bomb
+	if ((bomb = find_ent_by_model(-1, "grenade", "models/w_c4.mdl"))) 
+	{
+		new Float:bombpos[3]
+		pev(bomb, pev_origin, bombpos)
+			
+		//We are near the bomb and have it in FOV.
+		if (get_distance_f(origin, bombpos) < 100 && UTIL_In_FOV(id,bomb))
+			return PLUGIN_CONTINUE
+	}
+
+	//Hostage
+	new hostage = engfunc(EngFunc_FindEntityByString, -1,"classname", "hostage_entity")
+	while (hostage)
+	{
+		new Float:hospos[3]
+		pev(hostage, pev_origin, hospos)
+		if (get_distance_f(origin, hospos) < 70 && UTIL_In_FOV(id,hostage))
+			return PLUGIN_CONTINUE
+		
+		hostage = engfunc(EngFunc_FindEntityByString, hostage,"classname", "hostage_entity")
+	}
+	
+	item_mine(id)
+	return PLUGIN_CONTINUE
 }

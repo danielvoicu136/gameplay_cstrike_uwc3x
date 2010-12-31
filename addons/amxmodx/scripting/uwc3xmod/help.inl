@@ -146,8 +146,8 @@ public skills_info( id, tier )
 			case SKILLIDX_BLESS:
                 pos+= format( temp[pos], 4096-pos, "<li>%L<p>", id, "BLESS_DESC" );
 				
-			case SKILLIDX_NEWSKILL15:
-				pos+= format( temp[pos], 4096-pos, "<li>%L<p>", id, "NEWSKILL15_DESC" );
+			case SKILLIDX_MINE:
+				pos+= format( temp[pos], 4096-pos, "<li>%L<p>", id, "MINE_DESC" );
 			case SKILLIDX_NEWSKILL16:
 				pos+= format( temp[pos], 4096-pos, "<li>%L<p>", id, "NEWSKILL16_DESC" );
 		}

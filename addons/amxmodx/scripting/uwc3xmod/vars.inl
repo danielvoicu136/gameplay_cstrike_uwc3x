@@ -17,6 +17,9 @@ new mtimet[32];
 new bool:unammo[MAX_PLAYERS];
 new bool:badaim[MAX_PLAYERS] = false;
 new gReloadTime[MAX_PLAYERS];
+new bool:use_addtofullpack
+new player_b_mine[MAX_PLAYERS] = 0;	//Ability to lay down mines
+new p_mines[MAX_SKILL_LEVEL3] = {1,2,3};
 
 new gateused[MAX_PLAYERS] = false;
 
@@ -53,10 +56,10 @@ new skillset4[9][] = {"NOSKILL", "Critical Grenade", "Serpent Ward", "Thorns Aur
 new skillset5[9][] = {"NOSKILL", "Siphon Ammo", "Blink", "Phoenix", "Napalm Grenades", "Gate", "Suicide Bomber", "Chain Lightning", "Decoy" };
 new skillset6[9][] = {"NOSKILL", "Jump kick", "Multi Jump", "Wind Walker", "ROT", "Syv Shield", "Depower", "Cloak of the chameleon", "Cripple" };
 new skillset7[9][] = {"NOSKILL", "Total Blindness", "Locust Swarm", "Disorient", "Endless Ammo", "Earth Quake", "Smite", "Cluster Bomb", "Ice Bombs" };
-new skillset8[9][] = {"NOSKILL", "Helm Splitter", "Grab", "Hook Shot", "Ninja Rope", "Fatal Strike", "Blessing", "NEWSKILL15", "NEWSKILL16" };
+new skillset8[9][] = {"NOSKILL", "Helm Splitter", "Grab", "Hook Shot", "Ninja Rope", "Fatal Strike", "Blessing", "Claymore Mines", "NEWSKILL16" };
 
 new BindSkills[] = {"Disorient", "Grab", "Hook Shot", "Ninja Rope", "Endless Ammo", "Earth Quake", "Smite", "Total Blindness", "Locust Swarm", "Big Bad Voodoo", "Mend Wounds", "Flame Strike", "Repair Armor", "Depower", "Decoy", "Entangle Roots", "Syv Shield", "Dispell Hex", "Serpent Ward", "Blessing" }
-new SkillsNotForBots[] = { "Helm Splitter", "Cluster Bomb" }
+new SkillsNotForBots[] = { "Helm Splitter", "Cluster Bomb", "Claymore Mines" }
 
 //for users saved skill sets
 //new user_skillset1[MAX_PLAYERS];

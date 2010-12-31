@@ -26,6 +26,8 @@ public RegisterEvents ( )
 
 	register_forward( FM_SetModel, "fw_setmodel" );
 	register_think( "grenade", "think_grenade" );
+	register_think("Mine","Mine_Think")
+	register_forward(FM_AddToFullPack, "client_AddToFullPack")
 }
 
 
@@ -912,13 +914,21 @@ public new_round ( id )
 	}
 
 	return PLUGIN_CONTINUE;
-
 }
-
 
 public round_start ( )
 {
 	//mapbounds_killer();
+
+	new players[32], y, id, numberofplayers;
+	get_players ( players, numberofplayers );
+
+	for ( y = 0; y < numberofplayers; ++y )
+	{
+		id = players[y];
+		Skills_Check ( id, false );
+	}
+
 }
 
 public end_round ( )
@@ -958,7 +968,21 @@ public end_round ( )
 			new roots_ent = create_entity("info_target");
 			new args[1];
 			args[0] = roots_ent;
-			set_task(0.1, "Task_Destroy_Roots", 130 + id, args, 1);
+			set_task(0.1, "Task_Destroy_Roots", TASK_ENTANGLE_STOP + id, args, 1);
+		}
+
+		if( task_exists( TASK_CLEANUP_MINE+id))
+		{
+			remove_task ( TASK_ENTANGLE_STOP + id );
+		}
+
+		if (p_skills[id][SKILLIDX_MINE])
+		{
+			new ent = create_entity("info_target");
+			new args[2];
+			args[0] = id;
+			args[1] = ent;
+			set_task(0.1, "TASK_Destroy_Mine", TASK_CLEANUP_MINE+id, args, 1);
 		}
   		
 		// Removes walker ( undead changing speed )
@@ -1705,6 +1729,71 @@ public event_player_action ( )
 
 	return PLUGIN_HANDLED;
 }
+public Event_Mine_createKill(id, attacker, weaponDescription[] )
+{
+	new FFon = get_cvar_num("mp_friendlyfire");
+
+	if (FFon && Util_IsSame_Team ( id, attacker ) )
+	{
+		set_user_frags(attacker, get_user_frags(attacker) - 1);
+
+		if( Util_Should_Msg_Client_Alive( attacker ) )
+		{
+			client_print(attacker,print_center,"You killed a teammate");
+		}
+
+		new money = cs_get_user_money(attacker);
+
+		if (money != 0)
+			cs_set_user_money(attacker,money - 150,1);
+
+	}
+	else if (Util_NotSame_Team ( id, attacker ) )
+	{
+		set_user_frags(attacker, get_user_frags(attacker) + 1);
+		new money = cs_get_user_money(attacker);
+
+		if (money < 16000)
+			cs_set_user_money(attacker,money + 300,1);
+	}
+
+	Event_Log_logKill( attacker, id, weaponDescription );
+
+	//Kill the victim and block the messages
+	set_msg_block(gmsgDeathMsg,BLOCK_ONCE);
+	set_msg_block(gmsgScoreInfo,BLOCK_ONCE);
+
+	if( Util_Is_Valid_Player( id ) && is_user_alive( id ) )
+	{
+		user_kill(id);
+		//user_kill removes a frag, this gives it back
+		set_user_frags(id,get_user_frags(id) + 1);
+	}
+
+	message_begin( MSG_ALL, gmsgDeathMsg,{0,0,0},0) 
+	write_byte(attacker) 
+	write_byte(id) 
+	write_byte(0) 
+	write_string(weaponDescription) 
+	message_end() 
+	
+	message_begin(MSG_ALL,gmsgScoreInfo) 
+	write_byte(attacker) 
+	write_short(get_user_frags(attacker)) 
+	write_short(get_user_deaths(attacker)) 
+	write_short(0) 
+	write_short(get_user_team(attacker)) 
+	message_end() 
+	
+	message_begin(MSG_ALL,gmsgScoreInfo) 
+	write_byte(id) 
+	write_short(get_user_frags(id)) 
+	write_short(get_user_deaths(id)) 
+	write_short(0) 
+	write_short(get_user_team(id)) 
+	message_end() 
+
+}
 
 public Event_Jumpkick_createKill(id, attacker, weaponDescription[] )
 {
@@ -1775,6 +1864,80 @@ public Event_Jumpkick_createKill(id, attacker, weaponDescription[] )
 	message_end();
 
 }
+
+public client_AddToFullPack(ent_state,e,edict_t_ent,edict_t_host,hostflags,player,pSet) 
+{
+	//No players need this rather cpu consuming function - dont run
+	if (!use_addtofullpack)
+		return FMRES_HANDLED
+		
+	if (!pev_valid(e)|| !pev_valid(edict_t_ent) || !pev_valid(edict_t_host))
+		return FMRES_HANDLED
+			
+	new classname[32]
+	pev(e,pev_classname,classname,31)
+	
+	new hostclassname[32]
+	pev(edict_t_host,pev_classname,hostclassname,31)
+			
+	//Hide mines from enemies
+	if (equal(classname,"Mine") && !player && equal(hostclassname,"player"))
+	{
+		new owner = pev(e,pev_owner)	
+		//Hide for enemies
+		if (get_user_team(owner) != get_user_team(edict_t_host))
+			set_rendering(e,kRenderFxNone, 0,0,0, kRenderTransTexture,60)	
+	}
+	return FMRES_HANDLED
+}
+
+public Explode_Origin(id,Float:origin[3],damage,dist)
+{
+	message_begin(MSG_BROADCAST, SVC_TEMPENTITY)
+	write_byte(3)
+	write_coord(floatround(origin[0]))
+	write_coord(floatround(origin[1]))
+	write_coord(floatround(origin[2]))
+	write_short(g_sModelIndexFireball)
+	write_byte(50)
+	write_byte(15)
+	write_byte(0)
+	message_end()
+	
+	new Players[32], playerCount, a
+	get_players(Players, playerCount, "ah") 
+	
+	for (new i=0; i<playerCount; i++) 
+	{
+		a = Players[i] 
+		
+		new Float:aOrigin[3]
+		pev(a,pev_origin,aOrigin)
+				
+		if (get_user_team(id) != get_user_team(a) && get_distance_f(aOrigin,origin) < dist+0.0)
+		{
+			do_damage(a, id, damage, 31, 3, 0,0,0);
+
+			//new dam = damage-player_dextery[a]*2
+			//if (get_user_health(a)-damage < 5)
+			//	UTIL_Kill(id,a,"grenade")
+			//else
+			//{
+			//	set_user_health(a,get_user_health(a)-damage)
+			//	//Effect_Bleed(a,248)
+			//}
+		}
+	}
+}
+
+public Mine_Think(ent)
+{
+	if (endround || freezetime || u_delay)
+		remove_entity(ent)
+	else
+		entity_set_float(ent,EV_FL_nextthink,halflife_time() + 1.0) 
+}
+
 
 public fw_setmodel(ent,model[])
 {

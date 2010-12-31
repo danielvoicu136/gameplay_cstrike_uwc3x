@@ -658,13 +658,14 @@ public amx_maxresists( id, level )
 	for ( new j=0; j<MAX_RESISTS; j++ )
 	{
 		// Set all resistances to 0
-		p_resists[id][j] = RESIST_MAX_VALUE;
+		p_resists[player][j] = RESIST_MAX_VALUE;
 	}
-	resetresist[id] = false;
 
-	if( Util_Should_Msg_Client(id) )
+	resetresist[player] = false;
+
+	if( Util_Should_Msg_Client(player) )
 	{
-		client_print ( id, print_chat, "%L", id, "ADMIN_MAX_RESISTS", MOD );
+		client_print ( player, print_chat, "%L", player, "ADMIN_MAX_RESISTS", MOD );
 	}		
 
 	return PLUGIN_HANDLED;
@@ -699,15 +700,15 @@ public amx_maxattribs( id, level )
 	for ( new j=0; j<MAX_ATTRIBS; j++ )
 	{
 		// Set all attributes to the default
-		p_attribs[id][j] = ATTRIB_MAX_VALUE;
+		p_attribs[player][j] = ATTRIB_MAX_VALUE;
 	}
 	
-	Set_Wisdom_Bonuses(id);
-	resetattrib[id] = false;
+	Set_Wisdom_Bonuses(player);
+	resetattrib[player] = false;
 
-	if( Util_Should_Msg_Client(id) )
+	if( Util_Should_Msg_Client(player) )
 	{
-		client_print ( id, print_chat, "%L", id, "ADMIN_MAX_ATTRIBS", MOD );
+		client_print ( player, print_chat, "%L", player, "ADMIN_MAX_ATTRIBS", MOD );
 	}		
 
 	return PLUGIN_HANDLED;

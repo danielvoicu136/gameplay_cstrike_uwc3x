@@ -380,3 +380,77 @@ stock set_rendering2(index, fx=kRenderFxNone, r=255, g=255, b=255, render=kRende
 	return 1;
 #endif
 }
+
+stock Spawn_Ent(const classname[]) 
+{
+	new ent = engfunc(EngFunc_CreateNamedEntity, engfunc(EngFunc_AllocString, classname))
+	set_pev(ent, pev_origin, {0.0, 0.0, 0.0})    
+	dllfunc(DLLFunc_Spawn, ent)
+	return ent
+}
+
+stock Float:Vec2DLength( Float:Vec[2] )  
+{ 
+	return floatsqroot(Vec[x1]*Vec[x1] + Vec[y1]*Vec[y1] )
+}
+
+stock bool:UTIL_In_FOV(id,target)
+{
+	if (Find_Angle(id,target,9999.9) > 0.0)
+		return true
+	
+	return false
+}
+stock Float:Find_Angle(Core,Target,Float:dist)
+{
+	new Float:vec2LOS[2]
+	new Float:flDot	
+	new Float:CoreOrigin[3]
+	new Float:TargetOrigin[3]
+	new Float:CoreAngles[3]
+	
+	pev(Core,pev_origin,CoreOrigin)
+	pev(Target,pev_origin,TargetOrigin)
+	
+	if (get_distance_f(CoreOrigin,TargetOrigin) > dist)
+		return 0.0
+	
+	pev(Core,pev_angles, CoreAngles)
+	
+	for ( new i = 0; i < 2; i++ )
+		vec2LOS[i] = TargetOrigin[i] - CoreOrigin[i]
+	
+	new Float:veclength = Vec2DLength(vec2LOS)
+	
+	//Normalize V2LOS
+	if (veclength <= 0.0)
+	{
+		vec2LOS[x1] = 0.0
+		vec2LOS[y1] = 0.0
+	}
+	else
+	{
+		new Float:flLen = 1.0 / veclength;
+		vec2LOS[x1] = vec2LOS[x1]*flLen
+		vec2LOS[y1] = vec2LOS[y1]*flLen
+	}
+	
+	//Do a makevector to make v_forward right
+	engfunc(EngFunc_MakeVectors,CoreAngles)
+	
+	new Float:v_forward[3]
+	new Float:v_forward2D[2]
+	get_global_vector(GL_v_forward, v_forward)
+	
+	v_forward2D[x1] = v_forward[x1]
+	v_forward2D[y1] = v_forward[y1]
+	
+	flDot = vec2LOS[x1]*v_forward2D[x1]+vec2LOS[y1]*v_forward2D[y1]
+	
+	if ( flDot > 0.5 )
+	{
+		return flDot
+	}
+	
+	return 0.0	
+}

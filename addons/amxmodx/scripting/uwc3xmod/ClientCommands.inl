@@ -120,6 +120,7 @@ public Initialize_CLCMD ( )
 	register_concmd ( "wcgrab", 		"Ult_Grab", 			-1,		"-Grab Ultimate");
 	register_concmd ( "wchook", 		"Ult_Hook2", 			-1,		"-Hook Ultimate");
 	register_concmd ( "wcrope", 		"Ult_Rope", 			-1,		"-Rope Ultimate");
+	register_concmd ( "wcmine", 		"Use_Mine", 			-1,		"-Mine Skill");
 
 	register_clcmd ( "wcdispell",		"ability_wcdispell",	-1,		"-Special Ability: Dispell Hex ( aim at teammate and trigger the wcdispell cmd )" );
 	register_clcmd ( "wcward",			"ability_wcward",		-1,		"-Serpant Ward Ultimate Skill" );

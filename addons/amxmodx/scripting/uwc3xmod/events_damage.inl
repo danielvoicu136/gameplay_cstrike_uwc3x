@@ -67,6 +67,8 @@ public get_deathbystr( deathby, string[], len )
 			format( string, len, "%s", "UWC3X Ice Bomb" ); // Ice Bomb
 		case 30:
 			format( string, len, "%s", "UWC3X Fatal Strike" ); //Fatal Strike
+		case 31:
+			format( string, len, "%s", "UWC3X Claymore Mine" ); //Claymore
 	}
 }
 

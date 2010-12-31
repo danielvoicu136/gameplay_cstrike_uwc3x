@@ -883,6 +883,12 @@ public PreCache_Models ( )
 		precache_model("models/frostnova.mdl");
 	}
 
+	//Ice Bomb
+	if ( file_exists ( "models/mine.mdl" ) )
+	{
+		precache_model("models/mine.mdl");
+	}
+
 	glassGibs = precache_model("models/glassgibs.mdl");
 
 	// Precache std CS player models for use with decoy ability
@@ -1470,7 +1476,7 @@ public logevent_round_start ( )
 	}
 
 	freezetime = false;
-
+	use_addtofullpack = false;
 	new players[32], numberofplayers, id, i, parm[1];
 	get_players ( players, numberofplayers );
 
@@ -2132,5 +2138,48 @@ public get_solidity(ent)
 #endif
 }
 
+public UTIL_Kill(attacker,id,weapon[])
+{
+	
+	if(get_user_team(attacker)!=get_user_team(id))
+		set_user_frags(attacker,get_user_frags(attacker) +1);
+
+	if(get_user_team(attacker)==get_user_team(id))
+		set_user_frags(attacker,get_user_frags(attacker) -1);
+		
+	//if (cs_get_user_money(attacker) + 150 <= 16000)
+	cs_set_user_money(attacker,cs_get_user_money(attacker)+150)
+	//else
+	//	cs_set_user_money(attacker,16000)
+	
+	//do_damage(id, attacker, 55, 31, 3, 0,0,0);
+	//award_kill(attacker,id)
+	//user_kill(id,1) 
+
+	if(get_user_health(id) < 55 )
+	{
+		Event_Mine_createKill(id,attacker,"Clarmore Mine!");
+		new name[32],aname[32];
+		get_user_name ( id, name, 31 );
+		get_user_name ( attacker, aname, 31 );
+
+		if( Util_Should_Msg_Client(attacker) )
+		{
+			client_print( attacker, print_center, "%L", attacker, "MINE2", name );
+		}
+
+		if( is_user_connected( id ) && !is_user_bot( id ) )
+		{
+			client_print( id, print_center, "%L", id, "MINE1", aname );
+		}
+	}
+	else
+	{
+		fakedamage(id,"Claymore", float(55) , DMG_CRUSH );
+	}
+
+	return PLUGIN_CONTINUE;
+	
+}
 
 /* ==================================================================================================== */

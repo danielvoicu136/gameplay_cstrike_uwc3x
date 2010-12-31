@@ -1487,10 +1487,30 @@ public TASK_Suicide_Explode ( parm[] )
 		set_task ( 0.1, "TASK_Suicide_Explode", TASK_SUICIDE_EXPLODE_NOID, parm, 2 );
 	}
 
-
 	return PLUGIN_CONTINUE;
 }
 
+public TASK_Destroy_Mine ( args[] )
+{
+	new id = args[0];
+	new ents = -1;
+	
+	ents = find_ent_by_owner(ents,"Mine",id)
+	while (ents > 0)
+	{
+		remove_entity ( ents );
+		ents = find_ent_by_owner(ents,"Mine",id)
+	}
+
+	remove_entity ( args[1] );
+}
+
+public TASK_Cleanup_Mine( args[])
+{
+	//new id = args[0];
+	new ent = args[1];
+	remove_entity(ent);
+}
 
 /* Decoy */
 public TASK_Cleanup_Decoy ( args[] )
