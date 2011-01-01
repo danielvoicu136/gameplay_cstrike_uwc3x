@@ -233,10 +233,10 @@ public healingeffect( id, targetid, heal )
 			playerxp[id] += xpbonus;
 
 			/// LET THE PLAYER KNOW THAT WE GAVE THEM XP AND HOW MUCH
-			//if( Util_Should_Msg_Client(id) )
-			//{
-			//	client_print( id, print_chat, "%L", id, "HEALING_WAVE_HEAL", MOD, xpbonus );
-			//}
+			if( Util_Should_Msg_Client(id) )
+			{
+				client_print( id, print_console, "%L", id, "HEALING_WAVE_HEAL", MOD, xpbonus );
+			}
 		}
 	}
 

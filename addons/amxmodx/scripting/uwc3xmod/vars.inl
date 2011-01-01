@@ -453,7 +453,7 @@ new bombCarrier;			// Player ID carrying the bomb
 new bombdefuser;			// Player ID thhat completed defuse
 new bombstate;				// Bomb state ( 0, 1 or 2 )
 
-new bool:endround;			// Hs round ended or still going
+new bool:endround;			// Has round ended or still going
 new bool:u_delay = false;	// Is there an ultimate delay at round start
 new bool:no_he = false;		// Orc nades allowed or not
 new bool:buycalled = false;	// Buytime over or not

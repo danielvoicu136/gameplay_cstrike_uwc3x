@@ -178,18 +178,17 @@ public Buy_Item2( id , key )
 			playeritem3[id] = 0;
 		}
 	}
-	
+		
 	if ( playeritem2[id] == INFERNO )
 	{
-		if ( CVAR_NO_GLOVES_FOR_KA_MAPS )
+		if ( UWC3X_MapDisableCheck( "gloves.cfg" ) )
 		{
 			if( !givenade )
 			{
 				if( Util_Should_Msg_Client(id) )
 				{
-					//client_print( id , print_center , "%L", id, "GLOVE_RESTRICTED" );
-					hudchat_show(id, "%L", id, "GLOVE_RESTRICTED");
-					hudchat_update(id);
+					client_print ( id, print_chat, "%L", id, "GLOVES_ITEM_DISABLED", MOD );
+					emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 				}
 			
 				// Fix for Gloves bug which still allowed it to be bought
@@ -285,8 +284,8 @@ public Buy_Item2( id , key )
 	
 	if( Util_Should_Msg_Client(id) )
 	{
-		if ( file_exists( "sound/uwc3x/pickupitem.wav" ) == 1 )
-			emit_sound( id , CHAN_ITEM , "uwc3x/pickupitem.wav" , 1.0 , ATTN_NORM , 0 , PITCH_NORM );
+		if ( file_exists( "sound/uwc3x/shopmenu/sm_pickupitem.wav" ) == 1 )
+			emit_sound( id , CHAN_STATIC , "uwc3x/shopmenu/sm_pickupitem.wav" , 1.0 , ATTN_NORM , 0 , PITCH_NORM );
 	}
 	
 	displaylevel( id , 3 );
@@ -378,45 +377,6 @@ public Nade_Timer ( parm[2] )
 	return PLUGIN_CONTINUE;
 }
 
-
-public checkmap( )
-{
-	new mapname[32];
-	get_mapname( mapname , 31 );
-	
-	if ( containi( mapname , "ka_" ) != -1 || containi( mapname , "he_" ) != -1 || containi( mapname , "scoutzknivez" ) != -1 )
-	{
-		givepistol = false;
-		
-		if ( CVAR_NO_GLOVES_FOR_KA_MAPS )
-		{
-			givenade = false;
-		}
-		else
-		{
-			givenade = true;
-		}
-	}
-	else
-	{
-		givenade = true;
-		givepistol = true;
-	}
-	
-	if( CVAR_NO_GLOVES_FOR_KA_MAPS )
-	{
-		if ( containi( mapname , "ka_" ) != -1 || containi( mapname , "jail_riot" ) != -1 || containi( mapname , "fy_" ) != -1 )
-		{
-			no_he = true;
-		}
-		else
-		{
-			no_he = false;
-		}
-	}
-	
-	return PLUGIN_CONTINUE;
-}
 public rings5( id )
 {
 	if ( !is_user_alive( id ) )

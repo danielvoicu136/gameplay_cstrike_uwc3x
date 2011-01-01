@@ -93,7 +93,6 @@ new BOT_LEVEL, CVAR_BOT_LEVEL;
 new CVAR_GLOVE_TIMER;
 new CVAR_GLOVE_ORC_DAMAGE;
 new CVAR_GLOVE_NAPALM;
-new CVAR_NO_GLOVES_FOR_KA_MAPS;
 new CVAR_HEALING_RANGE;
 
 //Reset
@@ -336,7 +335,6 @@ new COMPETITIVE;
 new GLOVE_TIMER;
 new GLOVE_ORC_DAMAGE;
 new GLOVE_NAPALM;
-new NO_GLOVES_FOR_KA_MAPS;
 new HEALING_RANGE;
 
 //ultimate cool downs
@@ -563,7 +561,6 @@ public Register_Cvars ( )
 	GLOVE_TIMER						=			register_cvar ( "UWX_glove_timer",				"25"		 );
 	GLOVE_ORC_DAMAGE				=			register_cvar ( "UWX_glove_orc_damage",			"1"			 );
 	GLOVE_NAPALM					=			register_cvar ( "UWX_glove_napalm_damage",		"0"			 );
-	NO_GLOVES_FOR_KA_MAPS			=			register_cvar ( "UWX_no_gloves_on_ka",			"1"			 );
 
 	HEALING_RANGE					=			register_cvar ( "UWX_healing_range",			"750"		 );
 
@@ -667,7 +664,6 @@ public Register_Cvars ( )
 	VOTE_UWC3X_RATIO				=			register_cvar ( "amx_votewar3_ratio",			"0.70"		 );
 	DAYS_BEFORE_DELETE				=			register_cvar ( "sv_daysbeforedelete",			"31"		 );
 	ENABLE_SHOPMENU3				=			register_cvar ( "UWX_enable_shopmenu3",			"1"			 );
-	RESTRICT_HE_NADE				=			register_cvar ( "UWX_no_orcnades_on_he",		"0"		     );
 	POSITION						=			register_cvar ( "UWX_position",					"0"			 );
 	*/
 	
@@ -791,7 +787,6 @@ public Bind_Cvars ( )
 	CVAR_GLOVE_TIMER			=	get_pcvar_num ( GLOVE_TIMER );
 	CVAR_GLOVE_ORC_DAMAGE		=	get_pcvar_num ( GLOVE_ORC_DAMAGE );
 	CVAR_GLOVE_NAPALM			=	get_pcvar_num ( GLOVE_NAPALM );
-	CVAR_NO_GLOVES_FOR_KA_MAPS	=	get_pcvar_num ( NO_GLOVES_FOR_KA_MAPS );
 	CVAR_HEALING_RANGE			=	get_pcvar_num ( HEALING_RANGE );
 	CVAR_BLINK_PROTECTION		=	get_pcvar_num ( BLINK_PROTECTION );
 	CVAR_BLINK_DIZINESS			=	get_pcvar_num ( BLINK_DIZINESS );
@@ -924,7 +919,7 @@ public Exec_User_CFG ( )
 	new basedir[64];
 	new cfgfile[64];
 	get_customdir(basedir, 63);
-	format(cfgfile, 63, "%s/UWC3X.cfg", basedir);
+	format(cfgfile, 63, "%s/uwc3x/UWC3X.cfg", basedir);
 
 	if ( file_exists( cfgfile ) )
 	{

@@ -1,6 +1,38 @@
 //	Shared functions will go here, each ultimate will have its
 //	own file with its main and supporting functions and methods
 
+
+// Funtion will check a file to see if the mapname exists
+// Added by Yippee Ki Yay Mo and (--eRRoR--)
+bool:UWC3X_MapDisableCheck( szFileName[] )
+{
+	// Format the Orc Nade Disable File
+	new szFile[128];
+	get_configsdir( szFile, 127 );
+	formatex( szFile, 127, "%s/uwc3x/disable/%s", szFile, szFileName );
+
+	if ( !file_exists( szFile ) )
+		return false;
+
+	new iLineNum, szData[64], iTextLen, iLen;
+	new szMapName[64], szRestrictName[64];
+	get_mapname( szMapName, 63 );
+
+	while ( read_file( szFile, iLineNum, szData, 63, iTextLen ) )
+	{
+		iLen = copyc( szRestrictName, 63, szData, '*' );
+
+		if ( equali( szMapName, szRestrictName, iLen ) )
+		{
+			return true;
+		}
+
+		iLineNum++;
+	}
+
+	return false;
+}
+
 public cooldown2 ( parm[1] )
 {
 	new id = parm[0];
@@ -184,6 +216,7 @@ public Ult_Can_Use ( id , IDX )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
 			show_hudmessage ( id, "You may not use your ultimate during freezetime" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 
 		return false;
@@ -194,6 +227,7 @@ public Ult_Can_Use ( id , IDX )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
 			show_hudmessage ( id, "Your ultimates are not ready to be used." );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -203,6 +237,7 @@ public Ult_Can_Use ( id , IDX )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
 			show_hudmessage ( id, "You do not have any ultimates trained." );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -213,6 +248,7 @@ public Ult_Can_Use ( id , IDX )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
 			show_hudmessage ( id, "Moles cannot use ultimates" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -223,6 +259,7 @@ public Ult_Can_Use ( id , IDX )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
 			show_hudmessage ( id, "Ultimates are disabled for the^nfirst %d seconds of the round", CVAR_ULTIMATE_DELAY );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -236,6 +273,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_FLAME_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -244,6 +282,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_TELEPORT_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -252,6 +291,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_VOODOO_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -260,6 +300,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_GATE_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -268,6 +309,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_LGHTNG_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -276,6 +318,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_DECOY_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -284,6 +327,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_ENTANGLE_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -292,6 +336,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_TEAMSHIELD_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -300,6 +345,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_DEPOWER_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -308,6 +354,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_LOCUST_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -316,6 +363,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_BLIND_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -324,6 +372,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_DISORIENT_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -332,6 +381,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_UAMMO_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -340,6 +390,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_EARTHQUAKE_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -348,6 +399,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_SMITE_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -356,6 +408,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_HOOK_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -364,6 +417,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_ROPE_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -372,6 +426,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_GRAB_UNTRAINED" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -380,6 +435,7 @@ public Ult_Can_Use ( id , IDX )
 		if( Util_Should_Msg_Client(id) )
 		{
 			client_print ( id, print_chat, "%L", id, "ULTIMATE_WCSUICIDE_UNTRAINED", MOD );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		return false;
 	}
@@ -390,6 +446,7 @@ public Ult_Can_Use ( id , IDX )
 		{
 			set_hudmessage ( 178, 14, 41, -1.0, -0.4, 1, 0.5, 1.7, 0.2, 0.2, 5 );
 			show_hudmessage ( id, "You may not use your ultimate after the round is over" );
+			emit_sound( id, CHAN_ITEM, "uwc3x/error.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 
 		return false;
@@ -1000,6 +1057,13 @@ public Ult_Suicide_Bomber ( id )
 	{
 		return PLUGIN_HANDLED;
 	}
+	
+	if ( UWC3X_MapDisableCheck( "suicide.cfg" ) )
+	{
+		client_print ( id, print_chat, "%L", id, "ULTIMATE_SUICIDE_DISABLED", MOD );
+		emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
+		return PLUGIN_HANDLED;
+	}
 
 	if ( is_user_alive ( id ) )
 	{
@@ -1051,6 +1115,13 @@ public Ult_Teleport ( id )
 
 	if ( !Ult_Can_Use ( id , SKILLIDX_TELEPORT ) )
 	{
+		return PLUGIN_HANDLED;
+	}
+	
+	if ( UWC3X_MapDisableCheck( "teleport.cfg" ) )
+	{
+		client_print ( id, print_chat, "%L", id, "ULTIMATE_TELEPORT_DISABLED", MOD );
+		emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		return PLUGIN_HANDLED;
 	}
 
@@ -1110,7 +1181,7 @@ public Ult_Teleport ( id )
 						if( Util_Should_Msg_Client_Alive( id ))
 						{
 							set_hudmessage ( 255, 255, 10, -1.0, -0.4, 1, 0.5, CVAR_BLINK_COOLDOWN, 0.2, 0.2,5 );
-							show_hudmessage ( id, "Teleport Failed^nA Nearby Enemy Has Immunity" );
+							show_hudmessage( id , "%L", LANG_PLAYER, "ULTIMATE_TELEPORT_IMMUNITY" );
 						}
 
 						new coolparm[1];
@@ -1444,22 +1515,22 @@ public Ult_TeamShield ( id )
 /* Entengle roots */
 public Ult_Entangle ( id )
 {
-    if ( !Ult_Can_Use ( id, SKILLIDX_ENTANGLE ) )
-    {
-        return PLUGIN_HANDLED;
-    }
-    if ( is_user_alive ( id ) && Util_Is_Valid_Player( id ) )
-    {
-        if( !issearching[id] && !ultimateused[id] )
-        {
-            new parm[2];
-            parm[0] = id;
-            parm[1] = ULTIMATESEARCHTIME;
-            searchtarget ( parm );
-        }
-    }
-    return PLUGIN_CONTINUE;
-} 
+	if ( !Ult_Can_Use ( id, SKILLIDX_ENTANGLE ) )
+	{
+		return PLUGIN_HANDLED;
+	}
+	if ( is_user_alive ( id ) && Util_Is_Valid_Player( id ) )
+	{
+		if( !issearching[id] && !ultimateused[id] )
+		{
+			new parm[2];
+			parm[0] = id;
+			parm[1] = ULTIMATESEARCHTIME;
+			searchtarget ( parm );
+		}
+	}
+	return PLUGIN_CONTINUE;
+}
 
 /* Decoy */
 public Ult_Decoy ( id )
@@ -1567,6 +1638,13 @@ public Ult_DePower( id )
 	{
 		return PLUGIN_HANDLED;
 	}
+	
+	if ( UWC3X_MapDisableCheck( "depower.cfg" ) )
+	{
+		client_print ( id, print_chat, "%L", id, "ULTIMATE_DEPOWER_DISABLED", MOD );
+		emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
+		return PLUGIN_HANDLED;
+	}
 
 	if ( is_user_alive ( id ) && !issearching[id] && !ultimateused[id] && !UsedDepower[id] )
 	{
@@ -1641,6 +1719,13 @@ public Ult_Smite( id )
 		return PLUGIN_HANDLED;
 	}
 
+	if ( UWC3X_MapDisableCheck( "smite.cfg" ) )
+	{
+		client_print ( id, print_chat, "%L", id, "ULTIMATE_SMITE_DISABLED", MOD );
+		emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
+		return PLUGIN_HANDLED;
+	}
+	
 	if ( is_user_alive ( id ) && !issearching[id] && !ultimateused[id] )
 	{
 		new parm[2];
@@ -1659,6 +1744,13 @@ public Ult_EarthQuake( id )
 
 	if ( !Ult_Can_Use ( id, SKILLIDX_EARTHQUAKE ) )
 	{
+		return PLUGIN_HANDLED;
+	}
+	
+	if ( UWC3X_MapDisableCheck( "earthquake.cfg" ) )
+	{
+		client_print ( id, print_chat, "%L", id, "ULTIMATE_EARTHQUAKE_DISABLED", MOD );
+		emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		return PLUGIN_HANDLED;
 	}
 
@@ -1680,6 +1772,13 @@ public Ult_Locust(id)
 
 	if ( !Ult_Can_Use ( id, SKILLIDX_LOCUST ) )
 	{
+		return PLUGIN_HANDLED;
+	}
+	
+	if ( UWC3X_MapDisableCheck( "swarm.cfg" ) )
+	{
+		client_print ( id, print_chat, "%L", id, "ULTIMATE_SWARM_DISABLED", MOD );
+		emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		return PLUGIN_HANDLED;
 	}
 
@@ -1883,9 +1982,9 @@ public rope_on(id)
 
 		if( Util_Should_Msg_Client(id) )
 		{
-			if ( file_exists ( "sound/weapons/xbow_hit2.wav" ) == 1 )
+			if ( file_exists ( "sound/uwc3x/xbow_hit2.wav" ) == 1 )
 			{
-				emit_sound(id,CHAN_VOICE,"weapons/xbow_hit2.wav", 1.0, ATTN_NORM, 0, PITCH_NORM);
+				emit_sound(id,CHAN_STATIC,"uwc3x/xbow_hit2.wav", 1.0, ATTN_NORM, 0, PITCH_NORM);
 			}
 		}
 
@@ -2128,9 +2227,9 @@ public grabem(id,target)
 
 	if( Util_Should_Msg_Client(target) )
 	{
-		if ( file_exists ( "sound/weapons/xbow_fire1.wav" ) == 1 )
+		if ( file_exists ( "sound/uwc3x/xbow_fire1.wav" ) == 1 )
 		{
-			emit_sound ( id, CHAN_STATIC, "weapons/xbow_fire1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+			emit_sound ( id, CHAN_STATIC, "uwc3x/xbow_fire1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
 		}
 	}
 	
@@ -2327,9 +2426,9 @@ public hook_on ( id )
 
 	if( Util_Should_Msg_Client(id) )
 	{
-		if ( file_exists ( "sound/weapons/xbow_hit2.wav" ) == 1 )
+		if ( file_exists ( "sound/uwc3x/xbow_hit2.wav" ) == 1 )
 		{
-			emit_sound(id,CHAN_VOICE,"weapons/xbow_hit2.wav", 1.0, ATTN_NORM, 0, PITCH_NORM);
+			emit_sound(id,CHAN_STATIC,"uwc3x/xbow_hit2.wav", 1.0, ATTN_NORM, 0, PITCH_NORM);
 		}
 	}
 
@@ -2525,7 +2624,7 @@ public DO_HOOK(id)
 
 	if( Util_Should_Msg_Client(id) )
 	{
-		emit_sound(id, CHAN_STATIC, "weapons/xbow_hit2.wav", 1.0, ATTN_NORM, 0, PITCH_NORM);
+		emit_sound(id, CHAN_STATIC, "uwc3x/xbow_hit2.wav", 1.0, ATTN_NORM, 0, PITCH_NORM);
 	}
 
 	set_task(DELTA_T, "TASK_hooktask", TASK_HOOK + id, parm, 2, "b");

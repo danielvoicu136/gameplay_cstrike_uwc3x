@@ -499,7 +499,6 @@ public new_round ( id )
 	set_task ( 3.0, "monitor_players", TASK_MONITOR_PLAYERS );
 
 	buytime = true;
-	checkmap();
 	new parm[2];
 	parm[0] = id;
 
@@ -1179,6 +1178,14 @@ public hethrowevent ( id )
 {
 	new szModel[64] , grenadeid = 0, rgb[3];
 	grenadeid = get_grenade ( id );
+	
+	//[31-12-2010] - Check for valid map for grenade use
+	if ( UWC3X_MapDisableCheck( "cgrenade.cfg" ) )
+	{
+		client_print ( id, print_chat, "%L", id, "CGRENADE_SKILL_DISABLED", MOD );
+		emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
+		return PLUGIN_HANDLED;
+	}
 
 	// [10-05-04] - Check for Valid grenade entity
 	if ( !is_valid_ent ( grenadeid ) )
@@ -1938,7 +1945,6 @@ public Mine_Think(ent)
 		entity_set_float(ent,EV_FL_nextthink,halflife_time() + 1.0) 
 }
 
-
 public fw_setmodel(ent,model[])
 {
 
@@ -2139,7 +2145,7 @@ public grenade_explode(ent)
 				freeze_player(player);
 				isFrozen[player] = 1;
 
-				emit_sound(player,CHAN_BODY,"uwc3x/impalehit.wav",1.0,ATTN_NORM,0,PITCH_HIGH);
+				emit_sound(player,CHAN_BODY,"uwc3x/impale_hit.wav",1.0,ATTN_NORM,0,PITCH_HIGH);
 				set_task( 4.0,"remove_freeze", TASK_REMOVE_FREEZE +player );
 
 				// if they don't already have a frostnova

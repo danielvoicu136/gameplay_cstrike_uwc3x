@@ -397,8 +397,8 @@ SHOPMENU1_MASK = Mask of Death: You will receive health for every hit on the ene
 SHOPMENU1_NECKLACE = Necklace of Immunity: You will be immune to enemy ultimates
 SHOPMENU1_ORB = Orb of Frost: Slows your enemy down when you hit him
 SHOPMENU1_PERIPHAT = Periapt of Health: Receive extra health
-SHOPMENU1_TOME = Tome of Experience: Purchasing a tome increases your experience by a fixed amount, the tome is consume
-SHOPMENU1_TOME2 = You have gained %d XP from purchasing Tomb of experience
+SHOPMENU1_TOME = Tome of Experience: Purchasing a tome increases your experience by a fixed amount, the tome is consumed when bought
+SHOPMENU1_TOME2 = [%s]You have gained %d XP from purchasing Tomb of experience
 TOO_MANY_TOMES = You have already purchased more then the allowed amount of Tomes for this round
 
 SHOPMENU2_HEADER = The following items are available for purchase at the shop (say shopmenu2)
@@ -406,7 +406,7 @@ SHOPMENU2_SCROLL = Scroll of Respawning: You will respawn after death
 SHOPMENU2_MP = Mole Protectant: Protects you from moles (unless they hit you in the head)
 SHOPMENU2_AMULET = Amulet of the Cat: You cannot be heard when running/going up ladders
 SHOPMENU2_SOCK = Sock of the Feather: Allows you to levitate
-SHOPMEUN2_HELM = Helm of Excellence: Immunity to headshots
+SHOPMEUN2_HELM = Helm of Excellence: Immunity to headshots.Helmsplitter Ultimate can break the Helm
 SHOPMENU2_GLOVE = Flaming Gloves of Warmth: Given an HE grenade every %s seconds
 SHOPMENU2_RINGS = Ring of Regeneration +1: Gives 1 health every 2 seconds, you can have 5 max (type rings to receive 5)
 SHOPMENU2_CHAMELEON = Chameleon: You are disguised as the enemy!!
@@ -567,34 +567,20 @@ MENDWOUNDS_CURED_MESSAGE = %s has provided basic medical care to you
 SHHH_DEAD_MESSAGE = Shhhh, you are dead, act like it.
 RESISTANCE_ENDED = [%s] Your magic resistance to %s has ended
 
-SM3_DISEASE2 = Whoah, you suddenly start feeling a little better....
-SM3_POISON2 = Out of no where a man appears and sucks out the poison!
-SM3_FIRE2 = You suddenly remember to stop drop and roll, and the fire goes out.
-SM3_ROT2 = The arm that had rotted off suddenly regenerates and you are no longer rotting
-SM3_INVIS2 = You are now level 10 invisible for 15 seconds - better make it count!
-SM3_HEAL2 = mmmm You feel heathly!
-SM3_INVUL2 = For the next 20 seconds you will recieve 6 health back from each shot taken, if you survive the damage....
-SM3_GATE2 = You will be taken back to spawn.  Wussy :p
-SM3_VISIBLE2 = Looks like you are starting to become VISIBLE again.....better hide....
-SM3_VULERABLE2 = Looks like you are starting to become VULNERABLE again.....better not take much more damage....
-SM3_WAIT2 = You must wait 30 seconds between shopemnu3 purchases
-SM3_CAN_BUY2 = You can now make another purchase from SHOPMENU3
-SM3_NOHEX2 = Your hex has been dispelled.  Boy your legs are tired from all that jumping...
-SM3_MAXHEALTH = You are already at maximum health.
-
-SM3_DISEASE = [%s] Whoah, you suddenly start feeling a little better....
+SM3_DISEASE = [%s] Whoah,you suddenly start feeling a little better....
 SM3_POISON = [%s] Out of no where a man appears and sucks out the poison!
-SM3_FIRE = [%s] You suddenly remember to stop drop and roll, and the fire goes out.
+SM3_FIRE = [%s] You suddenly remember to stop drop and roll,and the fire goes out.
 SM3_ROT = [%s] The arm that had rotted off suddenly regenerates and you are no longer rotting
-SM3_INVIS = [%s] You are now level 10 invisible for 15 seconds - better make it count!
+SM3_INVIS = [%s] You are now Completely Invisible for 10 seconds!
 SM3_HEAL = [%s] mmmm You feel heathly!
 SM3_INVUL = [%s] For the next 20 seconds you will recieve 6 health back from each shot taken, if you survive the damage....
 SM3_GATE = [%s] You will be taken back to spawn.  Wussy :p
-SM3_VISIBLE = [%s] Looks like you are starting to become VISIBLE again.....better hide....
-SM3_VULERABLE = [%s] Looks like you are starting to become VULNERABLE again.....better not take much more damage....
+SM3_VISIBLE = [%s] You are now VISIBLE again.....better hide....
+SM3_VULNERABLE = [%s] Looks like you are starting to become VULNERABLE again.....better not take much more damage....
 SM3_WAIT = [%s] You must wait 30 seconds between shopemnu3 purchases
 SM3_CAN_BUY = [%s] You can now make another purchase from SHOPMENU3
-SM3_NOHEX = [%s] Your hex has been dispelled.  Boy your legs are tired from all that jumping...
+SM3_NOHEX = [%s] Your hex has been dispelled.Boy your legs are tired from all that jumping...
+SM3_MAXHEALTH = You are already at maximum health.
 
 SM3_NO_DISEASE = You are not diseased, this item will do you no good
 SM3_NO_POISON = You are not poisoned, this item will do you no good
@@ -669,12 +655,6 @@ ULTIMATE_DEPOWER_ENEMY1 = [%s] You have been depowered by %s and now you both ha
 ULTIMATE_DEPOWER_READY = [%s] Your depower ultimate is once again ready to be used
 ULTIMATE_DEPOWER_ENEMY2 = [%s] You can only have the TMP until your cooldown is finished.  You cant drop this gun until then
 ULTIMATE_DEPOWER_WORE_OFF = [%s] The depower placed on you by %s has finally wore off, you can go find a real gun now.....
-
-ULTIMATE_FLASH_UNTRAINED = You do not know the Flash of Light ultimate yet
-ULTIMATE_FLASH_ENEMY2 = You have been blinded by %s
-ULTIMATE_FLASH_ENEMY1 = [%s] You have been blinded by %s
-ULTIMATE_FLASH_YOU1 = [%s] %s has been blinded by your Flash of Light
-ULTIMATE_FLASH_YOU2 = %s has been blinded by your Flash of Light
 
 ULTIMATE_BLIND_UNTRAINED = [%s] You do not know the Total Blindness ultimate yet
 ULTIMATE_BLIND_ENEMY = You have been blinded by %s
@@ -785,7 +765,7 @@ ROT_DESC = Rot: This is the ultimate in effect changing skills.  Much like disea
 DEPOWER_DESC = Depower (Ultimate bind wcdepower): This will make BOTH you AND your opponent drop your guns and will give you a TMP instead.
 CLOAK_DESC = Cloak of the chameleon: This skill gives you a 10% chance per level of being spawned as a chameleon.  The bonus of this skill is that it will stack with MOLE, so if you have mole you will be spawned in the other teams spawn AND with chameleon.
 CRIPPLE_DESC = Cripple (Ultimate passive): Chance of completely freezing his target for 3 seconds (like Entangle but unblockable), Or crippling the target (crawl speed) for 6 seconds - Requires 3 points Bash, and 2 points Trueshot
-FLASH_DESC = Flash of Light (Ultimate bind wcflash): Blinds nearby enemeys
+BLIND_DESC = Total Blindness (Ultimate bind wcblind): Blinds the enemy you aim at for a few seconds
 LOCUST_DESC = Locust Swarm (Ultimate bind wclocust): Sends a swarm out to damage enemys all over the map, each point spent does 20 damage - affected player is also slowed temporarily
 DISORIENT_DESC = Disorient ( Ultimate bind wcdisorient): Causes your Opponent to be disoriented for a few seconds - quite a scary experience...
 UAMMO_DESC = Unlimited Amunition ( Ultimate bind wcuammo) : Gives you unlimited ammo for a few seconds
@@ -861,3 +841,17 @@ WAR3INFO6 = 3) Type bind = shopmenu2 (displays shopmenu2)
 WAR3INFO7 = 4) Type bind p wcward (to use the serpant ward ability)
 WAR3INFO8 = UWC3X allows you to have several ultimate skills as opposed to just one from the original Warcraft3. In the skills menu (/selectskill) ultimate skills will say (Ultimate: name), for example for the Teleport ultimate it says (Ultimate: wcteleport). Once you learn this skill you can use it by binding a key to the wcteleport command, done by typing: bind key wcteleport in the console.
 WAR3INFO9 = Say <b>/commands</b> to see the list of UWC3X spoken commands and say <b>/help</b> for the UWC3X help menu.
+
+ULTIMATE_LIGHTNING_DISABLED = [%s] Lightning ultimate is DISABLED on this map!
+ULTIMATE_SUICIDE_DISABLED = [%s] Suicide Bomber ultimate is DISABLED on this map!
+ULTIMATE_TELEPORT_DISABLED = [%s] Teleport ultimate is DISABLED on this map!
+ULTIMATE_DEPOWER_DISABLED = [%s] Depower ultimate is DISABLED on this map!
+ULTIMATE_SMITE_DISABLED = [%s] Smite ultimate is DISABLED on this map!
+ULTIMATE_EARTHQUAKE_DISABLED = [%s] Earthquake ultimate is DISABLED on this map!
+ULTIMATE_SWARM_DISABLED = [%s] Locust Swarm ultimate is DISABLED on this map!
+
+GLOVES_ITEM_DISABLED = [%s] Gloves of Warmth are DISABLED on this map!
+
+CGRENADE_SKILL_DISABLED = [%s] Critickal Grenade skill is DISABLED on this map!
+
+

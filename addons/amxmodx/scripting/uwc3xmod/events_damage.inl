@@ -939,8 +939,9 @@ public damage_event( id )
 				client_print( id, print_chat, "%L", id, "DISEASE2", MOD, ename );
 
 				if ( file_exists( "sound/uwc3x/carrionswarmdamage1.wav" ) == 1 )
+				{
 					emit_sound( id, CHAN_STATIC, "uwc3x/carrionswarmdamage1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-
+				}
 			}
 
 			if( Util_Should_Msg_Client(enemy) )
@@ -948,9 +949,10 @@ public damage_event( id )
 				client_print( enemy, print_chat, "%L", enemy, "DISEASE1", MOD, idname );
 
 				if ( file_exists( "sound/uwc3x/carrionswarmlaunch1.wav" ) == 1 )
+				{
 					emit_sound( enemy, CHAN_STATIC, "uwc3x/carrionswarmlaunch1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+				}
 			}
-
 
 			// 6-19-2004 - Carrion Beetles damage modified, now based on level ( K2mia )
 			damage = floatround( p_level[enemy] / 2.0 );
@@ -1281,7 +1283,9 @@ public damage_event( id )
 					client_print( id, print_chat, "%L", id, "IMPALE2", MOD );
 
 					if ( file_exists( "sound/uwc3x/impalehit.wav" ) == 1 )
+					{
 						emit_sound( id, CHAN_ITEM, "uwc3x/impalehit.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+					}	
 				}
 
 				if( Util_Should_Msg_Client(enemy) )
@@ -1335,7 +1339,9 @@ public damage_event( id )
 				{
 					client_print( id, print_chat, "%L", id, "HEX1", MOD, ename );
 					if ( file_exists( "sound/uwc3x/hex_infect.wav" ) == 1 )
+					{
 						emit_sound( id, CHAN_STATIC, "uwc3x/hex_infect.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+					}	
                 }
 				
 				if( Util_Should_Msg_Client(enemy) )
@@ -2127,7 +2133,7 @@ public damage_event( id )
 					client_print( id, print_chat, "%L", id, "HELMET_SHATTERED2", MOD, ename );
 					if ( file_exists ( "sound/uwc3x/helmsplitter.wav" ) ==1 )
 					{
-						emit_sound ( id, CHAN_ITEM, "uwc3x/helmsplitter.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+						emit_sound ( id, CHAN_STATIC, "uwc3x/helmsplitter.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
 					}
 					else
 					{
@@ -2167,17 +2173,17 @@ public damage_event( id )
 		new Float:randomnumber = random_float( 0.0, 1.0 );
 		new SkillLevel = p_skills[enemy][SKILLIDX_FATAL];
 		if( SkillLevel > 0 )
-        {
+		{
 			new Float:fatal_chance = p_fatal_chance[SkillLevel-1];
 			if ( randomnumber <= fatal_chance )
-            {
+			{
 				damage = read_data( 2 );
-
+			
 				if( SkillLevel == skill_limits[SKILLIDX_FATAL])
 				{
 					//check for the fatal strike
 					new Float:slay_random = random_float( 0.0, 1.0 );
-
+					
 					if ( slay_random <= CVAR_FATAL_CHANCE )
 					{
 						//set the damage equal to 200 - this should be enough to kill anyone
@@ -2196,29 +2202,29 @@ public damage_event( id )
 					// Changed to do extra damage
 					damage = floatround( float( damage ) * p_fatal_damage[SkillLevel-1] )
 				}
-
+			
 				new idname[32], ename[32];
 				get_user_name( id, idname, 31 );
 				get_user_name( enemy, ename, 31 );
-
+				
 				do_damage( id, enemy, damage, 30, 1, weapon, bodypart, 0 );
-
+				
 				if( Util_Should_Msg_Client(id) )
 				{
-					client_print( id, print_center, "%L", id, "FATAL_STRIKE2", MOD, ename );
 					client_print( id, print_chat, "%L", id, "FATAL_STRIKE2", MOD, ename );
-					
 					if ( file_exists( "sound/uwc3x/critical_hit_02.wav" ) == 1 )
+					{
 						emit_sound( id, CHAN_STATIC, "uwc3x/critical_hit_02.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+					}
 				}
 
 				if( Util_Should_Msg_Client(enemy) )
 				{
-					client_print( enemy, print_center, "%L", enemy, "FATAL_STRIKE1", MOD, idname );
 					client_print( enemy, print_chat, "%L", enemy, "FATAL_STRIKE1", MOD, idname );
-					
 					if ( file_exists( "sound/uwc3x/critical_hit_02.wav" ) == 1 )
+					{
 						emit_sound( enemy, CHAN_STATIC, "uwc3x/critical_hit_02.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+					}
 				}
 
 				if ( iglow[id][0] < 1 )
@@ -2239,21 +2245,21 @@ public damage_event( id )
 				}
 
 				if( Util_Should_Msg_Client( id ) )
-                {
-                    message_begin( MSG_ONE, gmsgFade, { 0, 0, 0 }, id );
-                    write_short( 1<<10 ); // fade lasts this long duration
-                    write_short( 1<<10 ); // fade lasts this long hold time
-                    write_short( 1<<12 ); // fade type ( in / out )
-                    write_byte( 255 ); // fade red
-                    write_byte( 0 ); // fade green
-                    write_byte( 0 ); // fade blue
-                    write_byte( iglow[id][0] ); // fade alpha
-                    message_end( );
-                }
-            }
-        }
-    }
-    // Fatal Strike	
+				{
+					message_begin( MSG_ONE, gmsgFade, { 0, 0, 0 }, id );
+					write_short( 1<<10 ); // fade lasts this long duration
+					write_short( 1<<10 ); // fade lasts this long hold time
+					write_short( 1<<12 ); // fade type ( in / out )
+					write_byte( 255 ); // fade red
+					write_byte( 0 ); // fade green
+					write_byte( 0 ); // fade blue
+					write_byte( iglow[id][0] ); // fade alpha
+					message_end( );
+				}
+			}
+		}
+	}
+	// Fatal Strike
 
 	// Claws of Attack
 	// [08-10-04] - Evasion now protects against all item-based attacks - K2mia
@@ -2538,7 +2544,7 @@ public death( )
 	// End of Vengeance
 
 	// Suicide Bomber
-	else if ( p_skills[victim_id][SKILLIDX_SUICIDE] && !hasblink[killer_id] && !changingteam[victim_id] && !u_delay )
+	else if ( p_skills[victim_id][SKILLIDX_SUICIDE] && !hasblink[killer_id] && !changingteam[victim_id] && !u_delay && !( UWC3X_MapDisableCheck( "suicide.cfg" ) ) )
 	{
 		if ( CVAR_DEBUG_MODE )
 		{

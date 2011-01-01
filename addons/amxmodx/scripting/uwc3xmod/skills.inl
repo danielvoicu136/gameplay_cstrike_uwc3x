@@ -841,7 +841,7 @@ public set_skill ( id, key )
 			return PLUGIN_HANDLED;
 		}
 
-		// [06-09-2004] K2mia - Allow only one of Shadow Strike / Carrion Beetles
+		// [06-09-2004] K2mia - Allow only one of Shadow Strike / Carrion Beetles / ROT / CRIPPLE
 		if ((skill_idx == SKILLIDX_SSTRIKE) && ( p_skills[id][SKILLIDX_CARRION] || p_skills[id][SKILLIDX_ROT] || p_skills[id][SKILLIDX_CRIPPLE] ) )
 		{
 			if( p_skills[id][SKILLIDX_CARRION] )
@@ -900,7 +900,67 @@ public set_skill ( id, key )
 			return PLUGIN_HANDLED;
 		}
 		
+		if ( (skill_idx == SKILLIDX_ROT) && ( p_skills[id][SKILLIDX_SSTRIKE] || p_skills[id][SKILLIDX_CARRION] || p_skills[id][SKILLIDX_CRIPPLE] ) )
+		{
+			if( p_skills[id][SKILLIDX_CARRION] )
+			{
+				if( Util_Should_Msg_Client(id) )
+				{
+					client_print(id, print_chat, "%L", id, "SHADOW_NO_CARION", MOD);
+					client_print(id, print_center, "%L", id, "SHADOW_NO_CARION", MOD);
+				}
+			}
+			else if( p_skills[id][SKILLIDX_SSTRIKE] )
+			{
+				if( Util_Should_Msg_Client(id) )
+				{
+					client_print(id, print_chat, "%L", id, "CARION_NO_SHADOW", MOD);
+					client_print(id, print_center, "%L", id, "CARION_NO_SHADOW", MOD);
+				}
+			}
+			else if( p_skills[id][SKILLIDX_CRIPPLE] )
+			{
+				if( Util_Should_Msg_Client(id) )
+				{
+					client_print(id, print_chat, "%L", id, "NO_CRIPPLE", MOD);
+					client_print(id, print_center, "%L", id, "NO_CRIPPLE", MOD);
+				}
+			}
 		
+			return PLUGIN_HANDLED;
+		}
+
+		if ( (skill_idx == SKILLIDX_CRIPPLE) && ( p_skills[id][SKILLIDX_SSTRIKE] || p_skills[id][SKILLIDX_CARRION] || p_skills[id][SKILLIDX_ROT] ) )
+		{
+			if( p_skills[id][SKILLIDX_CARRION] )
+			{
+				if( Util_Should_Msg_Client(id) )
+				{
+					client_print(id, print_chat, "%L", id, "SHADOW_NO_CARION", MOD);
+					client_print(id, print_center, "%L", id, "SHADOW_NO_CARION", MOD);
+				}
+			}
+			else if( p_skills[id][SKILLIDX_SSTRIKE] )
+			{
+				if( Util_Should_Msg_Client(id) )
+				{
+					client_print(id, print_chat, "%L", id, "CARION_NO_SHADOW", MOD);
+					client_print(id, print_center, "%L", id, "CARION_NO_SHADOW", MOD);
+				}
+			}
+			else if( p_skills[id][SKILLIDX_ROT] )
+			{
+				if( Util_Should_Msg_Client(id) )
+				{
+					client_print(id, print_chat, "%L", id, "CARION_NO_ROT", MOD);
+					client_print(id, print_center, "%L", id, "CARION_NO_ROT", MOD);
+				}
+			}
+
+			return PLUGIN_HANDLED;
+		}
+
+
 		//Can only have one - rope, hook or grab
 		if ((skill_idx == SKILLIDX_ROPE) && ( p_skills[id][SKILLIDX_HOOK] || p_skills[id][SKILLIDX_GRAB]  ) )
 		{
@@ -964,65 +1024,6 @@ public set_skill ( id, key )
 			return PLUGIN_HANDLED;
 		}
 
-		if ( (skill_idx == SKILLIDX_ROT) && ( p_skills[id][SKILLIDX_SSTRIKE] || p_skills[id][SKILLIDX_CARRION] || p_skills[id][SKILLIDX_CRIPPLE] ) )
-		{
-			if( p_skills[id][SKILLIDX_CARRION] )
-			{
-				if( Util_Should_Msg_Client(id) )
-				{
-					client_print(id, print_chat, "%L", id, "SHADOW_NO_CARION", MOD);
-					client_print(id, print_center, "%L", id, "SHADOW_NO_CARION", MOD);
-				}
-			}
-			else if( p_skills[id][SKILLIDX_SSTRIKE] )
-			{
-				if( Util_Should_Msg_Client(id) )
-				{
-					client_print(id, print_chat, "%L", id, "CARION_NO_SHADOW", MOD);
-					client_print(id, print_center, "%L", id, "CARION_NO_SHADOW", MOD);
-				}
-			}
-			else if( p_skills[id][SKILLIDX_CRIPPLE] )
-			{
-				if( Util_Should_Msg_Client(id) )
-				{
-					client_print(id, print_chat, "%L", id, "NO_CRIPPLE", MOD);
-					client_print(id, print_center, "%L", id, "NO_CRIPPLE", MOD);
-				}
-			}
-
-			return PLUGIN_HANDLED;
-		}
-
-		if ( (skill_idx == SKILLIDX_CRIPPLE) && ( p_skills[id][SKILLIDX_SSTRIKE] || p_skills[id][SKILLIDX_CARRION] || p_skills[id][SKILLIDX_ROT] ) )
-		{
-			if( p_skills[id][SKILLIDX_CARRION] )
-			{
-				if( Util_Should_Msg_Client(id) )
-				{
-					client_print(id, print_chat, "%L", id, "SHADOW_NO_CARION", MOD);
-					client_print(id, print_center, "%L", id, "SHADOW_NO_CARION", MOD);
-				}
-			}
-			else if( p_skills[id][SKILLIDX_SSTRIKE] )
-			{
-				if( Util_Should_Msg_Client(id) )
-				{
-					client_print(id, print_chat, "%L", id, "CARION_NO_SHADOW", MOD);
-					client_print(id, print_center, "%L", id, "CARION_NO_SHADOW", MOD);
-				}
-			}
-			else if( p_skills[id][SKILLIDX_ROT] )
-			{
-				if( Util_Should_Msg_Client(id) )
-				{
-					client_print(id, print_chat, "%L", id, "CARION_NO_ROT", MOD);
-					client_print(id, print_center, "%L", id, "CARION_NO_ROT", MOD);
-				}
-			}
-
-			return PLUGIN_HANDLED;
-		}
 
 		// [07-02-2004] K2mia - Allow only one of Vengeance / Suicide Bomber
 		if ((skill_idx == SKILLIDX_VENGEANCE) && (p_skills[id][SKILLIDX_SUICIDE]))

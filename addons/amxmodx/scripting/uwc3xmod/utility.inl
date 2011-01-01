@@ -398,6 +398,16 @@ public PreCache_Sounds ( )
 	if ( file_exists ( "sound/uwc3x/suicide_charging.wav" ) )
 	{
 		precache_sound( "uwc3x/suicide_charging.wav" );
+	}
+
+	if ( file_exists ( "sound/uwc3x/error.wav" ) )
+	{
+		precache_sound( "uwc3x/error.wav" );
+	}
+
+	if ( file_exists ( "sound/uwc3x/ultimateerror.wav" ) )
+	{
+		precache_sound( "uwc3x/ultimateerror.wav" );
 	}	
 
 }
@@ -929,7 +939,7 @@ public PreCache_Sprites ( )
 	spikes = precache_model ( "sprites/spikes1.spr" );
 	thorns = precache_model ( "sprites/thorns2.spr" );
 
-	//NEED TWO NEW MODELS
+	//[11-AUG-2009] Added sprites for rot and rottrail.Sprites created by (--eRRoR--)
 	ROTtrail = precache_model ( "sprites/rot_trail.spr" );
 	ROTspr = precache_model ( "sprites/rot_infects.spr" );
 	sprite_blood_spray = precache_model("sprites/bloodsprayROT.spr")

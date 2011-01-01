@@ -42,7 +42,7 @@ public Initialize_CLCMD ( )
 
 	// [09-13-04] Nasty exploit, this prevents it - K2mia
 	register_clcmd ( "fullupdate",		"fullupdate" );
-	register_clcmd ( "say",				"check_say" );
+	register_clcmd ( "say",			"check_say" );
 	register_clcmd ( "say_team",		"check_say" );
 
  

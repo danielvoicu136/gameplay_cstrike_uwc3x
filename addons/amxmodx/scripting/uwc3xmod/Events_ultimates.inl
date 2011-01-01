@@ -55,7 +55,7 @@ public EVENT_Do_Bolt ( id, targetid, linewidth, damage, caster )
 	write_byte ( 255 );
 
 	// r, g, b
-	write_byte ( 255 );
+	write_byte ( 10 );
 
 	// brightness
 	write_byte ( 255 );
@@ -93,7 +93,7 @@ public EVENT_Do_Bolt ( id, targetid, linewidth, damage, caster )
 	write_byte ( 255 );
 
 	// r, g, b
-	write_byte ( 255 );
+	write_byte ( 10 );
 
 	// life
 	write_byte ( 10 );
