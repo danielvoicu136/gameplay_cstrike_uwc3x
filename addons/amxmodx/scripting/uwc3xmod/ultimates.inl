@@ -685,6 +685,13 @@ public Ult_ChainLightning ( id )
 	{
 		return PLUGIN_HANDLED;
 	}
+	
+	if ( UWC3X_MapDisableCheck( "lightning.cfg" ) )
+	{
+		client_print ( id, print_chat, "%L", id, "ULTIMATE_LIGHTNING_DISABLED", MOD );
+		emit_sound( id, CHAN_ITEM, "uwc3x/ultimateerror.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
+		return PLUGIN_HANDLED;
+	}
 
 	if ( !issearching[id] && !ultimateused[id] )
 	{
@@ -930,13 +937,9 @@ public Do_FlameThrower ( id )
 {
 	if( Util_Should_Msg_Client_Alive( id ) )
 	{
-		if ( file_exists ( "sound/uwc3x/flamestriketargetwavenonloop1.wav" ) )
+		if ( file_exists ( "sound/uwc3x/flamestrike.wav" ) )
 		{
-			emit_sound ( id, CHAN_WEAPON, "uwc3x/flamestriketargetwavenonloop1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-		}
-		else
-		{
-			emit_sound ( id,CHAN_STATIC, "x/x_shoot1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+			emit_sound ( id, CHAN_WEAPON, "uwc3x/flamestrike.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
 		}
 	}
 
@@ -1191,13 +1194,9 @@ public Ult_Teleport ( id )
 
 						if( Util_Should_Msg_Client_Alive( id ) )
 						{
-							if ( file_exists ( "sound/uwc3x/blinkarrival.wav" ) )
+							if ( file_exists ( "sound/uwc3x/teleport.wav" ) )
 							{
-								emit_sound ( id,CHAN_STATIC, "uwc3x/blinkarrival.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-							}
-							else
-							{
-								emit_sound ( id,CHAN_STATIC, "x/x_shoot1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+								emit_sound ( id,CHAN_STATIC, "uwc3x/teleport.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
 							}
 						}
 
@@ -1236,13 +1235,9 @@ public Ult_Teleport ( id )
 
 			if( Util_Should_Msg_Client_Alive( id ) )
 			{
-				if ( file_exists ( "sound/uwc3x/blinkarrival.wav" ) )
+				if ( file_exists ( "sound/uwc3x/teleport.wav" ) )
 				{
-					emit_sound ( id,CHAN_STATIC, "uwc3x/blinkarrival.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-				}
-				else
-				{
-					emit_sound ( id,CHAN_STATIC, "x/x_shoot1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+					emit_sound ( id,CHAN_STATIC, "uwc3x/teleport.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
 				}
 			}
 
@@ -1313,13 +1308,9 @@ public Ult_Teleport ( id )
 			ultimateused[id] = true;
 			icon_controller ( id );
 
-			if ( file_exists ( "sound/uwc3x/blinkarrival.wav" ) )
+			if ( file_exists ( "sound/uwc3x/teleport.wav" ) )
 			{
-				emit_sound ( id,CHAN_ITEM, "uwc3x/blinkarrival.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
-			}
-			else
-			{
-				emit_sound ( id,CHAN_ITEM, "x/x_shoot1.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+				emit_sound ( id,CHAN_ITEM, "uwc3x/teleport.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
 			}
 
 			message_begin ( MSG_PAS, SVC_TEMPENTITY, newLocation );

@@ -53,9 +53,9 @@ new skillset1[9][] = {"NOSKILL", "Vampiric Aura", "Levitation", "Devotion Aura",
 new skillset2[9][] = {"NOSKILL", "Unholy Aura", "Bash", "Critical Strike", "Repair Armor", "Banish","Hex", "Spiked Carapace", "Mend Wounds" };
 new skillset3[9][] = {"NOSKILL", "Evasion", "Trueshot Aura", "Steel Skin", "Carrion Beetles", "Shadow Strike", "Entangle Roots", "Flame Strike", "Dispell Hex" };
 new skillset4[9][] = {"NOSKILL", "Critical Grenade", "Serpent Ward", "Thorns Aura", "Invisibility", "Teleport", "Big Bad Voodoo", "Fan of Knives", "Vengeance" };
-new skillset5[9][] = {"NOSKILL", "Siphon Ammo", "Blink", "Phoenix", "Napalm Grenades", "Gate", "Suicide Bomber", "Chain Lightning", "Decoy" };
+new skillset5[9][] = {"NOSKILL", "Siphon Ammo", "Blink", "Phoenix", "Napalm Grenade", "Gate", "Suicide Bomber", "Chain Lightning", "Decoy" };
 new skillset6[9][] = {"NOSKILL", "Jump kick", "Multi Jump", "Wind Walker", "ROT", "Syv Shield", "Depower", "Cloak of the chameleon", "Cripple" };
-new skillset7[9][] = {"NOSKILL", "Total Blindness", "Locust Swarm", "Disorient", "Endless Ammo", "Earth Quake", "Smite", "Cluster Bomb", "Ice Bombs" };
+new skillset7[9][] = {"NOSKILL", "Total Blindness", "Locust Swarm", "Disorient", "Endless Ammo", "Earth Quake", "Smite", "Cluster Grenade", "Ice Grenade" };
 new skillset8[9][] = {"NOSKILL", "Helm Splitter", "Grab", "Hook Shot", "Ninja Rope", "Fatal Strike", "Blessing", "Claymore Mines", "NEWSKILL16" };
 
 new BindSkills[] = {"Disorient", "Grab", "Hook Shot", "Ninja Rope", "Endless Ammo", "Earth Quake", "Smite", "Total Blindness", "Locust Swarm", "Big Bad Voodoo", "Mend Wounds", "Flame Strike", "Repair Armor", "Depower", "Decoy", "Entangle Roots", "Syv Shield", "Dispell Hex", "Serpent Ward", "Blessing" }

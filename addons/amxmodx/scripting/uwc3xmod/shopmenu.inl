@@ -204,8 +204,8 @@ public Buy_Item( id , key )
 
 	if( Util_Should_Msg_Client(id) )
 	{
-		if ( file_exists( "sound/uwc3x/pickupitem.wav" ) == 1 )
-			emit_sound (id, CHAN_ITEM, "uwc3x/pickupitem.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+		if ( file_exists( "sound/uwc3x/shopmenu/sm_pickupitem.wav" ) == 1 )
+			emit_sound (id, CHAN_STATIC, "uwc3x/shopmenu/sm_pickupitem.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
 	}
 
 	displaylevel( id, 3 );	
