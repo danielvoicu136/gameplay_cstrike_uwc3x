@@ -454,3 +454,6 @@ stock Float:Find_Angle(Core,Target,Float:dist)
 	
 	return 0.0	
 }
+
+
+

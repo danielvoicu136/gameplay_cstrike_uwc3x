@@ -1328,8 +1328,16 @@ public displaylevel( id, hide )
 
 		if (addskillmesg)
 			format(temp3, 127, "[%d skillpts]", skillptsavail);
+			
+		    new Float:progress = 0.0;
 
-		format(xpstring,1023,"Rank: %s [%d] XP: %d %s %s", p_rank[id], p_level[id], playerxp[id], temp2, temp3);
+			if (p_level[id] < (MAX_LEVEL - 1)) {
+				new Float:currentXP = float(playerxp[id] - xplevel_lev[p_level[id]]);
+				new Float:neededXP = float(xplevel_lev[p_level[id] + 1] - xplevel_lev[p_level[id]]);
+				progress = (currentXP / neededXP) * 100.0;
+			}
+
+		format(xpstring,1023,"%s  Level: %d  XP: %d  UP: %.2f %s %s", p_rank[id], p_level[id], playerxp[id], progress, temp2, temp3);
 	}
 
 	if( Util_Should_Msg_Client( id ) )

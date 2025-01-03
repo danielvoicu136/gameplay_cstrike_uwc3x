@@ -296,6 +296,14 @@ public client_connect ( id )
 	return PLUGIN_CONTINUE;
 }
 
+public client_putinserver(id) {
+    set_task(3.0, "TASK_SQC_LEVEL", id);
+}
+
+public TASK_SQC_LEVEL(id) {
+	Check_Player_Level(id);
+}
+
 public client_disconnect ( id )
 {
 	hudchat_clear(id);
@@ -519,3 +527,4 @@ public plugin_end ( )
 	EndHud();
 	return PLUGIN_CONTINUE;
 }
+

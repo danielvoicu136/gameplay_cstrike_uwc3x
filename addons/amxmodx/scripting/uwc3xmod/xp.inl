@@ -1116,3 +1116,27 @@ public amx_givexp ( id, level )
 
 	return PLUGIN_HANDLED;
 }
+
+
+public Check_Player_Level(id) {
+
+    new bool:bLvled = false;
+    new oldLevel = p_level[id];
+	
+    new name[32];
+    get_user_name(id, name, charsmax(name));
+
+    while ((p_level[id] < (MAX_LEVEL - 1)) && (playerxp[id] >= xplevel_lev[p_level[id] + 1])) {
+        p_level[id]++;
+        bLvled = true;
+    }
+
+    while ((p_level[id] > 0) && (playerxp[id] < xplevel_lev[p_level[id]])) {
+        p_level[id]--;
+        bLvled = true;
+    }
+
+    if (bLvled) {
+        server_print("[UWC3X HOT FIX] Player: %s (ID: %d) Level %d converted to Level %d", name, id, oldLevel, p_level[id]);
+    }
+}

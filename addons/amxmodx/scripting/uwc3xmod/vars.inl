@@ -39,7 +39,27 @@ new xpgiven;// Used to store current level of XP given
 new Float:weaponxpmultiplier[31] = {1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0};
 
 // UWC3X Rank titles
+
+/*
 new ranktitles[13][] = { "Orc Fodder", "Elf Acolyte", "Human Squire", "Undead Soldier", "Skilled Combatant", "Crypt Lord Zealot", "Arch Lich", "Blood Elf Champion", "Demon Hunter", "Emissary of Death", "Warchief", "World Destroyer", "Skull Breaker" };
+*/
+
+new ranktitles[13][] = { 
+    "Recruit",           // Level 1
+    "Apprentice",        // Level 2
+    "Soldier",           // Level 3
+    "Warrior",           // Level 4
+    "Elite",     		 // Level 5
+    "Captain",           // Level 6
+    "Commander",         // Level 7
+    "Champion",          // Level 8
+    "Hero",              // Level 9
+    "Legend",            // Level 10
+    "Master",            // Level 11
+    "Overlord",          // Level 12
+    "Supreme"     		 // Level 13
+};
+
 
 // **************************************************************************
 // BEGIN skills related variables declarations
